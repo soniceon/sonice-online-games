@@ -6,9 +6,6 @@
     <meta name="description" content="Play Monster Survivors online - Survive endless waves of monsters in this thrilling action game!">
     <meta name="keywords" content="Monster Survivors, online game, survival game, action game">
     <title>Monster Survivors - Thrilling Online Survival Game | sonice.online</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sonice Online Games</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="canonical" href="https://sonice.online" />
     <script src="https://cdn.tailwindcss.com"></script>
@@ -53,6 +50,39 @@
             height: 100%;
             border: none;
         }
+        /* Additional styles for game grid */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .game-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .game-card:hover {
+            transform: translateY(-5px);
+        }
+        .game-card img {
+            width: 100%;
+            height: auto;
+        }
+        .game-card-content {
+            padding: 15px;
+            background-color: white;
+        }
+        .game-card-content h3 {
+            margin-top: 0;
+            font-weight: bold;
+            color: #333;
+        }
+        .game-card-content p {
+            color: #666;
+            margin-bottom: 0;
+        }
     </style>
 </head>
 <body class="bg-apple-bg min-h-screen">
@@ -75,39 +105,20 @@
                 <a href="#play" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Play Game</a>
                 <a href="#about" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">About</a>
                 <a href="#controls" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Controls</a>
+                <a href="index.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Home</a>
+                <a href="categories/action.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Action</a>
+                <a href="categories/puzzle.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Puzzle</a>
+                <a href="categories/strategy.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Strategy</a>
+                <a href="categories/racing.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Racing</a>
+                <a href="about.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">About</a>
             </nav>
         </div>
-    </header>
-    <header>
-        <nav>
-            <div class="logo">sonice.online</div>
-            <div class="nav-links">
-                <a href="index.html" class="active">Home</a>
-                <a href="categories/action.html">Action</a>
-                <a href="categories/puzzle.html">Puzzle</a>
-                <a href="categories/strategy.html">Strategy</a>
-                <a href="categories/racing.html">Racing</a>
-                <a href="about.html">About</a>
-            </div>
-        </nav>
     </header>
 
     <main class="container mx-auto px-4 py-8">
         <section class="mb-12 text-center">
             <h1 class="text-4xl md:text-5xl font-bold mb-4 text-apple-indigo">Monster Survivors</h1>
             <p class="text-xl text-gray-700 mb-8">Survive the endless onslaught of monsters in this thrilling action-packed game!</p>
-            <h1>Monster Survivors</h1>
-    <p>Survive the endless onslaught of monsters in this thrilling action-packed game!</p>
-    
-    <div class="game-container">
-        <iframe src="https://cloud.onlinegames.io/games/2025/unity/monster-survivors/index-og.html" allowfullscreen></iframe>
-    </div>
-    
-    <h2>Game Description</h2>
-    <p>Monster Survivors is an action-packed survival game where your objective is to stay alive as long as possible while facing increasingly difficult waves of monsters. Collect experience points to level up and unlock powerful abilities.</p>
-    
-    <h2>Controls</h2>
-    <p>Use WASD or arrow keys to move your character. Press Space to use your primary ability.</p>
             
             <div id="play" class="game-container shadow-lg rounded-lg overflow-hidden border-2 border-apple-blue">
                 <iframe src="https://cloud.onlinegames.io/games/2025/unity/monster-survivors/index-og.html" allowfullscreen></iframe>
@@ -201,37 +212,40 @@
                     </div>
                 </div>
             </div>
-        </section
-             <h2>You Might Also Like</h2>
-    <div class="game-grid">
-        <div class="game-card">
-            <a href="games/zombie-apocalypse.html">
-                <img src="https://via.placeholder.com/300x150" alt="Zombie Apocalypse">
-                <div class="game-card-content">
-                    <h3>Zombie Apocalypse</h3>
-                    <p>Survive the zombie horde in this action game</p>
+        </section>
+
+        <section class="mb-12 bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-bold mb-4 text-apple-purple">You Might Also Like</h2>
+            <div class="game-grid">
+                <div class="game-card">
+                    <a href="games/zombie-apocalypse.html">
+                        <img src="https://via.placeholder.com/300x150" alt="Zombie Apocalypse">
+                        <div class="game-card-content">
+                            <h3>Zombie Apocalypse</h3>
+                            <p>Survive the zombie horde in this action game</p>
+                        </div>
+                    </a>
                 </div>
-            </a>
-        </div>
-        <div class="game-card">
-            <a href="games/space-shooter.html">
-                <img src="https://via.placeholder.com/300x150" alt="Space Shooter">
-                <div class="game-card-content">
-                    <h3>Space Shooter</h3>
-                    <p>Defend Earth from alien invaders</p>
+                <div class="game-card">
+                    <a href="games/space-shooter.html">
+                        <img src="https://via.placeholder.com/300x150" alt="Space Shooter">
+                        <div class="game-card-content">
+                            <h3>Space Shooter</h3>
+                            <p>Defend Earth from alien invaders</p>
+                        </div>
+                    </a>
                 </div>
-            </a>
-        </div>
-        <div class="game-card">
-            <a href="games/puzzle-master.html">
-                <img src="https://via.placeholder.com/300x150" alt="Puzzle Master">
-                <div class="game-card-content">
-                    <h3>Puzzle Master</h3>
-                    <p>Test your brain with challenging puzzles</p>
+                <div class="game-card">
+                    <a href="games/puzzle-master.html">
+                        <img src="https://via.placeholder.com/300x150" alt="Puzzle Master">
+                        <div class="game-card-content">
+                            <h3>Puzzle Master</h3>
+                            <p>Test your brain with challenging puzzles</p>
+                        </div>
+                    </a>
                 </div>
-            </a>
-        </div>
-    </div>
+            </div>
+        </section>
     </main>
 
     <footer class="bg-gray-800 text-white py-6">
@@ -241,7 +255,7 @@
                     <h2 class="text-xl font-bold mb-2">Monster Survivors</h2>
                     <p class="text-gray-400">© 2025 sonice.online. All rights reserved.</p>
                 </div>
-                <div>
+                <div class="mb-4 md:mb-0">
                     <h3 class="text-lg font-semibold mb-2">Quick Links</h3>
                     <ul class="space-y-1">
                         <li><a href="#play" class="text-gray-400 hover:text-white">Play Game</a></li>
@@ -249,28 +263,24 @@
                         <li><a href="#controls" class="text-gray-400 hover:text-white">Controls</a></li>
                     </ul>
                 </div>
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-lg font-semibold mb-2">Categories</h3>
+                    <ul class="space-y-1">
+                        <li><a href="categories/action.html" class="text-gray-400 hover:text-white">Action</a></li>
+                        <li><a href="categories/puzzle.html" class="text-gray-400 hover:text-white">Puzzle</a></li>
+                        <li><a href="categories/strategy.html" class="text-gray-400 hover:text-white">Strategy</a></li>
+                        <li><a href="categories/racing.html" class="text-gray-400 hover:text-white">Racing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-2">Contact</h3>
+                    <p class="text-gray-400">Email: contact@sonice.online</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-6 pt-6 text-center">
+                <p class="text-gray-400">&copy; 2025 sonice.online. All rights reserved.</p>
             </div>
         </div>
-        <div class="footer-content">
-        <div class="footer-section">
-            <h3>About Us</h3>
-            <p>Sonice.online is your destination for free online games. Play instantly without downloads!</p>
-        </div>
-        <div class="footer-section">
-            <h3>Categories</h3>
-            <ul>
-                <li><a href="categories/action.html">Action</a></li>
-                <li><a href="categories/puzzle.html">Puzzle</a></li>
-                <li><a href="categories/strategy.html">Strategy</a></li>
-                <li><a href="categories/racing.html">Racing</a></li>
-            </ul>
-        </div>
-        <div class="footer-section">
-            <h3>Contact</h3>
-            <p>Email: contact@sonice.online</p>
-        </div>
-    </div>
-    <p class="copyright">&copy; 2025 sonice.online. All rights reserved.</p>
     </footer>
 
     <script>
