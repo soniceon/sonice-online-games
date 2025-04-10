@@ -4,91 +4,231 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Play Monster Survivors online - Survive endless waves of monsters in this thrilling action game!">
-    <title>Monster Survivors - Sonice Online Games</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="keywords" content="Monster Survivors, online game, survival game, action game">
+    <title>Monster Survivors - Thrilling Online Survival Game | sonice.online</title>
+    <link rel="canonical" href="https://sonice.online" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'apple-blue': '#007AFF',
+                        'apple-green': '#34C759',
+                        'apple-indigo': '#5856D6',
+                        'apple-orange': '#FF9500',
+                        'apple-pink': '#FF2D55',
+                        'apple-purple': '#AF52DE',
+                        'apple-red': '#FF3B30',
+                        'apple-teal': '#5AC8FA',
+                        'apple-yellow': '#FFCC00',
+                        'apple-gray': '#8E8E93',
+                        'apple-bg': '#F2F2F7',
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/css">
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        .game-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+        .game-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
 </head>
-<body>
-    <header>
-        <nav>
-            <div class="logo">sonice.online</div>
-            <div class="nav-links">
-                <a href="index.html" class="active">Home</a>
-                <a href="categories/action.html">Action</a>
-                <a href="categories/puzzle.html">Puzzle</a>
-                <a href="categories/strategy.html">Strategy</a>
-                <a href="categories/racing.html">Racing</a>
-                <a href="about.html">About</a>
+<body class="bg-apple-bg min-h-screen">
+    <header class="bg-apple-blue text-white shadow-md">
+        <div class="container mx-auto px-4 py-6 md:flex md:justify-between md:items-center">
+            <div class="flex justify-between items-center">
+                <div>
+                    <a href="https://sonice.online" class="text-2xl font-bold">sonice.online</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-white focus:outline-none">
+                        <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                            <path class="hidden" id="menu-open" fill-rule="evenodd" clip-rule="evenodd" d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z"></path>
+                            <path id="menu-closed" fill-rule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path>
+                        </svg>
+                    </button>
+                </div>
             </div>
-        </nav>
+            <nav id="menu" class="hidden md:flex flex-col md:flex-row md:items-center md:justify-end md:flex-1">
+                <a href="#play" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Play Game</a>
+                <a href="#about" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">About</a>
+                <a href="#controls" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Controls</a>
+            </nav>
+        </div>
     </header>
 
-    <main>
-        <h1>Monster Survivors</h1>
-        <p>Survive the endless onslaught of monsters in this thrilling action-packed game!</p>
-        
-        <div class="game-container">
-            <iframe src="https://cloud.onlinegames.io/games/2025/unity/monster-survivors/index-og.html" allowfullscreen></iframe>
-        </div>
-        
-        <h2>Game Description</h2>
-        <p>Monster Survivors is an action-packed survival game where your objective is to stay alive as long as possible while facing increasingly difficult waves of monsters. Collect experience points to level up and unlock powerful abilities.</p>
-        
-        <h2>Controls</h2>
-        <p>Use WASD or arrow keys to move your character. Press Space to use your primary ability.</p>
-        
-        <h2>You Might Also Like</h2>
-        <div class="game-grid">
-            <div class="game-card">
-                <a href="games/zombie-apocalypse.html">
-                    <img src="https://via.placeholder.com/300x150" alt="Zombie Apocalypse">
-                    <div class="game-card-content">
-                        <h3>Zombie Apocalypse</h3>
-                        <p>Survive the zombie horde in this action game</p>
-                    </div>
-                </a>
+    <main class="container mx-auto px-4 py-8">
+        <section class="mb-12 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-apple-indigo">Monster Survivors</h1>
+            <p class="text-xl text-gray-700 mb-8">Survive the endless onslaught of monsters in this thrilling action-packed game!</p>
+            
+            <div id="play" class="game-container shadow-lg rounded-lg overflow-hidden border-2 border-apple-blue">
+                <iframe src="https://cloud.onlinegames.io/games/2025/unity/monster-survivors/index-og.html" allowfullscreen></iframe>
             </div>
-            <div class="game-card">
-                <a href="games/space-shooter.html">
-                    <img src="https://via.placeholder.com/300x150" alt="Space Shooter">
-                    <div class="game-card-content">
-                        <h3>Space Shooter</h3>
-                        <p>Defend Earth from alien invaders</p>
+        </section>
+
+        <section id="about" class="mb-12 bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-bold mb-4 text-apple-red">About Monster Survivors</h2>
+            <div class="md:flex md:space-x-6">
+                <div class="md:w-2/3">
+                    <p class="mb-4">Monster Survivors is an action-packed survival game where your objective is to stay alive as long as possible while facing increasingly difficult waves of monsters. Collect experience points to level up and unlock powerful abilities.</p>
+                    <p class="mb-4">With each level, you'll be able to choose from a variety of upgrades to customize your character's abilities and adapt to different enemy types. Strategic planning and quick reflexes are essential to survive the monster apocalypse!</p>
+                    <p>The game features vibrant graphics, dynamic gameplay, and an engaging progression system that will keep you coming back for more. Can you set a new survival record?</p>
+                </div>
+                <div class="md:w-1/3 mt-4 md:mt-0">
+                    <div class="bg-apple-bg p-4 rounded-lg">
+                        <h3 class="font-bold text-lg mb-2 text-apple-purple">Game Features</h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-start">
+                                <span class="text-apple-green mr-2">✓</span>
+                                <span>Endless waves of unique monsters</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-apple-green mr-2">✓</span>
+                                <span>RPG-style level progression</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-apple-green mr-2">✓</span>
+                                <span>Multiple character abilities</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-apple-green mr-2">✓</span>
+                                <span>Dynamic difficulty scaling</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-apple-green mr-2">✓</span>
+                                <span>Exciting power-ups and items</span>
+                            </li>
+                        </ul>
                     </div>
-                </a>
+                </div>
             </div>
-            <div class="game-card">
-                <a href="games/puzzle-master.html">
-                    <img src="https://via.placeholder.com/300x150" alt="Puzzle Master">
-                    <div class="game-card-content">
-                        <h3>Puzzle Master</h3>
-                        <p>Test your brain with challenging puzzles</p>
+        </section>
+
+        <section id="controls" class="mb-12 bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-bold mb-4 text-apple-orange">Game Controls</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-bold text-lg mb-2 text-apple-teal">Movement</h3>
+                    <p class="mb-2">Use <span class="font-mono bg-apple-bg px-2 py-1 rounded">W A S D</span> keys or arrow keys to move your character.</p>
+                    <p>Mobile users can use the on-screen joystick for movement.</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-2 text-apple-teal">Abilities</h3>
+                    <p class="mb-2">Press <span class="font-mono bg-apple-bg px-2 py-1 rounded">Space</span> to use your primary ability.</p>
+                    <p>Mobile users can tap the ability button on the right side of the screen.</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-2 text-apple-teal">Level Up</h3>
+                    <p>When you gain enough experience to level up, a selection of upgrades will appear. Click or tap on your desired upgrade to select it.</p>
+                </div>
+                <div>
+                    <h3 class="font-bold text-lg mb-2 text-apple-teal">Special Items</h3>
+                    <p>Collect special items dropped by defeated monsters for temporary boosts and power-ups.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-12 bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-2xl font-bold mb-4 text-apple-green">Strategy Tips</h2>
+            <div class="space-y-4">
+                <div class="flex items-start">
+                    <div class="bg-apple-green text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mr-3">1</div>
+                    <div>
+                        <h3 class="font-bold text-lg text-apple-green">Keep Moving</h3>
+                        <p>Standing still is a death sentence. Always keep moving to avoid being surrounded by monsters.</p>
                     </div>
-                </a>
+                </div>
+                <div class="flex items-start">
+                    <div class="bg-apple-green text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mr-3">2</div>
+                    <div>
+                        <h3 class="font-bold text-lg text-apple-green">Prioritize Upgrades</h3>
+                        <p>Choose upgrades that complement your playstyle. Balance between offensive abilities, movement speed, and area-of-effect attacks.</p>
+                    </div>
+                </div>
+                <div class="flex items-start">
+                    <div class="bg-apple-green text-white rounded-full w-8 h-8 flex items-center justify-center flex-shrink-0 mr-3">3</div>
+                    <div>
+                        <h3 class="font-bold text-lg text-apple-green">Collect Experience</h3>
+                        <p>Don't forget to collect experience gems dropped by defeated monsters. These are crucial for leveling up and gaining new abilities.</p>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
     </main>
-    
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>About Us</h3>
-                <p>Sonice.online is your destination for free online games. Play instantly without downloads!</p>
-            </div>
-            <div class="footer-section">
-                <h3>Categories</h3>
-                <ul>
-                    <li><a href="categories/action.html">Action</a></li>
-                    <li><a href="categories/puzzle.html">Puzzle</a></li>
-                    <li><a href="categories/strategy.html">Strategy</a></li>
-                    <li><a href="categories/racing.html">Racing</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Contact</h3>
-                <p>Email: contact@sonice.online</p>
+
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto px-4">
+            <div class="md:flex md:justify-between">
+                <div class="mb-4 md:mb-0">
+                    <h2 class="text-xl font-bold mb-2">Monster Survivors</h2>
+                    <p class="text-gray-400">© 2025 sonice.online. All rights reserved.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-2">Quick Links</h3>
+                    <ul class="space-y-1">
+                        <li><a href="#play" class="text-gray-400 hover:text-white">Play Game</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-white">About</a></li>
+                        <li><a href="#controls" class="text-gray-400 hover:text-white">Controls</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-        <p class="copyright">&copy; 2025 sonice.online. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const menu = document.getElementById('menu');
+            const openIcon = document.getElementById('menu-open');
+            const closedIcon = document.getElementById('menu-closed');
+            
+            menu.classList.toggle('hidden');
+            openIcon.classList.toggle('hidden');
+            closedIcon.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const menu = document.getElementById('menu');
+                    if (!menu.classList.contains('hidden') && window.innerWidth < 768) {
+                        menu.classList.add('hidden');
+                        document.getElementById('menu-open').classList.add('hidden');
+                        document.getElementById('menu-closed').classList.remove('hidden');
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
