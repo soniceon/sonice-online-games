@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonice Online Games</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #F2F2F7;
+        }
+        header {
+            background-color: #007AFF;
+            color: white;
+            padding: 1rem;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+        }
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        .game-container {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            margin: 2rem 0;
+            border: 2px solid #007AFF;
+            border-radius: 0.5rem;
+        }
+        .game-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .game-card {
+            background: white;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .game-card:hover {
+            transform: translateY(-5px);
+        }
+        .game-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        .game-card-content {
+            padding: 1rem;
+        }
+        .game-card h3 {
+            margin-top: 0;
+            color: #007AFF;
+        }
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">sonice.online</div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">Action</a>
+                <a href="#">Puzzle</a>
+                <a href="#">Strategy</a>
+                <a href="#">Racing</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Monster Survivors</h1>
+        <p>Survive the endless onslaught of monsters in this thrilling action-packed game!</p>
+        
+        <div class="game-container">
+            <iframe src="https://cloud.onlinegames.io/games/2025/unity/monster-survivors/index-og.html" allowfullscreen></iframe>
+        </div>
+        
+        <h2>Game Description</h2>
+        <p>Monster Survivors is an action-packed survival game where your objective is to stay alive as long as possible while facing increasingly difficult waves of monsters. Collect experience points to level up and unlock powerful abilities.</p>
+        
+        <h2>Controls</h2>
+        <p>Use WASD or arrow keys to move your character. Press Space to use your primary ability.</p>
+        
+        <h2>You Might Also Like</h2>
+        <div class="game-grid">
+            <div class="game-card">
+                <img src="https://via.placeholder.com/300x150" alt="Game thumbnail">
+                <div class="game-card-content">
+                    <h3>Zombie Apocalypse</h3>
+                    <p>Survive the zombie horde in this action game</p>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/300x150" alt="Game thumbnail">
+                <div class="game-card-content">
+                    <h3>Space Shooter</h3>
+                    <p>Defend Earth from alien invaders</p>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="https://via.placeholder.com/300x150" alt="Game thumbnail">
+                <div class="game-card-content">
+                    <h3>Puzzle Master</h3>
+                    <p>Test your brain with challenging puzzles</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 sonice.online. All rights reserved.</p>
+    </footer>
+</body>
+</html>
