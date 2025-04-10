@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Play free online games at sonice.online - Action, Puzzle, Strategy and more!">
+    <title>Sonice Online Games - Play Free Games Online</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="canonical" href="https://sonice.online" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'apple-blue': '#007AFF',
+                        'apple-green': '#34C759',
+                        'apple-indigo': '#5856D6',
+                        'apple-orange': '#FF9500',
+                        'apple-pink': '#FF2D55',
+                        'apple-purple': '#AF52DE',
+                        'apple-red': '#FF3B30',
+                        'apple-teal': '#5AC8FA',
+                        'apple-yellow': '#FFCC00',
+                        'apple-gray': '#8E8E93',
+                        'apple-bg': '#F2F2F7',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-apple-bg min-h-screen">
+    <header class="bg-apple-blue text-white shadow-md">
+        <div class="container mx-auto px-4 py-6 md:flex md:justify-between md:items-center">
+            <div class="flex justify-between items-center">
+                <div>
+                    <a href="index.html" class="text-2xl font-bold">sonice.online</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-white focus:outline-none">
+                        <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                            <path class="hidden" id="menu-open" fill-rule="evenodd" clip-rule="evenodd" d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z"></path>
+                            <path id="menu-closed" fill-rule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <nav id="menu" class="hidden md:flex flex-col md:flex-row md:items-center md:justify-end md:flex-1">
+                <a href="index.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Home</a>
+                <a href="categories/action.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Action</a>
+                <a href="categories/puzzle.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Puzzle</a>
+                <a href="categories/strategy.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Strategy</a>
+                <a href="categories/racing.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Racing</a>
+                <a href="about.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-apple-indigo text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Play Free Online Games</h1>
+            <p class="text-xl mb-8">Enjoy hundreds of games directly in your browser - no downloads required!</p>
+            
+            <!-- Search Bar -->
+            <div class="max-w-md mx-auto">
+                <div class="relative">
+                    <input type="text" placeholder="Search games..." class="w-full py-3 px-4 rounded-full text-gray-800 focus:outline-none focus:ring-2 focus:ring-apple-yellow">
+                    <button class="absolute right-2 top-0 mt-3 mr-2">
+                        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- Featured Game -->
+        <section class="mb-12 bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="md:flex">
+                <div class="md:w-1/2">
+                    <img src="https://via.placeholder.com/600x400" alt="Monster Survivors" class="w-full h-full object-cover">
+                </div>
+                <div class="md:w-1/2 p-6">
+                    <div class="bg-apple-red text-white inline-block px-3 py-1 rounded-full text-sm font-bold mb-4">Featured Game</div>
+                    <h2 class="text-3xl font-bold mb-4 text-apple-blue">Monster Survivors</h2>
+                    <p class="text-gray-700 mb-6">Survive the endless onslaught of monsters in this thrilling action-packed game! Collect experience, level up, and unlock powerful abilities.</p>
+                    <a href="games/monster-survivors.html" class="bg-apple-green hover:bg-opacity-90 text-white font-bold py-3 px-6 rounded-lg inline-block transition">Play Now</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Popular Games -->
+        <section class="mb-12">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">Popular Games</h2>
+                <a href="#" class="text-apple-blue hover:underline">View All</a>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <a href="games/monster-survivors.html">
+                        <img src="https://via.placeholder.com/300x200" alt="Monster Survivors" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2 text-gray-800">Monster Survivors</h3>
+                            <p class="text-gray-600 text-sm">Action, RPG</p>
+                            <div class="flex items-center mt-2">
+                                <div class="flex text-apple-yellow">
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                    </svg>
+                                </div>
+                                <span class="text-gray-600 text-sm ml-2">(425)</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- 添加更多游戏卡片（占位符） -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <a href="#">
+                        <img src="https://via.placeholder.com/300x200" alt="Zombie Apocalypse" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2 text-gray-800">Zombie Apocalypse</h3>
+                            <p class="text-gray-600 text-sm">Action, Survival</p>
+                            <div class="flex items-center mt-2">
+                                <div class="flex text-apple-yellow">
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4 fill-current opacity-50" viewBox="0 0 24 24">
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                    </svg>
+                                </div>
+                                <span class="text-gray-600 text-sm ml-2">(342)</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <a href="#">
+                        <img src="https://via.placeholder.com/300x200" alt="Puzzle Master" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2 text-gray-800">Puzzle Master</h3>
+                            <p class="text-gray-600 text-sm">Puzzle, Brain Teaser</p>
+                            <div class="flex items-center mt-2">
+                                <div class="flex text-apple-yellow">
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4 fill-current opacity-50" viewBox="0 0 24 24">
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                    </svg>
+                                </div>
+                                <span class="text-gray-600 text-sm ml-2">(287)</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <a href="#">
+                        <img src="https://via.placeholder.com/300x200" alt="Space Shooter" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2 text-gray-800">Space Shooter</h3>
+                            <p class="text-gray-600 text-sm">Action, Arcade</p>
+                            <div class="flex items-center mt-2">
+                                <div class="flex text-apple-yellow">
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4 fill-current opacity-50" viewBox="0 0 24 24">
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                    </svg>
+                                    <svg class="w-4 h-4 fill-current opacity-50" viewBox="0 0 24 24">
+                                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path>
+                                    </svg>
+                                </div>
+                                <span class="text-gray-600 text-sm ml-2">(193)</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Game Categories -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6">Game Categories</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                <a href="categories/action.html" class="block bg-apple-red text-white rounded-lg overflow-hidden shadow-md transition transform hover:scale-105">
+                    <div class="p-6 flex justify-between items-center">
+                        <h3 class="text-xl font-bold">Action</h3>
+                        <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13 5.5a.5.5 0 0 1 .5.5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0V8h-1a.5.5 0 0 1 0-1h1V6a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M8.5 1c.5 0 1 .21 1.5.55l.28.28.02.02c.28.24.5.56.8.81l.05.05A5.98 5.98 0 0 0 15.5 5.97l.5.03v.5c0 1.82-.88 3.65-2 5.5a.5.5 0 0 1-.77.15.5.5 0 0 1-.15-.69c1-1.68 1.76-3.28 1.76-4.8l.75-1.01-.28.05A4.99 4.99 0 0 1 11.04 3a5.2 5.2 0 0 1-.89-.92l-.2-.25L9.7 1.5l-.25-.3A.5.5 0 0 0 9.16 1h-.75z"/>
+                        </svg>
+                    </div>
+                </a>
+                <a href="categories/puzzle.html" class="block bg-apple-green text-white rounded-lg overflow-hidden shadow-md transition transform hover:scale-105">
+                    <div class="p-6 flex justify-between items-center">
+                        <h3 class="text-xl font-bold">Puzzle</h3>
+                        <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M10 13a1 1 0 0 1 1 1v1a1 1 0 0 1-2 0v-1a1 1 0 0 1 1-1zm-1-6a1 1 0 1 1 2 0v3a1 1 0 0 1-2 0V7z"/>
+                            <path d="M10 2a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm0 14a6 6 0 1 1 0-12 6 6 0 0 1 0 12z"/>
+                        </svg>
+                    </div>
+                </a>
+                <a href="categories/strategy.html" class="block bg-apple-indigo text-white rounded-lg overflow-hidden shadow-md transition transform hover:scale-105">
+                    <div class="p-6 flex justify-between items-center">
+                        <h3 class="text-xl font-bold">Strategy</h3>
+                        <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 3a2 2 0 0 0-2 2v.3a5.97 5.97 0 0 0-2-.3 5.97 5.97 0 0 0-4.25 1.75.75.75 0 0 0 0 1.06L5.81 9.7a9.04 9.04 0 0 1 4.19-1 5.89 5.89 0 0 1 2 .35V12a2 2 0 1 0 4 0V5a2 2 0 0 0-2-2h-2z"/>
+                            <path d="M8 7.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                        </svg>
+                    </div>
+                </a>
+                <a href="categories/racing.html" class="block bg-apple-orange text-white rounded-lg overflow-hidden shadow-md transition transform hover:scale-105">
+                    <div class="p-6 flex justify-between items-center">
+                        <h3 class="text-xl font-bold">Racing</h3>
+                        <svg class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14.5 6.5a4.5 4.5 0 1 0 0 9 4.5 4.5 0 0 0 0-9zM18 6a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM9.834 9.55C9.89 8.71 9.84 7.96 9.692 7.33a3.2 3.2 0 0 0-.209-.669 1 1 0 0 0-.871-.6H3.64a1 1 0 0 0-.869.598 3.17 3.17 0 0 0-.214.675c-.146.626-.194 1.356-.144 2.176.027.44.1.98.21 1.59.067.38.157.693.267.935a1 1 0 0 0 .829.599l4.758.053a1 1 0 0 0 .83-.598c.108-.239.197-.544.267-.926.112-.615.185-1.26.21-1.618.007-.1.01-.195.01-.279a4.69 4.69 0 0 0-.01-.307z"/>
+                        </svg>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- New Games -->
+        <section class="mb-12">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">New Games</h2>
+                <a href="#" class="text-apple-blue hover:underline">View All</a>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- 添加游戏卡片（占位符） -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <a href="#">
+                        <div class="relative">
+                            <img src="https://via.placeholder.com/300x200" alt="New Game 1" class="w-full h-48 object-cover">
+                            <div class="absolute top-2 right-2 bg-apple-red text-white text-xs px-2 py-1 rounded">NEW</div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2 text-gray-800">Racing Derby</h3>
+                            <p class="text-gray-600 text-sm">Racing, Sports</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <a href="#">
+                        <div class="relative">
+                            <img src="https://via.placeholder.com/300x200" alt="New Game 2" class="w-full h-48 object-cover">
+                            <div class="absolute top-2 right-2 bg-apple-red text-white text-xs px-2 py-1 rounded">NEW</div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2 text-gray-800">Block Builder</h3>
+                            <p class="text-gray-600 text-sm">Puzzle, Strategy</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <a href="#">
+                        <div class="relative">
+                            <img src="https://via.placeholder.com/300x200" alt="New Game 3" class="w-full h-48 object-cover">
+                            <div class="absolute top-2 right-2 bg-apple-red text-white text-xs px-2 py-1 rounded">NEW</div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2 text-gray-800">Alien Attack</h3>
+                            <p class="text-gray-600 text-sm">Action, Shooter</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <a href="#">
+                        <div class="relative">
+                            <img src="https://via.placeholder.com/300x200" alt="New Game 4" class="w-full h-48 object-cover">
+                            <div class="absolute top-2 right-2 bg-apple-red text-white text-xs px-2 py-1 rounded">NEW</div>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2 text-gray-800">Word Master</h3>
+                            <p class="text-gray-600 text-sm">Puzzle, Word</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto px-4">
+            <div class="md:flex md:justify-between">
+                <div class="mb-4 md:mb-0
