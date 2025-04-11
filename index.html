@@ -264,7 +264,7 @@
            openIcon.classList.toggle('hidden');
            closedIcon.classList.toggle('hidden');
     
-           // 更新ARIA状态
+           // Update ARIA state
            const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
            menuToggle.setAttribute('aria-expanded', !isExpanded);
         });
