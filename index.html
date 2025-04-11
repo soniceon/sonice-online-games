@@ -254,19 +254,25 @@
 
     <script>
        // Mobile menu toggle
-       document.getElementById('menu-toggle').addEventListener('click', function() {
-           const menu = document.getElementById('menu');
-           const openIcon = document.getElementById('menu-open');
-           const closedIcon = document.getElementById('menu-closed');
-           const menuToggle = document.getElementById('menu-toggle');
-    
-           menu.classList.toggle('hidden');
-           openIcon.classList.toggle('hidden');
-           closedIcon.classList.toggle('hidden');
-    
-           // Update ARIA state
-           const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-           menuToggle.setAttribute('aria-expanded', !isExpanded);
+        document.getElementById('menu-toggle').addEventListener('click', function () {
+            const menu = document.getElementById('menu');
+            const openIcon = document.getElementById('menu-open');
+            const closedIcon = document.getElementById('menu-closed');
+            const menuToggle = document.getElementById('menu-toggle');
+
+            menu.classList.toggle('hidden');
+
+            // If menu is now visible, show the "open" icon (X) and hide the "closed" icon (three lines)
+            if (!menu.classList.contains('hidden')) {
+                openIcon.classList.remove('hidden');
+                closedIcon.classList.add('hidden');
+                menuToggle.setAttribute('aria-expanded', 'true');
+            } else {
+                // If menu is now hidden, show the "closed" icon (three lines) and hide the "open" icon (X)
+                openIcon.classList.add('hidden');
+                closedIcon.classList.remove('hidden');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            }
         });
     </script>
 </body>
