@@ -1,0 +1,111 @@
+# 游戏页面模板使用指南
+
+## 简介
+
+这个模板设计用于创建统一、美观且对SEO友好的游戏页面。它整合了最佳实践，确保所有游戏页面具有一致的用户体验和优化的搜索引擎表现。
+
+## 如何使用模板
+
+1. 复制模板HTML代码
+2. 将所有占位符（用`{PLACEHOLDER}`格式标记）替换为实际内容
+3. 根据需要添加或删除某些部分（如"如何游戏"部分是可选的）
+4. 保存为新的HTML文件，文件名应与游戏名称相符（如`drift-king.html`）
+
+## 占位符说明
+
+### 基本信息
+
+| 占位符 | 描述 | 示例 |
+|--------|------|------|
+| `{GAME_NAME}` | 游戏的完整名称 | Drift Hunters Pro |
+| `{GAME_URL}` | 用于URL的游戏名称（小写，用连字符连接） | drift-hunters-pro |
+| `{SHORT_DESCRIPTION}` | 简短的游戏描述（60-160字符） | Master the art of drifting in this realistic racing simulator with stunning graphics! |
+| `{FULL_DESCRIPTION}` | 详细的游戏描述（2-4句话） | Drift Hunters Pro is an advanced racing simulator that puts you behind the wheel of powerful drift cars. Navigate through detailed tracks while perfecting your drifting techniques to earn points and unlock new vehicles and upgrades. |
+
+### 图片和链接
+
+| 占位符 | 描述 | 示例 |
+|--------|------|------|
+| `{GAME_IMAGE_FILENAME}` | 游戏缩略图文件名 | drift-hunters-pro.webp |
+| `{GAME_IFRAME_URL}` | 游戏iframe的URL | https://www.onlinegames.io/games/2023/unity/drift-hunters-pro/index.html |
+
+### 游戏分类和特性
+
+| 占位符 | 描述 | 示例 |
+|--------|------|------|
+| `{GENRE_1}` | 主要游戏类型 | Racing |
+| `{GENRE_2}` | 次要游戏类型 | Simulator |
+| `{DIFFICULTY}` | 游戏难度（可选） | Advanced |
+| `{FEATURE_1}` | 游戏特点1 | Realistic physics engine |
+| `{FEATURE_2}` | 游戏特点2 | 20+ customizable cars |
+| `{FEATURE_3}` | 游戏特点3 | Multiple track environments |
+
+### 游戏操作指南
+
+根据游戏实际操作方式修改操作指南部分。如果游戏不需要特定操作说明，可以简化或移除此部分。
+
+### 相关游戏推荐
+
+为"更多游戏"部分添加3-4个相关游戏，确保推荐的游戏与当前游戏类型相似：
+
+| 占位符 | 描述 | 示例 |
+|--------|------|------|
+| `{RELATED_GAME_1_NAME}` | 相关游戏1名称 | Drift King |
+| `{RELATED_GAME_1_URL}` | 相关游戏1 URL | drift-king |
+| `{RELATED_GAME_1_IMAGE}` | 相关游戏1图片 | drift-king.webp |
+| `{RELATED_GAME_1_GENRES}` | 相关游戏1类型 | Racing, Arcade |
+
+## SEO优化要点
+
+模板中包含以下SEO优化功能：
+
+1. **元标签**：标题、描述和Open Graph标签已优化
+2. **结构化数据**：包含VideoGame Schema标记，有助于搜索引擎理解内容
+3. **语义HTML**：使用适当的标题层次结构和语义元素
+4. **规范链接**：使用canonical标签防止重复内容问题
+5. **内容优化**：游戏分类、特点和描述使用丰富的关键词
+6. **移动优化**：响应式设计适合各种设备
+
+## 示例：完成的游戏页面
+
+下面是一个已完成的"Drift King"游戏页面示例：
+
+```html
+<!-- 示例：将占位符替换为实际内容的最终结果 -->
+<title>Drift King - Sonice Online Games</title>
+<meta name="description" content="Play Drift King - a high-speed racing arcade game where you master the art of drifting at sonice.online">
+
+<!-- 游戏标题部分 -->
+<h1 class="text-4xl font-bold text-gray-800 mb-2">Drift King</h1>
+<div class="flex justify-center items-center space-x-4 mb-4">
+    <span class="bg-apple-blue text-white px-3 py-1 rounded-full text-sm">Racing</span>
+    <span class="bg-apple-green text-white px-3 py-1 rounded-full text-sm">Arcade</span>
+</div>
+<p class="text-xl text-gray-600">Master the art of drifting in this high-speed racing arcade game!</p>
+
+<!-- 游戏描述部分 -->
+<p class="text-gray-700 mb-4">Drift King puts you in control of powerful drift cars on challenging tracks. Perfect your drifting techniques to earn points, unlock new cars, and become the ultimate drift champion. Compete against the clock or challenge your friends to beat your high scores.</p>
+<div class="space-y-2">
+    <div class="flex items-center">
+        <span class="text-apple-blue mr-2">•</span>
+        <span class="text-gray-600">10 unique drift cars to unlock</span>
+    </div>
+    <div class="flex items-center">
+        <span class="text-apple-blue mr-2">•</span>
+        <span class="text-gray-600">5 challenging track environments</span>
+    </div>
+    <div class="flex items-center">
+        <span class="text-apple-blue mr-2">•</span>
+        <span class="text-gray-600">Arcade-style physics for exciting gameplay</span>
+    </div>
+</div>
+```
+
+## 维护建议
+
+1. **定期更新**：如有新的SEO最佳实践，应更新模板
+2. **图像优化**：确保所有游戏图像都经过压缩并使用现代格式（如WebP）
+3. **性能监控**：使用Google PageSpeed Insights等工具定期检查页面性能
+4. **用户体验**：收集用户反馈，不断改进模板设计和功能性
+
+通过使用此模板并遵循这些建议，你可以确保所有游戏页面保持高质量、一致性和良好的搜索引擎排名。
