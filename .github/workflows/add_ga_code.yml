@@ -1,0 +1,26 @@
+name: Add Google Analytics Code
+
+on:
+  workflow_dispatch:
+
+jobs:
+  add-ga-code:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          
+      - name: Run script to add GA code
+        run: python add_ga_code.py
+        
+      - name: Commit changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add .
+          git commit -m "Add Google Analytics code to HTML files" || echo "No changes to commit"
+          git push
