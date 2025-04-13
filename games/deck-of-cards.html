@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Play Deck of Cards Mahjong - a classic matching card game with a twist, combining elements of Mahjong and traditional playing cards at sonice.online">
+    <!-- Open Graph tags for better social media sharing -->
+    <meta property="og:title" content="Deck of Cards Mahjong - Sonice Online Games">
+    <meta property="og:description" content="Test your memory and strategy skills with this unique matching game that combines Mahjong gameplay with traditional playing cards!">
+    <meta property="og:image" content="../images/deck-of-cards.webp">
+    <meta property="og:url" content="https://sonice.online/games/deck-of-cards.html">
+    <meta property="og:type" content="website">
+    <!-- Twitter Card tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Deck of Cards Mahjong - Sonice Online Games">
+    <meta name="twitter:description" content="Test your memory and strategy skills with this unique matching game that combines Mahjong gameplay with traditional playing cards!">
+    <meta name="twitter:image" content="../images/deck-of-cards.webp">
+    <!-- Canonical URL for SEO -->
+    <title>Deck of Cards Mahjong - Sonice Online Games</title>
+    <link rel="canonical" href="https://sonice.online/games/deck-of-cards.html" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../favicon.png">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'apple-blue': '#007AFF',
+                        'apple-green': '#34C759',
+                        'apple-indigo': '#5856D6',
+                        'apple-orange': '#FF9500',
+                        'apple-pink': '#FF2D55',
+                        'apple-purple': '#AF52DE',
+                        'apple-red': '#FF3B30',
+                        'apple-teal': '#5AC8FA',
+                        'apple-yellow': '#FFCC00',
+                        'apple-gray': '#8E8E93',
+                        'apple-bg': '#F2F2F7',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Structured Data for Rich Snippets -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "Deck of Cards Mahjong",
+        "description": "Deck of Cards Mahjong is a strategic matching game that combines the mechanics of Mahjong with traditional playing cards. Players must find and match pairs of cards to remove them from the board, with the goal of clearing all cards. The game challenges memory, pattern recognition, and strategic thinking.",
+        "genre": ["Card", "Puzzle", "Strategy"],
+        "image": "https://sonice.online/images/deck-of-cards.webp",
+        "url": "https://sonice.online/games/deck-of-cards.html",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Sonice Online"
+        }
+    }
+    </script>
+</head>
+<body class="bg-apple-bg min-h-screen">
+    <header class="bg-apple-blue text-white shadow-md">
+        <div class="container mx-auto px-4 py-6 md:flex md:justify-between md:items-center">
+            <div class="flex justify-between items-center">
+                <div>
+                    <a href="../index.html" class="text-2xl font-bold">sonice.online</a>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-white focus:outline-none" aria-expanded="false" aria-label="Toggle navigation menu">
+                        <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
+                            <path class="hidden" id="menu-open" fill-rule="evenodd" clip-rule="evenodd" d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z"></path>
+                            <path id="menu-closed" fill-rule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            <nav id="menu" class="hidden md:flex flex-col md:flex-row md:items-center md:justify-end md:flex-1">
+                <a href="../index.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Home</a>
+                <a href="../categories/action.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Action</a>
+                <a href="../categories/puzzle.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Puzzle</a>
+                <a href="../categories/strategy.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Strategy</a>
+                <a href="../categories/racing.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Racing</a>
+                <a href="../about.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">About</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+        <!-- Game Title -->
+        <div class="text-center mb-6">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">Deck of Cards Mahjong</h1>
+            <div class="flex justify-center items-center space-x-4 mb-4">
+                <!-- Game Categories/Tags -->
+                <span class="bg-apple-red text-white px-3 py-1 rounded-full text-sm">Card</span>
+                <span class="bg-apple-purple text-white px-3 py-1 rounded-full text-sm">Puzzle</span>
+                <span class="bg-apple-indigo text-white px-3 py-1 rounded-full text-sm">Strategy</span>
+            </div>
+            <p class="text-xl text-gray-600">Test your memory and strategy skills with this unique matching game that combines Mahjong gameplay with traditional playing cards!</p>
+        </div>
+
+        <!-- Game Canvas with Loading State -->
+        <div class="bg-gray-900 rounded-lg shadow-lg overflow-hidden mb-8">
+            <div id="game-container" class="w-full aspect-video relative">
+                <div id="loading-overlay" class="absolute inset-0 flex items-center justify-center bg-gray-900">
+                    <div class="text-white text-center">
+                        <div class="animate-spin rounded-full h-12 w-12 border-4 border-apple-red mx-auto mb-4"></div>
+                        <p>Loading game...</p>
+                    </div>
+                </div>
+                <iframe 
+                    src="http://cdn2.addictinggames.com/addictinggames-content/ag-assets/content-items/html5-games/deck-of-cards-mahjong/index.html" 
+                    class="w-full h-full border-0" 
+                    title="Deck of Cards Mahjong gameplay"
+                    allowfullscreen
+                    onload="document.getElementById('loading-overlay').style.display='none'"
+                ></iframe>
+            </div>
+        </div>
+
+        <!-- Game Info Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <!-- Game Controls -->
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h3 class="text-lg font-semibold mb-3">Game Controls</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex items-center">
+                        <span class="bg-gray-100 px-3 py-1 rounded mr-2">Mouse</span>
+                        <span class="text-gray-600">Select Cards</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="bg-gray-100 px-3 py-1 rounded mr-2">Click</span>
+                        <span class="text-gray-600">Match Pairs</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="bg-gray-100 px-3 py-1 rounded mr-2">Hint Button</span>
+                        <span class="text-gray-600">Get a Hint</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="bg-gray-100 px-3 py-1 rounded mr-2">Shuffle Button</span>
+                        <span class="text-gray-600">Rearrange Cards</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Description -->
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h3 class="text-lg font-semibold mb-3">Game Overview</h3>
+                <p class="text-gray-700 mb-4">Deck of Cards Mahjong combines the strategic gameplay of Mahjong with the familiar symbols and patterns of traditional playing cards. Your goal is to match and remove pairs of identical cards from the board. A card is available for matching only when its left or right edge is free (not blocked by other cards). Think carefully about each move, as the order in which you remove cards affects your ability to clear the board!</p>
+                <div class="space-y-2">
+                    <div class="flex items-center">
+                        <span class="text-apple-red mr-2">•</span>
+                        <span class="text-gray-600">Multiple challenging layouts and difficulty levels</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-apple-red mr-2">•</span>
+                        <span class="text-gray-600">Beautiful card designs and smooth animations</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-apple-red mr-2">•</span>
+                        <span class="text-gray-600">Time-based scoring system with bonus points</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- How to Play Section -->
+        <div class="bg-white rounded-lg shadow-md p-4 mb-8">
+            <h3 class="text-lg font-semibold mb-3">How to Play</h3>
+            <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                <li>The goal is to clear all cards from the board by matching pairs</li>
+                <li>Two cards can be matched if they have identical ranks and suits (e.g., both are King of Hearts)</li>
+                <li>You can only select cards that are "free" - meaning at least one side (left or right) is not blocked by another card</li>
+                <li>Click on one card, then click on its matching pair to remove both from the board</li>
+                <li>Plan your moves carefully - removing cards in the wrong order can leave you with unmatchable pairs</li>
+                <li>If you get stuck, you can use the hint feature to highlight available matches</li>
+                <li>The shuffle button can help rearrange cards when no more moves are possible</li>
+                <li>Clear the board as quickly as possible for the highest score and time bonuses</li>
+                <li>Complete all levels to win the game and unlock new challenges</li>
+            </ol>
+        </div>
+
+        <!-- More Games Section -->
+        <div class="mb-8">
+            <h2 class="text-2xl font-bold mb-6 text-gray-800">More Games You Might Enjoy</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                    <a href="solitaire-tripeaks-garden.html">
+                        <img src="../images/solitaire-tripeaks-garden.webp" alt="Solitaire TriPeaks Garden" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2 text-gray-800">Solitaire TriPeaks Garden</h3>
+                            <p class="text-gray-600 text-sm">Card, Puzzle</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                    <a href="fireboy-and-watergirl-3.html">
+                        <img src="../images/fireboy-and-watergirl-3.webp" alt="Fireboy and Watergirl 3" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2 text-gray-800">Fireboy and Watergirl 3</h3>
+                            <p class="text-gray-600 text-sm">Puzzle, Platformer</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                    <a href="e-life-simulation.html">
+                        <img src="../images/e-life-simulation.webp" alt="E-Life Simulation" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2 text-gray-800">E-Life Simulation</h3>
+                            <p class="text-gray-600 text-sm">Simulation, Strategy</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow md:hidden lg:block">
+                    <a href="stardew-valley.html">
+                        <img src="../images/stardew-valley.webp" alt="Stardew Valley" class="w-full h-48 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-bold text-lg mb-2 text-gray-800">Stardew Valley</h3>
+                            <p class="text-gray-600 text-sm">Farming, RPG</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto px-4">
+            <div class="md:flex md:justify-between">
+                <div class="mb-4 md:mb-0">
+                    <h2 class="text-xl font-bold mb-2">sonice.online</h2>
+                    <p class="text-gray-400">© 2025 sonice.online. All rights reserved.</p>
+                </div>
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-lg font-semibold mb-2">Categories</h3>
+                    <ul class="space-y-1">
+                        <li><a href="../categories/action.html" class="text-gray-400 hover:text-white">Action</a></li>
+                        <li><a href="../categories/puzzle.html" class="text-gray-400 hover:text-white">Puzzle</a></li>
+                        <li><a href="../categories/strategy.html" class="text-gray-400 hover:text-white">Strategy</a></li>
+                        <li><a href="../categories/racing.html" class="text-gray-400 hover:text-white">Racing</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-2">Contact</h3>
+                    <p class="text-gray-400">Email: contact@sonice.online</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const menu = document.getElementById('menu');
+            const openIcon = document.getElementById('menu-open');
+            const closedIcon = document.getElementById('menu-closed');
+            const menuToggle = document.getElementById('menu-toggle');
+            
+            menu.classList.toggle('hidden');
+            openIcon.classList.toggle('hidden');
+            closedIcon.classList.toggle('hidden');
+            
+            // Update ARIA state
+            const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+            menuToggle.setAttribute('aria-expanded', !isExpanded);
+        });
+        
+        // Game loading tracking for analytics (optional)
+        window.addEventListener('load', function() {
+            // You can add game loading analytics code here if needed
+            console.log('Game page fully loaded');
+        });
+    </script>
+</body>
+</html>
