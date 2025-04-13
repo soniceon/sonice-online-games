@@ -4,8 +4,11 @@ on:
   workflow_dispatch:
 
 jobs:
-  add-ga-code:
+  add_ga_code:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # Give the workflow permission to write content
+    
     steps:
       - uses: actions/checkout@v3
       
