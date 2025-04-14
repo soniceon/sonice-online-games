@@ -3,9 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Play Basket Blitz 2 - a fast-paced basketball arcade game at sonice.online">
+    <meta name="description" content="Play Basket Blitz 2 - Fast-paced basketball arcade game at sonice.online">
+    
+    <!-- Open Graph tags -->
+    <meta property="og:title" content="Basket Blitz 2 - Sonice Online Games">
+    <meta property="og:description" content="Challenge yourself in this exciting arcade-style basketball game!">
+    <meta property="og:image" content="../images/basket-blitz-2.webp">
+    <meta property="og:url" content="https://sonice.online/games/basket-blitz-2.html">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Basket Blitz 2 - Sonice Online Games">
+    <meta name="twitter:description" content="Challenge yourself in this exciting arcade-style basketball game!">
+    <meta name="twitter:image" content="../images/basket-blitz-2.webp">
+
     <title>Basket Blitz 2 - Sonice Online Games</title>
     <link rel="canonical" href="https://sonice.online/games/basket-blitz-2.html" />
+    <link rel="icon" type="image/png" href="../favicon.png">
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -14,14 +31,7 @@
                     colors: {
                         'apple-blue': '#007AFF',
                         'apple-green': '#34C759',
-                        'apple-indigo': '#5856D6',
-                        'apple-orange': '#FF9500',
-                        'apple-pink': '#FF2D55',
-                        'apple-purple': '#AF52DE',
-                        'apple-red': '#FF3B30',
-                        'apple-teal': '#5AC8FA',
                         'apple-yellow': '#FFCC00',
-                        'apple-gray': '#8E8E93',
                         'apple-bg': '#F2F2F7',
                     }
                 }
@@ -29,15 +39,18 @@
         }
     </script>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C6DQJE930Z"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-C6DQJE930Z');
-</script>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C6DQJE930Z"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-C6DQJE930Z');
+    </script>
 
+    <!-- Game recommendation scripts -->
+    <script src="../js/games-data.js"></script>
+    <script src="../js/game-recommendations.js"></script>
 </head>
 <body class="bg-apple-bg min-h-screen">
     <header class="bg-apple-blue text-white shadow-md">
@@ -47,10 +60,10 @@
                     <a href="../index.html" class="text-2xl font-bold">sonice.online</a>
                 </div>
                 <div class="md:hidden">
-                    <button id="menu-toggle" class="text-white focus:outline-none" aria-expanded="false" aria-label="Toggle navigation menu">
+                    <button id="menu-toggle" class="text-white focus:outline-none" aria-expanded="false">
                         <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
-                            <path class="hidden" id="menu-open" fill-rule="evenodd" clip-rule="evenodd" d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z"></path>
-                            <path id="menu-closed" fill-rule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path>
+                            <path class="hidden" id="menu-open" d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z"></path>
+                            <path id="menu-closed" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path>
                         </svg>
                     </button>
                 </div>
@@ -70,77 +83,106 @@
         <!-- Game Title -->
         <div class="text-center mb-6">
             <h1 class="text-4xl font-bold text-gray-800 mb-2">Basket Blitz 2</h1>
-            <p class="text-xl text-gray-600">Test your basketball skills in this fast-paced arcade game with exciting challenges!</p>
+            <div class="flex justify-center items-center space-x-4 mb-4">
+                <span class="bg-apple-blue text-white px-3 py-1 rounded-full text-sm">Sports</span>
+                <span class="bg-apple-green text-white px-3 py-1 rounded-full text-sm">Arcade</span>
+            </div>
+            <p class="text-xl text-gray-600">Fast-paced basketball arcade game with multiple game modes!</p>
         </div>
 
         <!-- Game Canvas -->
         <div class="bg-gray-900 rounded-lg shadow-lg overflow-hidden mb-8">
             <div id="game-container" class="w-full aspect-video">
-                <iframe src="https://games.crazygames.com/en_US/basket-blitz/index.html" class="w-full h-full border-0" allowfullscreen></iframe>
+                <iframe 
+                    src="https://games.crazygames.com/en_US/basket-blitz/index.html" 
+                    class="w-full h-full border-0" 
+                    allowfullscreen
+                    scrolling="no"
+                ></iframe>
             </div>
+        </div>
+
+        <!-- Game Info -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <!-- Game Controls -->
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h3 class="text-lg font-semibold mb-3">Game Controls</h3>
+                <div class="space-y-2 text-gray-600">
+                    <div class="flex items-center">
+                        <span class="bg-gray-100 px-3 py-1 rounded mr-2">Mouse</span>
+                        <span>Aim and shoot</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="bg-gray-100 px-3 py-1 rounded mr-2">Click + Hold</span>
+                        <span>Control shot power</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="bg-gray-100 px-3 py-1 rounded mr-2">Release</span>
+                        <span>Shoot the ball</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Description -->
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h3 class="text-lg font-semibold mb-3">Game Overview</h3>
+                <p class="text-gray-700">Challenge yourself in this exciting arcade-style basketball game! Test your shooting skills, compete for high scores, and unlock new challenges as you progress.</p>
+            </div>
+        </div>
+
+        <!-- How to Play -->
+        <div class="bg-white rounded-lg shadow-md p-4 mb-8">
+            <h3 class="text-lg font-semibold mb-3">How to Play</h3>
+            <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                <li>Use your mouse to aim the basketball</li>
+                <li>Click and hold to control shot power</li>
+                <li>Release to shoot the ball</li>
+                <li>Score as many points as possible</li>
+                <li>Complete challenges to unlock new modes</li>
+            </ol>
         </div>
 
         <!-- More Games Section -->
         <div class="mb-8">
             <h2 class="text-2xl font-bold mb-6 text-gray-800">More Games You Might Enjoy</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <a href="monster-survivors.html">
-                        <img src="../images/monster-survivors.webp" alt="Monster Survivors" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-bold text-lg mb-2 text-gray-800">Monster Survivors</h3>
-                            <p class="text-gray-600 text-sm">Action, Adventure</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <a href="drift-hunters.html">
-                        <img src="../images/drift-hunters.webp" alt="Drift Hunters" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-bold text-lg mb-2 text-gray-800">Drift Hunters</h3>
-                            <p class="text-gray-600 text-sm">Racing, Simulator</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="bg-white rounded-lg shadow-md overflow-hidden">
-                    <a href="crazy-strike-force.html">
-                        <img src="../images/crazy-strike-force.webp" alt="Crazy Strike Force" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-bold text-lg mb-2 text-gray-800">Crazy Strike Force</h3>
-                            <p class="text-gray-600 text-sm">Action, Shooter</p>
-                        </div>
-                    </a>
-                </div>
+            <div id="recommended-games" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <script>
+                    const currentGame = 'basket-blitz-2';
+                    const recommendedGames = getRandomGames(currentGame, 'sports');
+                    const gamesHTML = recommendedGames.map(renderGameCard).join('');
+                    document.getElementById('recommended-games').innerHTML = gamesHTML;
+                </script>
             </div>
         </div>
     </main>
 
-    <footer class="bg-gray-800 text-white py-6">
-        <div class="container mx-auto px-4">
-            <div class="md:flex md:justify-between">
-                <div class="mb-4 md:mb-0">
-                    <h2 class="text-xl font-bold mb-2">sonice.online</h2>
-                    <p class="text-gray-400">© 2025 sonice.online. All rights reserved.</p>
-                </div>
-                <div class="mb-4 md:mb-0">
-                    <h3 class="text-lg font-semibold mb-2">Categories</h3>
-                    <ul class="space-y-1">
-                        <li><a href="../categories/action.html" class="text-gray-400 hover:text-white">Action</a></li>
-                        <li><a href="../categories/puzzle.html" class="text-gray-400 hover:text-white">Puzzle</a></li>
-                        <li><a href="../categories/strategy.html" class="text-gray-400 hover:text-white">Strategy</a></li>
-                        <li><a href="../categories/racing.html" class="text-gray-400 hover:text-white">Racing</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-2">Contact</h3>
-                    <p class="text-gray-400">Email: contact@sonice.online</p>
-                </div>
+    <!-- Footer -->
+    <footer class="bg-[#1f2937] text-white py-12">
+        <div class="container mx-auto px-4 grid grid-cols-3 gap-x-8">
+            <div>
+                <h3 class="text-xl font-bold mb-2">sonice.online</h3>
+                <p class="text-gray-400 text-sm">© 2025 sonice.online. All rights reserved.</p>
+            </div>
+            
+            <div>
+                <h3 class="text-xl font-bold mb-4">Categories</h3>
+                <nav class="space-y-2 text-gray-400">
+                    <div><a href="/action" class="hover:text-white">Action</a></div>
+                    <div><a href="/puzzle" class="hover:text-white">Puzzle</a></div>
+                    <div><a href="/strategy" class="hover:text-white">Strategy</a></div>
+                    <div><a href="/racing" class="hover:text-white">Racing</a></div>
+                </nav>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-bold mb-2">Contact</h3>
+                <p class="text-gray-400">Email: contact@sonice.online</p>
             </div>
         </div>
     </footer>
 
+    <!-- Mobile menu script -->
     <script>
-        // Mobile menu toggle
         document.getElementById('menu-toggle').addEventListener('click', function() {
             const menu = document.getElementById('menu');
             const openIcon = document.getElementById('menu-open');
@@ -151,7 +193,6 @@
             openIcon.classList.toggle('hidden');
             closedIcon.classList.toggle('hidden');
             
-            // Update ARIA state
             const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
             menuToggle.setAttribute('aria-expanded', !isExpanded);
         });

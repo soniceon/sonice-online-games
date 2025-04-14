@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Play Crazy Strike Force - An exciting action shooting game">
+    <meta name="description" content="Play Crazy Strike Force - Intense shooting action game with multiple weapons and challenges">
+    <meta name="keywords" content="Crazy Strike Force, shooting game, action game, online game">
     <title>Crazy Strike Force - Sonice Games</title>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C6DQJE930Z"></script>
+    <script src="../js/analytics.js"></script>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="../styles.css">
 </head>
@@ -13,7 +19,7 @@
     
     <main class="container mx-auto px-4 py-8">
         <div class="bg-white rounded-lg shadow-lg p-6">
-            <h1 class="text-3xl font-bold mb-4">Crazy Strike Force</h1>
+            <h1 class="text-3xl font-bold mb-4" data-track="view_game" data-category="games">Crazy Strike Force</h1>
             
             <div class="aspect-w-16 aspect-h-9 mb-6">
                 <iframe 
@@ -21,15 +27,18 @@
                     class="w-full h-[600px]"
                     frameborder="0" 
                     allow="fullscreen"
-                    scrolling="no">
+                    scrolling="no"
+                    data-track="start_game" 
+                    data-category="game_interaction">
                 </iframe>
             </div>
             
             <div class="game-info mt-6">
                 <h2 class="text-xl font-semibold mb-2">Game Description</h2>
                 <p class="text-gray-600 mb-4">
-                    Crazy Strike Force is an exciting shooting game where you must defend your base against waves of enemies. 
-                    Use various weapons and upgrade your arsenal to survive increasingly difficult challenges.
+                    Experience intense shooting action in Crazy Strike Force! Battle through waves of enemies, 
+                    upgrade your weapons, and defend your position in this action-packed game. With multiple 
+                    weapons to choose from and increasingly challenging levels, your skills will be put to the test.
                 </p>
                 
                 <div class="game-controls mt-4">
@@ -39,6 +48,7 @@
                         <li>Mouse - Aim and shoot</li>
                         <li>R - Reload weapon</li>
                         <li>Space - Jump</li>
+                        <li>1-4 - Switch weapons</li>
                     </ul>
                 </div>
             </div>

@@ -3,280 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Play BasketBros - a fun multiplayer basketball game with crazy physics and hilarious gameplay at sonice.online">
-    <!-- Open Graph tags for better social media sharing -->
-    <meta property="og:title" content="BasketBros - Sonice Online Games">
-    <meta property="og:description" content="Enjoy this chaotic basketball game with wacky physics and multiplayer action!">
-    <meta property="og:image" content="../images/basketbros.webp">
-    <meta property="og:url" content="https://sonice.online/games/basketbros.html">
-    <meta property="og:type" content="website">
-    <!-- Twitter Card tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="BasketBros - Sonice Online Games">
-    <meta name="twitter:description" content="Enjoy this chaotic basketball game with wacky physics and multiplayer action!">
-    <meta name="twitter:image" content="../images/basketbros.webp">
-    <!-- Canonical URL for SEO -->
-    <title>BasketBros - Sonice Online Games</title>
-    <link rel="canonical" href="https://sonice.online/games/basketbros.html" />
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="../favicon.png">
-    <!-- Tailwind CSS -->
+    <meta name="description" content="Play BasketBros - Intense multiplayer basketball action with unique characters">
+    <meta name="keywords" content="BasketBros, basketball game, multiplayer game, sports game, online game">
+    <title>BasketBros - Sonice Games</title>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C6DQJE930Z"></script>
+    <script src="../js/analytics.js"></script>
+    
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'apple-blue': '#007AFF',
-                        'apple-green': '#34C759',
-                        'apple-indigo': '#5856D6',
-                        'apple-orange': '#FF9500',
-                        'apple-pink': '#FF2D55',
-                        'apple-purple': '#AF52DE',
-                        'apple-red': '#FF3B30',
-                        'apple-teal': '#5AC8FA',
-                        'apple-yellow': '#FFCC00',
-                        'apple-gray': '#8E8E93',
-                        'apple-bg': '#F2F2F7',
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- Structured Data for Rich Snippets -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "VideoGame",
-        "name": "BasketBros",
-        "description": "BasketBros is a chaotic multiplayer basketball game with wacky physics and hilarious gameplay. Challenge your friends in local multiplayer or play against the computer in this unconventional sports game where anything can happen!",
-        "genre": ["Sports", "Arcade"],
-        "image": "https://sonice.online/images/basketbros.webp",
-        "url": "https://sonice.online/games/basketbros.html",
-        "publisher": {
-            "@type": "Organization",
-            "name": "Sonice Online"
-        }
-    }
-    </script>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C6DQJE930Z"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-C6DQJE930Z');
-</script>
-
+    <link rel="stylesheet" href="../styles.css">
 </head>
-<body class="bg-apple-bg min-h-screen">
-    <header class="bg-apple-blue text-white shadow-md">
-        <div class="container mx-auto px-4 py-6 md:flex md:justify-between md:items-center">
-            <div class="flex justify-between items-center">
-                <div>
-                    <a href="../index.html" class="text-2xl font-bold">sonice.online</a>
-                </div>
-                <div class="md:hidden">
-                    <button id="menu-toggle" class="text-white focus:outline-none" aria-expanded="false" aria-label="Toggle navigation menu">
-                        <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
-                            <path class="hidden" id="menu-open" fill-rule="evenodd" clip-rule="evenodd" d="M18.278 16.864a1 1 0 0 1-1.414 1.414l-4.829-4.828-4.828 4.828a1 1 0 0 1-1.414-1.414l4.828-4.829-4.828-4.828a1 1 0 0 1 1.414-1.414l4.829 4.828 4.828-4.828a1 1 0 1 1 1.414 1.414l-4.828 4.829 4.828 4.828z"></path>
-                            <path id="menu-closed" fill-rule="evenodd" d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            <nav id="menu" class="hidden md:flex flex-col md:flex-row md:items-center md:justify-end md:flex-1">
-                <a href="../index.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Home</a>
-                <a href="../categories/action.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Action</a>
-                <a href="../categories/puzzle.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Puzzle</a>
-                <a href="../categories/strategy.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Strategy</a>
-                <a href="../categories/racing.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Racing</a>
-                <a href="../about.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">About</a>
-            </nav>
-        </div>
-    </header>
-
+<body class="bg-gray-100">
+    <div id="header-container"></div>
+    
     <main class="container mx-auto px-4 py-8">
-        <!-- Game Title -->
-        <div class="text-center mb-6">
-            <h1 class="text-4xl font-bold text-gray-800 mb-2">BasketBros</h1>
-            <div class="flex justify-center items-center space-x-4 mb-4">
-                <!-- Game Categories/Tags -->
-                <span class="bg-apple-blue text-white px-3 py-1 rounded-full text-sm">Sports</span>
-                <span class="bg-apple-green text-white px-3 py-1 rounded-full text-sm">Arcade</span>
-                <span class="bg-apple-orange text-white px-3 py-1 rounded-full text-sm">Multiplayer</span>
-            </div>
-            <p class="text-xl text-gray-600">Experience chaotic basketball action with ridiculous physics and hilarious gameplay!</p>
-        </div>
-
-        <!-- Game Canvas with Loading State -->
-        <div class="bg-gray-900 rounded-lg shadow-lg overflow-hidden mb-8">
-            <div id="game-container" class="w-full aspect-video relative">
-                <div id="loading-overlay" class="absolute inset-0 flex items-center justify-center bg-gray-900">
-                    <div class="text-white text-center">
-                        <div class="animate-spin rounded-full h-12 w-12 border-4 border-apple-blue mx-auto mb-4"></div>
-                        <p>Loading game...</p>
-                    </div>
-                </div>
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h1 class="text-3xl font-bold mb-4" data-track="view_game" data-category="games">BasketBros</h1>
+            
+            <div class="aspect-w-16 aspect-h-9 mb-6">
                 <iframe 
                     src="https://games.crazygames.com/en_US/basketbros/index.html" 
-                    class="w-full h-full border-0" 
-                    title="BasketBros gameplay"
-                    allowfullscreen
-                    onload="document.getElementById('loading-overlay').style.display='none'"
-                ></iframe>
+                    class="w-full h-[600px]"
+                    frameborder="0" 
+                    allow="fullscreen"
+                    scrolling="no"
+                    data-track="start_game" 
+                    data-category="game_interaction">
+                </iframe>
             </div>
-        </div>
-
-        <!-- Game Info Section -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-            <!-- Game Controls -->
-            <div class="bg-white rounded-lg shadow-md p-4">
-                <h3 class="text-lg font-semibold mb-3">Game Controls</h3>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="flex items-center">
-                        <span class="bg-gray-100 px-3 py-1 rounded mr-2">WASD</span>
-                        <span class="text-gray-600">Player 1 Movement</span>
-                    </div>
-                    <div class="flex items-center">
-                        <span class="bg-gray-100 px-3 py-1 rounded mr-2">Arrow Keys</span>
-                        <span class="text-gray-600">Player 2 Movement</span>
-                    </div>
-                    <div class="flex items-center">
-                        <span class="bg-gray-100 px-3 py-1 rounded mr-2">F</span>
-                        <span class="text-gray-600">Player 1 Shoot/Action</span>
-                    </div>
-                    <div class="flex items-center">
-                        <span class="bg-gray-100 px-3 py-1 rounded mr-2">P</span>
-                        <span class="text-gray-600">Player 2 Shoot/Action</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Game Description -->
-            <div class="bg-white rounded-lg shadow-md p-4">
-                <h3 class="text-lg font-semibold mb-3">Game Overview</h3>
-                <p class="text-gray-700 mb-4">BasketBros is a wacky basketball game that turns the traditional sport on its head with physics-based gameplay and chaotic action. Play against friends on the same keyboard or challenge the computer in this hilarious take on basketball where skill meets luck and anything can happen!</p>
-                <div class="space-y-2">
-                    <div class="flex items-center">
-                        <span class="text-apple-blue mr-2">•</span>
-                        <span class="text-gray-600">Local multiplayer for up to 4 players</span>
-                    </div>
-                    <div class="flex items-center">
-                        <span class="text-apple-blue mr-2">•</span>
-                        <span class="text-gray-600">Ragdoll physics for unpredictable fun</span>
-                    </div>
-                    <div class="flex items-center">
-                        <span class="text-apple-blue mr-2">•</span>
-                        <span class="text-gray-600">Multiple game modes and courts</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- How to Play Section -->
-        <div class="bg-white rounded-lg shadow-md p-4 mb-8">
-            <h3 class="text-lg font-semibold mb-3">How to Play</h3>
-            <ol class="list-decimal list-inside space-y-2 text-gray-700">
-                <li>Select a game mode (1-on-1, 2-on-2, etc.) from the main menu</li>
-                <li>Choose your character and team colors</li>
-                <li>Use the movement keys to run and jump around the court</li>
-                <li>Press the action button to shoot when you have the ball or steal/block when on defense</li>
-                <li>Score more points than your opponent before time runs out</li>
-            </ol>
-        </div>
-
-        <!-- More Games Section -->
-        <div class="mb-8">
-            <h2 class="text-2xl font-bold mb-6 text-gray-800">More Games You Might Enjoy</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                    <a href="basketball-stars.html">
-                        <img src="../images/basketball-stars.webp" alt="Basketball Stars" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-bold text-lg mb-2 text-gray-800">Basketball Stars</h3>
-                            <p class="text-gray-600 text-sm">Sports, Action</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                    <a href="basket-blitz-2.html">
-                        <img src="../images/basket-blitz-2.webp" alt="Basket Blitz 2" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-bold text-lg mb-2 text-gray-800">Basket Blitz 2</h3>
-                            <p class="text-gray-600 text-sm">Sports, Arcade</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                    <a href="hoop-world-3d.html">
-                        <img src="../images/hoop-world-3d.webp" alt="Hoop World 3D" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-bold text-lg mb-2 text-gray-800">Hoop World 3D</h3>
-                            <p class="text-gray-600 text-sm">Sports, 3D</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow md:hidden lg:block">
-                    <a href="monster-survivors.html">
-                        <img src="../images/monster-survivors.webp" alt="Monster Survivors" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-bold text-lg mb-2 text-gray-800">Monster Survivors</h3>
-                            <p class="text-gray-600 text-sm">Action, Adventure</p>
-                        </div>
-                    </a>
+            
+            <div class="game-info mt-6">
+                <h2 class="text-xl font-semibold mb-2">Game Description</h2>
+                <p class="text-gray-600 mb-4">
+                    BasketBros brings multiplayer basketball mayhem to your screen! Choose your unique character, 
+                    each with special abilities, and compete in fast-paced matches against players worldwide. 
+                    Master different shot types, perform crazy dunks, and dominate the court in this action-packed 
+                    basketball game.
+                </p>
+                
+                <div class="game-controls mt-4">
+                    <h3 class="text-lg font-semibold mb-2">Controls</h3>
+                    <ul class="list-disc list-inside text-gray-600">
+                        <li>WASD / Arrow Keys - Move character</li>
+                        <li>Spacebar - Jump</li>
+                        <li>Left Mouse - Shoot / Block</li>
+                        <li>Right Mouse - Special ability</li>
+                        <li>E - Emote</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </main>
 
-    <footer class="bg-gray-800 text-white py-6">
-        <div class="container mx-auto px-4">
-            <div class="md:flex md:justify-between">
-                <div class="mb-4 md:mb-0">
-                    <h2 class="text-xl font-bold mb-2">sonice.online</h2>
-                    <p class="text-gray-400">© 2025 sonice.online. All rights reserved.</p>
-                </div>
-                <div class="mb-4 md:mb-0">
-                    <h3 class="text-lg font-semibold mb-2">Categories</h3>
-                    <ul class="space-y-1">
-                        <li><a href="../categories/action.html" class="text-gray-400 hover:text-white">Action</a></li>
-                        <li><a href="../categories/puzzle.html" class="text-gray-400 hover:text-white">Puzzle</a></li>
-                        <li><a href="../categories/strategy.html" class="text-gray-400 hover:text-white">Strategy</a></li>
-                        <li><a href="../categories/racing.html" class="text-gray-400 hover:text-white">Racing</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-2">Contact</h3>
-                    <p class="text-gray-400">Email: contact@sonice.online</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile menu toggle
-        document.getElementById('menu-toggle').addEventListener('click', function() {
-            const menu = document.getElementById('menu');
-            const openIcon = document.getElementById('menu-open');
-            const closedIcon = document.getElementById('menu-closed');
-            const menuToggle = document.getElementById('menu-toggle');
-            
-            menu.classList.toggle('hidden');
-            openIcon.classList.toggle('hidden');
-            closedIcon.classList.toggle('hidden');
-            
-            // Update ARIA state
-            const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-            menuToggle.setAttribute('aria-expanded', !isExpanded);
-        });
-        
-        // Game loading tracking for analytics (optional)
-        window.addEventListener('load', function() {
-            // You can add game loading analytics code here if needed
-            console.log('Game page fully loaded');
-        });
-    </script>
+    <div id="footer-container"></div>
+    
+    <script src="../js/template-loader.js"></script>
 </body>
 </html>
