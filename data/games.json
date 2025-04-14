@@ -1,0 +1,32 @@
+{
+  "games": [
+    {
+      "id": "monster-survivors",
+      "title": "Monster Survivors",
+      "image": "images/monster-survivors.webp",
+      "categories": ["Action", "RPG"],
+      "rating": 5,
+      "reviews": 425,
+      "featured": true,
+      "description": "Survive the endless onslaught of monsters in this thrilling action-packed game! Collect experience, level up, and unlock powerful abilities."
+    },
+    {
+      "id": "drift-king",
+      "title": "Drift King",
+      "image": "images/drift-king.webp",
+      "categories": ["Racing", "Arcade"],
+      "rating": 4,
+      "reviews": 342,
+      "featured": false
+    },
+    {
+      "id": "masked-special-forces",
+      "title": "Masked Special Forces",
+      "image": "images/masked-special-forces.webp",
+      "categories": ["Action", "Shooter"],
+      "rating": 4,
+      "reviews": 287,
+      "featured": false
+    }
+  ]
+}
