@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Play the best strategy games online at sonice.online - War Games, Tower Defense and more!">
-    <title>Strategy Games - Sonice Online</title>
-    <link rel="canonical" href="https://sonice.online/categories/strategy.html" />
+    <meta name="description" content="Play the best sports games online at sonice.online - Basketball, Soccer and more!">
+    <title>Sports Games - Sonice Online</title>
+    <link rel="canonical" href="https://sonice.online/categories/sports.html" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -43,6 +43,7 @@
     </header>
 
     <main class="container mx-auto px-4 py-8">
+        <!-- Breadcrumb navigation -->
         <nav class="text-sm mb-6" aria-label="Breadcrumb">
             <ol class="list-none p-0 inline-flex">
                 <li class="flex items-center">
@@ -58,16 +59,16 @@
                     </svg>
                 </li>
                 <li>
-                    <span class="text-gray-500" aria-current="page">Strategy Games</span>
+                    <span class="text-gray-500" aria-current="page">Sports Games</span>
                 </li>
             </ol>
         </nav>
 
         <div class="flex items-center mb-8">
-            <span class="text-4xl mr-4">♟️</span>
+            <span class="text-4xl mr-4">⚽</span>
             <div>
-                <h1 class="text-3xl font-bold">Strategy Games</h1>
-                <p class="text-gray-600 mt-2">Plan, build, and conquer in strategic gameplay</p>
+                <h1 class="text-3xl font-bold">Sports Games</h1>
+                <p class="text-gray-600 mt-2">Competitive sports and athletic challenges</p>
             </div>
         </div>
 
@@ -92,7 +93,7 @@
     </footer>
 
     <script>
-        async function loadStrategyGames() {
+        async function loadSportsGames() {
             try {
                 const [categoriesResponse, gamesResponse] = await Promise.all([
                     fetch('../data/categories.json'),
@@ -102,15 +103,15 @@
                 const categoriesData = await categoriesResponse.json();
                 const gamesData = await gamesResponse.json();
                 
-                const strategyGames = categoriesData.categories.Strategy.games;
+                const sportsGames = categoriesData.categories.Sports.games;
                 const gamesGrid = document.getElementById('games-grid');
                 
                 const gamesList = gamesData.games.filter(game => 
-                    strategyGames.includes(game.id)
+                    sportsGames.includes(game.id)
                 );
 
                 if (gamesList.length === 0) {
-                    gamesGrid.innerHTML = '<p class="col-span-full text-center text-gray-600 py-8">No strategy games available at the moment.</p>';
+                    gamesGrid.innerHTML = '<p class="col-span-full text-center text-gray-600 py-8">No sports games available at the moment.</p>';
                     return;
                 }
 
@@ -120,8 +121,8 @@
                             <div class="relative">
                                 <img src="../${game.image}" alt="${game.title}" class="w-full h-48 object-cover">
                                 <div class="absolute top-2 right-2">
-                                    <span class="bg-apple-orange text-white text-xs px-2 py-1 rounded-full">
-                                        Strategy
+                                    <span class="bg-apple-blue text-white text-xs px-2 py-1 rounded-full">
+                                        Sports
                                     </span>
                                 </div>
                             </div>
@@ -144,7 +145,7 @@
                     </div>
                 `).join('');
             } catch (error) {
-                console.error('Error loading strategy games:', error);
+                console.error('Error loading sports games:', error);
                 const gamesGrid = document.getElementById('games-grid');
                 gamesGrid.innerHTML = '<p class="col-span-full text-center text-red-600 py-8">Error loading games. Please try again later.</p>';
             }
@@ -160,7 +161,7 @@
                 Array(emptyStars).fill('<svg class="w-4 h-4 fill-current opacity-50" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>').join('');
         }
 
-        document.addEventListener('DOMContentLoaded', loadStrategyGames);
+        document.addEventListener('DOMContentLoaded', loadSportsGames);
     </script>
 </body>
 </html>

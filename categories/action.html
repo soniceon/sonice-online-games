@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Play the best action games online at sonice.online - FPS, Fighting and more!">
     <title>Action Games - Sonice Online</title>
+    <link rel="canonical" href="https://sonice.online/categories/action.html" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -26,26 +28,139 @@
             }
         }
     </script>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C6DQJE930Z"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-C6DQJE930Z');
-</script>
-
 </head>
 <body class="bg-apple-bg min-h-screen">
     <header class="bg-apple-blue text-white shadow-md">
-        <div class="container mx-auto px-4 py-6">
+        <div class="container mx-auto px-4 py-6 flex justify-between items-center">
             <a href="../index.html" class="text-2xl font-bold">sonice.online</a>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="../index.html" class="hover:text-apple-yellow">Home</a></li>
+                    <li><a href="../categories.html" class="hover:text-apple-yellow">Categories</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
+
     <main class="container mx-auto px-4 py-8">
-        <h1 class="text-3xl font-bold mb-6">Action Games</h1>
-        <p>Explore our collection of action games.</p>
+        <nav class="text-sm mb-6" aria-label="Breadcrumb">
+            <ol class="list-none p-0 inline-flex">
+                <li class="flex items-center">
+                    <a href="../index.html" class="text-apple-blue hover:text-apple-indigo">Home</a>
+                    <svg class="fill-current w-3 h-3 mx-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                        <path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/>
+                    </svg>
+                </li>
+                <li class="flex items-center">
+                    <a href="../categories.html" class="text-apple-blue hover:text-apple-indigo">Categories</a>
+                    <svg class="fill-current w-3 h-3 mx-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                        <path d="M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z"/>
+                    </svg>
+                </li>
+                <li>
+                    <span class="text-gray-500" aria-current="page">Action Games</span>
+                </li>
+            </ol>
+        </nav>
+
+        <div class="flex items-center mb-8">
+            <span class="text-4xl mr-4">🎮</span>
+            <div>
+                <h1 class="text-3xl font-bold">Action Games</h1>
+                <p class="text-gray-600 mt-2">Fast-paced games full of excitement and adventure</p>
+            </div>
+        </div>
+
+        <div id="games-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Games will be loaded here -->
+        </div>
     </main>
+
+    <footer class="bg-gray-800 text-white py-6 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="md:flex md:justify-between">
+                <div class="mb-4 md:mb-0">
+                    <h2 class="text-xl font-bold mb-2">sonice.online</h2>
+                    <p class="text-gray-400">© 2025 sonice.online. All rights reserved.</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-2">Contact</h3>
+                    <p class="text-gray-400">Email: contact@sonice.online</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        async function loadActionGames() {
+            try {
+                const [categoriesResponse, gamesResponse] = await Promise.all([
+                    fetch('../data/categories.json'),
+                    fetch('../data/games.json')
+                ]);
+                
+                const categoriesData = await categoriesResponse.json();
+                const gamesData = await gamesResponse.json();
+                
+                const actionGames = categoriesData.categories.Action.games;
+                const gamesGrid = document.getElementById('games-grid');
+                
+                const gamesList = gamesData.games.filter(game => 
+                    actionGames.includes(game.id)
+                );
+
+                if (gamesList.length === 0) {
+                    gamesGrid.innerHTML = '<p class="col-span-full text-center text-gray-600 py-8">No action games available at the moment.</p>';
+                    return;
+                }
+
+                gamesGrid.innerHTML = gamesList.map(game => `
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
+                        <a href="../games/${game.id}.html" class="block">
+                            <div class="relative">
+                                <img src="../${game.image}" alt="${game.title}" class="w-full h-48 object-cover">
+                                <div class="absolute top-2 right-2">
+                                    <span class="bg-apple-red text-white text-xs px-2 py-1 rounded-full">
+                                        Action
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="p-4">
+                                <h3 class="font-bold text-lg mb-2 text-gray-800">${game.title}</h3>
+                                <p class="text-gray-600 text-sm line-clamp-2 mb-2">${game.description}</p>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center">
+                                        <div class="flex text-apple-yellow">
+                                            ${generateRatingStars(game.rating)}
+                                        </div>
+                                        <span class="text-gray-600 text-sm ml-2">(${game.reviews})</span>
+                                    </div>
+                                    <span class="bg-apple-green text-white text-xs px-3 py-1 rounded-full">
+                                        Play Now
+                                    </span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error('Error loading action games:', error);
+                const gamesGrid = document.getElementById('games-grid');
+                gamesGrid.innerHTML = '<p class="col-span-full text-center text-red-600 py-8">Error loading games. Please try again later.</p>';
+            }
+        }
+
+        function generateRatingStars(rating) {
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 >= 0.5;
+            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+            
+            return Array(fullStars).fill('<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>').join('') +
+                (hasHalfStar ? '<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27V2L9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z"/></svg>' : '') +
+                Array(emptyStars).fill('<svg class="w-4 h-4 fill-current opacity-50" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>').join('');
+        }
+
+        document.addEventListener('DOMContentLoaded', loadActionGames);
+    </script>
 </body>
 </html>
