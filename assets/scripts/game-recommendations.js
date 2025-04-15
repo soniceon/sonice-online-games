@@ -16,7 +16,7 @@ function renderGameCard(game) {
     return `
         <div class="bg-white rounded-lg shadow-md overflow-hidden">
             <a href="${game.id}.html">
-                <img src="../images/${game.image}" alt="${game.title}" class="w-full h-48 object-cover">
+                <img src="../assets/images/${game.image}" alt="${game.title}" class="w-full h-48 object-cover">
                 <div class="p-4">
                     <h3 class="font-bold text-lg mb-2 text-gray-800">${game.title}</h3>
                     <p class="text-gray-600 text-sm">${game.categories.join(', ')}</p>
