@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Not Found - Sonice Online Games</title>
+    <meta name="robots" content="noindex,follow">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'apple-blue': '#007AFF',
+                        'apple-bg': '#F2F2F7',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-apple-bg min-h-screen flex items-center justify-center">
+    <div class="container mx-auto px-4 py-16 text-center">
+        <h1 class="text-6xl font-bold text-apple-blue mb-4">404</h1>
+        <p class="text-2xl text-gray-600 mb-8">Oops! Page not found</p>
+        <p class="text-gray-500 mb-8">The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
+        <div class="space-y-4">
+            <a href="/" class="inline-block bg-apple-blue text-white px-6 py-3 rounded-lg hover:bg-opacity-90 transition">
+                Return Home
+            </a>
+            <p class="text-gray-400">or</p>
+            <div class="max-w-md mx-auto">
+                <form action="/search-results.html" method="get" role="search" class="flex">
+                    <input type="text" 
+                           name="query" 
+                           placeholder="Search games..." 
+                           class="flex-1 px-4 py-2 rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-apple-blue"
+                           required>
+                    <button type="submit" 
+                            class="bg-apple-blue text-white px-6 py-2 rounded-r-lg hover:bg-opacity-90 transition"
+                            aria-label="Search">
+                        Search
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
