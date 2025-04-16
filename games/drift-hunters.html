@@ -69,7 +69,13 @@
     <main class="container mx-auto px-4 py-8">
         <!-- Game Title -->
         <div class="text-center mb-6">
-            <h1 class="text-4xl font-bold text-gray-800 mb-2">Drift Hunters</h1>
+            <h1 class="text-4xl font-bold text-apple-blue mb-2">Drift Hunters</h1>
+            <div class="flex justify-center items-center space-x-4 mb-4">
+                <!-- Game Categories/Tags -->
+                <span class="bg-apple-red text-white px-3 py-1 rounded-full text-sm">Racing</span>
+                <span class="bg-apple-purple text-white px-3 py-1 rounded-full text-sm">Simulator</span>
+                <span class="bg-apple-indigo text-white px-3 py-1 rounded-full text-sm">Drift</span>
+            </div>
             <p class="text-xl text-gray-600">Experience the thrill of drifting with realistic physics and customizable cars!</p>
         </div>
 
@@ -78,6 +84,66 @@
             <div id="game-container" class="w-full aspect-video">
                 <iframe src="https://www.onlinegames.io/games/2023/unity3/drift-hunters/index.html" class="w-full h-full border-0" allowfullscreen></iframe>
             </div>
+        </div>
+
+        <!-- Game Info Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <!-- Game Controls -->
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h3 class="text-lg font-semibold mb-3">Game Controls</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex items-center">
+                        <span class="bg-gray-100 px-3 py-1 rounded mr-2">WASD</span>
+                        <span class="text-gray-600">Steer Car</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="bg-gray-100 px-3 py-1 rounded mr-2">Space</span>
+                        <span class="text-gray-600">Handbrake</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="bg-gray-100 px-3 py-1 rounded mr-2">Shift</span>
+                        <span class="text-gray-600">Boost</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="bg-gray-100 px-3 py-1 rounded mr-2">R</span>
+                        <span class="text-gray-600">Reset Car</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Description -->
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h3 class="text-lg font-semibold mb-3">Game Overview</h3>
+                <p class="text-gray-700 mb-4">Drift Hunters is a realistic drifting simulator where you can customize and tune your dream cars. Master the art of drifting, compete in challenges, and unlock new vehicles. The game features realistic physics, detailed car customization, and various tracks to test your skills.</p>
+                <div class="space-y-2">
+                    <div class="flex items-center">
+                        <span class="text-apple-red mr-2">•</span>
+                        <span class="text-gray-600">Realistic physics and car handling</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-apple-red mr-2">•</span>
+                        <span class="text-gray-600">Extensive car customization options</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-apple-red mr-2">•</span>
+                        <span class="text-gray-600">Multiple tracks and challenges</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- How to Play Section -->
+        <div class="bg-white rounded-lg shadow-md p-4 mb-8">
+            <h3 class="text-lg font-semibold mb-3">How to Play</h3>
+            <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                <li>Choose your car and customize it to your liking</li>
+                <li>Use WASD keys to control the car's movement</li>
+                <li>Press Space for handbrake to initiate drifts</li>
+                <li>Use Shift for boost when needed</li>
+                <li>Complete drift challenges to earn points</li>
+                <li>Unlock new cars and tracks as you progress</li>
+                <li>Master the art of drifting to achieve high scores</li>
+            </ol>
         </div>
 
         <!-- More Games Section -->

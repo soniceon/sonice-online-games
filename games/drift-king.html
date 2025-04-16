@@ -69,7 +69,13 @@
     <main class="container mx-auto px-4 py-8">
         <!-- Game Title -->
         <div class="text-center mb-6">
-            <h1 class="text-4xl font-bold text-gray-800 mb-2">Drift King</h1>
+            <h1 class="text-4xl font-bold text-apple-blue mb-2">Drift King</h1>
+            <div class="flex justify-center items-center space-x-4 mb-4">
+                <!-- Game Categories/Tags -->
+                <span class="bg-apple-red text-white px-3 py-1 rounded-full text-sm">Racing</span>
+                <span class="bg-apple-purple text-white px-3 py-1 rounded-full text-sm">Arcade</span>
+                <span class="bg-apple-indigo text-white px-3 py-1 rounded-full text-sm">Drift</span>
+            </div>
             <p class="text-xl text-gray-600">Master the art of drifting in this high-speed racing arcade game!</p>
         </div>
 
@@ -77,6 +83,52 @@
         <div class="bg-gray-900 rounded-lg shadow-lg overflow-hidden mb-8">
             <div id="game-container" class="w-full aspect-video">
                 <iframe src="https://www.onlinegames.io/games/2024/unity/drift-king/index.html" class="w-full h-full border-0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- Game Info Section -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            <!-- Game Controls -->
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h3 class="text-lg font-semibold mb-3">Game Controls</h3>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="flex items-center">
+                        <span class="bg-gray-100 px-3 py-1 rounded mr-2">WASD</span>
+                        <span class="text-gray-600">Steer Car</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="bg-gray-100 px-3 py-1 rounded mr-2">Space</span>
+                        <span class="text-gray-600">Handbrake</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="bg-gray-100 px-3 py-1 rounded mr-2">Shift</span>
+                        <span class="text-gray-600">Boost</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="bg-gray-100 px-3 py-1 rounded mr-2">R</span>
+                        <span class="text-gray-600">Reset Car</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Description -->
+            <div class="bg-white rounded-lg shadow-md p-4">
+                <h3 class="text-lg font-semibold mb-3">Game Overview</h3>
+                <p class="text-gray-700 mb-4">Drift King is an exciting racing game where you can master the art of drifting. Choose from a variety of cars, customize them to your liking, and compete in challenging drift competitions. Perfect your drifting skills to earn points and unlock new vehicles and tracks.</p>
+                <div class="space-y-2">
+                    <div class="flex items-center">
+                        <span class="text-apple-red mr-2">•</span>
+                        <span class="text-gray-600">Multiple cars to choose from</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-apple-red mr-2">•</span>
+                        <span class="text-gray-600">Customizable vehicles</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="text-apple-red mr-2">•</span>
+                        <span class="text-gray-600">Challenging drift tracks</span>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -106,26 +158,26 @@
         </div>
     </main>
 
-    <footer class="bg-gray-800 text-white py-6">
-        <div class="container mx-auto px-4">
-            <div class="md:flex md:justify-between">
-                <div class="mb-4 md:mb-0">
-                    <h2 class="text-xl font-bold mb-2">sonice.online</h2>
-                    <p class="text-gray-400">© 2025 sonice.online. All rights reserved.</p>
-                </div>
-                <div class="mb-4 md:mb-0">
-                    <h3 class="text-lg font-semibold mb-2">Categories</h3>
-                    <ul class="space-y-1">
-                        <li><a href="../categories/action.html" class="text-gray-400 hover:text-white">Action</a></li>
-                        <li><a href="../categories/puzzle.html" class="text-gray-400 hover:text-white">Puzzle</a></li>
-                        <li><a href="../categories/strategy.html" class="text-gray-400 hover:text-white">Strategy</a></li>
-                        <li><a href="../categories/racing.html" class="text-gray-400 hover:text-white">Racing</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-2">Contact</h3>
-                    <p class="text-gray-400">Email: contact@sonice.online</p>
-                </div>
+    <footer class="bg-[#1f2937] text-white py-12">
+        <div class="container mx-auto px-4 grid grid-cols-3 gap-x-8">
+            <div>
+                <h3 class="text-xl font-bold mb-2">sonice.online</h3>
+                <p class="text-gray-400 text-sm">© 2025 sonice.online. All rights reserved.</p>
+            </div>
+            
+            <div>
+                <h3 class="text-xl font-bold mb-4">Categories</h3>
+                <nav class="space-y-2 text-gray-400">
+                    <div><a href="/action" class="hover:text-white">Action</a></div>
+                    <div><a href="/puzzle" class="hover:text-white">Puzzle</a></div>
+                    <div><a href="/strategy" class="hover:text-white">Strategy</a></div>
+                    <div><a href="/racing" class="hover:text-white">Racing</a></div>
+                </nav>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-bold mb-2">Contact</h3>
+                <p class="text-gray-400">Email: contact@sonice.online</p>
             </div>
         </div>
     </footer>

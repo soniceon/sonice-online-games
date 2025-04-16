@@ -3,24 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Play Solitaire TriPeaks Garden - a relaxing card game with beautiful garden themes where you clear cards in sequence at sonice.online">
-    <!-- Open Graph tags for better social media sharing -->
-    <meta property="og:title" content="Solitaire TriPeaks Garden - Sonice Online Games">
-    <meta property="og:description" content="Enjoy this relaxing card game with beautiful garden themes as you clear cards in sequence to solve each level!">
-    <meta property="og:image" content="../assets/images/solitaire-tripeaks-garden.webp">
-    <meta property="og:url" content="https://sonice.online/games/solitaire-tripeaks-garden.html">
-    <meta property="og:type" content="website">
-    <!-- Twitter Card tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Solitaire TriPeaks Garden - Sonice Online Games">
-    <meta name="twitter:description" content="Enjoy this relaxing card game with beautiful garden themes as you clear cards in sequence to solve each level!">
-    <meta name="twitter:image" content="../assets/images/solitaire-tripeaks-garden.webp">
-    <!-- Canonical URL for SEO -->
+    <meta name="description" content="Play Solitaire TriPeaks Garden - a relaxing card game with beautiful garden themes where you clear cards in sequence">
     <title>Solitaire TriPeaks Garden - Sonice Online Games</title>
     <link rel="canonical" href="https://sonice.online/games/solitaire-tripeaks-garden.html" />
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="../favicon.png">
-    <!-- Tailwind CSS -->
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -43,36 +29,21 @@
             }
         }
     </script>
-    <!-- Structured Data for Rich Snippets -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "VideoGame",
-        "name": "Solitaire TriPeaks Garden",
-        "description": "Solitaire TriPeaks Garden is a relaxing card game that combines the classic TriPeaks solitaire gameplay with beautiful garden themes. Players must remove cards in sequence to clear each level, with increasing challenges as they progress through different garden environments.",
-        "genre": ["Card", "Puzzle", "Casual"],
-        "image": "https://sonice.online/images/solitaire-tripeaks-garden.webp",
-        "url": "https://sonice.online/games/solitaire-tripeaks-garden.html",
-        "publisher": {
-            "@type": "Organization",
-            "name": "Sonice Online"
-        }
-    }
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C6DQJE930Z"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-C6DQJE930Z');
     </script>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C6DQJE930Z"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-C6DQJE930Z');
-</script>
-
 </head>
 <body class="bg-apple-bg min-h-screen">
+    <!-- Header Navigation -->
     <header class="bg-apple-blue text-white shadow-md">
         <div class="container mx-auto px-4 py-6 md:flex md:justify-between md:items-center">
+            <!-- Logo and Mobile Menu Button -->
             <div class="flex justify-between items-center">
                 <div>
                     <a href="../index.html" class="text-2xl font-bold">sonice.online</a>
@@ -86,6 +57,7 @@
                     </button>
                 </div>
             </div>
+            <!-- Navigation Menu -->
             <nav id="menu" class="hidden md:flex flex-col md:flex-row md:items-center md:justify-end md:flex-1">
                 <a href="../index.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Home</a>
                 <a href="../categories/action.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Action</a>
@@ -100,32 +72,20 @@
     <main class="container mx-auto px-4 py-8">
         <!-- Game Title -->
         <div class="text-center mb-6">
-            <h1 class="text-4xl font-bold text-gray-800 mb-2">Solitaire TriPeaks Garden</h1>
+            <h1 class="text-4xl font-bold text-apple-blue mb-2">Solitaire TriPeaks Garden</h1>
             <div class="flex justify-center items-center space-x-4 mb-4">
                 <!-- Game Categories/Tags -->
                 <span class="bg-apple-red text-white px-3 py-1 rounded-full text-sm">Card</span>
                 <span class="bg-apple-purple text-white px-3 py-1 rounded-full text-sm">Puzzle</span>
-                <span class="bg-apple-green text-white px-3 py-1 rounded-full text-sm">Casual</span>
+                <span class="bg-apple-indigo text-white px-3 py-1 rounded-full text-sm">Casual</span>
             </div>
             <p class="text-xl text-gray-600">Enjoy this relaxing card game with beautiful garden themes as you clear cards in sequence to solve each level!</p>
         </div>
 
-        <!-- Game Canvas with Loading State -->
+        <!-- Game Canvas -->
         <div class="bg-gray-900 rounded-lg shadow-lg overflow-hidden mb-8">
-            <div id="game-container" class="w-full aspect-video relative">
-                <div id="loading-overlay" class="absolute inset-0 flex items-center justify-center bg-gray-900">
-                    <div class="text-white text-center">
-                        <div class="animate-spin rounded-full h-12 w-12 border-4 border-apple-green mx-auto mb-4"></div>
-                        <p>Loading game...</p>
-                    </div>
-                </div>
-                <iframe 
-                    src="https://cdn2.addictinggames.com/addictinggames-content/ag-assets/content-items/html5-games/solitaire-tripeaks-garden/index.html" 
-                    class="w-full h-full border-0" 
-                    title="Solitaire TriPeaks Garden gameplay"
-                    allowfullscreen
-                    onload="document.getElementById('loading-overlay').style.display='none'"
-                ></iframe>
+            <div id="game-container" class="w-full aspect-video">
+                <iframe src="https://cdn2.addictinggames.com/addictinggames-content/ag-assets/content-items/html5-games/solitaire-tripeaks-garden/index.html" class="w-full h-full border-0" allowfullscreen></iframe>
             </div>
         </div>
 
@@ -157,76 +117,34 @@
             <!-- Game Description -->
             <div class="bg-white rounded-lg shadow-md p-4">
                 <h3 class="text-lg font-semibold mb-3">Game Overview</h3>
-                <p class="text-gray-700 mb-4">Solitaire TriPeaks Garden combines the classic TriPeaks solitaire gameplay with beautiful garden-themed backgrounds and relaxing music. In this card game, you'll work to clear all cards from the pyramid-like layout by selecting cards that are one rank higher or lower than the card shown on the waste pile, regardless of suit. As you progress through levels, you'll unlock new garden environments with increasing challenges.</p>
+                <p class="text-gray-700 mb-4">Solitaire TriPeaks Garden combines the classic TriPeaks solitaire gameplay with beautiful garden-themed backgrounds and relaxing music. In this card game, you'll work to clear all cards from the pyramid-like layout by selecting cards that are one rank higher or lower than the card shown on the waste pile, regardless of suit.</p>
                 <div class="space-y-2">
                     <div class="flex items-center">
-                        <span class="text-apple-green mr-2">•</span>
+                        <span class="text-apple-red mr-2">•</span>
                         <span class="text-gray-600">Beautiful garden-themed backgrounds</span>
                     </div>
                     <div class="flex items-center">
-                        <span class="text-apple-green mr-2">•</span>
-                        <span class="text-gray-600">Multiple levels with increasing difficulty</span>
+                        <span class="text-apple-red mr-2">•</span>
+                        <span class="text-gray-600">Relaxing music and sound effects</span>
                     </div>
                     <div class="flex items-center">
-                        <span class="text-apple-green mr-2">•</span>
-                        <span class="text-gray-600">Relaxing gameplay with soothing music</span>
+                        <span class="text-apple-red mr-2">•</span>
+                        <span class="text-gray-600">Multiple levels with increasing challenges</span>
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- How to Play Section -->
-        <div class="bg-white rounded-lg shadow-md p-4 mb-8">
-            <h3 class="text-lg font-semibold mb-3">How to Play</h3>
-            <ol class="list-decimal list-inside space-y-2 text-gray-700">
-                <li>The goal is to remove all cards from the three pyramid peaks</li>
-                <li>You can select any exposed card that is one rank higher or lower than the card on the waste pile (the card shown at the bottom)</li>
-                <li>For example, if the waste pile shows a 7, you can select either a 6 or an 8</li>
-                <li>Kings can be matched with Aces (and vice versa) to create a continuous sequence</li>
-                <li>Try to create long sequences of cards to earn combo bonuses and higher scores</li>
-                <li>If you get stuck, you can use the hint button or draw a new card from the stock pile</li>
-                <li>Be strategic with your moves, as some cards might block access to other cards you need</li>
-                <li>Clear all cards from the board to complete each level and progress through the garden</li>
-            </ol>
         </div>
 
         <!-- More Games Section -->
         <div class="mb-8">
             <h2 class="text-2xl font-bold mb-6 text-gray-800">More Games You Might Enjoy</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                    <a href="fireboy-and-watergirl-3.html">
-                        <img src="../assets/images/fireboy-and-watergirl-3.webp" alt="Fireboy and Watergirl 3" class="w-full h-48 object-cover">
+                <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                    <a href="deck-of-cards.html">
+                        <img src="../assets/images/deck-of-cards.webp" alt="Deck of Cards" class="w-full h-48 object-cover">
                         <div class="p-4">
-                            <h3 class="font-bold text-lg mb-2 text-gray-800">Fireboy and Watergirl 3</h3>
-                            <p class="text-gray-600 text-sm">Puzzle, Platformer</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                    <a href="e-life-simulation.html">
-                        <img src="../assets/images/e-life-simulation.webp" alt="E-Life Simulation" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-bold text-lg mb-2 text-gray-800">E-Life Simulation</h3>
-                            <p class="text-gray-600 text-sm">Simulation, RPG</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                    <a href="stardew-valley.html">
-                        <img src="../assets/images/stardew-valley.webp" alt="Stardew Valley" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-bold text-lg mb-2 text-gray-800">Stardew Valley</h3>
-                            <p class="text-gray-600 text-sm">Farming, RPG</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow md:hidden lg:block">
-                    <a href="tanuki-sunset.html">
-                        <img src="../assets/images/tanuki-sunset.webp" alt="Tanuki Sunset" class="w-full h-48 object-cover">
-                        <div class="p-4">
-                            <h3 class="font-bold text-lg mb-2 text-gray-800">Tanuki Sunset</h3>
-                            <p class="text-gray-600 text-sm">Racing, Arcade</p>
+                            <h3 class="font-bold text-lg mb-2 text-gray-800">Deck of Cards</h3>
+                            <p class="text-gray-600 text-sm">Card, Casual</p>
                         </div>
                     </a>
                 </div>
@@ -234,32 +152,33 @@
         </div>
     </main>
 
-    <footer class="bg-gray-800 text-white py-6">
-        <div class="container mx-auto px-4">
-            <div class="md:flex md:justify-between">
-                <div class="mb-4 md:mb-0">
-                    <h2 class="text-xl font-bold mb-2">sonice.online</h2>
-                    <p class="text-gray-400">© 2025 sonice.online. All rights reserved.</p>
-                </div>
-                <div class="mb-4 md:mb-0">
-                    <h3 class="text-lg font-semibold mb-2">Categories</h3>
-                    <ul class="space-y-1">
-                        <li><a href="../categories/action.html" class="text-gray-400 hover:text-white">Action</a></li>
-                        <li><a href="../categories/puzzle.html" class="text-gray-400 hover:text-white">Puzzle</a></li>
-                        <li><a href="../categories/strategy.html" class="text-gray-400 hover:text-white">Strategy</a></li>
-                        <li><a href="../categories/racing.html" class="text-gray-400 hover:text-white">Racing</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-2">Contact</h3>
-                    <p class="text-gray-400">Email: contact@sonice.online</p>
-                </div>
+    <!-- Footer -->
+    <footer class="bg-[#1f2937] text-white py-12">
+        <div class="container mx-auto px-4 grid grid-cols-3 gap-x-8">
+            <div>
+                <h3 class="text-xl font-bold mb-2">sonice.online</h3>
+                <p class="text-gray-400 text-sm">© 2025 sonice.online. All rights reserved.</p>
+            </div>
+            
+            <div>
+                <h3 class="text-xl font-bold mb-4">Categories</h3>
+                <nav class="space-y-2 text-gray-400">
+                    <div><a href="/action" class="hover:text-white">Action</a></div>
+                    <div><a href="/puzzle" class="hover:text-white">Puzzle</a></div>
+                    <div><a href="/strategy" class="hover:text-white">Strategy</a></div>
+                    <div><a href="/racing" class="hover:text-white">Racing</a></div>
+                </nav>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-bold mb-2">Contact</h3>
+                <p class="text-gray-400">Email: contact@sonice.online</p>
             </div>
         </div>
     </footer>
 
+    <!-- Mobile Menu Script -->
     <script>
-        // Mobile menu toggle
         document.getElementById('menu-toggle').addEventListener('click', function() {
             const menu = document.getElementById('menu');
             const openIcon = document.getElementById('menu-open');
@@ -270,15 +189,8 @@
             openIcon.classList.toggle('hidden');
             closedIcon.classList.toggle('hidden');
             
-            // Update ARIA state
             const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
             menuToggle.setAttribute('aria-expanded', !isExpanded);
-        });
-        
-        // Game loading tracking for analytics (optional)
-        window.addEventListener('load', function() {
-            // You can add game loading analytics code here if needed
-            console.log('Game page fully loaded');
         });
     </script>
 </body>

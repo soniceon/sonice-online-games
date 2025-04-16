@@ -29,19 +29,20 @@
         }
     </script>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-C6DQJE930Z"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-C6DQJE930Z');
-</script>
-
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C6DQJE930Z"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-C6DQJE930Z');
+    </script>
 </head>
 <body class="bg-apple-bg min-h-screen">
+    <!-- Header Navigation -->
     <header class="bg-apple-blue text-white shadow-md">
         <div class="container mx-auto px-4 py-6 md:flex md:justify-between md:items-center">
+            <!-- Logo and Mobile Menu Button -->
             <div class="flex justify-between items-center">
                 <div>
                     <a href="../index.html" class="text-2xl font-bold">sonice.online</a>
@@ -55,6 +56,7 @@
                     </button>
                 </div>
             </div>
+            <!-- Navigation Menu -->
             <nav id="menu" class="hidden md:flex flex-col md:flex-row md:items-center md:justify-end md:flex-1">
                 <a href="../index.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Home</a>
                 <a href="../categories/action.html" class="mt-3 md:mt-0 md:ml-6 text-white hover:text-apple-yellow">Action</a>
@@ -69,7 +71,7 @@
     <main class="container mx-auto px-4 py-8">
         <!-- Game Title -->
         <div class="text-center mb-6">
-            <h1 class="text-4xl font-bold text-gray-800 mb-2">Rome Simulator</h1>
+            <h1 class="text-4xl font-bold text-apple-blue mb-2">Rome Simulator</h1>
             <p class="text-xl text-gray-600">Build, expand, and rule your own Roman empire in this historical strategy simulation!</p>
         </div>
 
@@ -77,6 +79,36 @@
         <div class="bg-gray-900 rounded-lg shadow-lg overflow-hidden mb-8">
             <div id="game-container" class="w-full aspect-video">
                 <iframe src="https://www.onlinegames.io/games/2021/unity/rome-simulator/index.html" class="w-full h-full border-0" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <!-- Game Description -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <h2 class="text-2xl font-bold mb-4 text-gray-800">Game Description</h2>
+            <p class="text-gray-600 mb-6">
+                Rome Simulator is a historical strategy game where you take on the role of a Roman emperor. 
+                Build and expand your empire, manage resources, train armies, and make strategic decisions to ensure the prosperity of your civilization. 
+                Experience the challenges of ruling an ancient empire while competing with other civilizations for dominance.
+            </p>
+            
+            <h3 class="text-xl font-bold mb-3 text-gray-800">Game Controls</h3>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="flex items-center">
+                    <span class="bg-gray-100 px-3 py-1 rounded mr-2">Mouse</span>
+                    <span class="text-gray-600">Select and interact with buildings</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="bg-gray-100 px-3 py-1 rounded mr-2">Left Click</span>
+                    <span class="text-gray-600">Build and place structures</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="bg-gray-100 px-3 py-1 rounded mr-2">Right Click</span>
+                    <span class="text-gray-600">Move units and cancel actions</span>
+                </div>
+                <div class="flex items-center">
+                    <span class="bg-gray-100 px-3 py-1 rounded mr-2">WASD</span>
+                    <span class="text-gray-600">Move camera</span>
+                </div>
             </div>
         </div>
 
@@ -115,32 +147,33 @@
         </div>
     </main>
 
-    <footer class="bg-gray-800 text-white py-6">
-        <div class="container mx-auto px-4">
-            <div class="md:flex md:justify-between">
-                <div class="mb-4 md:mb-0">
-                    <h2 class="text-xl font-bold mb-2">sonice.online</h2>
-                    <p class="text-gray-400">© 2025 sonice.online. All rights reserved.</p>
-                </div>
-                <div class="mb-4 md:mb-0">
-                    <h3 class="text-lg font-semibold mb-2">Categories</h3>
-                    <ul class="space-y-1">
-                        <li><a href="../categories/action.html" class="text-gray-400 hover:text-white">Action</a></li>
-                        <li><a href="../categories/puzzle.html" class="text-gray-400 hover:text-white">Puzzle</a></li>
-                        <li><a href="../categories/strategy.html" class="text-gray-400 hover:text-white">Strategy</a></li>
-                        <li><a href="../categories/racing.html" class="text-gray-400 hover:text-white">Racing</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-2">Contact</h3>
-                    <p class="text-gray-400">Email: contact@sonice.online</p>
-                </div>
+    <!-- Footer -->
+    <footer class="bg-[#1f2937] text-white py-12">
+        <div class="container mx-auto px-4 grid grid-cols-3 gap-x-8">
+            <div>
+                <h3 class="text-xl font-bold mb-2">sonice.online</h3>
+                <p class="text-gray-400 text-sm">© 2025 sonice.online. All rights reserved.</p>
+            </div>
+            
+            <div>
+                <h3 class="text-xl font-bold mb-4">Categories</h3>
+                <nav class="space-y-2 text-gray-400">
+                    <div><a href="/action" class="hover:text-white">Action</a></div>
+                    <div><a href="/puzzle" class="hover:text-white">Puzzle</a></div>
+                    <div><a href="/strategy" class="hover:text-white">Strategy</a></div>
+                    <div><a href="/racing" class="hover:text-white">Racing</a></div>
+                </nav>
+            </div>
+
+            <div>
+                <h3 class="text-xl font-bold mb-2">Contact</h3>
+                <p class="text-gray-400">Email: contact@sonice.online</p>
             </div>
         </div>
     </footer>
 
+    <!-- Mobile Menu Script -->
     <script>
-        // Mobile menu toggle
         document.getElementById('menu-toggle').addEventListener('click', function() {
             const menu = document.getElementById('menu');
             const openIcon = document.getElementById('menu-open');
@@ -151,7 +184,6 @@
             openIcon.classList.toggle('hidden');
             closedIcon.classList.toggle('hidden');
             
-            // Update ARIA state
             const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
             menuToggle.setAttribute('aria-expanded', !isExpanded);
         });
