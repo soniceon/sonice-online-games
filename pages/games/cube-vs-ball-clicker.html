@@ -12,14 +12,14 @@
     <meta property="og:url" content="https://sonice.online/games/cube-vs-ball-clicker.html">
     <meta property="og:title" content="Cube vs Ball Clicker - Play Free Online Game">
     <meta property="og:description" content="Play Cube vs Ball Clicker online for free! Enjoy this addictive game directly in your browser, no download required.">
-    <meta property="og:image" content="/src/assets/images/games/cube-vs-ball-clicker.jpg">
+    <meta property="og:image" content="/assets/images/games/cube-vs-ball-clicker-360-240.webp">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://sonice.online/games/cube-vs-ball-clicker.html">
     <meta property="twitter:title" content="Cube vs Ball Clicker - Play Free Online Game">
     <meta property="twitter:description" content="Play Cube vs Ball Clicker online for free! Enjoy this addictive game directly in your browser, no download required.">
-    <meta property="twitter:image" content="/src/assets/images/games/cube-vs-ball-clicker.jpg">
+    <meta property="twitter:image" content="/assets/images/games/cube-vs-ball-clicker-360-240.webp">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -28,8 +28,8 @@
         "@type": "VideoGame",
         "name": "Cube vs Ball Clicker",
         "description": "Play Cube vs Ball Clicker online for free! Enjoy this addictive game directly in your browser, no download required.",
-        "image": "/src/assets/images/games/cube-vs-ball-clicker.jpg",
-        "genre": "{% for category in game.categories %}{{category}}{% if not loop.last %}",
+        "image": "/assets/images/games/cube-vs-ball-clicker-360-240.webp",
+        "genre": ", ",
         "url": "https://sonice.online/games/cube-vs-ball-clicker.html"
     }
     </script>
@@ -620,7 +620,7 @@
                         <h1>Cube vs Ball Clicker</h1>
                         
                         <div class="categories-section">
-                            {% for category in game.categories %}
+                            
                             <span class="category-tag" style="
                                 background: linear-gradient(135deg, rgba(124, 58, 237, 0.8), rgba(139, 92, 246, 0.8));
                                 box-shadow: 0 2px 8px rgba(124, 58, 237, 0.2);
@@ -628,8 +628,8 @@
                                 padding: 0.5rem 1rem;
                                 border-radius: 20px;
                                 font-weight: 500;
-                            ">{{category}}</span>
-                            {% endfor %}
+                            "></span>
+                            
                         </div>
                         
                         <div class="description-section">
@@ -643,7 +643,7 @@
 
                     <div class="game-controls">
                         <h2>Game Controls</h2>
-                        <p>{{game.controls}}</p>
+                        <p></p>
                     </div>
 
                     <div class="game-overview">
@@ -651,29 +651,56 @@
                         <p>Play Cube vs Ball Clicker online for free! Enjoy this addictive game directly in your browser, no download required.</p>
                         
                         <div class="game-categories">
-
-                            <span class="category-tag">Clicker</span>
                             
-                            <span class="category-tag">Arcade</span>
+                            <span class="category-tag"></span>
                             
-</div>
+                        </div>
                     </div>
 
                     <!-- Recommended Games -->
                     <div class="recommended-games">
                         <h2>You May Also Like</h2>
                         <div class="games-grid">
-                            {% for rec_game in game.recommendedGames %}
-                            <div class="game-card">
-                                <img src="{{rec_game.image}}" alt="{{rec_game.title}}">
-                                <div class="game-card-content">
-                                    <h3>{{rec_game.title}}</h3>
-                                    <p>{{rec_game.description}}</p>
-                                    <a href="/games/{{rec_game.slug}}.html" class="play-button">Play Now</a>
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </div>
+            <div class="game-card">
+                <img src="/assets/images/games/cupcake-clicker-360-240.webp" alt="Cupcake Clicker" 
+                     onerror="this.onerror=null; this.src='/src/assets/images/games/cupcake-clicker-360-240.webp'; 
+                     if(this.naturalHeight==0){this.src='/assets/images/default-game.webp';}">
+                <div class="game-card-content">
+                    <h3>Cupcake Clicker</h3>
+                    <p>Play Cupcake Clicker online for free! Enjoy this addictive game directly in your browser, no downloa...</p>
+                    <a href="/pages/games/cupcake-clicker.html" class="play-button">Play Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="/assets/images/games/cut-annoying-orange-idle-360-240.webp" alt="Cut Annoying Orange Idle" 
+                     onerror="this.onerror=null; this.src='/src/assets/images/games/cut-annoying-orange-idle-360-240.webp'; 
+                     if(this.naturalHeight==0){this.src='/assets/images/default-game.webp';}">
+                <div class="game-card-content">
+                    <h3>Cut Annoying Orange Idle</h3>
+                    <p>Play Cut Annoying Orange Idle online for free! Enjoy this addictive game directly in your browser, n...</p>
+                    <a href="/pages/games/cut-annoying-orange-idle.html" class="play-button">Play Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="/assets/images/games/cyber-farm-360-240.webp" alt="Cyber Farm" 
+                     onerror="this.onerror=null; this.src='/src/assets/images/games/cyber-farm-360-240.webp'; 
+                     if(this.naturalHeight==0){this.src='/assets/images/default-game.webp';}">
+                <div class="game-card-content">
+                    <h3>Cyber Farm</h3>
+                    <p>Play Cyber Farm online for free! Enjoy this addictive game directly in your browser, no download req...</p>
+                    <a href="/pages/games/cyber-farm.html" class="play-button">Play Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="/assets/images/games/doge-miner-2-360-240.webp" alt="Doge Miner 2" 
+                     onerror="this.onerror=null; this.src='/src/assets/images/games/doge-miner-2-360-240.webp'; 
+                     if(this.naturalHeight==0){this.src='/assets/images/default-game.webp';}">
+                <div class="game-card-content">
+                    <h3>Doge Miner 2</h3>
+                    <p>Play Doge Miner 2 online for free! Enjoy this addictive game directly in your browser, no download r...</p>
+                    <a href="/pages/games/doge-miner-2.html" class="play-button">Play Now</a>
+                </div>
+            </div></div>
                     </div>
 
                     <!-- 在推荐游戏和页脚之间添加评分组件 -->

@@ -12,14 +12,14 @@
     <meta property="og:url" content="https://sonice.online/games/survivor-idle-run.html">
     <meta property="og:title" content="Survivor Idle Run - Play Free Online Game">
     <meta property="og:description" content="Play Survivor Idle Run online for free! Enjoy this addictive game directly in your browser, no download required.">
-    <meta property="og:image" content="/src/assets/images/games/survivor-idle-run.jpg">
+    <meta property="og:image" content="/assets/images/games/survivor-idle-run-360-240.webp">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://sonice.online/games/survivor-idle-run.html">
     <meta property="twitter:title" content="Survivor Idle Run - Play Free Online Game">
     <meta property="twitter:description" content="Play Survivor Idle Run online for free! Enjoy this addictive game directly in your browser, no download required.">
-    <meta property="twitter:image" content="/src/assets/images/games/survivor-idle-run.jpg">
+    <meta property="twitter:image" content="/assets/images/games/survivor-idle-run-360-240.webp">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -28,8 +28,8 @@
         "@type": "VideoGame",
         "name": "Survivor Idle Run",
         "description": "Play Survivor Idle Run online for free! Enjoy this addictive game directly in your browser, no download required.",
-        "image": "/src/assets/images/games/survivor-idle-run.jpg",
-        "genre": "{% for category in game.categories %}{{category}}{% if not loop.last %}",
+        "image": "/assets/images/games/survivor-idle-run-360-240.webp",
+        "genre": ", ",
         "url": "https://sonice.online/games/survivor-idle-run.html"
     }
     </script>
@@ -620,7 +620,7 @@
                         <h1>Survivor Idle Run</h1>
                         
                         <div class="categories-section">
-                            {% for category in game.categories %}
+                            
                             <span class="category-tag" style="
                                 background: linear-gradient(135deg, rgba(124, 58, 237, 0.8), rgba(139, 92, 246, 0.8));
                                 box-shadow: 0 2px 8px rgba(124, 58, 237, 0.2);
@@ -628,8 +628,8 @@
                                 padding: 0.5rem 1rem;
                                 border-radius: 20px;
                                 font-weight: 500;
-                            ">{{category}}</span>
-                            {% endfor %}
+                            "></span>
+                            
                         </div>
                         
                         <div class="description-section">
@@ -643,7 +643,7 @@
 
                     <div class="game-controls">
                         <h2>Game Controls</h2>
-                        <p>{{game.controls}}</p>
+                        <p></p>
                     </div>
 
                     <div class="game-overview">
@@ -651,29 +651,56 @@
                         <p>Play Survivor Idle Run online for free! Enjoy this addictive game directly in your browser, no download required.</p>
                         
                         <div class="game-categories">
-
-                            <span class="category-tag">Idle</span>
                             
-                            <span class="category-tag">Clicker</span>
+                            <span class="category-tag"></span>
                             
-</div>
+                        </div>
                     </div>
 
                     <!-- Recommended Games -->
                     <div class="recommended-games">
                         <h2>You May Also Like</h2>
                         <div class="games-grid">
-                            {% for rec_game in game.recommendedGames %}
-                            <div class="game-card">
-                                <img src="{{rec_game.image}}" alt="{{rec_game.title}}">
-                                <div class="game-card-content">
-                                    <h3>{{rec_game.title}}</h3>
-                                    <p>{{rec_game.description}}</p>
-                                    <a href="/games/{{rec_game.slug}}.html" class="play-button">Play Now</a>
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </div>
+            <div class="game-card">
+                <img src="/assets/images/games/sword-adventure-idle-360-240.webp" alt="Sword Adventure Idle" 
+                     onerror="this.onerror=null; this.src='/src/assets/images/games/sword-adventure-idle-360-240.webp'; 
+                     if(this.naturalHeight==0){this.src='/assets/images/default-game.webp';}">
+                <div class="game-card-content">
+                    <h3>Sword Adventure Idle</h3>
+                    <p>Play Sword Adventure Idle online for free! Enjoy this addictive game directly in your browser, no do...</p>
+                    <a href="/pages/games/sword-adventure-idle.html" class="play-button">Play Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="/assets/images/games/sword-merging-simulator-360-240.webp" alt="Sword Merging Simulator" 
+                     onerror="this.onerror=null; this.src='/src/assets/images/games/sword-merging-simulator-360-240.webp'; 
+                     if(this.naturalHeight==0){this.src='/assets/images/default-game.webp';}">
+                <div class="game-card-content">
+                    <h3>Sword Merging Simulator</h3>
+                    <p>Play Sword Merging Simulator online for free! Enjoy this addictive game directly in your browser, no...</p>
+                    <a href="/pages/games/sword-merging-simulator.html" class="play-button">Play Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="/assets/images/games/tabletop-idle-remastered-360-240.webp" alt="Tabletop Idle Remastered" 
+                     onerror="this.onerror=null; this.src='/src/assets/images/games/tabletop-idle-remastered-360-240.webp'; 
+                     if(this.naturalHeight==0){this.src='/assets/images/default-game.webp';}">
+                <div class="game-card-content">
+                    <h3>Tabletop Idle Remastered</h3>
+                    <p>Play Tabletop Idle Remastered online for free! Enjoy this addictive game directly in your browser, n...</p>
+                    <a href="/pages/games/tabletop-idle-remastered.html" class="play-button">Play Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="/assets/images/games/tanuki-sunset-360-240.webp" alt="tanuki" 
+                     onerror="this.onerror=null; this.src='/src/assets/images/games/tanuki-sunset-360-240.webp'; 
+                     if(this.naturalHeight==0){this.src='/assets/images/default-game.webp';}">
+                <div class="game-card-content">
+                    <h3>tanuki</h3>
+                    <p>Play tanuki-sunset online for free! Enjoy this addictive game directly in your browser, no download ...</p>
+                    <a href="/pages/games/tanuki-sunset.html" class="play-button">Play Now</a>
+                </div>
+            </div></div>
                     </div>
 
                     <!-- 在推荐游戏和页脚之间添加评分组件 -->

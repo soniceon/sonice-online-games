@@ -1,19 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Categories - Sonice Online Games</title>
-    <meta name="description" content="Browse all game categories at sonice.online. Find your favorite game categories including action, puzzle, racing and more!">
-    <link rel="icon" type="image/png" href="/src/assets/icons/logo.png">
-    
-    <!-- Open Graph / Facebook -->
+    <title>游戏分类 - Sonice Games</title>
+    <meta name="description" content="浏览所有游戏分类，找到你喜欢的游戏类型。在Sonice Games免费玩最好的在线游戏。">
+    <meta property="og:title" content="游戏分类 - Sonice Games">
+    <meta property="og:description" content="浏览所有游戏分类，找到你喜欢的游戏类型。在Sonice Games免费玩最好的在线游戏。">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sonice.online/categories.html">
-    <meta property="og:title" content="Game Categories - Sonice Online Games">
-    <meta property="og:description" content="Browse all game categories at sonice.online. Find your favorite game categories including action, puzzle, racing and more!">
-    <meta property="og:image" content="/src/assets/images/og-image.jpg">
-
+    <link rel="canonical" href="https://sonice.online/categories.html">
     <link rel="stylesheet" href="/css/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -106,82 +102,95 @@
             border-color: rgba(255, 255, 255, 0.3);
         }
 
-        /* Category styles */
-        .categories-container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        .main-content {
+            margin-left: 64px;
             padding: 2rem;
-            margin: 2rem auto;
-            max-width: 1400px;
+            transition: margin-left 0.3s ease;
         }
 
-        .category-title {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: white;
-            text-align: center;
-            margin-bottom: 2rem;
+        .content-wrapper {
+            margin-top: 64px !important;
         }
 
+        /* 分类卡片样式 */
         .categories-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
+            gap: 2rem;
+            margin-top: 2rem;
         }
 
         .category-card {
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            padding: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
         }
 
         .category-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .category-card a {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            color: white;
+            text-decoration: none;
         }
 
         .category-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            font-size: 2.5rem;
+            margin-right: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
         }
 
-        .category-name {
-            font-size: 1.5rem;
+        .category-info {
+            flex: 1;
+        }
+
+        .category-info h3 {
+            font-size: 1.25rem;
             font-weight: 600;
-            color: white;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
         }
 
         .category-count {
             color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
+            font-size: 0.875rem;
         }
 
-        .category-button {
+        /* 分类页头部样式 */
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #7DD3FC, #38BDF8, #0EA5E9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             display: inline-block;
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            padding: 0.5rem 1.5rem;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: background-color 0.3s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .category-button:hover {
-            background: rgba(255, 255, 255, 0.25);
+        .page-header p {
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
     </style>
 </head>
@@ -215,7 +224,7 @@
         </div>
     </header>
 
-    <div class="content-wrapper" style="margin-top: 104px;">
+    <div class="content-wrapper">
         <div class="flex">
             <!-- Sidebar -->
             <aside class="sidebar">
@@ -237,7 +246,6 @@
                                 </svg>
                             </div>
                             <span class="sidebar-item">Favorites</span>
-                            <span class="ml-auto bg-purple-primary px-2 py-0.5 rounded-full text-xs text-white favorites-count">0</span>
                         </a>
                         
                         <a href="/recent.html" class="sidebar-link">
@@ -256,48 +264,120 @@
                                 </svg>
                             </div>
                             <span class="sidebar-item">New Games</span>
-                            <span class="ml-auto bg-blue-primary px-2 py-0.5 rounded-full text-xs text-white">12</span>
                         </a>
 
-                        <div class="py-2">
-                            <div class="category-label">
-                                <span class="sidebar-item">Categories</span>
+                        <a href="/categories.html" class="sidebar-link">
+                            <div class="sidebar-icon icon-categories">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M3 5h4v4H3V5zm6 0h4v4H9V5zm6 0h4v4h-4V5zm0 6h4v4h-4v-4zm-6 0h4v4H9v-4zm-6 0h4v4H3v-4zm0 6h4v4H3v-4zm6 0h4v4H9v-4zm6 0h4v4h-4v-4z"/>
+                                </svg>
                             </div>
-
-                            <a href="/categories.html" class="sidebar-link active">
-                                <div class="sidebar-icon icon-action">
-                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                                        <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
-                                    </svg>
-                                </div>
-                                <span class="sidebar-item">All Categories</span>
-                            </a>
-                        </div>
+                            <span class="sidebar-item">All Categories</span>
+                        </a>
                     </div>
                 </nav>
             </aside>
 
             <!-- Main Content -->
-            <main class="main-content flex-1 p-6">
-                <div class="categories-container">
-                    <h1 class="category-title">Game Categories</h1>
+            <main class="main-content flex-1">
+                <div class="container mx-auto">
+                    <div class="page-header">
+                        <h1>游戏分类</h1>
+                        <p>浏览所有游戏分类，找到你喜欢的游戏类型。在Sonice Games，你可以免费玩各种类型的在线游戏，无需下载，直接在浏览器中即可体验。</p>
+                    </div>
                     
                     <div class="categories-grid">
-
-                        <div class="category-card">
-                            <div class="category-icon">🎮</div>
-                            <h2 class="category-name">{% for category in game.categories %}{{category}}{% if not loop.last %}, {% endif %}{% endfor %}</h2>
-                            <div class="category-count">240 Games</div>
-                            <a href="/category/-for-category-in-gamecategories-category-if-not-looplast-endif-endfor-.html" class="category-button">View Games</a>
-                        </div>
-
-                        <div class="category-card">
-                            <div class="category-icon">🎲</div>
-                            <h2 class="category-name">Other</h2>
-                            <div class="category-count">2 Games</div>
-                            <a href="/category/other.html" class="category-button">View Games</a>
-                        </div>
-
+                        
+            <div class="category-card">
+                <a href="/category/other.html">
+                    <div class="category-icon">🎲</div>
+                    <div class="category-info">
+                        <h3>Other</h3>
+                        <span class="category-count">91 games</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="category-card">
+                <a href="/category/idle.html">
+                    <div class="category-icon">⏳</div>
+                    <div class="category-info">
+                        <h3>Idle</h3>
+                        <span class="category-count">69 games</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="category-card">
+                <a href="/category/clicker.html">
+                    <div class="category-icon">🖱️</div>
+                    <div class="category-info">
+                        <h3>Clicker</h3>
+                        <span class="category-count">52 games</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="category-card">
+                <a href="/category/mining.html">
+                    <div class="category-icon">⛏️</div>
+                    <div class="category-info">
+                        <h3>Mining</h3>
+                        <span class="category-count">10 games</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="category-card">
+                <a href="/category/merge.html">
+                    <div class="category-icon">🔄</div>
+                    <div class="category-info">
+                        <h3>Merge</h3>
+                        <span class="category-count">8 games</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="category-card">
+                <a href="/category/tycoon.html">
+                    <div class="category-icon">💰</div>
+                    <div class="category-info">
+                        <h3>Tycoon</h3>
+                        <span class="category-count">7 games</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="category-card">
+                <a href="/category/racing.html">
+                    <div class="category-icon">🏎️</div>
+                    <div class="category-info">
+                        <h3>Racing</h3>
+                        <span class="category-count">2 games</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="category-card">
+                <a href="/category/shooting.html">
+                    <div class="category-icon">🎯</div>
+                    <div class="category-info">
+                        <h3>Shooting</h3>
+                        <span class="category-count">1 games</span>
+                    </div>
+                </a>
+            </div>
+            
+            <div class="category-card">
+                <a href="/category/span-class.html">
+                    <div class="category-icon">🎮</div>
+                    <div class="category-info">
+                        <h3><span class=</h3>
+                        <span class="category-count">1 games</span>
+                    </div>
+                </a>
+            </div>
+            
                     </div>
                 </div>
             </main>
@@ -305,56 +385,49 @@
     </div>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>About Us</h3>
-                <p>sonice.online is your premier destination for free online games. We offer a wide variety of games across different genres.</p>
+    <footer class="bg-dark-lighter text-white py-12 mt-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">关于我们</h3>
+                    <p class="text-gray-400">Sonice Games 是一个提供免费在线游戏的平台，我们致力于为玩家提供最好的游戏体验。</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">快速链接</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="/" class="hover:text-white transition-colors">首页</a></li>
+                        <li><a href="/categories.html" class="hover:text-white transition-colors">游戏分类</a></li>
+                        <li><a href="/new-games.html" class="hover:text-white transition-colors">新游戏</a></li>
+                        <li><a href="/privacy.html" class="hover:text-white transition-colors">隐私政策</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">热门分类</h3>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="/category/action.html" class="hover:text-white transition-colors">动作游戏</a></li>
+                        <li><a href="/category/racing.html" class="hover:text-white transition-colors">赛车游戏</a></li>
+                        <li><a href="/category/puzzle.html" class="hover:text-white transition-colors">益智游戏</a></li>
+                        <li><a href="/category/sports.html" class="hover:text-white transition-colors">体育游戏</a></li>
+                    </ul>
+                </div>
             </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul class="footer-links">
-                    <li><a href="/games.html">All Games</a></li>
-                    <li><a href="/categories.html">Categories</a></li>
-                    <li><a href="/about.html">About Us</a></li>
-                    <li><a href="/contact.html">Contact</a></li>
-                </ul>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+                <p>&copy; 2024 Sonice Games. All rights reserved.</p>
             </div>
-            <div class="footer-section">
-                <h3>Categories</h3>
-                <ul class="footer-links">
-                    <li><a href="/category/action.html">Action</a></li>
-                    <li><a href="/category/puzzle.html">Puzzle</a></li>
-                    <li><a href="/category/racing.html">Racing</a></li>
-                    <li><a href="/category/sports.html">Sports</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="copyright">
-            <p>&copy; 2024 sonice.online. All rights reserved.</p>
         </div>
     </footer>
 
     <script>
-        // Sidebar toggle functionality
-        const sidebar = document.querySelector('.sidebar');
-        const mainContent = document.querySelector('.main-content');
-        const toggleBtn = document.querySelector('.toggle-sidebar');
-
-        if (toggleBtn) {
-            toggleBtn.addEventListener('click', () => {
-                sidebar.classList.toggle('collapsed');
-                mainContent.classList.toggle('expanded');
-            });
-        }
-
-        // Keyboard shortcut (Alt + S) to toggle sidebar
-        document.addEventListener('keydown', (e) => {
-            if (e.altKey && e.key.toLowerCase() === 's') {
-                e.preventDefault();
-                if (toggleBtn) toggleBtn.click();
+        // 搜索功能
+        const searchInput = document.querySelector('.search-bar input');
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                const query = searchInput.value.trim();
+                if (query) {
+                    window.location.href = `/search.html?q=${encodeURIComponent(query)}`;
+                }
             }
         });
     </script>
 </body>
-</html>
+</html> 

@@ -12,14 +12,14 @@
     <meta property="og:url" content="https://sonice.online/games/idle-soccer-manager.html">
     <meta property="og:title" content="Idle Soccer Manager - Play Free Online Game">
     <meta property="og:description" content="Play Idle Soccer Manager online for free! Enjoy this addictive game directly in your browser, no download required.">
-    <meta property="og:image" content="/src/assets/images/games/idle-soccer-manager.jpg">
+    <meta property="og:image" content="/assets/images/games/idle-soccer-manager-360-240.webp">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://sonice.online/games/idle-soccer-manager.html">
     <meta property="twitter:title" content="Idle Soccer Manager - Play Free Online Game">
     <meta property="twitter:description" content="Play Idle Soccer Manager online for free! Enjoy this addictive game directly in your browser, no download required.">
-    <meta property="twitter:image" content="/src/assets/images/games/idle-soccer-manager.jpg">
+    <meta property="twitter:image" content="/assets/images/games/idle-soccer-manager-360-240.webp">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -28,8 +28,8 @@
         "@type": "VideoGame",
         "name": "Idle Soccer Manager",
         "description": "Play Idle Soccer Manager online for free! Enjoy this addictive game directly in your browser, no download required.",
-        "image": "/src/assets/images/games/idle-soccer-manager.jpg",
-        "genre": "{% for category in game.categories %}{{category}}{% if not loop.last %}",
+        "image": "/assets/images/games/idle-soccer-manager-360-240.webp",
+        "genre": ", ",
         "url": "https://sonice.online/games/idle-soccer-manager.html"
     }
     </script>
@@ -620,7 +620,7 @@
                         <h1>Idle Soccer Manager</h1>
                         
                         <div class="categories-section">
-                            {% for category in game.categories %}
+                            
                             <span class="category-tag" style="
                                 background: linear-gradient(135deg, rgba(124, 58, 237, 0.8), rgba(139, 92, 246, 0.8));
                                 box-shadow: 0 2px 8px rgba(124, 58, 237, 0.2);
@@ -628,8 +628,8 @@
                                 padding: 0.5rem 1rem;
                                 border-radius: 20px;
                                 font-weight: 500;
-                            ">{{category}}</span>
-                            {% endfor %}
+                            "></span>
+                            
                         </div>
                         
                         <div class="description-section">
@@ -643,7 +643,7 @@
 
                     <div class="game-controls">
                         <h2>Game Controls</h2>
-                        <p>{{game.controls}}</p>
+                        <p></p>
                     </div>
 
                     <div class="game-overview">
@@ -651,29 +651,56 @@
                         <p>Play Idle Soccer Manager online for free! Enjoy this addictive game directly in your browser, no download required.</p>
                         
                         <div class="game-categories">
-
-                            <span class="category-tag">Idle</span>
                             
-                            <span class="category-tag">Clicker</span>
+                            <span class="category-tag"></span>
                             
-</div>
+                        </div>
                     </div>
 
                     <!-- Recommended Games -->
                     <div class="recommended-games">
                         <h2>You May Also Like</h2>
                         <div class="games-grid">
-                            {% for rec_game in game.recommendedGames %}
-                            <div class="game-card">
-                                <img src="{{rec_game.image}}" alt="{{rec_game.title}}">
-                                <div class="game-card-content">
-                                    <h3>{{rec_game.title}}</h3>
-                                    <p>{{rec_game.description}}</p>
-                                    <a href="/games/{{rec_game.slug}}.html" class="play-button">Play Now</a>
-                                </div>
-                            </div>
-                            {% endfor %}
-                        </div>
+            <div class="game-card">
+                <img src="/assets/images/games/idle-space-business-tycoon-360-240.webp" alt="Idle Space Business Tycoon" 
+                     onerror="this.onerror=null; this.src='/src/assets/images/games/idle-space-business-tycoon-360-240.webp'; 
+                     if(this.naturalHeight==0){this.src='/assets/images/default-game.webp';}">
+                <div class="game-card-content">
+                    <h3>Idle Space Business Tycoon</h3>
+                    <p>Play Idle Space Business Tycoon online for free! Enjoy this addictive game directly in your browser,...</p>
+                    <a href="/pages/games/idle-space-business-tycoon.html" class="play-button">Play Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="/assets/images/games/idle-streamer-360-240.webp" alt="Idle Streamer" 
+                     onerror="this.onerror=null; this.src='/src/assets/images/games/idle-streamer-360-240.webp'; 
+                     if(this.naturalHeight==0){this.src='/assets/images/default-game.webp';}">
+                <div class="game-card-content">
+                    <h3>Idle Streamer</h3>
+                    <p>Play Idle Streamer online for free! Enjoy this addictive game directly in your browser, no download ...</p>
+                    <a href="/pages/games/idle-streamer.html" class="play-button">Play Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="/assets/images/games/idle-treadmill-360-240.webp" alt="Idle Treadmill" 
+                     onerror="this.onerror=null; this.src='/src/assets/images/games/idle-treadmill-360-240.webp'; 
+                     if(this.naturalHeight==0){this.src='/assets/images/default-game.webp';}">
+                <div class="game-card-content">
+                    <h3>Idle Treadmill</h3>
+                    <p>Play Idle Treadmill online for free! Enjoy this addictive game directly in your browser, no download...</p>
+                    <a href="/pages/games/idle-treadmill.html" class="play-button">Play Now</a>
+                </div>
+            </div>
+            <div class="game-card">
+                <img src="/assets/images/games/idle-world-miner-tycoon-360-240.webp" alt="Idle World Miner Tycoon" 
+                     onerror="this.onerror=null; this.src='/src/assets/images/games/idle-world-miner-tycoon-360-240.webp'; 
+                     if(this.naturalHeight==0){this.src='/assets/images/default-game.webp';}">
+                <div class="game-card-content">
+                    <h3>Idle World Miner Tycoon</h3>
+                    <p>Play Idle World Miner Tycoon online for free! Enjoy this addictive game directly in your browser, no...</p>
+                    <a href="/pages/games/idle-world-miner-tycoon.html" class="play-button">Play Now</a>
+                </div>
+            </div></div>
                     </div>
 
                     <!-- 在推荐游戏和页脚之间添加评分组件 -->
