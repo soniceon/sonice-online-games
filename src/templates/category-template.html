@@ -1,137 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="{CATEGORY_NAME} Games - Play the best {CATEGORY_NAME} games at sonice.online">
-    <title>{CATEGORY_NAME} Games - Sonice Online</title>
-    <link rel="canonical" href="https://sonice.online/categories/{CATEGORY_ID}.html" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'apple-blue': '#007AFF',
-                        'apple-green': '#34C759',
-                        'apple-indigo': '#5856D6',
-                        'apple-orange': '#FF9500',
-                        'apple-pink': '#FF2D55',
-                        'apple-purple': '#AF52DE',
-                        'apple-red': '#FF3B30',
-                        'apple-teal': '#5AC8FA',
-                        'apple-yellow': '#FFCC00',
-                        'apple-gray': '#8E8E93',
-                        'apple-bg': '#F2F2F7',
-                    }
-                }
-            }
-        }
-    </script>
+    <title>{{CATEGORY_NAME}} 游戏 - Sonice Games</title>
+    <meta name="description" content="{{CATEGORY_DESCRIPTION}}">
+    <meta property="og:title" content="{{CATEGORY_NAME}} 游戏 - 免费玩最好的游戏">
+    <meta property="og:description" content="{{CATEGORY_DESCRIPTION}}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sonice.online/category/{{CATEGORY_ID}}.html">
+    <link rel="canonical" href="https://sonice.online/category/{{CATEGORY_ID}}.html">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/category.css">
+    <script src="/assets/js/script.js" defer></script>
 </head>
-<body class="bg-apple-bg min-h-screen">
-    <header class="bg-apple-blue text-white shadow-md">
-        <div class="container mx-auto px-4 py-6">
-            <div class="flex justify-between items-center">
-                <a href="../index.html" class="text-2xl font-bold">sonice.online</a>
-                <nav>
-                    <ul class="flex space-x-6">
-                        <li><a href="../index.html" class="hover:text-apple-yellow">Home</a></li>
-                        <li><a href="../categories.html" class="hover:text-apple-yellow">Categories</a></li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
-    </header>
-
-    <main class="container mx-auto px-4 py-8">
-        <div class="flex items-center mb-8">
-            <span class="text-4xl mr-4">{CATEGORY_ICON}</span>
-            <h1 class="text-3xl font-bold">{CATEGORY_NAME} Games</h1>
-        </div>
-        
-        <div id="games-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <!-- Games will be loaded here -->
-        </div>
-    </main>
-
-    <footer class="bg-gray-800 text-white py-6 mt-12">
-        <div class="container mx-auto px-4">
-            <div class="md:flex md:justify-between">
-                <div class="mb-4 md:mb-0">
-                    <h2 class="text-xl font-bold mb-2">sonice.online</h2>
-                    <p class="text-gray-400">© 2025 sonice.online. All rights reserved.</p>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold mb-2">Contact</h3>
-                    <p class="text-gray-400">Email: contact@sonice.online</p>
+<body>
+    <div class="site-wrapper">
+        <header class="header">
+            <div class="container">
+                <div class="header-inner">
+                    <a href="/" class="logo">
+                        <img src="/assets/images/logo.png" alt="Sonice Games" width="180" height="50">
+                    </a>
+                    <nav class="main-nav">
+                        <ul class="main-menu">
+                            <li><a href="/">首页</a></li>
+                            <li><a href="/categories.html" class="active">分类</a></li>
+                            <li><a href="/top-games.html">热门游戏</a></li>
+                            <li><a href="/new-games.html">最新游戏</a></li>
+                        </ul>
+                    </nav>
+                    <div class="header-right">
+                        <div class="search-box">
+                            <input type="text" placeholder="搜索游戏..." id="search-input">
+                            <button id="search-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <button class="menu-toggle" id="menu-toggle">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </footer>
+        </header>
 
-    <script>
-        async function loadCategoryGames() {
-            try {
-                const category = document.title.split(' ')[0];
-                const [categoriesResponse, gamesResponse] = await Promise.all([
-                    fetch('../data/categories.json'),
-                    fetch('../data/games.json')
-                ]);
+        <main class="main-content">
+            <div class="container">
+                <div class="category-header">
+                    <div class="category-icon">{{CATEGORY_ICON}}</div>
+                    <h1>{{CATEGORY_NAME}} 游戏</h1>
+                    <p class="category-description">{{CATEGORY_DESCRIPTION}}</p>
+                </div>
                 
-                const categoriesData = await categoriesResponse.json();
-                const gamesData = await gamesResponse.json();
-                
-                const categoryInfo = categoriesData.categories[category];
-                const categoryGames = categoryInfo.games;
-                
-                const gamesGrid = document.getElementById('games-grid');
-                const gamesList = gamesData.games.filter(game => 
-                    categoryGames.includes(game.id)
-                );
-
-                gamesGrid.innerHTML = gamesList.map(game => `
-                    <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105">
-                        <a href="../games/${game.id}.html" class="block">
-                            <div class="relative">
-                                <img src="../${game.image}" alt="${game.title}" class="w-full h-48 object-cover">
-                                <div class="absolute top-2 right-2">
-                                    <span class="bg-apple-blue text-white text-xs px-2 py-1 rounded-full">
-                                        ${game.categories[0]}
-                                    </span>
+                <div class="game-grid">
+                    {% for game in GAMES %}
+                    <div class="game-card">
+                        <a href="{{game.url}}" class="game-link">
+                            <div class="game-image">
+                                <img src="{{game.image}}" alt="{{game.title}}">
+                                <div class="play-button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                    </svg>
                                 </div>
                             </div>
-                            <div class="p-4">
-                                <h3 class="font-bold text-lg mb-2 text-gray-800">${game.title}</h3>
-                                <p class="text-gray-600 text-sm line-clamp-2 mb-2">${game.description}</p>
-                                <div class="flex items-center justify-between">
-                                    <div class="flex items-center">
-                                        <div class="flex text-apple-yellow">
-                                            ${generateRatingStars(game.rating)}
-                                        </div>
-                                        <span class="text-gray-600 text-sm ml-2">(${game.reviews})</span>
-                                    </div>
+                            <div class="game-info">
+                                <h3 class="game-title">{{game.title}}</h3>
+                                <div class="game-categories">
+                                    {% for category in game.categories %}
+                                    <span class="category-badge">{{category.name}}</span>
+                                    {% endfor %}
                                 </div>
                             </div>
                         </a>
                     </div>
-                `).join('');
-            } catch (error) {
-                console.error('Error loading category games:', error);
-            }
-        }
+                    {% endfor %}
+                </div>
+                
+                <div class="pagination">
+                    <span class="page-info">第 1 页</span>
+                </div>
+            </div>
+        </main>
 
-        function generateRatingStars(rating) {
-            const fullStars = Math.floor(rating);
-            const hasHalfStar = rating % 1 >= 0.5;
-            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
-            
-            return Array(fullStars).fill('<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>').join('') +
-                (hasHalfStar ? '<svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27V2L9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27z"/></svg>' : '') +
-                Array(emptyStars).fill('<svg class="w-4 h-4 fill-current opacity-50" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>').join('');
-        }
-
-        document.addEventListener('DOMContentLoaded', loadCategoryGames);
-    </script>
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-inner">
+                    <div class="footer-info">
+                        <a href="/" class="footer-logo">
+                            <img src="/assets/images/logo.png" alt="Sonice Games" width="180" height="50">
+                        </a>
+                        <p>Sonice Games 提供最好玩的免费在线游戏，无需下载即可在浏览器中畅玩。</p>
+                    </div>
+                    <div class="footer-links">
+                        <div class="footer-column">
+                            <h4>热门分类</h4>
+                            <ul>
+                                <li><a href="/category/action.html">动作游戏</a></li>
+                                <li><a href="/category/puzzle.html">益智游戏</a></li>
+                                <li><a href="/category/arcade.html">街机游戏</a></li>
+                                <li><a href="/category/shooting.html">射击游戏</a></li>
+                                <li><a href="/category/strategy.html">策略游戏</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-column">
+                            <h4>关于我们</h4>
+                            <ul>
+                                <li><a href="/about.html">关于Sonice</a></li>
+                                <li><a href="/privacy.html">隐私政策</a></li>
+                                <li><a href="/terms.html">使用条款</a></li>
+                                <li><a href="/contact.html">联系我们</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2023 Sonice Games. 保留所有权利。</p>
+                </div>
+            </div>
+        </footer>
+    </div>
 </body>
 </html>

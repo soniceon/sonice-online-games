@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Sugar Factory 2 - Play Free Online Game</title>
-    <meta name="description" content="Play My Sugar Factory 2 online at sonice.online - Free browser game, no download required!">
+    <meta name="description" content="Play My Sugar Factory 2 online for free! Enjoy this addictive game directly in your browser, no download required.">
     <link rel="icon" type="image/png" href="/src/assets/icons/logo.png">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sonice.online/games/my-sugar-factory-2.html">
     <meta property="og:title" content="My Sugar Factory 2 - Play Free Online Game">
-    <meta property="og:description" content="Play My Sugar Factory 2 online at sonice.online - Free browser game, no download required!">
-    <meta property="og:image" content="{{game.image}}">
+    <meta property="og:description" content="Play My Sugar Factory 2 online for free! Enjoy this addictive game directly in your browser, no download required.">
+    <meta property="og:image" content="/src/assets/images/games/my-sugar-factory-2.jpg">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://sonice.online/games/my-sugar-factory-2.html">
     <meta property="twitter:title" content="My Sugar Factory 2 - Play Free Online Game">
-    <meta property="twitter:description" content="Play My Sugar Factory 2 online at sonice.online - Free browser game, no download required!">
-    <meta property="twitter:image" content="{{game.image}}">
+    <meta property="twitter:description" content="Play My Sugar Factory 2 online for free! Enjoy this addictive game directly in your browser, no download required.">
+    <meta property="twitter:image" content="/src/assets/images/games/my-sugar-factory-2.jpg">
 
     <!-- Structured Data -->
     <script type="application/ld+json">
@@ -27,9 +27,9 @@
         "@context": "https://schema.org",
         "@type": "VideoGame",
         "name": "My Sugar Factory 2",
-        "description": "Play My Sugar Factory 2 online at sonice.online - Free browser game, no download required!",
-        "image": "{{game.image}}",
-        "genre": "<span class="category-tag"><span class=</span>",
+        "description": "Play My Sugar Factory 2 online for free! Enjoy this addictive game directly in your browser, no download required.",
+        "image": "/src/assets/images/games/my-sugar-factory-2.jpg",
+        "genre": "{% for category in game.categories %}{{category}}{% if not loop.last %}",
         "url": "https://sonice.online/games/my-sugar-factory-2.html"
     }
     </script>
@@ -620,73 +620,59 @@
                         <h1>My Sugar Factory 2</h1>
                         
                         <div class="categories-section">
-                            <span class="category-tag"><span class=</span>
+                            {% for category in game.categories %}
+                            <span class="category-tag" style="
+                                background: linear-gradient(135deg, rgba(124, 58, 237, 0.8), rgba(139, 92, 246, 0.8));
+                                box-shadow: 0 2px 8px rgba(124, 58, 237, 0.2);
+                                border: 1px solid rgba(255, 255, 255, 0.1);
+                                padding: 0.5rem 1rem;
+                                border-radius: 20px;
+                                font-weight: 500;
+                            ">{{category}}</span>
+                            {% endfor %}
                         </div>
                         
                         <div class="description-section">
-                            <p class="text-white text-lg">Play My Sugar Factory 2 online at sonice.online - Free browser game, no download required!</p>
+                            <p class="text-white text-lg">Play My Sugar Factory 2 online for free! Enjoy this addictive game directly in your browser, no download required.</p>
                         </div>
                     </div>
                     
                     <div class="game-wrapper">
-                        <iframe src="https://sonice.online/games/my-sugar-factory-2/" frameborder="0" allowfullscreen></iframe>
+                        <iframe src="https://games.crazygames.com/en_US/my-sugar-factory-2/index.html" frameborder="0" allowfullscreen></iframe>
                     </div>
 
                     <div class="game-controls">
                         <h2>Game Controls</h2>
-                        <p>Use your mouse to play this game.</p>
+                        <p>{{game.controls}}</p>
                     </div>
 
                     <div class="game-overview">
                         <h2>Game Overview</h2>
-                        <p>Play My Sugar Factory 2 online at sonice.online - Free browser game, no download required!</p>
+                        <p>Play My Sugar Factory 2 online for free! Enjoy this addictive game directly in your browser, no download required.</p>
                         
                         <div class="game-categories">
-                            <span class="category-tag"><span class=</span>
-                        </div>
+
+                            <span class="category-tag">Game</span>
+                            
+                            <span class="category-tag">Arcade</span>
+                            
+</div>
                     </div>
 
                     <!-- Recommended Games -->
                     <div class="recommended-games">
                         <h2>You May Also Like</h2>
                         <div class="games-grid">
-                            
-        <div class="game-card">
-            <img src="/src/assets/images/games/default.jpg" alt="Recommended Game">
-            <div class="game-card-content">
-                <h3>Similar Game</h3>
-                <p>Try another exciting game in the same category!</p>
-                <a href="#" class="play-button">Play Now</a>
-            </div>
-        </div>
-    
-        <div class="game-card">
-            <img src="/src/assets/images/games/default.jpg" alt="Recommended Game">
-            <div class="game-card-content">
-                <h3>Similar Game</h3>
-                <p>Try another exciting game in the same category!</p>
-                <a href="#" class="play-button">Play Now</a>
-            </div>
-        </div>
-    
-        <div class="game-card">
-            <img src="/src/assets/images/games/default.jpg" alt="Recommended Game">
-            <div class="game-card-content">
-                <h3>Similar Game</h3>
-                <p>Try another exciting game in the same category!</p>
-                <a href="#" class="play-button">Play Now</a>
-            </div>
-        </div>
-    
-        <div class="game-card">
-            <img src="/src/assets/images/games/default.jpg" alt="Recommended Game">
-            <div class="game-card-content">
-                <h3>Similar Game</h3>
-                <p>Try another exciting game in the same category!</p>
-                <a href="#" class="play-button">Play Now</a>
-            </div>
-        </div>
-    
+                            {% for rec_game in game.recommendedGames %}
+                            <div class="game-card">
+                                <img src="{{rec_game.image}}" alt="{{rec_game.title}}">
+                                <div class="game-card-content">
+                                    <h3>{{rec_game.title}}</h3>
+                                    <p>{{rec_game.description}}</p>
+                                    <a href="/games/{{rec_game.slug}}.html" class="play-button">Play Now</a>
+                                </div>
+                            </div>
+                            {% endfor %}
                         </div>
                     </div>
 
