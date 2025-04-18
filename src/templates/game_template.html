@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} - Sonice Games</title>
+    <meta name="description" content="{{ description }}">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="{{ title }} - Sonice Games">
+    <meta property="og:description" content="{{ description }}">
+    <meta property="og:image" content="{{ thumbnail }}">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="{{ title }} - Sonice Games">
+    <meta property="twitter:description" content="{{ description }}">
+    <meta property="twitter:image" content="{{ thumbnail }}">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark': '#0F1012',
+                        'dark-lighter': '#1A1B1F',
+                        'blue-primary': '#0EA5E9',
+                        'blue-secondary': '#38BDF8',
+                        'blue-bright': '#7DD3FC',
+                        'purple-primary': '#7C3AED',
+                        'gray-custom': '#2A2B31'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: #0F1012;
+            color: #fff;
+            min-height: 100vh;
+        }
+        .game-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .game-iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 8px;
+            background: #1A1B1F;
+        }
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(124, 58, 237, 0.2);
+            color: #7C3AED;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="mb-8">
+            <h1 class="text-3xl font-bold text-white mb-4">{{ title }}</h1>
+            <p class="text-gray-400 mb-4">{{ description }}</p>
+            <div class="flex flex-wrap">
+                {% for tag in tags %}
+                <span class="tag">{{ tag }}</span>
+                {% endfor %}
+            </div>
+        </div>
+        
+        <div class="game-frame mb-8">
+            <iframe src="{{ iframe_url }}" class="game-iframe" allowfullscreen></iframe>
+        </div>
+        
+        <div class="flex justify-between items-center">
+            <a href="/" class="text-blue-primary hover:text-blue-secondary">← Back to Home</a>
+            <button class="bg-purple-primary text-white px-4 py-2 rounded-lg hover:bg-purple-600 transition-colors">
+                Rate this game
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Add game rating functionality
+        document.querySelector('button').addEventListener('click', () => {
+            // Implement rating functionality here
+            alert('Rating functionality coming soon!');
+        });
+    </script>
+</body>
+</html> 

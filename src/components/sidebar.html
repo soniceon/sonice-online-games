@@ -1,0 +1,107 @@
+<!-- Vertical Navigation Sidebar -->
+<nav class="vertical-nav">
+    <a href="/" class="nav-item">
+        <img src="/assets/images/nav/home.png" alt="Home">
+    </a>
+    <a href="/favorites" class="nav-item">
+        <img src="/assets/images/nav/heart.png" alt="Favorites">
+    </a>
+    <a href="/history" class="nav-item">
+        <img src="/assets/images/nav/history.png" alt="History">
+    </a>
+    <a href="/settings" class="nav-item">
+        <img src="/assets/images/nav/settings.png" alt="Settings">
+    </a>
+    <div class="nav-divider">
+        <span>CATEGORIES</span>
+    </div>
+    <a href="/categories/action" class="nav-item">
+        <img src="/assets/images/nav/gamepad.png" alt="Action">
+    </a>
+    <a href="/categories/puzzle" class="nav-item">
+        <img src="/assets/images/nav/puzzle.png" alt="Puzzle">
+    </a>
+    <a href="/help" class="nav-item">
+        <img src="/assets/images/nav/help.png" alt="Help">
+    </a>
+    <a href="/camera" class="nav-item">
+        <img src="/assets/images/nav/camera.png" alt="Camera">
+    </a>
+    <a href="/more" class="nav-item">
+        <img src="/assets/images/nav/more.png" alt="More">
+    </a>
+</nav>
+
+<style>
+.vertical-nav {
+    width: 60px;
+    background: #1a1a1a;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 1rem;
+}
+
+.vertical-nav .nav-item {
+    width: 40px;
+    height: 40px;
+    margin: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.vertical-nav .nav-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.vertical-nav .nav-item img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.vertical-nav .nav-divider {
+    width: 100%;
+    padding: 0.5rem 0;
+    margin: 0.5rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: center;
+}
+
+.vertical-nav .nav-divider span {
+    color: #666;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+    .vertical-nav {
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: auto;
+        width: 100%;
+        height: 60px;
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 0.5rem;
+    }
+
+    .vertical-nav .nav-divider {
+        display: none;
+    }
+
+    .vertical-nav .nav-item {
+        margin: 0 0.25rem;
+    }
+}
+</style> 

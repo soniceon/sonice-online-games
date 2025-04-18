@@ -1,0 +1,14 @@
+{
+  "name": "sonice-online-games",
+  "version": "1.0.0",
+  "description": "Sonice Online Games Platform",
+  "scripts": {
+    "fetch-games": "node scripts/fetch-games-data.js",
+    "generate-pages": "node scripts/generate-game-pages.js"
+  },
+  "dependencies": {
+    "axios": "^1.8.4",
+    "cheerio": "^1.0.0",
+    "puppeteer": "^24.6.1"
+  }
+}

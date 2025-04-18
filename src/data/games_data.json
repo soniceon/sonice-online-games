@@ -1,0 +1,84 @@
+{
+  "games": [
+    {
+      "id": "legendary-sniper",
+      "title": "Legendary Sniper",
+      "description": "Test your accuracy and patience in this intense sniper game.",
+      "category": "shooting",
+      "image": "/assets/images/games/legendary-sniper.jpg",
+      "controls": "Mouse to aim and shoot, R to reload"
+    },
+    {
+      "id": "tanuki-sunset",
+      "title": "Tanuki Sunset",
+      "description": "Skate downhill as a cool raccoon in this stylish game.",
+      "category": "arcade",
+      "image": "/assets/images/games/tanuki-sunset.jpg",
+      "controls": "Arrow keys to move"
+    },
+    {
+      "id": "stardew-valley",
+      "title": "Stardew Valley",
+      "description": "Build your dream farm in this relaxing simulation game.",
+      "category": "adventure",
+      "image": "/assets/images/games/stardew-valley.jpg",
+      "controls": "WASD to move, Mouse to interact"
+    },
+    {
+      "id": "snow-rider-3d",
+      "title": "Snow Rider 3D",
+      "description": "Race down snowy slopes in this thrilling winter sports game.",
+      "category": "sports",
+      "image": "/assets/images/games/snow-rider-3d.jpg",
+      "controls": "Arrow keys to control"
+    },
+    {
+      "id": "monster-survivors",
+      "title": "Monster Survivors",
+      "description": "Survive waves of monsters in this action-packed game.",
+      "category": "action",
+      "image": "/assets/images/games/monster-survivors.jpg",
+      "controls": "WASD to move, Mouse to shoot"
+    },
+    {
+      "id": "masked-special-forces",
+      "title": "Masked Special Forces",
+      "description": "Join elite forces in intense combat missions.",
+      "category": "action",
+      "image": "/assets/images/games/masked-special-forces.jpg",
+      "controls": "WASD to move, Mouse to aim and shoot"
+    },
+    {
+      "id": "fort-drifter",
+      "title": "Fort Drifter",
+      "description": "Drift through challenging tracks in this unique racing game.",
+      "category": "racing",
+      "image": "/assets/images/games/fort-drifter.jpg",
+      "controls": "Arrow keys to drive"
+    },
+    {
+      "id": "fireboy-and-watergirl-3",
+      "title": "Fireboy and Watergirl 3",
+      "description": "Solve puzzles with two players in this cooperative game.",
+      "category": "puzzle",
+      "image": "/assets/images/games/fireboy-and-watergirl-3.jpg",
+      "controls": "Arrow keys and WASD for each player"
+    },
+    {
+      "id": "cs-online",
+      "title": "CS Online",
+      "description": "Experience tactical team-based shooting action.",
+      "category": "shooting",
+      "image": "/assets/images/games/cs-online.jpg",
+      "controls": "WASD to move, Mouse to aim and shoot"
+    },
+    {
+      "id": "crazy-shooters",
+      "title": "Crazy Shooters",
+      "description": "Fast-paced multiplayer shooting action.",
+      "category": "shooting",
+      "image": "/assets/images/games/crazy-shooters.jpg",
+      "controls": "WASD to move, Mouse to shoot"
+    }
+  ]
+}
