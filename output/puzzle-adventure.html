@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puzzle Adventure - Play Free Online Game</title>
+    <meta name="description" content="Play Puzzle Adventure online for free! Challenge your brain with increasingly difficult puzzles. Each level presents unique challenges that will test your logical thinking, pattern recognition, and problem-solving skills.">
+    <link rel="icon" type="image/png" href="/src/assets/icons/logo.png">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sonice.online/games/puzzle-adventure.html">
+    <meta property="og:title" content="Puzzle Adventure - Play Free Online Game">
+    <meta property="og:description" content="Play Puzzle Adventure online for free! Challenge your brain with increasingly difficult puzzles. Each level presents unique challenges that will test your logical thinking, pattern recognition, and problem-solving skills.">
+    <meta property="og:image" content="/assets/images/games/puzzle-adventure-360-240.webp">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://sonice.online/games/puzzle-adventure.html">
+    <meta property="twitter:title" content="Puzzle Adventure - Play Free Online Game">
+    <meta property="twitter:description" content="Play Puzzle Adventure online for free! Challenge your brain with increasingly difficult puzzles. Each level presents unique challenges that will test your logical thinking, pattern recognition, and problem-solving skills.">
+    <meta property="twitter:image" content="/assets/images/games/puzzle-adventure-360-240.webp">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "Puzzle Adventure",
+        "description": "Play Puzzle Adventure online for free! Challenge your brain with increasingly difficult puzzles. Each level presents unique challenges that will test your logical thinking, pattern recognition, and problem-solving skills.",
+        "image": "/assets/images/games/puzzle-adventure-360-240.webp",
+        "genre": "",
+        "url": "https://sonice.online/games/puzzle-adventure.html"
+    }
+    </script>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark': '#0F1012',
+                        'dark-lighter': '#1A1B1F',
+                        'blue-primary': '#0EA5E9',
+                        'blue-secondary': '#38BDF8',
+                        'blue-bright': '#7DD3FC',
+                        'purple-primary': '#7C3AED',
+                        'gray-custom': '#2A2B31'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, rgba(30, 58, 138, 0.95) 0%, rgba(30, 64, 175, 0.95) 25%, rgba(37, 99, 235, 0.95) 50%, rgba(59, 130, 246, 0.95) 75%, rgba(96, 165, 250, 0.95) 100%);
+            color: #fff;
+            font-family: Arial, sans-serif;
+            padding: 0;
+            margin: 0;
+        }
+        .game-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .title-section {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h1 {
+            font-size: 2rem;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        .game-wrapper {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            margin: 2rem 0;
+        }
+        .game-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .game-controls, .game-overview {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .category-tag {
+            background: rgba(124, 58, 237, 0.8);
+            border-radius: 20px;
+            padding: 5px 15px;
+            margin: 5px;
+            display: inline-block;
+        }
+        .recommended-games {
+            margin-top: 40px;
+        }
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .game-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        .game-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+        }
+        .game-card-content {
+            padding: 15px;
+        }
+        .play-button {
+            background: rgba(124, 58, 237, 0.8);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .rating-section {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .star {
+            font-size: 24px;
+            color: gold;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <div class="title-section">
+            <h1>Puzzle Adventure</h1>
+            <div>
+                <span class="category-tag">puzzle</span>
+<span class="category-tag">action</span>
+<span class="category-tag">rpg</span>
+            </div>
+            <p>Play Puzzle Adventure online for free! Challenge your brain with increasingly difficult puzzles. Each level presents unique challenges that will test your logical thinking, pattern recognition, and problem-solving skills.</p>
+        </div>
+        
+        <div class="game-wrapper">
+            <iframe src="https://example.com/games/puzzle-adventure " frameborder="0" allowfullscreen></iframe>
+        </div>
+
+        <div class="game-controls">
+            <h2>Game Controls</h2>
+            <p>Use your mouse to move pieces, solve puzzles, and complete challenges. Think carefully about each move.</p>
+        </div>
+
+        <div class="game-overview">
+            <h2>Game Overview</h2>
+            <p>Play Puzzle Adventure online for free! Challenge your brain with increasingly difficult puzzles. Each level presents unique challenges that will test your logical thinking, pattern recognition, and problem-solving skills.</p>
+            <div>
+                
+            </div>
+        </div>
+
+        <!-- Recommended Games -->
+        <div class="recommended-games">
+            <h2>You May Also Like</h2>
+            <div class="games-grid">
+                
+                <span class="category-tag">{{category}}</span>
+                
+                <span class="category-tag">{{category}}</span>
+                
+                <span class="category-tag">{{category}}</span>
+                
+                <span class="category-tag">{{category}}</span>
+                
+            </div>
+        </div>
+
+        <!-- Rating Section -->
+        <div class="rating-section">
+            <h2>Rate This Game</h2>
+            <div>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+                <span class="star">★</span>
+            </div>
+            <div>
+                Average Rating: <span>4.5</span>/5
+                (<span>128</span> votes)
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simple placeholder for JavaScript functionality
+        console.log('Game page loaded successfully');
+    </script>
+</body>
+</html> 

@@ -4,11 +4,14 @@
   "description": "Sonice Online Games Platform",
   "scripts": {
     "fetch-games": "node scripts/fetch-games-data.js",
-    "generate-pages": "node scripts/generate-game-pages.js"
+    "generate-pages": "node scripts/generate-game-pages.js",
+    "build": "npm run fetch-games && npm run generate-pages"
   },
   "dependencies": {
-    "axios": "^1.8.4",
+    "axios": "^1.4.0",
     "cheerio": "^1.0.0",
-    "puppeteer": "^24.6.1"
+    "csv-parser": "^3.2.0",
+    "fs-extra": "^11.1.1",
+    "puppeteer": "^19.7.2"
   }
 }

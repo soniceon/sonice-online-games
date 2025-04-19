@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{CATEGORY_NAME}} 游戏 - Sonice Games</title>
+    <meta name="description" content="{{CATEGORY_DESCRIPTION}}">
+    <meta property="og:title" content="{{CATEGORY_NAME}} 游戏 - 免费玩最好的游戏">
+    <meta property="og:description" content="{{CATEGORY_DESCRIPTION}}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sonice.online/category/{{CATEGORY_ID}}.html">
+    <link rel="canonical" href="https://sonice.online/category/{{CATEGORY_ID}}.html">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/category.css">
+    <script src="/assets/js/script.js" defer></script>
+</head>
+<body>
+    <div class="site-wrapper">
+        <header class="header">
+            <div class="container">
+                <div class="header-inner">
+                    <a href="/" class="logo">
+                        <img src="/assets/images/logo.png" alt="Sonice Games" width="180" height="50">
+                    </a>
+                    <nav class="main-nav">
+                        <ul class="main-menu">
+                            <li><a href="/">首页</a></li>
+                            <li><a href="/categories.html" class="active">分类</a></li>
+                            <li><a href="/top-games.html">热门游戏</a></li>
+                            <li><a href="/new-games.html">最新游戏</a></li>
+                        </ul>
+                    </nav>
+                    <div class="header-right">
+                        <div class="search-box">
+                            <input type="text" placeholder="搜索游戏..." id="search-input">
+                            <button id="search-button">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </button>
+                        </div>
+                        <button class="menu-toggle" id="menu-toggle">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="container">
+                <div class="category-header">
+                    <div class="category-icon">{{CATEGORY_ICON}}</div>
+                    <h1>{{CATEGORY_NAME}} 游戏</h1>
+                    <p class="category-description">{{CATEGORY_DESCRIPTION}}</p>
+                </div>
+                
+                <div class="game-grid">
+                    {% for game in GAMES %}
+                    <div class="game-card">
+                        <a href="{{game.url}}" class="game-link">
+                            <div class="game-image">
+                                <img src="{{game.image}}" alt="{{game.title}}">
+                                <div class="play-button">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="game-info">
+                                <h3 class="game-title">{{game.title}}</h3>
+                                <div class="game-categories">
+                                    {% for category in game.categories %}
+                                    <span class="category-badge">{{category.name}}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+                
+                <div class="pagination">
+                    <span class="page-info">第 1 页</span>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <div class="container">
+                <div class="footer-inner">
+                    <div class="footer-info">
+                        <a href="/" class="footer-logo">
+                            <img src="/assets/images/logo.png" alt="Sonice Games" width="180" height="50">
+                        </a>
+                        <p>Sonice Games 提供最好玩的免费在线游戏，无需下载即可在浏览器中畅玩。</p>
+                    </div>
+                    <div class="footer-links">
+                        <div class="footer-column">
+                            <h4>热门分类</h4>
+                            <ul>
+                                <li><a href="/category/action.html">动作游戏</a></li>
+                                <li><a href="/category/puzzle.html">益智游戏</a></li>
+                                <li><a href="/category/arcade.html">街机游戏</a></li>
+                                <li><a href="/category/shooting.html">射击游戏</a></li>
+                                <li><a href="/category/strategy.html">策略游戏</a></li>
+                            </ul>
+                        </div>
+                        <div class="footer-column">
+                            <h4>关于我们</h4>
+                            <ul>
+                                <li><a href="/about.html">关于Sonice</a></li>
+                                <li><a href="/privacy.html">隐私政策</a></li>
+                                <li><a href="/terms.html">使用条款</a></li>
+                                <li><a href="/contact.html">联系我们</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2023 Sonice Games. 保留所有权利。</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html> 
