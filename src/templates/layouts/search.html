@@ -1,0 +1,501 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Search Results for "{{ query }}" - Sonice Games{% endblock %}
+{% block description %}Search results for "{{ query }}" at Sonice Games. Find and play your favorite online games for free.{% endblock %}
+{% block og_title %}Search Results for "{{ query }}" - Sonice Games{% endblock %}
+{% block og_description %}Search results for "{{ query }}" at Sonice Games. Find your favorite games now!{% endblock %}
+
+{% block additional_css %}
+<style>
+    /* Search results page styles */
+    .search-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+    
+    /* Search header */
+    .search-header {
+        margin: 2rem 0 3rem;
+    }
+    
+    .search-title {
+        font-size: 2rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 1rem;
+    }
+    
+    .search-query {
+        color: #7C3AED;
+    }
+    
+    .search-meta {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 1rem;
+    }
+    
+    /* Search box */
+    .search-form {
+        display: flex;
+        margin: 1.5rem 0;
+        max-width: 600px;
+    }
+    
+    .search-input {
+        flex: 1;
+        background-color: rgba(26, 27, 31, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 0.5rem 0 0 0.5rem;
+        padding: 0.75rem 1rem;
+        color: white;
+        font-size: 1rem;
+        outline: none;
+        transition: all 0.2s;
+    }
+    
+    .search-input:focus {
+        border-color: rgba(124, 58, 237, 0.5);
+        box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.25);
+    }
+    
+    .search-button {
+        background-color: #7C3AED;
+        color: white;
+        border: none;
+        border-radius: 0 0.5rem 0.5rem 0;
+        padding: 0 1.5rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    
+    .search-button:hover {
+        background-color: #6D28D9;
+    }
+    
+    /* Results sections */
+    .results-section {
+        margin-bottom: 3rem;
+    }
+    
+    .section-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: white;
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+    }
+    
+    .section-title i {
+        margin-right: 0.75rem;
+        color: #7C3AED;
+    }
+    
+    /* Category pills */
+    .category-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        margin-bottom: 2rem;
+    }
+    
+    .category-pill {
+        background-color: rgba(26, 27, 31, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 2rem;
+        padding: 0.5rem 1.25rem;
+        color: white;
+        font-size: 0.875rem;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .category-pill:hover {
+        background-color: rgba(124, 58, 237, 0.2);
+        border-color: rgba(124, 58, 237, 0.5);
+    }
+    
+    .category-pill i {
+        color: #7C3AED;
+        font-size: 0.75rem;
+    }
+    
+    .category-pill-count {
+        background-color: rgba(124, 58, 237, 0.3);
+        color: #7C3AED;
+        border-radius: 1rem;
+        padding: 0.125rem 0.5rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+    }
+    
+    /* Game grid */
+    .games-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1.5rem;
+    }
+    
+    /* Game card */
+    .game-card {
+        background-color: rgba(26, 27, 31, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 0.75rem;
+        overflow: hidden;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .game-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .game-image {
+        position: relative;
+        aspect-ratio: 16/9;
+        overflow: hidden;
+    }
+    
+    .game-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s;
+    }
+    
+    .game-card:hover .game-image img {
+        transform: scale(1.05);
+    }
+    
+    .game-card-badge {
+        position: absolute;
+        top: 0.75rem;
+        left: 0.75rem;
+        background-color: rgba(124, 58, 237, 0.9);
+        color: white;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        z-index: 1;
+    }
+    
+    .game-card-badge.new {
+        background-color: rgba(220, 38, 38, 0.9);
+    }
+    
+    .game-card-badge.hot {
+        background-color: rgba(245, 158, 11, 0.9);
+    }
+    
+    .game-play-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(124, 58, 237, 0.9);
+        color: white;
+        border: none;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transition: opacity 0.3s, transform 0.3s;
+    }
+    
+    .game-card:hover .game-play-button {
+        opacity: 1;
+    }
+    
+    .game-play-button:hover {
+        transform: translate(-50%, -50%) scale(1.1);
+        background-color: rgb(124, 58, 237);
+    }
+    
+    .game-info {
+        padding: 1rem;
+    }
+    
+    .game-title {
+        font-weight: 600;
+        margin: 0;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .game-meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-top: 0.5rem;
+    }
+    
+    .game-category {
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.6);
+    }
+    
+    .game-rating {
+        display: flex;
+        align-items: center;
+        font-size: 0.75rem;
+        color: rgba(255, 255, 255, 0.6);
+    }
+    
+    .game-rating i {
+        color: #F59E0B;
+        margin-right: 0.25rem;
+    }
+    
+    /* No results */
+    .no-results {
+        text-align: center;
+        padding: 3rem 0;
+    }
+    
+    .no-results-icon {
+        font-size: 3rem;
+        color: rgba(255, 255, 255, 0.2);
+        margin-bottom: 1.5rem;
+    }
+    
+    .no-results-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.8);
+        margin-bottom: 1rem;
+    }
+    
+    .no-results-text {
+        color: rgba(255, 255, 255, 0.6);
+        max-width: 500px;
+        margin: 0 auto 1.5rem;
+    }
+    
+    .suggest-text {
+        margin-top: 2rem;
+        color: rgba(255, 255, 255, 0.6);
+    }
+    
+    /* Popular searches */
+    .popular-searches {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+        margin-top: 1rem;
+    }
+    
+    .popular-search-tag {
+        background-color: rgba(26, 27, 31, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 2rem;
+        padding: 0.4rem 1rem;
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 0.875rem;
+        transition: all 0.2s;
+    }
+    
+    .popular-search-tag:hover {
+        background-color: rgba(124, 58, 237, 0.2);
+        border-color: rgba(124, 58, 237, 0.5);
+        color: white;
+    }
+    
+    /* Pagination */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+    }
+    
+    .pagination-list {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    
+    .pagination-item {
+        min-width: 2.5rem;
+        height: 2.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(26, 27, 31, 0.7);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 0.5rem;
+        color: white;
+        transition: all 0.2s;
+        cursor: pointer;
+    }
+    
+    .pagination-item:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .pagination-item.active {
+        background-color: rgba(124, 58, 237, 0.8);
+        border-color: rgba(124, 58, 237, 0.5);
+    }
+    
+    .pagination-item.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+        .search-title {
+            font-size: 1.75rem;
+        }
+        
+        .games-grid {
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 1rem;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .search-title {
+            font-size: 1.5rem;
+        }
+        
+        .games-grid {
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 0.75rem;
+        }
+        
+        .search-form {
+            flex-direction: column;
+        }
+        
+        .search-input {
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .search-button {
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            width: 100%;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="search-container">
+    <!-- Search Header -->
+    <div class="search-header">
+        <h1 class="search-title">Search results for "<span class="search-query">{{ query }}</span>"</h1>
+        <p class="search-meta">{{ total_results }} results found</p>
+        
+        <!-- Search Form -->
+        <form class="search-form" action="/search" method="GET">
+            <input type="text" class="search-input" name="q" value="{{ query }}" placeholder="Search for games...">
+            <button type="submit" class="search-button">Search</button>
+        </form>
+    </div>
+    
+    {% if total_results > 0 %}
+        <!-- Categories Section (if any) -->
+        {% if categories and categories|length > 0 %}
+        <div class="results-section">
+            <h2 class="section-title"><i class="fas fa-folder"></i> Categories</h2>
+            <div class="category-pills">
+                {% for category in categories %}
+                <a href="{{ category.url }}" class="category-pill">
+                    <i class="fas fa-tag"></i>
+                    {{ category.name }}
+                    <span class="category-pill-count">{{ category.count }}</span>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- Games Results -->
+        <div class="results-section">
+            <h2 class="section-title"><i class="fas fa-gamepad"></i> Games</h2>
+            <div class="games-grid">
+                {% for game in games %}
+                <div class="game-card">
+                    <a href="{{ game.url }}">
+                        <div class="game-image">
+                            {% if game.is_new %}
+                            <div class="game-card-badge new">NEW</div>
+                            {% endif %}
+                            {% if game.is_hot %}
+                            <div class="game-card-badge hot">HOT</div>
+                            {% endif %}
+                            <img src="{{ game.thumbnail }}" alt="{{ game.title }}">
+                            <button class="game-play-button">
+                                <i class="fas fa-play"></i>
+                            </button>
+                        </div>
+                        <div class="game-info">
+                            <h3 class="game-title">{{ game.title }}</h3>
+                            <div class="game-meta">
+                                <div class="game-category">{{ game.category }}</div>
+                                <div class="game-rating">
+                                    <i class="fas fa-star"></i> {{ game.rating }}
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+            
+            <!-- Pagination -->
+            {% if total_pages > 1 %}
+            <div class="pagination">
+                <div class="pagination-list">
+                    <a class="pagination-item {% if current_page == 1 %}disabled{% endif %}" {% if current_page > 1 %}href="/search?q={{ query }}&page={{ current_page - 1 }}"{% endif %}>
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                    
+                    {% for page in pages %}
+                    <a class="pagination-item {% if page == current_page %}active{% endif %}" href="/search?q={{ query }}&page={{ page }}">
+                        {{ page }}
+                    </a>
+                    {% endfor %}
+                    
+                    <a class="pagination-item {% if current_page == total_pages %}disabled{% endif %}" {% if current_page < total_pages %}href="/search?q={{ query }}&page={{ current_page + 1 }}"{% endif %}>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    {% else %}
+        <!-- No Results -->
+        <div class="no-results">
+            <div class="no-results-icon">
+                <i class="fas fa-search"></i>
+            </div>
+            <h2 class="no-results-title">No results found</h2>
+            <p class="no-results-text">Sorry, we couldn't find any games matching "{{ query }}". Please check your spelling or try different keywords.</p>
+            
+            <p class="suggest-text">Popular searches:</p>
+            <div class="popular-searches">
+                <a href="/search?q=action" class="popular-search-tag">Action</a>
+                <a href="/search?q=racing" class="popular-search-tag">Racing</a>
+                <a href="/search?q=puzzle" class="popular-search-tag">Puzzle</a>
+                <a href="/search?q=adventure" class="popular-search-tag">Adventure</a>
+                <a href="/search?q=strategy" class="popular-search-tag">Strategy</a>
+                <a href="/search?q=shooting" class="popular-search-tag">Shooting</a>
+            </div>
+        </div>
+    {% endif %}
+</div>
+{% endblock %} 
