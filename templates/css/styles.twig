@@ -1,0 +1,1841 @@
+/* Custom CSS Variables */
+:root {
+    --navy-900: #0a0f2c;  /* 更深的背景色 */
+    --navy-800: #1a1f3c;  /* 次要背景色 */
+    --navy-700: #2a2f4c;  /* 边框和悬停状态 */
+    --navy-600: #475569;
+    --navy-500: #64748b;
+    --navy-400: #94a3b8;
+    --navy-300: #cbd5e1;
+    --navy-200: #e2e8f0;
+    --navy-100: #f1f5f9;
+    --navy-50: #f8fafc;
+    --blue-gradient-start: #4169E1;  /* 渐变起始色 */
+    --blue-gradient-end: #00BFFF;    /* 渐变结束色 */
+}
+
+/* Base Styles */
+body {
+    background-color: var(--navy-900);
+    color: var(--navy-100);
+    min-height: 100vh;
+}
+
+.page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-wrapper {
+    flex: 1;
+    display: flex;
+    margin-top: 4rem;
+}
+
+/* Header Styles */
+.header-bg {
+    background: linear-gradient(to right, #0d1130, #121c44, #152a69);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.search-bar {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    backdrop-filter: blur(4px);
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 60px;
+    position: fixed;
+    left: 0;
+    top: 4rem;
+    bottom: 0;
+    background: linear-gradient(180deg, #0d1130 0%, #121c44 100%);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 40;
+}
+
+.sidebar-content {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    padding: 0.5rem 0;
+}
+
+.sidebar-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    padding: 0.5rem 0;
+    position: relative;
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.sidebar-icon {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+.sidebar-item {
+    font-size: 11px;
+    letter-spacing: -0.2px;
+    text-align: center;
+    white-space: nowrap;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.category-label {
+    padding: 0.75rem 0;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.badge {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    font-size: 10px;
+    font-weight: 500;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.badge.new {
+    background: #2dce89;
+}
+
+.category-count {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Hover Effects */
+.sidebar-link:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-link:hover .sidebar-item {
+    color: #ffffff;
+}
+
+/* Scrollbar */
+.sidebar::-webkit-scrollbar,
+.sidebar-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.sidebar::-webkit-scrollbar-track,
+.sidebar-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb,
+.sidebar-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+/* Icon Colors */
+.icon-home { color: #4f86f7; }
+.icon-favorites { color: #ff5c8d; }
+.icon-recent { color: #3da4e3; }
+.icon-new { color: #2dce89; }
+.icon-action { color: #ff6b6b; }
+.icon-puzzle { color: #9775fa; }
+.icon-racing { color: #ff8f5e; }
+.icon-sports { color: #63e6be; }
+.icon-shooter { color: #ffd43b; }
+.icon-cards { color: #a66ffe; }
+.icon-strategy { color: #74c0fc; }
+.icon-educational { color: #2dce89; }
+
+/* Main Content Adjustment */
+.main-content {
+    margin-left: 60px;
+    min-height: 100vh;
+    padding: 1.5rem;
+    background: #070d2a;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+}
+
+/* Game Cards */
+.game-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    background: linear-gradient(135deg, #4169E1 0%, #60A5FA 100%);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 280px;
+}
+
+.game-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.game-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.game-card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+}
+
+/* Single Page Fix */
+.single-page-fix .content-wrapper {
+    margin-top: 0;
+}
+
+.single-page-fix .sidebar,
+.single-page-fix .header-bg {
+    display: none;
+}
+
+/* Toast Notification */
+#toast {
+    transition: opacity 0.3s ease-in-out;
+}
+
+#toast.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--navy-900);
+}
+
+/* Remove hover expansion */
+.sidebar:hover {
+    width: 60px;
+}
+
+/* 链接样式 */
+.sidebar-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.75rem 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.2s ease;
+    height: 48px;
+}
+
+/* Remove hover effects that change layout */
+.sidebar:hover .sidebar-link {
+    flex-direction: column;
+    height: 72px;
+}
+
+.sidebar:hover .sidebar-icon {
+    margin-top: 0.25rem;
+}
+
+.sidebar:hover .sidebar-item {
+    text-align: center;
+    font-size: 11px;
+    margin-top: 0.25rem;
+}
+
+/* 徽章样式 */
+.sidebar-link .ml-auto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 16px;
+    height: 4px;
+    padding: 0 0.25rem;
+    border-radius: 9999px;
+    font-size: 10px;
+    font-weight: 500;
+    margin-left: auto;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.sidebar:hover .sidebar-link .ml-auto {
+    position: absolute;
+    right: 0.25rem;
+    top: 0.25rem;
+}
+
+/* 图标颜色 */
+.icon-home { color: #4f86f7; }
+.icon-favorites { color: #ff5c8d; }
+.icon-recent { color: #3da4e3; }
+.icon-new { color: #2dce89; }
+.icon-action { color: #ff6b6b; }
+.icon-puzzle { color: #9775fa; }
+.icon-racing { color: #ff8f5e; }
+.icon-sports { color: #63e6be; }
+.icon-shooter { color: #ffd43b; }
+.icon-cards { color: #a66ffe; }
+.icon-strategy { color: #74c0fc; }
+.icon-educational { color: #2dce89; }
+
+/* Badge styles */
+.badge {
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+}
+
+/* Category count */
+.category-count {
+    margin-left: auto;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Main content adjustment */
+.main-content {
+    margin-left: 60px;
+    min-height: 100vh;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+}
+
+@media (min-width: 1024px) {
+    .sidebar:hover + .main-content {
+        margin-left: 200px;
+    }
+}
+
+/* Remove tooltip when sidebar is expanded */
+.sidebar:hover .sidebar-item::after {
+    display: none;
+}
+
+/* Tooltip */
+.sidebar-item {
+    position: relative;
+}
+
+.sidebar-item::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    margin-left: 10px;
+}
+
+.sidebar-item:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Input Fields */
+.input-field {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    background: var(--navy-700);
+    border: 1px solid var(--navy-600);
+    border-radius: 0.75rem;
+    color: white;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+/* Buttons */
+.btn-primary {
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(90deg, #4169E1, #60A5FA);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 0.75rem;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(90deg, #3158D0, #4F94F9);
+}
+
+.btn-secondary {
+    padding: 0.75rem 1.5rem;
+    background: var(--navy-700);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 0.75rem;
+    transition: all 0.2s ease;
+    outline: none;
+    ring: 2px solid var(--navy-500);
+    ring-offset: 2px;
+    ring-offset-color: var(--navy-800);
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(0.25rem);
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 48rem;
+    padding: 1.5rem;
+    background: var(--navy-800);
+    border-radius: 1rem;
+    shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--navy-700);
+}
+
+.modal-body {
+    padding: 0.75rem 0;
+}
+
+.modal-close {
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+    color: white;
+}
+
+/* Toast Notifications */
+.toast {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background: var(--navy-800);
+    border-radius: 0.75rem;
+    shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-out;
+    animation: slide-up 0.3s ease-out;
+}
+
+.toast.fade-out {
+    opacity: 0;
+    transform: translateY(1rem);
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.toast-success {
+    background: var(--green-500);
+    color: white;
+}
+
+.toast-error {
+    background: var(--red-500);
+    color: white;
+}
+
+.toast-info {
+    background: var(--blue-500);
+    color: white;
+}
+
+@keyframes slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(1rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Search Suggestions */
+.search-container {
+    position: relative;
+}
+
+/* Search Bar */
+.search-bar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 48rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(42, 47, 76, 0.5);
+    background: rgba(26, 31, 60, 0.8);
+}
+
+.search-input {
+    background: transparent;
+    border: none;
+    color: white;
+    width: 100%;
+    outline: none;
+    font-size: 0.875rem;
+}
+
+.search-input::placeholder {
+    color: rgba(156, 163, 175, 1);
+}
+
+.search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 0.25rem;
+    background: var(--navy-800);
+    border: 1px solid var(--navy-700);
+    border-radius: 0.75rem;
+    shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    z-index: 50;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.suggestion-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.2s ease;
+}
+
+.suggestion-item:hover {
+    background: var(--navy-700);
+}
+
+/* User Menu */
+.user-menu-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+}
+
+.user-menu-button:hover {
+    background-color: rgba(30, 41, 59, 1);
+}
+
+.user-avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+    border: 2px solid #3b82f6;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background: var(--navy-800);
+    transform: translate(100%);
+    transition: transform 0.3s ease-in-out;
+    duration: 300ms;
+}
+
+.mobile-menu.hidden {
+    transform: translate(0);
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo img {
+    width: 2rem;
+    height: 2rem;
+}
+
+.logo span {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.logo .games-text {
+    color: #60a5fa;
+}
+
+/* 侧边栏 */
+.sidebar-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 彩色图标 */
+.icon-action { color: #FF6B6B; }
+.icon-puzzle { color: #9775FA; }
+.icon-racing { color: #FF8F5E; }
+.icon-sports { color: #63E6BE; }
+.icon-shooter { color: #FFD43B; }
+.icon-cards { color: #a66ffe; }
+.icon-strategy { color: #74C0FC; }
+.icon-educational { color: #2dce89; }
+
+/* 游戏卡片 */
+.game-card {
+    background: var(--navy-800);
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 2px solid var(--blue-500);
+}
+
+.game-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background: linear-gradient(to bottom, #4169E1, #60A5FA);
+}
+
+.game-info {
+    padding: 0.75rem;
+}
+
+.game-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.game-description {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.75rem;
+}
+
+/* 标签和徽章 */
+.play-count {
+    padding: 0.25rem 0.75rem;
+    background: var(--green-600);
+    color: white;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* 模态框 */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(0.25rem);
+    z-index: 50;
+}
+
+.modal-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 48rem;
+    padding: 1.5rem;
+    background: var(--navy-800);
+    border-radius: 1rem;
+    shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 50;
+}
+
+/* 页脚 */
+.footer {
+    margin-top: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(10, 15, 44, 0.85);
+    backdrop-filter: blur(10px);
+    padding: 2rem 1rem;
+}
+
+.sidebar:hover {
+    width: 72px;
+}
+
+.sidebar .sidebar-label, 
+.sidebar .category-label {
+    display: none;
+}
+
+/* Category count badges */
+.category-count {
+    margin-left: 0.5rem;
+    font-size: 0.875rem;
+    color: #60a5fa;
+}
+
+/* 主内容区域 */
+.welcome-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.welcome-subtitle {
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+/* 游戏网格布局 */
+.games-grid {
+    display: grid;
+    grid-cols: 1;
+    gap: 1.5rem;
+    padding: 1.5rem;
+}
+
+/* 用户菜单 */
+.user-menu-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+}
+
+.user-avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+    border: 2px solid #3b82f6;
+}
+
+/* Badge styles */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 0.75rem;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    color: white;
+}
+
+.badge.new { background: #2dce89; }
+.badge.fav { background: #ff5c8d; }
+
+/* Main content area */
+.main-content {
+    margin-left: 72px;
+    min-height: 100vh;
+    padding: 1.5rem;
+}
+
+/* 新游戏卡片占位符 */
+.new-game-placeholder {
+    background: linear-gradient(135deg, rgba(65, 105, 225, 0.3) 0%, rgba(96, 165, 250, 0.3) 100%);
+    border-radius: 1rem;
+    aspect-ratio: 1;
+    transition: transform 0.3s ease;
+}
+
+.new-game-placeholder:hover {
+    transform: translateY(-4px);
+}
+
+/* 游戏统计数据 */
+.game-stats {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.875rem;
+}
+
+/* 欢迎区域 */
+.welcome-section {
+    padding: 48px 0;
+}
+
+.welcome-section h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.welcome-section p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.125rem;
+}
+
+/* 游戏卡片样式 */
+.game-card {
+    background: linear-gradient(135deg, #4169E1 0%, #60A5FA 100%);
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.game-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.game-card .play-now {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    padding: 8px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.game-card .play-now:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* 侧边栏样式 */
+.sidebar-link {
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.3s ease;
+}
+
+.sidebar-link:hover,
+.sidebar-link.active {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-link i {
+    font-size: 24px;
+}
+
+/* SVG Icons */
+.sidebar-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+} 
+ 
+:root {
+    --navy-900: #0a0f2c;  /* 更深的背景色 */
+    --navy-800: #1a1f3c;  /* 次要背景色 */
+    --navy-700: #2a2f4c;  /* 边框和悬停状态 */
+    --navy-600: #475569;
+    --navy-500: #64748b;
+    --navy-400: #94a3b8;
+    --navy-300: #cbd5e1;
+    --navy-200: #e2e8f0;
+    --navy-100: #f1f5f9;
+    --navy-50: #f8fafc;
+    --blue-gradient-start: #4169E1;  /* 渐变起始色 */
+    --blue-gradient-end: #00BFFF;    /* 渐变结束色 */
+}
+
+/* Base Styles */
+body {
+    background-color: var(--navy-900);
+    color: var(--navy-100);
+    min-height: 100vh;
+}
+
+.page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-wrapper {
+    flex: 1;
+    display: flex;
+    margin-top: 4rem;
+}
+
+/* Header Styles */
+.header-bg {
+    background: linear-gradient(to right, #0d1130, #121c44, #152a69);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.search-bar {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    backdrop-filter: blur(4px);
+}
+
+/* Sidebar Styles */
+.sidebar {
+    width: 60px;
+    position: fixed;
+    left: 0;
+    top: 4rem;
+    bottom: 0;
+    background: linear-gradient(180deg, #0d1130 0%, #121c44 100%);
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 40;
+}
+
+.sidebar-content {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    padding: 0.5rem 0;
+}
+
+.sidebar-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 60px;
+    padding: 0.5rem 0;
+    position: relative;
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+
+.sidebar-icon {
+    width: 20px;
+    height: 20px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+}
+
+.sidebar-item {
+    font-size: 11px;
+    letter-spacing: -0.2px;
+    text-align: center;
+    white-space: nowrap;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.category-label {
+    padding: 0.75rem 0;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.badge {
+    position: absolute;
+    right: 8px;
+    top: 8px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    font-size: 10px;
+    font-weight: 500;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.badge.new {
+    background: #2dce89;
+}
+
+.category-count {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Hover Effects */
+.sidebar-link:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-link:hover .sidebar-item {
+    color: #ffffff;
+}
+
+/* Scrollbar */
+.sidebar::-webkit-scrollbar,
+.sidebar-content::-webkit-scrollbar {
+    width: 4px;
+}
+
+.sidebar::-webkit-scrollbar-track,
+.sidebar-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.sidebar::-webkit-scrollbar-thumb,
+.sidebar-content::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+/* Icon Colors */
+.icon-home { color: #4f86f7; }
+.icon-favorites { color: #ff5c8d; }
+.icon-recent { color: #3da4e3; }
+.icon-new { color: #2dce89; }
+.icon-action { color: #ff6b6b; }
+.icon-puzzle { color: #9775fa; }
+.icon-racing { color: #ff8f5e; }
+.icon-sports { color: #63e6be; }
+.icon-shooter { color: #ffd43b; }
+.icon-cards { color: #a66ffe; }
+.icon-strategy { color: #74c0fc; }
+.icon-educational { color: #2dce89; }
+
+/* Main Content Adjustment */
+.main-content {
+    margin-left: 60px;
+    min-height: 100vh;
+    padding: 1.5rem;
+    background: #070d2a;
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        transform: translateX(-100%);
+    }
+    
+    .sidebar.active {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+}
+
+/* Game Cards */
+.game-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    background: linear-gradient(135deg, #4169E1 0%, #60A5FA 100%);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    min-height: 280px;
+}
+
+.game-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.game-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.game-card-content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 1rem;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+}
+
+/* Single Page Fix */
+.single-page-fix .content-wrapper {
+    margin-top: 0;
+}
+
+.single-page-fix .sidebar,
+.single-page-fix .header-bg {
+    display: none;
+}
+
+/* Toast Notification */
+#toast {
+    transition: opacity 0.3s ease-in-out;
+}
+
+#toast.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Header */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--navy-900);
+}
+
+/* Remove hover expansion */
+.sidebar:hover {
+    width: 60px;
+}
+
+/* 链接样式 */
+.sidebar-link {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.75rem 0.75rem;
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.2s ease;
+    height: 48px;
+}
+
+/* Remove hover effects that change layout */
+.sidebar:hover .sidebar-link {
+    flex-direction: column;
+    height: 72px;
+}
+
+.sidebar:hover .sidebar-icon {
+    margin-top: 0.25rem;
+}
+
+.sidebar:hover .sidebar-item {
+    text-align: center;
+    font-size: 11px;
+    margin-top: 0.25rem;
+}
+
+/* 徽章样式 */
+.sidebar-link .ml-auto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 16px;
+    height: 4px;
+    padding: 0 0.25rem;
+    border-radius: 9999px;
+    font-size: 10px;
+    font-weight: 500;
+    margin-left: auto;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.sidebar:hover .sidebar-link .ml-auto {
+    position: absolute;
+    right: 0.25rem;
+    top: 0.25rem;
+}
+
+/* 图标颜色 */
+.icon-home { color: #4f86f7; }
+.icon-favorites { color: #ff5c8d; }
+.icon-recent { color: #3da4e3; }
+.icon-new { color: #2dce89; }
+.icon-action { color: #ff6b6b; }
+.icon-puzzle { color: #9775fa; }
+.icon-racing { color: #ff8f5e; }
+.icon-sports { color: #63e6be; }
+.icon-shooter { color: #ffd43b; }
+.icon-cards { color: #a66ffe; }
+.icon-strategy { color: #74c0fc; }
+.icon-educational { color: #2dce89; }
+
+/* Badge styles */
+.badge {
+    min-width: 20px;
+    height: 20px;
+    padding: 0 6px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+}
+
+/* Category count */
+.category-count {
+    margin-left: auto;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+/* Main content adjustment */
+.main-content {
+    margin-left: 60px;
+    min-height: 100vh;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+}
+
+@media (min-width: 1024px) {
+    .sidebar:hover + .main-content {
+        margin-left: 200px;
+    }
+}
+
+/* Remove tooltip when sidebar is expanded */
+.sidebar:hover .sidebar-item::after {
+    display: none;
+}
+
+/* Tooltip */
+.sidebar-item {
+    position: relative;
+}
+
+.sidebar-item::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    margin-left: 10px;
+}
+
+.sidebar-item:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Input Fields */
+.input-field {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    background: var(--navy-700);
+    border: 1px solid var(--navy-600);
+    border-radius: 0.75rem;
+    color: white;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+/* Buttons */
+.btn-primary {
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(90deg, #4169E1, #60A5FA);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 0.75rem;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(90deg, #3158D0, #4F94F9);
+}
+
+.btn-secondary {
+    padding: 0.75rem 1.5rem;
+    background: var(--navy-700);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 0.75rem;
+    transition: all 0.2s ease;
+    outline: none;
+    ring: 2px solid var(--navy-500);
+    ring-offset: 2px;
+    ring-offset-color: var(--navy-800);
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(0.25rem);
+}
+
+.modal-content {
+    width: 100%;
+    max-width: 48rem;
+    padding: 1.5rem;
+    background: var(--navy-800);
+    border-radius: 1rem;
+    shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid var(--navy-700);
+}
+
+.modal-body {
+    padding: 0.75rem 0;
+}
+
+.modal-close {
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.2s ease;
+}
+
+.modal-close:hover {
+    color: white;
+}
+
+/* Toast Notifications */
+.toast {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    background: var(--navy-800);
+    border-radius: 0.75rem;
+    shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-out;
+    animation: slide-up 0.3s ease-out;
+}
+
+.toast.fade-out {
+    opacity: 0;
+    transform: translateY(1rem);
+}
+
+.toast-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.toast-success {
+    background: var(--green-500);
+    color: white;
+}
+
+.toast-error {
+    background: var(--red-500);
+    color: white;
+}
+
+.toast-info {
+    background: var(--blue-500);
+    color: white;
+}
+
+@keyframes slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(1rem);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Search Suggestions */
+.search-container {
+    position: relative;
+}
+
+/* Search Bar */
+.search-bar {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 48rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(42, 47, 76, 0.5);
+    background: rgba(26, 31, 60, 0.8);
+}
+
+.search-input {
+    background: transparent;
+    border: none;
+    color: white;
+    width: 100%;
+    outline: none;
+    font-size: 0.875rem;
+}
+
+.search-input::placeholder {
+    color: rgba(156, 163, 175, 1);
+}
+
+.search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 0.25rem;
+    background: var(--navy-800);
+    border: 1px solid var(--navy-700);
+    border-radius: 0.75rem;
+    shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    z-index: 50;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.suggestion-item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    transition: all 0.2s ease;
+}
+
+.suggestion-item:hover {
+    background: var(--navy-700);
+}
+
+/* User Menu */
+.user-menu-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+}
+
+.user-menu-button:hover {
+    background-color: rgba(30, 41, 59, 1);
+}
+
+.user-avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+    border: 2px solid #3b82f6;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    background: var(--navy-800);
+    transform: translate(100%);
+    transition: transform 0.3s ease-in-out;
+    duration: 300ms;
+}
+
+.mobile-menu.hidden {
+    transform: translate(0);
+}
+
+/* Logo */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.logo img {
+    width: 2rem;
+    height: 2rem;
+}
+
+.logo span {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.logo .games-text {
+    color: #60a5fa;
+}
+
+/* 侧边栏 */
+.sidebar-icon {
+    width: 1.25rem;
+    height: 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 彩色图标 */
+.icon-action { color: #FF6B6B; }
+.icon-puzzle { color: #9775FA; }
+.icon-racing { color: #FF8F5E; }
+.icon-sports { color: #63E6BE; }
+.icon-shooter { color: #FFD43B; }
+.icon-cards { color: #a66ffe; }
+.icon-strategy { color: #74C0FC; }
+.icon-educational { color: #2dce89; }
+
+/* 游戏卡片 */
+.game-card {
+    background: var(--navy-800);
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 2px solid var(--blue-500);
+}
+
+.game-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    background: linear-gradient(to bottom, #4169E1, #60A5FA);
+}
+
+.game-info {
+    padding: 0.75rem;
+}
+
+.game-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.game-description {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.75rem;
+}
+
+/* 标签和徽章 */
+.play-count {
+    padding: 0.25rem 0.75rem;
+    background: var(--green-600);
+    color: white;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* 模态框 */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(0.25rem);
+    z-index: 50;
+}
+
+.modal-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 48rem;
+    padding: 1.5rem;
+    background: var(--navy-800);
+    border-radius: 1rem;
+    shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 50;
+}
+
+/* 页脚 */
+.footer {
+    margin-top: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(10, 15, 44, 0.85);
+    backdrop-filter: blur(10px);
+    padding: 2rem 1rem;
+}
+
+.sidebar:hover {
+    width: 72px;
+}
+
+.sidebar .sidebar-label, 
+.sidebar .category-label {
+    display: none;
+}
+
+/* Category count badges */
+.category-count {
+    margin-left: 0.5rem;
+    font-size: 0.875rem;
+    color: #60a5fa;
+}
+
+/* 主内容区域 */
+.welcome-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+.welcome-subtitle {
+    font-size: 1.125rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+/* 游戏网格布局 */
+.games-grid {
+    display: grid;
+    grid-cols: 1;
+    gap: 1.5rem;
+    padding: 1.5rem;
+}
+
+/* 用户菜单 */
+.user-menu-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+}
+
+.user-avatar {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+    border: 2px solid #3b82f6;
+}
+
+/* Badge styles */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 0.75rem;
+    border-radius: 9999px;
+    font-size: 12px;
+    font-weight: 500;
+    text-align: center;
+    color: white;
+}
+
+.badge.new { background: #2dce89; }
+.badge.fav { background: #ff5c8d; }
+
+/* Main content area */
+.main-content {
+    margin-left: 72px;
+    min-height: 100vh;
+    padding: 1.5rem;
+}
+
+/* 新游戏卡片占位符 */
+.new-game-placeholder {
+    background: linear-gradient(135deg, rgba(65, 105, 225, 0.3) 0%, rgba(96, 165, 250, 0.3) 100%);
+    border-radius: 1rem;
+    aspect-ratio: 1;
+    transition: transform 0.3s ease;
+}
+
+.new-game-placeholder:hover {
+    transform: translateY(-4px);
+}
+
+/* 游戏统计数据 */
+.game-stats {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.875rem;
+}
+
+/* 欢迎区域 */
+.welcome-section {
+    padding: 48px 0;
+}
+
+.welcome-section h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.welcome-section p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.125rem;
+}
+
+/* 游戏卡片样式 */
+.game-card {
+    background: linear-gradient(135deg, #4169E1 0%, #60A5FA 100%);
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.game-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.game-card .play-now {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    padding: 8px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.game-card .play-now:hover {
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* 侧边栏样式 */
+.sidebar-link {
+    height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.3s ease;
+}
+
+.sidebar-link:hover,
+.sidebar-link.active {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-link i {
+    font-size: 24px;
+}
+
+/* SVG Icons */
+.sidebar-icon svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+} 
+ 

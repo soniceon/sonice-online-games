@@ -1,540 +1,388 @@
-// User Authentication System
-class Auth {
-    constructor() {
-        this.users = JSON.parse(localStorage.getItem('users') || '[]');
-        this.currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
-        this.tokenExpiryTime = localStorage.getItem('tokenExpiryTime') || null;
+// Auth System for Sonice Games
+const auth = {
+    currentUser: null,
+    
+    // Get user from localStorage on page load
+    init() {
+        const storedUser = localStorage.getItem('currentUser');
+        if (storedUser) {
+            this.currentUser = JSON.parse(storedUser);
+            this.updateUIForUser();
+        }
+    },
+    
+    // Register a new user
+    register(username, email, password) {
+        // In a real system, you would make an API call here
+        // For this demo, we'll just store in localStorage
+        const userId = 'user_' + Date.now();
+        const newUser = {
+            id: userId,
+            username,
+            email,
+            password, // Note: In a real system, never store plain text passwords
+            createdAt: new Date().toISOString()
+        };
         
-        // Check if token is expired
-        if (this.tokenExpiryTime && new Date().getTime() > parseInt(this.tokenExpiryTime)) {
-            this.logout(false); // Silent logout if token expired
+        // Store user info
+        localStorage.setItem(`user_${email}`, JSON.stringify(newUser));
+        
+        // Log in the user after registration
+        this.login(email, password);
+        
+        return newUser;
+    },
+    
+    // Log in a user
+    login(email, password) {
+        // In a real system, you would validate with an API call
+        const storedUser = localStorage.getItem(`user_${email}`);
+        
+        if (!storedUser) {
+            throw new Error('User not found');
         }
         
-        this.initAuthUI();
-        this.updateAuthState();
-    }
-
-    initAuthUI() {
-        // Add auth modal to body
-        const authModal = document.createElement('div');
-        authModal.id = 'auth-modal';
-        authModal.className = 'fixed inset-0 bg-black/50 flex items-center justify-center hidden z-50';
-        authModal.innerHTML = `
-            <div class="bg-dark-lighter rounded-lg p-6 w-full max-w-md">
+        const user = JSON.parse(storedUser);
+        
+        if (user.password !== password) {
+            throw new Error('Invalid password');
+        }
+        
+        // Store current user
+        this.currentUser = {
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            createdAt: user.createdAt
+        };
+        
+        localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+        
+        // Update UI
+        this.updateUIForUser();
+        
+        // Dispatch auth state change event
+        const event = new CustomEvent('authStateChanged', { detail: { user: this.currentUser } });
+        document.dispatchEvent(event);
+        
+        return this.currentUser;
+    },
+    
+    // Log out the current user
+    logout() {
+        this.currentUser = null;
+        localStorage.removeItem('currentUser');
+        
+        // Update UI
+        this.updateUIForUser();
+        
+        // Dispatch auth state change event
+        const event = new CustomEvent('authStateChanged', { detail: { user: null } });
+        document.dispatchEvent(event);
+    },
+    
+    // Update UI elements based on authentication state
+    updateUIForUser() {
+        const loginButton = document.getElementById('loginButton');
+        const authButtonText = document.querySelector('#loginButton span');
+        const authButtonAvatar = document.querySelector('#loginButton img');
+        
+        if (loginButton) {
+            if (this.currentUser) {
+                // User is logged in
+                if (authButtonText) {
+                    authButtonText.textContent = this.currentUser.username;
+                }
+                
+                if (authButtonAvatar) {
+                    // You could use user's profile pic if available
+                    authButtonAvatar.src = '/assets/images/default-avatar.png';
+                }
+                
+                // Add dropdown menu functionality
+                loginButton.addEventListener('click', this.toggleUserMenu);
+            } else {
+                // User is logged out
+                if (authButtonText) {
+                    authButtonText.textContent = 'Login';
+                }
+                
+                if (authButtonAvatar) {
+                    authButtonAvatar.src = '/assets/images/default-avatar.png';
+                }
+                
+                // Remove dropdown menu and add login modal functionality
+                loginButton.removeEventListener('click', this.toggleUserMenu);
+                loginButton.addEventListener('click', this.showAuthModal);
+            }
+        }
+    },
+    
+    // Toggle user dropdown menu
+    toggleUserMenu(e) {
+        const userMenu = document.getElementById('userMenu');
+        if (!userMenu) {
+            // Create the menu if it doesn't exist
+            const menu = document.createElement('div');
+            menu.id = 'userMenu';
+            menu.className = 'user-menu absolute top-full right-0 mt-2 w-48 bg-dark-lighter rounded-lg shadow-lg py-2 z-50';
+            menu.innerHTML = `
+                <a href="/profile.html" class="block px-4 py-2 text-white hover:bg-gray-700">Profile</a>
+                <a href="/favorites.html" class="block px-4 py-2 text-white hover:bg-gray-700">Favorites</a>
+                <a href="/recent.html" class="block px-4 py-2 text-white hover:bg-gray-700">Recently Played</a>
+                <div class="border-t border-gray-700 my-1"></div>
+                <a href="#" id="logoutButton" class="block px-4 py-2 text-white hover:bg-gray-700">Logout</a>
+            `;
+            document.body.appendChild(menu);
+            
+            // Position the menu
+            const buttonRect = e.currentTarget.getBoundingClientRect();
+            menu.style.top = (buttonRect.bottom + window.scrollY) + 'px';
+            menu.style.right = (window.innerWidth - buttonRect.right) + 'px';
+            
+            // Add logout functionality
+            document.getElementById('logoutButton').addEventListener('click', (e) => {
+                e.preventDefault();
+                auth.logout();
+                menu.remove();
+            });
+            
+            // Close menu when clicking outside
+            const closeMenu = (e) => {
+                if (!menu.contains(e.target) && e.target !== document.getElementById('loginButton')) {
+                    menu.remove();
+                    document.removeEventListener('click', closeMenu);
+                }
+            };
+            
+            // Use setTimeout to avoid immediate closure
+            setTimeout(() => {
+                document.addEventListener('click', closeMenu);
+            }, 0);
+        } else {
+            userMenu.remove();
+        }
+    },
+    
+    // Show authentication modal
+    showAuthModal() {
+        const modal = document.createElement('div');
+        modal.id = 'authModal';
+        modal.className = 'fixed inset-0 flex items-center justify-center z-50';
+        modal.innerHTML = `
+            <div class="fixed inset-0 bg-black opacity-70"></div>
+            <div class="auth-modal bg-dark-lighter rounded-lg shadow-xl p-6 max-w-md w-full relative z-10">
                 <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-xl font-bold text-white" id="auth-modal-title">Sign In</h2>
-                    <button class="text-gray-400 hover:text-white" id="close-auth-modal">
+                    <h2 class="text-xl font-bold text-white">Sign In</h2>
+                    <button id="closeAuthModal" class="text-gray-400 hover:text-white">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
                     </button>
                 </div>
-                <div id="auth-forms">
-                    <!-- Login Form -->
-                    <form id="login-form" class="space-y-4">
-                        <div>
-                            <label class="block text-gray-400 mb-2" for="login-email">Email</label>
-                            <input type="email" id="login-email" class="w-full px-4 py-2 rounded bg-dark border border-gray-700 text-white focus:outline-none focus:border-purple-primary" required>
-                            <p class="text-red-500 text-sm mt-1 hidden" id="login-email-error"></p>
+                
+                <div class="auth-tabs flex border-b border-gray-700 mb-4">
+                    <button id="loginTab" class="active-tab flex-1 py-2 text-center text-white font-medium">Login</button>
+                    <button id="registerTab" class="flex-1 py-2 text-center text-gray-400 font-medium">Register</button>
                         </div>
-                        <div>
-                            <label class="block text-gray-400 mb-2" for="login-password">Password</label>
-                            <input type="password" id="login-password" class="w-full px-4 py-2 rounded bg-dark border border-gray-700 text-white focus:outline-none focus:border-purple-primary" required>
-                            <p class="text-red-500 text-sm mt-1 hidden" id="login-password-error"></p>
+                
+                <div id="loginForm" class="auth-form">
+                    <div class="mb-4">
+                        <label class="block text-white text-sm font-medium mb-2" for="email">Email</label>
+                        <input id="loginEmail" type="email" class="w-full px-3 py-2 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-primary" placeholder="Enter your email">
+                        <p id="loginEmailError" class="text-red-500 text-xs mt-1 hidden">Invalid email format</p>
                         </div>
-                        <div class="flex items-center">
-                            <input type="checkbox" id="remember-me" class="mr-2 bg-dark border border-gray-700 rounded">
-                            <label for="remember-me" class="text-gray-400">Remember me for 30 days</label>
+                    
+                    <div class="mb-6">
+                        <label class="block text-white text-sm font-medium mb-2" for="password">Password</label>
+                        <input id="loginPassword" type="password" class="w-full px-3 py-2 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-primary" placeholder="Enter your password">
+                        <p id="loginPasswordError" class="text-red-500 text-xs mt-1 hidden">Password is required</p>
                         </div>
-                        <button type="submit" class="w-full py-2 px-4 bg-purple-primary text-white rounded hover:bg-purple-600 transition-colors">
+                    
+                    <p id="loginError" class="text-red-500 text-sm mb-4 hidden">Invalid email or password</p>
+                    
+                    <button id="loginSubmit" class="w-full bg-blue-primary hover:bg-blue-secondary text-white font-medium py-2 px-4 rounded-lg transition-colors">
                             Sign In
                         </button>
-                        <div class="flex justify-between">
-                            <button type="button" class="text-blue-primary hover:text-blue-secondary text-sm" id="show-forgot-password">Forgot Password?</button>
-                            <button type="button" class="text-blue-primary hover:text-blue-secondary text-sm" id="show-register">Register</button>
                         </div>
-                    </form>
-
-                    <!-- Register Form -->
-                    <form id="register-form" class="space-y-4 hidden">
-                        <div>
-                            <label class="block text-gray-400 mb-2" for="register-username">Username</label>
-                            <input type="text" id="register-username" class="w-full px-4 py-2 rounded bg-dark border border-gray-700 text-white focus:outline-none focus:border-purple-primary" required>
-                            <p class="text-red-500 text-sm mt-1 hidden" id="register-username-error"></p>
+                
+                <div id="registerForm" class="auth-form hidden">
+                    <div class="mb-4">
+                        <label class="block text-white text-sm font-medium mb-2" for="username">Username</label>
+                        <input id="registerUsername" type="text" class="w-full px-3 py-2 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-primary" placeholder="Choose a username">
+                        <p id="registerUsernameError" class="text-red-500 text-xs mt-1 hidden">Username is required</p>
                         </div>
-                        <div>
-                            <label class="block text-gray-400 mb-2" for="register-email">Email</label>
-                            <input type="email" id="register-email" class="w-full px-4 py-2 rounded bg-dark border border-gray-700 text-white focus:outline-none focus:border-purple-primary" required>
-                            <p class="text-red-500 text-sm mt-1 hidden" id="register-email-error"></p>
-                        </div>
-                        <div>
-                            <label class="block text-gray-400 mb-2" for="register-password">Password</label>
-                            <input type="password" id="register-password" class="w-full px-4 py-2 rounded bg-dark border border-gray-700 text-white focus:outline-none focus:border-purple-primary" required>
-                            <p class="text-red-500 text-sm mt-1 hidden" id="register-password-error"></p>
-                            <div class="mt-1 text-xs text-gray-500">
-                                Password must be at least 8 characters and include a number and a special character
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-gray-400 mb-2" for="register-confirm-password">Confirm Password</label>
-                            <input type="password" id="register-confirm-password" class="w-full px-4 py-2 rounded bg-dark border border-gray-700 text-white focus:outline-none focus:border-purple-primary" required>
-                            <p class="text-red-500 text-sm mt-1 hidden" id="register-confirm-password-error"></p>
-                        </div>
-                        <button type="submit" class="w-full py-2 px-4 bg-purple-primary text-white rounded hover:bg-purple-600 transition-colors">
-                            Register
-                        </button>
-                        <p class="text-center text-gray-400">
-                            Already have an account? 
-                            <button type="button" class="text-blue-primary hover:text-blue-secondary" id="show-login">Sign In</button>
-                        </p>
-                    </form>
                     
-                    <!-- Forgot Password Form -->
-                    <form id="forgot-password-form" class="space-y-4 hidden">
-                        <div>
-                            <label class="block text-gray-400 mb-2" for="forgot-email">Email</label>
-                            <input type="email" id="forgot-email" class="w-full px-4 py-2 rounded bg-dark border border-gray-700 text-white focus:outline-none focus:border-purple-primary" required>
-                            <p class="text-red-500 text-sm mt-1 hidden" id="forgot-email-error"></p>
+                    <div class="mb-4">
+                        <label class="block text-white text-sm font-medium mb-2" for="email">Email</label>
+                        <input id="registerEmail" type="email" class="w-full px-3 py-2 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-primary" placeholder="Enter your email">
+                        <p id="registerEmailError" class="text-red-500 text-xs mt-1 hidden">Invalid email format</p>
                         </div>
-                        <button type="submit" class="w-full py-2 px-4 bg-purple-primary text-white rounded hover:bg-purple-600 transition-colors">
-                            Reset Password
-                        </button>
-                        <p class="text-center text-gray-400">
-                            Remember your password? 
-                            <button type="button" class="text-blue-primary hover:text-blue-secondary" id="back-to-login">Back to Sign In</button>
-                        </p>
-                    </form>
                     
-                    <!-- Reset Password Form -->
-                    <form id="reset-password-form" class="space-y-4 hidden">
-                        <div>
-                            <label class="block text-gray-400 mb-2" for="security-question">Security Question: What is your favorite color?</label>
-                            <input type="text" id="security-answer" class="w-full px-4 py-2 rounded bg-dark border border-gray-700 text-white focus:outline-none focus:border-purple-primary" required>
-                            <p class="text-red-500 text-sm mt-1 hidden" id="security-answer-error"></p>
+                    <div class="mb-6">
+                        <label class="block text-white text-sm font-medium mb-2" for="password">Password</label>
+                        <input id="registerPassword" type="password" class="w-full px-3 py-2 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-primary" placeholder="Create a password">
+                        <p id="registerPasswordError" class="text-red-500 text-xs mt-1 hidden">Password must be at least 6 characters</p>
                         </div>
-                        <div>
-                            <label class="block text-gray-400 mb-2" for="new-password">New Password</label>
-                            <input type="password" id="new-password" class="w-full px-4 py-2 rounded bg-dark border border-gray-700 text-white focus:outline-none focus:border-purple-primary" required>
-                            <p class="text-red-500 text-sm mt-1 hidden" id="new-password-error"></p>
-                            <div class="mt-1 text-xs text-gray-500">
-                                Password must be at least 8 characters and include a number and a special character
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-gray-400 mb-2" for="confirm-new-password">Confirm New Password</label>
-                            <input type="password" id="confirm-new-password" class="w-full px-4 py-2 rounded bg-dark border border-gray-700 text-white focus:outline-none focus:border-purple-primary" required>
-                            <p class="text-red-500 text-sm mt-1 hidden" id="confirm-new-password-error"></p>
-                        </div>
-                        <input type="hidden" id="reset-email">
-                        <button type="submit" class="w-full py-2 px-4 bg-purple-primary text-white rounded hover:bg-purple-600 transition-colors">
-                            Reset Password
+                    
+                    <p id="registerError" class="text-red-500 text-sm mb-4 hidden">Error creating account</p>
+                    
+                    <button id="registerSubmit" class="w-full bg-blue-primary hover:bg-blue-secondary text-white font-medium py-2 px-4 rounded-lg transition-colors">
+                        Create Account
                         </button>
-                    </form>
                 </div>
             </div>
         `;
-        document.body.appendChild(authModal);
-
-        // Event Listeners
-        document.getElementById('close-auth-modal').addEventListener('click', () => this.hideAuthModal());
-        document.getElementById('show-register').addEventListener('click', () => this.toggleAuthForms('register'));
-        document.getElementById('show-login').addEventListener('click', () => this.toggleAuthForms('login'));
-        document.getElementById('show-forgot-password').addEventListener('click', () => this.toggleAuthForms('forgot-password'));
-        document.getElementById('back-to-login').addEventListener('click', () => this.toggleAuthForms('login'));
-        document.getElementById('login-form').addEventListener('submit', (e) => this.handleLogin(e));
-        document.getElementById('register-form').addEventListener('submit', (e) => this.handleRegister(e));
-        document.getElementById('forgot-password-form').addEventListener('submit', (e) => this.handleForgotPassword(e));
-        document.getElementById('reset-password-form').addEventListener('submit', (e) => this.handleResetPassword(e));
-    }
-
-    showAuthModal() {
-        document.getElementById('auth-modal').classList.remove('hidden');
-    }
-
-    hideAuthModal() {
-        document.getElementById('auth-modal').classList.add('hidden');
-    }
-
-    toggleAuthForms(form) {
-        const loginForm = document.getElementById('login-form');
-        const registerForm = document.getElementById('register-form');
-        const forgotPasswordForm = document.getElementById('forgot-password-form');
-        const resetPasswordForm = document.getElementById('reset-password-form');
-        const modalTitle = document.getElementById('auth-modal-title');
-
-        // Hide all forms first
-        loginForm.classList.add('hidden');
-        registerForm.classList.add('hidden');
-        forgotPasswordForm.classList.add('hidden');
-        resetPasswordForm.classList.add('hidden');
         
-        // Show selected form
-        if (form === 'register') {
-            registerForm.classList.remove('hidden');
-            modalTitle.textContent = 'Register';
-        } else if (form === 'forgot-password') {
-            forgotPasswordForm.classList.remove('hidden');
-            modalTitle.textContent = 'Forgot Password';
-        } else if (form === 'reset-password') {
-            resetPasswordForm.classList.remove('hidden');
-            modalTitle.textContent = 'Reset Password';
-        } else {
-            loginForm.classList.remove('hidden');
-            modalTitle.textContent = 'Sign In';
-        }
-    }
-    
-    // Simple password hash function (for demo purposes)
-    // In production, use a proper hashing library or API
-    hashPassword(password) {
-        // This is a simple hash for demonstration
-        // Do NOT use this in production!
-        let hash = 0;
-        for (let i = 0; i < password.length; i++) {
-            const char = password.charCodeAt(i);
-            hash = ((hash << 5) - hash) + char;
-            hash = hash & hash; // Convert to 32bit integer
-        }
-        return hash.toString(16); // Convert to hex string
-    }
-    
-    validateEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(email);
-    }
-    
-    validatePassword(password) {
-        // At least 8 characters, 1 number, and 1 special character
-        const re = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,}$/;
-        return re.test(password);
-    }
-    
-    validateUsername(username) {
-        // At least 3 characters, only alphanumeric and underscore
-        const re = /^[a-zA-Z0-9_]{3,}$/;
-        return re.test(username);
-    }
-    
-    showFieldError(fieldId, message) {
-        const errorElement = document.getElementById(`${fieldId}-error`);
-        if (errorElement) {
-            errorElement.textContent = message;
-            errorElement.classList.remove('hidden');
-            document.getElementById(fieldId).classList.add('border-red-500');
-        }
-    }
-    
-    clearFieldError(fieldId) {
-        const errorElement = document.getElementById(`${fieldId}-error`);
-        if (errorElement) {
-            errorElement.textContent = '';
-            errorElement.classList.add('hidden');
-            document.getElementById(fieldId).classList.remove('border-red-500');
-        }
-    }
-    
-    clearAllErrors(formId) {
-        const errorElements = document.querySelectorAll(`#${formId} [id$="-error"]`);
-        errorElements.forEach(el => {
-            el.textContent = '';
-            el.classList.add('hidden');
+        document.body.appendChild(modal);
+
+        // Modal interactions
+        document.getElementById('closeAuthModal').addEventListener('click', () => {
+            modal.remove();
         });
         
-        const inputElements = document.querySelectorAll(`#${formId} input`);
-        inputElements.forEach(el => {
-            el.classList.remove('border-red-500');
-        });
-    }
-
-    handleLogin(e) {
-        e.preventDefault();
-        this.clearAllErrors('login-form');
-        
-        const email = document.getElementById('login-email').value;
-        const password = document.getElementById('login-password').value;
-        const rememberMe = document.getElementById('remember-me').checked;
-        
-        // Validate inputs
-        let isValid = true;
-        
-        if (!this.validateEmail(email)) {
-            this.showFieldError('login-email', 'Please enter a valid email address');
-            isValid = false;
-        }
-        
-        if (!password) {
-            this.showFieldError('login-password', 'Please enter your password');
-            isValid = false;
-        }
-        
-        if (!isValid) return;
-        
-        // Hash password for comparison
-        const hashedPassword = this.hashPassword(password);
-        
-        const user = this.users.find(u => u.email === email && u.password === hashedPassword);
-        if (user) {
-            this.currentUser = Object.assign({}, user, { password: undefined }); // Don't store password in memory
-            localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
-            
-            // Set token expiry time
-            const expiryTime = rememberMe 
-                ? new Date().getTime() + (30 * 24 * 60 * 60 * 1000) // 30 days
-                : new Date().getTime() + (24 * 60 * 60 * 1000); // 24 hours
-            
-            localStorage.setItem('tokenExpiryTime', expiryTime.toString());
-            this.tokenExpiryTime = expiryTime;
-            
-            this.hideAuthModal();
-            this.updateAuthState();
-            this.showToast('Successfully signed in!');
-            
-            // Dispatch event for other components
-            document.dispatchEvent(new CustomEvent('authStateChanged'));
-        } else {
-            this.showToast('Invalid email or password', 'error');
-        }
-    }
-
-    handleRegister(e) {
-        e.preventDefault();
-        this.clearAllErrors('register-form');
-        
-        const username = document.getElementById('register-username').value;
-        const email = document.getElementById('register-email').value;
-        const password = document.getElementById('register-password').value;
-        const confirmPassword = document.getElementById('register-confirm-password').value;
-        
-        // Validate inputs
-        let isValid = true;
-        
-        if (!this.validateUsername(username)) {
-            this.showFieldError('register-username', 'Username must be at least 3 characters and only contain letters, numbers, and underscores');
-            isValid = false;
-        }
-        
-        if (!this.validateEmail(email)) {
-            this.showFieldError('register-email', 'Please enter a valid email address');
-            isValid = false;
-        }
-        
-        if (this.users.some(u => u.email === email)) {
-            this.showFieldError('register-email', 'This email is already registered');
-            isValid = false;
-        }
-        
-        if (!this.validatePassword(password)) {
-            this.showFieldError('register-password', 'Password must be at least 8 characters with at least one number and one special character');
-            isValid = false;
-        }
-        
-        if (password !== confirmPassword) {
-            this.showFieldError('register-confirm-password', 'Passwords do not match');
-            isValid = false;
-        }
-        
-        if (!isValid) return;
-        
-        // Hash password before storing
-        const hashedPassword = this.hashPassword(password);
-
-        const newUser = {
-            id: Date.now().toString(),
-            username,
-            email,
-            password: hashedPassword,
-            securityAnswer: '', // Will be set during password reset
-            createdAt: new Date().toISOString(),
-            profilePicture: null,
-            preferences: {
-                theme: 'dark',
-                notifications: true
+        // Close modal when clicking outside
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.remove();
             }
-        };
-
-        this.users.push(newUser);
-        localStorage.setItem('users', JSON.stringify(this.users));
+        });
         
-        this.currentUser = Object.assign({}, newUser, { password: undefined }); // Don't store password in memory
-        localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+        // Tab switching
+        document.getElementById('loginTab').addEventListener('click', () => {
+            document.getElementById('loginTab').classList.add('active-tab');
+            document.getElementById('loginTab').classList.remove('text-gray-400');
+            document.getElementById('loginTab').classList.add('text-white');
+            
+            document.getElementById('registerTab').classList.remove('active-tab');
+            document.getElementById('registerTab').classList.add('text-gray-400');
+            document.getElementById('registerTab').classList.remove('text-white');
+            
+            document.getElementById('loginForm').classList.remove('hidden');
+            document.getElementById('registerForm').classList.add('hidden');
+        });
         
-        // Set token expiry time (24 hours by default)
-        const expiryTime = new Date().getTime() + (24 * 60 * 60 * 1000);
-        localStorage.setItem('tokenExpiryTime', expiryTime.toString());
-        this.tokenExpiryTime = expiryTime;
+        document.getElementById('registerTab').addEventListener('click', () => {
+            document.getElementById('registerTab').classList.add('active-tab');
+            document.getElementById('registerTab').classList.remove('text-gray-400');
+            document.getElementById('registerTab').classList.add('text-white');
+            
+            document.getElementById('loginTab').classList.remove('active-tab');
+            document.getElementById('loginTab').classList.add('text-gray-400');
+            document.getElementById('loginTab').classList.remove('text-white');
+            
+            document.getElementById('registerForm').classList.remove('hidden');
+            document.getElementById('loginForm').classList.add('hidden');
+        });
         
-        this.hideAuthModal();
-        this.updateAuthState();
-        this.showToast('Successfully registered!');
+        // Login form submission
+        document.getElementById('loginSubmit').addEventListener('click', () => {
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            
+            // Reset errors
+            document.getElementById('loginEmailError').classList.add('hidden');
+            document.getElementById('loginPasswordError').classList.add('hidden');
+            document.getElementById('loginError').classList.add('hidden');
         
-        // Dispatch event for other components
-        document.dispatchEvent(new CustomEvent('authStateChanged'));
-    }
-    
-    handleForgotPassword(e) {
-        e.preventDefault();
-        this.clearAllErrors('forgot-password-form');
-        
-        const email = document.getElementById('forgot-email').value;
-        
-        if (!this.validateEmail(email)) {
-            this.showFieldError('forgot-email', 'Please enter a valid email address');
-            return;
-        }
-        
-        const user = this.users.find(u => u.email === email);
-        if (!user) {
-            this.showFieldError('forgot-email', 'No account found with this email address');
-            return;
-        }
-        
-        // Set up reset password form
-        document.getElementById('reset-email').value = email;
-        this.toggleAuthForms('reset-password');
-    }
-    
-    handleResetPassword(e) {
-        e.preventDefault();
-        this.clearAllErrors('reset-password-form');
-        
-        const securityAnswer = document.getElementById('security-answer').value;
-        const newPassword = document.getElementById('new-password').value;
-        const confirmNewPassword = document.getElementById('confirm-new-password').value;
-        const email = document.getElementById('reset-email').value;
-        
-        // Find user
-        const userIndex = this.users.findIndex(u => u.email === email);
-        if (userIndex === -1) {
-            this.showToast('User not found', 'error');
-            return;
-        }
-        
+            // Validate
         let isValid = true;
         
-        // Simple security check (in real app, this would be more sophisticated)
-        if (!securityAnswer) {
-            this.showFieldError('security-answer', 'Please provide an answer');
+            if (!email || !email.includes('@')) {
+                document.getElementById('loginEmailError').classList.remove('hidden');
             isValid = false;
         }
         
-        if (!this.validatePassword(newPassword)) {
-            this.showFieldError('new-password', 'Password must be at least 8 characters with at least one number and one special character');
+            if (!password) {
+                document.getElementById('loginPasswordError').classList.remove('hidden');
             isValid = false;
         }
         
-        if (newPassword !== confirmNewPassword) {
-            this.showFieldError('confirm-new-password', 'Passwords do not match');
+            if (isValid) {
+                try {
+                    auth.login(email, password);
+                    modal.remove();
+                    
+                    // Show success notification
+                    showToast('Successfully logged in!');
+                } catch (error) {
+                    document.getElementById('loginError').textContent = error.message;
+                    document.getElementById('loginError').classList.remove('hidden');
+                }
+            }
+        });
+        
+        // Register form submission
+        document.getElementById('registerSubmit').addEventListener('click', () => {
+            const username = document.getElementById('registerUsername').value.trim();
+            const email = document.getElementById('registerEmail').value.trim();
+            const password = document.getElementById('registerPassword').value;
+            
+            // Reset errors
+            document.getElementById('registerUsernameError').classList.add('hidden');
+            document.getElementById('registerEmailError').classList.add('hidden');
+            document.getElementById('registerPasswordError').classList.add('hidden');
+            document.getElementById('registerError').classList.add('hidden');
+            
+            // Validate
+        let isValid = true;
+        
+            if (!username) {
+                document.getElementById('registerUsernameError').classList.remove('hidden');
             isValid = false;
         }
         
-        if (!isValid) return;
+            if (!email || !email.includes('@')) {
+                document.getElementById('registerEmailError').classList.remove('hidden');
+            isValid = false;
+        }
         
-        // Update user in the array
-        const user = this.users[userIndex];
+            if (!password || password.length < 6) {
+                document.getElementById('registerPasswordError').classList.remove('hidden');
+            isValid = false;
+        }
         
-        // If this is the first time setting security answer
-        if (!user.securityAnswer) {
-            user.securityAnswer = securityAnswer;
-        } 
-        // Check security answer (case insensitive)
-        else if (user.securityAnswer.toLowerCase() !== securityAnswer.toLowerCase()) {
-            this.showFieldError('security-answer', 'Incorrect answer');
+            if (isValid) {
+                try {
+                    // Check if email already exists
+                    if (localStorage.getItem(`user_${email}`)) {
+                        document.getElementById('registerError').textContent = 'Email already in use';
+                        document.getElementById('registerError').classList.remove('hidden');
             return;
         }
         
-        // Update password
-        user.password = this.hashPassword(newPassword);
-        
-        // Update users array
-        this.users[userIndex] = user;
-        localStorage.setItem('users', JSON.stringify(this.users));
-        
-        this.showToast('Password successfully reset!');
-        this.toggleAuthForms('login');
+                    auth.register(username, email, password);
+                    modal.remove();
+                    
+                    // Show success notification
+                    showToast('Account created successfully!');
+                } catch (error) {
+                    document.getElementById('registerError').textContent = error.message;
+                    document.getElementById('registerError').classList.remove('hidden');
+                }
+            }
+        });
     }
+};
 
-    updateAuthState() {
-        const authButton = document.querySelector('.user-auth-button');
-        if (!authButton) return;
-        
-        if (this.currentUser) {
-            authButton.innerHTML = `
-                <div class="relative group">
-                    <button class="flex items-center space-x-2 text-white">
-                        <span class="w-8 h-8 bg-purple-primary rounded-full flex items-center justify-center text-sm font-medium">
-                            ${this.currentUser.username.charAt(0).toUpperCase()}
-                        </span>
-                        <span class="hidden md:block">${this.currentUser.username}</span>
-                        <i class="fas fa-chevron-down text-gray-400 ml-1"></i>
-                    </button>
-                    <div class="absolute right-0 mt-2 w-48 bg-dark-lighter rounded-lg shadow-lg py-2 hidden group-hover:block">
-                        <a href="/profile.html" class="block w-full px-4 py-2 text-left text-gray-400 hover:text-white hover:bg-gray-700">
-                            <i class="fas fa-user mr-2"></i> Profile
-                        </a>
-                        <a href="/settings.html" class="block w-full px-4 py-2 text-left text-gray-400 hover:text-white hover:bg-gray-700">
-                            <i class="fas fa-cog mr-2"></i> Settings
-                        </a>
-                        <button onclick="auth.logout()" class="block w-full px-4 py-2 text-left text-gray-400 hover:text-white hover:bg-gray-700">
-                            <i class="fas fa-sign-out-alt mr-2"></i> Sign Out
-                        </button>
-                    </div>
-                </div>
-            `;
-        } else {
-            authButton.innerHTML = `
-                <button onclick="auth.showAuthModal()" class="flex items-center space-x-2 text-white hover:text-gray-200">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                    </svg>
-                    <span class="hidden md:block">Sign In</span>
-                </button>
-            `;
+// Initialize auth system on page load
+document.addEventListener('DOMContentLoaded', () => {
+    auth.init();
+    
+    // Add styles for auth elements
+    const style = document.createElement('style');
+    style.textContent = `
+        .active-tab {
+            border-bottom: 2px solid #0EA5E9;
+            color: white;
         }
-    }
-
-    logout(showToast = true) {
-        this.currentUser = null;
-        localStorage.removeItem('currentUser');
-        localStorage.removeItem('tokenExpiryTime');
-        this.tokenExpiryTime = null;
-        this.updateAuthState();
-        
-        if (showToast) {
-            this.showToast('Successfully signed out!');
+        .user-menu {
+            background: #1A1B1F;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
         }
-        
-        // Dispatch event for other components
-        document.dispatchEvent(new CustomEvent('authStateChanged'));
-    }
+    `;
+    document.head.appendChild(style);
+});
 
-    showToast(message, type = 'success') {
-        const toastElement = document.getElementById('toast-notification');
-        
-        if (toastElement) {
-            // Use existing toast element
-            toastElement.textContent = message;
-            toastElement.className = `toast ${type}`;
-            toastElement.classList.add('show');
-            
-            setTimeout(() => {
-                toastElement.classList.remove('show');
-            }, 3000);
-        } else {
-            // Create new toast element
-            const toast = document.createElement('div');
-            toast.className = `fixed bottom-4 right-4 px-6 py-3 rounded-lg text-white ${
-                type === 'success' ? 'bg-green-500' : 'bg-red-500'
-            } transition-opacity duration-300`;
-            toast.textContent = message;
-            document.body.appendChild(toast);
-
-            setTimeout(() => {
-                toast.style.opacity = '0';
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        }
-    }
-}
-
-// Initialize auth system
-const auth = new Auth(); 
+// Expose methods globally
+window.auth = auth; 

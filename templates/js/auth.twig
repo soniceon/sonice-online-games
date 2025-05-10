@@ -1,0 +1,289 @@
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // DOM Elements
+    const userMenuButton = document.getElementById('userMenuButton');
+    const userDropdownMenu = document.getElementById('userDropdownMenu');
+    const loginBtn = document.getElementById('loginBtn');
+    const registerBtn = document.getElementById('registerBtn');
+    const loginModal = document.getElementById('loginModal');
+    const registerModal = document.getElementById('registerModal');
+    const switchToRegister = document.getElementById('switchToRegister');
+    const switchToLogin = document.getElementById('switchToLogin');
+    const closeModals = document.querySelectorAll('.close-modal');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const toast = document.getElementById('toast');
+
+    // Toggle user dropdown menu
+    userMenuButton?.addEventListener('click', () => {
+        userDropdownMenu.classList.toggle('hidden');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!userMenuButton?.contains(e.target) && !userDropdownMenu?.contains(e.target)) {
+            userDropdownMenu?.classList.add('hidden');
+        }
+    });
+
+    // Modal Controls
+    loginBtn?.addEventListener('click', () => {
+        loginModal.classList.remove('hidden');
+        userDropdownMenu.classList.add('hidden');
+    });
+
+    registerBtn?.addEventListener('click', () => {
+        registerModal.classList.remove('hidden');
+        userDropdownMenu.classList.add('hidden');
+    });
+
+    switchToRegister?.addEventListener('click', () => {
+        loginModal.classList.add('hidden');
+        registerModal.classList.remove('hidden');
+    });
+
+    switchToLogin?.addEventListener('click', () => {
+        registerModal.classList.add('hidden');
+        loginModal.classList.remove('hidden');
+    });
+
+    closeModals.forEach(button => {
+        button.addEventListener('click', () => {
+            loginModal.classList.add('hidden');
+            registerModal.classList.add('hidden');
+        });
+    });
+
+    // Close modals when clicking outside
+    [loginModal, registerModal].forEach(modal => {
+        modal?.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.add('hidden');
+            }
+        });
+    });
+
+    // Form Submissions
+    loginForm?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(loginForm);
+        
+        try {
+            const response = await fetch('{{ base_url }}/api/auth/login.php', {
+                method: 'POST',
+                body: formData
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok) {
+                showToast('Login successful!', 'success');
+                setTimeout(() => window.location.reload(), 1000);
+            } else {
+                showToast(data.message || 'Login failed. Please try again.', 'error');
+            }
+        } catch (error) {
+            showToast('An error occurred. Please try again.', 'error');
+        }
+    });
+
+    registerForm?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(registerForm);
+        
+        if (formData.get('password') !== formData.get('confirm_password')) {
+            showToast('Passwords do not match!', 'error');
+            return;
+        }
+        
+        try {
+            const response = await fetch('{{ base_url }}/api/auth/register.php', {
+                method: 'POST',
+                body: formData
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok) {
+                showToast('Registration successful! Please login.', 'success');
+                setTimeout(() => {
+                    registerModal.classList.add('hidden');
+                    loginModal.classList.remove('hidden');
+                }, 1000);
+            } else {
+                showToast(data.message || 'Registration failed. Please try again.', 'error');
+            }
+        } catch (error) {
+            showToast('An error occurred. Please try again.', 'error');
+        }
+    });
+
+    // Toast Notification
+    function showToast(message, type = 'info') {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = 'fixed top-6 right-6 z-[9999] px-4 py-2 rounded shadow-lg';
+        
+        switch (type) {
+            case 'success':
+                toast.classList.add('bg-green-500');
+                break;
+            case 'error':
+                toast.classList.add('bg-red-500');
+                break;
+            default:
+                toast.classList.add('bg-blue-500');
+        }
+        
+        toast.classList.remove('hidden');
+        
+        setTimeout(() => {
+            toast.classList.add('hidden');
+        }, 3000);
+    }
+});
+</script> 
+document.addEventListener('DOMContentLoaded', function() {
+    // DOM Elements
+    const userMenuButton = document.getElementById('userMenuButton');
+    const userDropdownMenu = document.getElementById('userDropdownMenu');
+    const loginBtn = document.getElementById('loginBtn');
+    const registerBtn = document.getElementById('registerBtn');
+    const loginModal = document.getElementById('loginModal');
+    const registerModal = document.getElementById('registerModal');
+    const switchToRegister = document.getElementById('switchToRegister');
+    const switchToLogin = document.getElementById('switchToLogin');
+    const closeModals = document.querySelectorAll('.close-modal');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const toast = document.getElementById('toast');
+
+    // Toggle user dropdown menu
+    userMenuButton?.addEventListener('click', () => {
+        userDropdownMenu.classList.toggle('hidden');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!userMenuButton?.contains(e.target) && !userDropdownMenu?.contains(e.target)) {
+            userDropdownMenu?.classList.add('hidden');
+        }
+    });
+
+    // Modal Controls
+    loginBtn?.addEventListener('click', () => {
+        loginModal.classList.remove('hidden');
+        userDropdownMenu.classList.add('hidden');
+    });
+
+    registerBtn?.addEventListener('click', () => {
+        registerModal.classList.remove('hidden');
+        userDropdownMenu.classList.add('hidden');
+    });
+
+    switchToRegister?.addEventListener('click', () => {
+        loginModal.classList.add('hidden');
+        registerModal.classList.remove('hidden');
+    });
+
+    switchToLogin?.addEventListener('click', () => {
+        registerModal.classList.add('hidden');
+        loginModal.classList.remove('hidden');
+    });
+
+    closeModals.forEach(button => {
+        button.addEventListener('click', () => {
+            loginModal.classList.add('hidden');
+            registerModal.classList.add('hidden');
+        });
+    });
+
+    // Close modals when clicking outside
+    [loginModal, registerModal].forEach(modal => {
+        modal?.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.add('hidden');
+            }
+        });
+    });
+
+    // Form Submissions
+    loginForm?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(loginForm);
+        
+        try {
+            const response = await fetch('{{ base_url }}/api/auth/login.php', {
+                method: 'POST',
+                body: formData
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok) {
+                showToast('Login successful!', 'success');
+                setTimeout(() => window.location.reload(), 1000);
+            } else {
+                showToast(data.message || 'Login failed. Please try again.', 'error');
+            }
+        } catch (error) {
+            showToast('An error occurred. Please try again.', 'error');
+        }
+    });
+
+    registerForm?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(registerForm);
+        
+        if (formData.get('password') !== formData.get('confirm_password')) {
+            showToast('Passwords do not match!', 'error');
+            return;
+        }
+        
+        try {
+            const response = await fetch('{{ base_url }}/api/auth/register.php', {
+                method: 'POST',
+                body: formData
+            });
+            
+            const data = await response.json();
+            
+            if (response.ok) {
+                showToast('Registration successful! Please login.', 'success');
+                setTimeout(() => {
+                    registerModal.classList.add('hidden');
+                    loginModal.classList.remove('hidden');
+                }, 1000);
+            } else {
+                showToast(data.message || 'Registration failed. Please try again.', 'error');
+            }
+        } catch (error) {
+            showToast('An error occurred. Please try again.', 'error');
+        }
+    });
+
+    // Toast Notification
+    function showToast(message, type = 'info') {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = 'fixed top-6 right-6 z-[9999] px-4 py-2 rounded shadow-lg';
+        
+        switch (type) {
+            case 'success':
+                toast.classList.add('bg-green-500');
+                break;
+            case 'error':
+                toast.classList.add('bg-red-500');
+                break;
+            default:
+                toast.classList.add('bg-blue-500');
+        }
+        
+        toast.classList.remove('hidden');
+        
+        setTimeout(() => {
+            toast.classList.add('hidden');
+        }, 3000);
+    }
+});
+</script> 

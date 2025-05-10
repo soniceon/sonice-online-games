@@ -1,67 +1,25 @@
 {
-  "categories": {
-    "Idle": {
-      "name": "Idle",
-      "slug": "idle",
-      "icon": "⏳",
-      "count": 69,
-      "url": "/category/idle.html"
+  "count": 4,
+  "categories": [
+    {
+      "name": "Puzzle",
+      "slug": "puzzle",
+      "count": 4
     },
-    "Clicker": {
-      "name": "Clicker",
-      "slug": "clicker",
-      "icon": "🖱️",
-      "count": 52,
-      "url": "/category/clicker.html"
+    {
+      "name": "Arcade",
+      "slug": "arcade",
+      "count": 3
     },
-    "Other": {
-      "name": "Other",
-      "slug": "other",
-      "icon": "🎲",
-      "count": 91,
-      "url": "/category/other.html"
+    {
+      "name": "Card",
+      "slug": "card",
+      "count": 1
     },
-    "Tycoon": {
-      "name": "Tycoon",
-      "slug": "tycoon",
-      "icon": "💰",
-      "count": 7,
-      "url": "/category/tycoon.html"
-    },
-    "Shooting": {
-      "name": "Shooting",
-      "slug": "shooting",
-      "icon": "🎯",
-      "count": 1,
-      "url": "/category/shooting.html"
-    },
-    "Mining": {
-      "name": "Mining",
-      "slug": "mining",
-      "icon": "⛏️",
-      "count": 10,
-      "url": "/category/mining.html"
-    },
-    "Racing": {
-      "name": "Racing",
-      "slug": "racing",
-      "icon": "🏎️",
-      "count": 2,
-      "url": "/category/racing.html"
-    },
-    "Merge": {
-      "name": "Merge",
-      "slug": "merge",
-      "icon": "🔄",
-      "count": 8,
-      "url": "/category/merge.html"
-    },
-    "<span class=": {
-      "name": "<span class=",
-      "slug": "span-class",
-      "icon": "🎮",
-      "count": 1,
-      "url": "/category/span-class.html"
+    {
+      "name": "Strategy",
+      "slug": "strategy",
+      "count": 2
     }
-  }
+  ]
 }

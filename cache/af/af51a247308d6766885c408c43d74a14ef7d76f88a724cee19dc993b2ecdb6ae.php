@@ -1,0 +1,232 @@
+<?php
+
+use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Extension\CoreExtension;
+use Twig\Extension\SandboxExtension;
+use Twig\Markup;
+use Twig\Sandbox\SecurityError;
+use Twig\Sandbox\SecurityNotAllowedTagError;
+use Twig\Sandbox\SecurityNotAllowedFilterError;
+use Twig\Sandbox\SecurityNotAllowedFunctionError;
+use Twig\Source;
+use Twig\Template;
+
+/* partials/icons.twig */
+class __TwigTemplate_0062224ff10a39c0f5795eff52a92efa012bea7aceb1e8b3d73ae8914039d447 extends Template
+{
+    private $source;
+    private $macros = [];
+
+    public function __construct(Environment $env)
+    {
+        parent::__construct($env);
+
+        $this->source = $this->getSourceContext();
+
+        $this->parent = false;
+
+        $this->blocks = [
+        ];
+    }
+
+    protected function doDisplay(array $context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        // line 34
+        yield " 
+";
+        // line 67
+        yield " ";
+        return; yield '';
+    }
+
+    // line 35
+    public function macro_icon($__name__ = null, ...$__varargs__)
+    {
+        $macros = $this->macros;
+        $context = $this->env->mergeGlobals([
+            "name" => $__name__,
+            "varargs" => $__varargs__,
+        ]);
+
+        $blocks = [];
+
+        return ('' === $tmp = \Twig\Extension\CoreExtension::captureOutput((function () use (&$context, $macros, $blocks) {
+            // line 36
+            yield "    ";
+            if ((($context["name"] ?? null) == "home")) {
+                // line 37
+                yield "        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M4 21V9l8-6 8 6v12h-6v-7h-4v7H4Z\"/></svg>
+    ";
+            } elseif ((            // line 38
+($context["name"] ?? null) == "favorites")) {
+                // line 39
+                yield "        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"m12 21.35-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35Z\"/></svg>
+    ";
+            } elseif ((            // line 40
+($context["name"] ?? null) == "recent")) {
+                // line 41
+                yield "        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z\"/></svg>
+    ";
+            } elseif ((            // line 42
+($context["name"] ?? null) == "new")) {
+                // line 43
+                yield "        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z\"/></svg>
+    ";
+            } elseif ((            // line 44
+($context["name"] ?? null) == "action")) {
+                // line 45
+                yield "        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M13.5 10a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3ZM21 16v5l-4-4H7l-4 4v-5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2ZM15.033 8a3 3 0 1 0-6 0 3 3 0 0 0 6 0ZM9 8a4.977 4.977 0 0 1 1.856-3.868l.301.522a1 1 0 0 0 1.732-1l-.301-.522A5 5 0 0 1 18 8c0 2.763-2.237 5-5 5s-5-2.237-5-5Z\"/></svg>
+    ";
+            } elseif ((            // line 46
+($context["name"] ?? null) == "racing")) {
+                // line 47
+                yield "        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M19 17h2v.5a2.5 2.5 0 0 1-2.5 2.5 2.5 2.5 0 0 1-2.5-2.5v-.5h2v.5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5V17Zm-9.5 2.5a2.5 2.5 0 0 1-2.5-2.5v-.5h2v.5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-.5h2v.5a2.5 2.5 0 0 1-2.5 2.5ZM22 14v3h-2.253a2.47 2.47 0 0 0-.496-1H18V7.27L15.53 5h-4.97L8 7.27V16h-1.197a2.47 2.47 0 0 0-.496 1H4v-3H2V4h11v2h2V4h5v10h2Zm-10 1.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v.5h1v-.5Zm4 0a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v.5h1v-.5Zm-6-7.41L11.03 7h4.03L16 8.09V14h-6V8.09Z\"/></svg>
+    ";
+            } elseif ((            // line 48
+($context["name"] ?? null) == "sports")) {
+                // line 49
+                yield "        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M19.071 4.929A9.97 9.97 0 0 0 12 2a9.97 9.97 0 0 0-7.071 2.929A9.97 9.97 0 0 0 2 12a9.97 9.97 0 0 0 2.929 7.071A9.97 9.97 0 0 0 12 22a9.97 9.97 0 0 0 7.071-2.929A9.97 9.97 0 0 0 22 12a9.97 9.97 0 0 0-2.929-7.071ZM12 20c-2.144 0-4.145-.667-5.787-1.806L17.194 7.206A7.973 7.973 0 0 1 20 12a8 8 0 0 1-8 8ZM4 12a7.969 7.969 0 0 1 1.806-5.787l10.988 10.988A7.977 7.977 0 0 1 12 20a8 8 0 0 1-8-8Z\"/></svg>
+    ";
+            } elseif ((            // line 50
+($context["name"] ?? null) == "shooter")) {
+                // line 51
+                yield "        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M8 5h2v2H8V5Zm-2 4V7h2v2H6Zm10-4h2v2h-2V5Zm2 4V7h-2v2h2Zm-4 5h2v-2h-2v-2h-4v2H8v2h2v2h4v-2Zm1-9h-2v2h2V5ZM7 5h2v2H7V5Zm12 0h3v14H2V5h3v2H4v2h1v8h14v-8h1V7h-1V5Z\"/></svg>
+    ";
+            } elseif ((            // line 52
+($context["name"] ?? null) == "cards")) {
+                // line 53
+                yield "        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M21.47 4.35 20.13 3.79V12.82L22.56 6.96c.62-1.82-.06-3.78-1.09-4.61zM1.97 8.05l6.93 6.9c5.04-5.46 9.33-8.24 12.04-9.06-1.97-.24-4.33.32-6.83 1.68L11.14 5.65c-1.85-1.84-4.26-2.32-6.28-1.87-1.37.31-2.34 1.22-2.89 2.27zm7.7 7.78.97.97.9-.92-.9-.92-.97.87zM4.56 4.31c-.39.39-.39 1.02 0 1.41L6.3 7.45c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L5.97 4.31c-.39-.38-1.02-.38-1.41 0z\"/></svg>
+    ";
+            } elseif ((            // line 54
+($context["name"] ?? null) == "puzzle")) {
+                // line 55
+                yield "        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M20.5 11H19V7c0-1.1-.9-2-2-2h-4V3.5a2.5 2.5 0 0 0-5 0V5H4c-1.1 0-1.99.9-1.99 2v3.8H3.5c1.49 0 2.7 1.21 2.7 2.7s-1.21 2.7-2.7 2.7H2V20c0 1.1.9 2 2 2h3.8v-1.5c0-1.49 1.21-2.7 2.7-2.7s2.7 1.21 2.7 2.7V22H17c1.1 0 2-.9 2-2v-4h1.5a2.5 2.5 0 0 0 0-5z\"/></svg>
+    ";
+            } elseif ((            // line 56
+($context["name"] ?? null) == "strategy")) {
+                // line 57
+                yield "        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M8.5 13.5l2.5 3 3.5-4.5 4.5 6H5m16 1V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2Z\"/></svg>
+    ";
+            } elseif ((            // line 58
+($context["name"] ?? null) == "mining")) {
+                // line 59
+                yield "        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M15.75 19.13c-.83.83-1.55 1.67-2.25 2.5-.7-.83-1.42-1.67-2.25-2.5-2.04-2.04-4.5-3.15-6.38-4.8C3.1 12.89 2 11.38 2 9c0-1.25.87-2.19 2-3.25 2.82.38 5.34 1.5 8 3.25 2.66-1.75 5.18-2.87 8-3.25 1.13 1.06 2 2 2 3.25 0 2.38-1.1 3.89-2.88 5.33a18.78 18.78 0 0 1-3.37 2.8m.25-7.76-.5.5 2.5 2.5.5-.5a4.39 4.39 0 0 0 .85-3.95c-.38.17-.83.05-1.17-.3-.34-.33-.51-.79-.3-1.16a4.39 4.39 0 0 0-3.95.84L12 10.44l1.06 1.06 1.38-1.38a1.44 1.44 0 0 1 2 2l-.44.25z\"/></svg>
+    ";
+            } elseif ((            // line 60
+($context["name"] ?? null) == "idle")) {
+                // line 61
+                yield "        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7h1.5Z\"/></svg>
+    ";
+            } elseif ((            // line 62
+($context["name"] ?? null) == "clicker")) {
+                // line 63
+                yield "        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M8.5 4.5a1 1 0 0 0-1 1H5.5a3 3 0 1 1 6 0H9.5a1 1 0 0 0-1-1zM10 9V6.5a3.5 3.5 0 1 0-7 0V9a3 3 0 0 0-3 3v7a3 3 0 0 0 3 3h7a3 3 0 0 0 3-3v-7a3 3 0 0 0-3-3zm1 10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v7zm9.83-13.83-3.5-3.5-1.42 1.42L17.33 5.5l-4.17 4.17a1 1 0 0 0 0 1.41l1.59 1.59c.39.39 1.02.39 1.41 0l4.17-4.17 1.42 1.42-3.5 3.5 1.42 1.41 5.5-5.5-1.42-1.41z\"/></svg>
+    ";
+            } elseif ((            // line 64
+($context["name"] ?? null) == "simulation")) {
+                // line 65
+                yield "        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M1 2h10v2H3v8h2V6h2v6h2V8h2v10h2v-3h2v3h2v-5h2v5h2v2H1v-2h2V2h10v2h-2v4h-2V4h-2v4h-2V4H3v4H1V2zm14 8h2V8h-2v2zm-4-4V4h-2v2h2zm8 0h2V4h-2v2zm-4 8h2v-2h-2v2zm4-4h2v-2h-2v2z\"/></svg>
+    ";
+            }
+            return; yield '';
+        })())) ? '' : new Markup($tmp, $this->env->getCharset());
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getTemplateName()
+    {
+        return "partials/icons.twig";
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function isTraitable()
+    {
+        return false;
+    }
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function getDebugInfo()
+    {
+        return array (  131 => 65,  129 => 64,  126 => 63,  124 => 62,  121 => 61,  119 => 60,  116 => 59,  114 => 58,  111 => 57,  109 => 56,  106 => 55,  104 => 54,  101 => 53,  99 => 52,  96 => 51,  94 => 50,  91 => 49,  89 => 48,  86 => 47,  84 => 46,  81 => 45,  79 => 44,  76 => 43,  74 => 42,  71 => 41,  69 => 40,  66 => 39,  64 => 38,  61 => 37,  58 => 36,  46 => 35,  41 => 67,  38 => 34,);
+    }
+
+    public function getSourceContext()
+    {
+        return new Source("{# SVG Icons Library #}
+{% macro icon(name) %}
+    {% if name == 'home' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M4 21V9l8-6 8 6v12h-6v-7h-4v7H4Z\"/></svg>
+    {% elseif name == 'favorites' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"m12 21.35-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35Z\"/></svg>
+    {% elseif name == 'recent' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z\"/></svg>
+    {% elseif name == 'new' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z\"/></svg>
+    {% elseif name == 'action' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M13.5 10a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3ZM21 16v5l-4-4H7l-4 4v-5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2ZM15.033 8a3 3 0 1 0-6 0 3 3 0 0 0 6 0ZM9 8a4.977 4.977 0 0 1 1.856-3.868l.301.522a1 1 0 0 0 1.732-1l-.301-.522A5 5 0 0 1 18 8c0 2.763-2.237 5-5 5s-5-2.237-5-5Z\"/></svg>
+    {% elseif name == 'racing' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M19 17h2v.5a2.5 2.5 0 0 1-2.5 2.5 2.5 2.5 0 0 1-2.5-2.5v-.5h2v.5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5V17Zm-9.5 2.5a2.5 2.5 0 0 1-2.5-2.5v-.5h2v.5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-.5h2v.5a2.5 2.5 0 0 1-2.5 2.5ZM22 14v3h-2.253a2.47 2.47 0 0 0-.496-1H18V7.27L15.53 5h-4.97L8 7.27V16h-1.197a2.47 2.47 0 0 0-.496 1H4v-3H2V4h11v2h2V4h5v10h2Zm-10 1.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v.5h1v-.5Zm4 0a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v.5h1v-.5Zm-6-7.41L11.03 7h4.03L16 8.09V14h-6V8.09Z\"/></svg>
+    {% elseif name == 'sports' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M19.071 4.929A9.97 9.97 0 0 0 12 2a9.97 9.97 0 0 0-7.071 2.929A9.97 9.97 0 0 0 2 12a9.97 9.97 0 0 0 2.929 7.071A9.97 9.97 0 0 0 12 22a9.97 9.97 0 0 0 7.071-2.929A9.97 9.97 0 0 0 22 12a9.97 9.97 0 0 0-2.929-7.071ZM12 20c-2.144 0-4.145-.667-5.787-1.806L17.194 7.206A7.973 7.973 0 0 1 20 12a8 8 0 0 1-8 8ZM4 12a7.969 7.969 0 0 1 1.806-5.787l10.988 10.988A7.977 7.977 0 0 1 12 20a8 8 0 0 1-8-8Z\"/></svg>
+    {% elseif name == 'shooter' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M8 5h2v2H8V5Zm-2 4V7h2v2H6Zm10-4h2v2h-2V5Zm2 4V7h-2v2h2Zm-4 5h2v-2h-2v-2h-4v2H8v2h2v2h4v-2Zm1-9h-2v2h2V5ZM7 5h2v2H7V5Zm12 0h3v14H2V5h3v2H4v2h1v8h14v-8h1V7h-1V5Z\"/></svg>
+    {% elseif name == 'cards' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M21.47 4.35 20.13 3.79V12.82L22.56 6.96c.62-1.82-.06-3.78-1.09-4.61zM1.97 8.05l6.93 6.9c5.04-5.46 9.33-8.24 12.04-9.06-1.97-.24-4.33.32-6.83 1.68L11.14 5.65c-1.85-1.84-4.26-2.32-6.28-1.87-1.37.31-2.34 1.22-2.89 2.27zm7.7 7.78.97.97.9-.92-.9-.92-.97.87zM4.56 4.31c-.39.39-.39 1.02 0 1.41L6.3 7.45c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L5.97 4.31c-.39-.38-1.02-.38-1.41 0z\"/></svg>
+    {% elseif name == 'puzzle' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M20.5 11H19V7c0-1.1-.9-2-2-2h-4V3.5a2.5 2.5 0 0 0-5 0V5H4c-1.1 0-1.99.9-1.99 2v3.8H3.5c1.49 0 2.7 1.21 2.7 2.7s-1.21 2.7-2.7 2.7H2V20c0 1.1.9 2 2 2h3.8v-1.5c0-1.49 1.21-2.7 2.7-2.7s2.7 1.21 2.7 2.7V22H17c1.1 0 2-.9 2-2v-4h1.5a2.5 2.5 0 0 0 0-5z\"/></svg>
+    {% elseif name == 'strategy' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M8.5 13.5l2.5 3 3.5-4.5 4.5 6H5m16 1V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2Z\"/></svg>
+    {% elseif name == 'mining' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M15.75 19.13c-.83.83-1.55 1.67-2.25 2.5-.7-.83-1.42-1.67-2.25-2.5-2.04-2.04-4.5-3.15-6.38-4.8C3.1 12.89 2 11.38 2 9c0-1.25.87-2.19 2-3.25 2.82.38 5.34 1.5 8 3.25 2.66-1.75 5.18-2.87 8-3.25 1.13 1.06 2 2 2 3.25 0 2.38-1.1 3.89-2.88 5.33a18.78 18.78 0 0 1-3.37 2.8m.25-7.76-.5.5 2.5 2.5.5-.5a4.39 4.39 0 0 0 .85-3.95c-.38.17-.83.05-1.17-.3-.34-.33-.51-.79-.3-1.16a4.39 4.39 0 0 0-3.95.84L12 10.44l1.06 1.06 1.38-1.38a1.44 1.44 0 0 1 2 2l-.44.25z\"/></svg>
+    {% elseif name == 'idle' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7h1.5Z\"/></svg>
+    {% elseif name == 'clicker' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M8.5 4.5a1 1 0 0 0-1 1H5.5a3 3 0 1 1 6 0H9.5a1 1 0 0 0-1-1zM10 9V6.5a3.5 3.5 0 1 0-7 0V9a3 3 0 0 0-3 3v7a3 3 0 0 0 3 3h7a3 3 0 0 0 3-3v-7a3 3 0 0 0-3-3zm1 10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v7zm9.83-13.83-3.5-3.5-1.42 1.42L17.33 5.5l-4.17 4.17a1 1 0 0 0 0 1.41l1.59 1.59c.39.39 1.02.39 1.41 0l4.17-4.17 1.42 1.42-3.5 3.5 1.42 1.41 5.5-5.5-1.42-1.41z\"/></svg>
+    {% elseif name == 'simulation' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M1 2h10v2H3v8h2V6h2v6h2V8h2v10h2v-3h2v3h2v-5h2v5h2v2H1v-2h2V2h10v2h-2v4h-2V4h-2v4h-2V4H3v4H1V2zm14 8h2V8h-2v2zm-4-4V4h-2v2h2zm8 0h2V4h-2v2zm-4 8h2v-2h-2v2zm4-4h2v-2h-2v2z\"/></svg>
+    {% endif %}
+{% endmacro %} 
+{% macro icon(name) %}
+    {% if name == 'home' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M4 21V9l8-6 8 6v12h-6v-7h-4v7H4Z\"/></svg>
+    {% elseif name == 'favorites' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"m12 21.35-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35Z\"/></svg>
+    {% elseif name == 'recent' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z\"/></svg>
+    {% elseif name == 'new' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z\"/></svg>
+    {% elseif name == 'action' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M13.5 10a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3ZM21 16v5l-4-4H7l-4 4v-5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2ZM15.033 8a3 3 0 1 0-6 0 3 3 0 0 0 6 0ZM9 8a4.977 4.977 0 0 1 1.856-3.868l.301.522a1 1 0 0 0 1.732-1l-.301-.522A5 5 0 0 1 18 8c0 2.763-2.237 5-5 5s-5-2.237-5-5Z\"/></svg>
+    {% elseif name == 'racing' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M19 17h2v.5a2.5 2.5 0 0 1-2.5 2.5 2.5 2.5 0 0 1-2.5-2.5v-.5h2v.5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5V17Zm-9.5 2.5a2.5 2.5 0 0 1-2.5-2.5v-.5h2v.5a.5.5 0 0 0 .5.5.5.5 0 0 0 .5-.5v-.5h2v.5a2.5 2.5 0 0 1-2.5 2.5ZM22 14v3h-2.253a2.47 2.47 0 0 0-.496-1H18V7.27L15.53 5h-4.97L8 7.27V16h-1.197a2.47 2.47 0 0 0-.496 1H4v-3H2V4h11v2h2V4h5v10h2Zm-10 1.5a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v.5h1v-.5Zm4 0a.5.5 0 0 0-.5-.5.5.5 0 0 0-.5.5v.5h1v-.5Zm-6-7.41L11.03 7h4.03L16 8.09V14h-6V8.09Z\"/></svg>
+    {% elseif name == 'sports' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M19.071 4.929A9.97 9.97 0 0 0 12 2a9.97 9.97 0 0 0-7.071 2.929A9.97 9.97 0 0 0 2 12a9.97 9.97 0 0 0 2.929 7.071A9.97 9.97 0 0 0 12 22a9.97 9.97 0 0 0 7.071-2.929A9.97 9.97 0 0 0 22 12a9.97 9.97 0 0 0-2.929-7.071ZM12 20c-2.144 0-4.145-.667-5.787-1.806L17.194 7.206A7.973 7.973 0 0 1 20 12a8 8 0 0 1-8 8ZM4 12a7.969 7.969 0 0 1 1.806-5.787l10.988 10.988A7.977 7.977 0 0 1 12 20a8 8 0 0 1-8-8Z\"/></svg>
+    {% elseif name == 'shooter' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M8 5h2v2H8V5Zm-2 4V7h2v2H6Zm10-4h2v2h-2V5Zm2 4V7h-2v2h2Zm-4 5h2v-2h-2v-2h-4v2H8v2h2v2h4v-2Zm1-9h-2v2h2V5ZM7 5h2v2H7V5Zm12 0h3v14H2V5h3v2H4v2h1v8h14v-8h1V7h-1V5Z\"/></svg>
+    {% elseif name == 'cards' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M21.47 4.35 20.13 3.79V12.82L22.56 6.96c.62-1.82-.06-3.78-1.09-4.61zM1.97 8.05l6.93 6.9c5.04-5.46 9.33-8.24 12.04-9.06-1.97-.24-4.33.32-6.83 1.68L11.14 5.65c-1.85-1.84-4.26-2.32-6.28-1.87-1.37.31-2.34 1.22-2.89 2.27zm7.7 7.78.97.97.9-.92-.9-.92-.97.87zM4.56 4.31c-.39.39-.39 1.02 0 1.41L6.3 7.45c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L5.97 4.31c-.39-.38-1.02-.38-1.41 0z\"/></svg>
+    {% elseif name == 'puzzle' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M20.5 11H19V7c0-1.1-.9-2-2-2h-4V3.5a2.5 2.5 0 0 0-5 0V5H4c-1.1 0-1.99.9-1.99 2v3.8H3.5c1.49 0 2.7 1.21 2.7 2.7s-1.21 2.7-2.7 2.7H2V20c0 1.1.9 2 2 2h3.8v-1.5c0-1.49 1.21-2.7 2.7-2.7s2.7 1.21 2.7 2.7V22H17c1.1 0 2-.9 2-2v-4h1.5a2.5 2.5 0 0 0 0-5z\"/></svg>
+    {% elseif name == 'strategy' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M8.5 13.5l2.5 3 3.5-4.5 4.5 6H5m16 1V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2Z\"/></svg>
+    {% elseif name == 'mining' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M15.75 19.13c-.83.83-1.55 1.67-2.25 2.5-.7-.83-1.42-1.67-2.25-2.5-2.04-2.04-4.5-3.15-6.38-4.8C3.1 12.89 2 11.38 2 9c0-1.25.87-2.19 2-3.25 2.82.38 5.34 1.5 8 3.25 2.66-1.75 5.18-2.87 8-3.25 1.13 1.06 2 2 2 3.25 0 2.38-1.1 3.89-2.88 5.33a18.78 18.78 0 0 1-3.37 2.8m.25-7.76-.5.5 2.5 2.5.5-.5a4.39 4.39 0 0 0 .85-3.95c-.38.17-.83.05-1.17-.3-.34-.33-.51-.79-.3-1.16a4.39 4.39 0 0 0-3.95.84L12 10.44l1.06 1.06 1.38-1.38a1.44 1.44 0 0 1 2 2l-.44.25z\"/></svg>
+    {% elseif name == 'idle' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M12 20a8 8 0 0 0 8-8 8 8 0 0 0-8-8 8 8 0 0 0-8 8 8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10 10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67-.75 1.23L11 13V7h1.5Z\"/></svg>
+    {% elseif name == 'clicker' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M8.5 4.5a1 1 0 0 0-1 1H5.5a3 3 0 1 1 6 0H9.5a1 1 0 0 0-1-1zM10 9V6.5a3.5 3.5 0 1 0-7 0V9a3 3 0 0 0-3 3v7a3 3 0 0 0 3 3h7a3 3 0 0 0 3-3v-7a3 3 0 0 0-3-3zm1 10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-7a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v7zm9.83-13.83-3.5-3.5-1.42 1.42L17.33 5.5l-4.17 4.17a1 1 0 0 0 0 1.41l1.59 1.59c.39.39 1.02.39 1.41 0l4.17-4.17 1.42 1.42-3.5 3.5 1.42 1.41 5.5-5.5-1.42-1.41z\"/></svg>
+    {% elseif name == 'simulation' %}
+        <svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\" width=\"24\" height=\"24\"><path d=\"M1 2h10v2H3v8h2V6h2v6h2V8h2v10h2v-3h2v3h2v-5h2v5h2v2H1v-2h2V2h10v2h-2v4h-2V4h-2v4h-2V4H3v4H1V2zm14 8h2V8h-2v2zm-4-4V4h-2v2h2zm8 0h2V4h-2v2zm-4 8h2v-2h-2v2zm4-4h2v-2h-2v2z\"/></svg>
+    {% endif %}
+{% endmacro %} ", "partials/icons.twig", "C:\\xampp\\htdocs\\sonice-online-games-new\\templates\\partials\\icons.twig");
+    }
+}

@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{game.title}} - Play Free Online Game</title>
+    <meta name="description" content="{{game.description}}">
+    <link rel="icon" type="image/png" href="/assets/images/icons/logo.png">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sonice.online/pages/games/{{game.slug}}.html">
+    <meta property="og:title" content="{{game.title}} - Play Free Online Game">
+    <meta property="og:description" content="{{game.description}}">
+    <meta property="og:image" content="https://sonice.online/assets/images/games/{{game.slug}}-360-240.webp">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://sonice.online/pages/games/{{game.slug}}.html">
+    <meta property="twitter:title" content="{{game.title}} - Play Free Online Game">
+    <meta property="twitter:description" content="{{game.description}}">
+    <meta property="twitter:image" content="https://sonice.online/assets/images/games/{{game.slug}}-360-240.webp">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "{{game.title}}",
+        "description": "{{game.description}}",
+        "image": "https://sonice.online/assets/images/games/{{game.slug}}-360-240.webp",
+        "genre": "{% for category in game.categories %}{{category}}{% if not loop.last %}, {% endif %}{% endfor %}",
+        "url": "https://sonice.online/pages/games/{{game.slug}}.html"
+    }
+    </script>
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- 添加auth.css样式文件引用 -->
+    <link rel="stylesheet" href="/css/auth.css">
+    <!-- 为确保密码控件安全性添加crypto-js引用 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark': '#0F1012',
+                        'dark-lighter': '#1A1B1F',
+                        'blue-primary': '#0EA5E9',
+                        'blue-secondary': '#38BDF8',
+                        'blue-bright': '#7DD3FC',
+                        'purple-primary': '#7C3AED',
+                        'gray-custom': '#2A2B31',
+                        'sidebar-blue': '#152a69',
+                        'sidebar-hover': '#1d3a8f'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: 
+                linear-gradient(135deg, rgba(30, 58, 138, 0.95) 0%, rgba(30, 64, 175, 0.95) 25%, rgba(37, 99, 235, 0.95) 50%, rgba(59, 130, 246, 0.95) 75%, rgba(96, 165, 250, 0.95) 100%),
+                url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239BA3EB' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            color: #fff;
+            min-height: 100vh;
+        }
+        .header-bg {
+            background: linear-gradient(to right, #0d1130, #121c44, #152a69);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .sidebar {
+            width: 64px;
+            background: rgba(0, 43, 135, 0.95);
+            backdrop-filter: blur(12px);
+            position: fixed;
+            top: 64px;
+            left: 0;
+            height: calc(100vh - 64px);
+            transition: width 0.3s ease;
+            overflow: hidden;
+            z-index: 40;
+        }
+        .sidebar:hover {
+            width: 240px;
+        }
+        .sidebar-item {
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+        }
+        .sidebar:hover .sidebar-item {
+            opacity: 1;
+        }
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+        }
+        .sidebar-link:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        .sidebar-icon {
+            min-width: 24px;
+            width: 24px;
+            height: 24px;
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .category-label {
+            padding: 0.75rem 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.4);
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+        .favorite-btn {
+            transition: all 0.2s ease;
+        }
+        .favorite-btn.is-favorite {
+            color: #EF4444;
+        }
+        .favorite-btn:hover {
+            transform: scale(1.1);
+        }
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 12px 16px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        .toast.success {
+            background-color: #10B981;
+        }
+        .toast.error {
+            background-color: #EF4444;
+        }
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* 其他样式从原模板保留 */
+        .search-bar {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .search-bar:focus-within {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        .game-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 1400px;
+        }
+        .game-wrapper {
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            margin: 2rem 0;
+        }
+        .game-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .title-section {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+        .title-section h1 {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 0.5rem;
+            display: inline-block;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, rgba(14, 165, 233, 0.8), rgba(56, 189, 248, 0.8));
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .categories-section {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* 为侧边栏图标添加颜色 */
+        .icon-home svg {
+            fill: #4f86f7;
+        }
+        .icon-favorites svg {
+            fill: #ff5c8d;
+        }
+        .icon-recent svg {
+            fill: #3da4e3;
+        }
+        .icon-new svg {
+            fill: #2dce89;
+        }
+        .icon-action svg {
+            fill: #ff8c3f;
+        }
+        .icon-puzzle svg {
+            fill: #22a1f2;
+        }
+        .icon-racing svg {
+            fill: #e64c66;
+        }
+        .icon-sports svg {
+            fill: #36d399;
+        }
+        .icon-shooter svg {
+            fill: #f6c90e;
+        }
+        .icon-cards svg {
+            fill: #a66ffe;
+        }
+        .icon-strategy svg {
+            fill: #3ac2ff;
+        }
+        
+        /* 更新页脚背景 */
+        .footer {
+            background: linear-gradient(to right, #0d1130, #121c44, #152a69) !important;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header-bg fixed top-0 left-0 right-0 h-16 z-50">
+        <div class="container mx-auto px-4 h-full">
+            <div class="flex items-center justify-between h-full">
+                <!-- Logo -->
+                <a href="/index.html" class="flex items-center space-x-2">
+                    <img src="/assets/images/icons/logo.png" alt="Sonice Games" class="w-8 h-8">
+                    <span class="text-xl font-bold">
+                        <span class="text-white">Sonice</span><span class="text-blue-500 font-bold">.Games</span>
+                    </span>
+                </a>
+
+                <!-- Search Bar -->
+                <div class="flex-1 max-w-2xl mx-8 relative">
+                    <form id="searchForm" action="/pages/search.html" method="get" class="search-bar flex items-center px-4 py-2">
+                        <i class="fas fa-search text-gray-400 mr-2"></i>
+                        <input 
+                            type="text" 
+                            id="searchInput" 
+                            name="q" 
+                            placeholder="Search games..." 
+                            class="bg-transparent w-full text-white focus:outline-none"
+                            autocomplete="off"
+                        >
+                        <button type="submit" class="text-blue-400 hover:text-blue-300">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </form>
+                    <!-- 搜索建议下拉 -->
+                    <div id="searchSuggestions" class="absolute bg-dark-lighter rounded-lg shadow-lg mt-1 w-full max-w-2xl hidden z-50">
+                        <div id="suggestionResults" class="p-2 max-h-80 overflow-y-auto">
+                            <!-- 搜索建议项将动态添加到这里 -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Menu -->
+                <div class="flex items-center space-x-4">
+                    <div class="user-auth-container relative">
+                        <!-- 用户菜单按钮 -->
+                        <button id="userMenuButton" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-700 transition-colors">
+                            <img id="userAvatar" src="/assets/images/user/default-avatar.png" alt="User" class="w-8 h-8 rounded-full">
+                            <span id="userDisplayName" class="text-white">Login</span>
+                            <i class="fas fa-chevron-down text-gray-400"></i>
+                        </button>
+                        
+                        <!-- 用户菜单下拉框 -->
+                        <div id="userDropdownMenu" class="absolute right-0 mt-2 w-48 bg-dark-lighter rounded-lg shadow-lg overflow-hidden z-50 hidden">
+                            <!-- 未登录状态菜单 -->
+                            <div id="guestMenuItems">
+                                <button id="loginBtn" class="w-full text-left px-4 py-2 text-white hover:bg-sidebar-blue transition-colors">
+                                    <i class="fas fa-sign-in-alt mr-2"></i> Login
+                                </button>
+                                <button id="registerBtn" class="w-full text-left px-4 py-2 text-white hover:bg-sidebar-blue transition-colors">
+                                    <i class="fas fa-user-plus mr-2"></i> Register
+                        </button>
+                            </div>
+                            
+                            <!-- 已登录状态菜单 -->
+                            <div id="userMenuItems" class="hidden">
+                                <button id="profileBtn" class="w-full text-left px-4 py-2 text-white hover:bg-sidebar-blue transition-colors">
+                                    <i class="fas fa-user mr-2"></i> My Profile
+                                </button>
+                                <a href="/pages/favorites.html" class="block px-4 py-2 text-white hover:bg-sidebar-blue transition-colors">
+                                    <i class="fas fa-heart mr-2"></i> My Favorites
+                                    <span class="ml-auto bg-purple-primary px-2 py-0.5 rounded-full text-xs text-white favorites-count">0</span>
+                                </a>
+                                <a href="/pages/recent.html" class="block px-4 py-2 text-white hover:bg-sidebar-blue transition-colors">
+                                    <i class="fas fa-history mr-2"></i> Recently Played
+                                </a>
+                                <div class="border-t border-gray-700"></div>
+                                <button id="logoutButton" class="w-full text-left px-4 py-2 text-white hover:bg-red-700 transition-colors">
+                                    <i class="fas fa-sign-out-alt mr-2"></i> Logout
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="content-wrapper" style="margin-top: 104px;">
+        <div class="flex">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <nav class="py-2" role="navigation" aria-label="Main navigation">
+                    <div class="space-y-1">
+                        <a href="/index.html" class="sidebar-link">
+                            <div class="sidebar-icon icon-home">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2L2 9.5V22h20V9.5L12 2zm7 18H5v-9.5l7-5.25 7 5.25V20z"/>
+                                </svg>
+                            </div>
+                            <span class="sidebar-item">Home</span>
+                        </a>
+                        
+                        <a href="/pages/favorites.html" class="sidebar-link">
+                            <div class="sidebar-icon icon-favorites">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                </svg>
+                            </div>
+                            <span class="sidebar-item">Favorites</span>
+                            <span class="ml-auto bg-purple-primary px-2 py-0.5 rounded-full text-xs text-white favorites-count">0</span>
+                        </a>
+                        
+                        <a href="/pages/recent.html" class="sidebar-link">
+                            <div class="sidebar-icon icon-recent">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                                </svg>
+                            </div>
+                            <span class="sidebar-item">Recently Played</span>
+                        </a>
+
+                        <a href="/pages/new-games.html" class="sidebar-link">
+                            <div class="sidebar-icon icon-new">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M20 4v12h-1.34l1.91 1.91A2.01 2.01 0 0022 16V4c0-1.1-.9-2-2-2H4c-1.1 0-1.99.9-1.99 2L2 16c0 1.1.9 2 2 2h11.17l-.83-.83V18H4V6h16v10h-1v2h1zm-7 6l-4 4h3v6h2v-6h3l-4-4z"/>
+                                </svg>
+                            </div>
+                            <span class="sidebar-item">New Games</span>
+                            <span class="ml-auto bg-blue-primary px-2 py-0.5 rounded-full text-xs text-white">12</span>
+                        </a>
+
+                        <div class="py-2">
+                            <div class="category-label">
+                                <span class="sidebar-item">Categories</span>
+                            </div>
+
+                            <a href="/pages/categories/action.html" class="sidebar-link">
+                                <div class="sidebar-icon icon-action">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M21.58 16.09l-1.09-7.66A3.996 3.996 0 0016.53 5H7.47C5.48 5 3.79 6.46 3.51 8.43l-1.09 7.66a2.545 2.545 0 00.62 2.07c.43.46 1.03.73 1.69.73L6 19v1c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-1l1.27-.1c.66 0 1.26-.27 1.69-.73.43-.46.63-1.05.62-1.69z"/>
+                                    </svg>
+                                </div>
+                                <span class="sidebar-item">Action</span>
+                                <span class="ml-auto text-xs text-gray-500">42</span>
+                            </a>
+
+                            <a href="/pages/categories/puzzle.html" class="sidebar-link">
+                                <div class="sidebar-icon icon-puzzle">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M13 4l3 3h4v14H4V4h9zm-5 6H6v3h2v-3zm10 0h-2v3h2v-3zM8 17h8v-3H8v3z"/>
+                                    </svg>
+                                </div>
+                                <span class="sidebar-item">Puzzle</span>
+                                <span class="ml-auto text-xs text-gray-500">35</span>
+                            </a>
+
+                            <a href="/pages/categories/racing.html" class="sidebar-link">
+                                <div class="sidebar-icon icon-racing">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-5h14v5z M7.5 14.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z M16.5 14.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/>
+                                    </svg>
+                                </div>
+                                <span class="sidebar-item">Racing</span>
+                                <span class="ml-auto text-xs text-gray-500">28</span>
+                            </a>
+
+                            <a href="/pages/categories/sports.html" class="sidebar-link">
+                                <div class="sidebar-icon icon-sports">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zM5.23 7.75C6.1 8.62 6.7 9.74 6.91 11H4.07c.15-1.18.56-2.28 1.16-3.25zM4 12c0-.2.01-.4.02-.6h3.1c-.01.2-.02.4-.02.6s.01.4.02.6H4.02c-.01-.2-.02-.4-.02-.6zm.07 1h2.84c-.21 1.26-.81 2.38-1.68 3.25-.6-.97-1.01-2.07-1.16-3.25z"/>
+                                    </svg>
+                                </div>
+                                <span class="sidebar-item">Sports</span>
+                                <span class="ml-auto text-xs text-gray-500">35</span>
+                            </a>
+
+                            <a href="/pages/categories/shooter.html" class="sidebar-link">
+                                <div class="sidebar-icon icon-shooter">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M21 6h-3.17L16 4h-6v2h5.12l1.83 2H21v12H5v-9H3v9c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zM8 14c0 2.76 2.24 5 5 5s5-2.24 5-5-2.24-5-5-5-5 2.24-5 5zm5-3c1.65 0 3 1.35 3 3s-1.35 3-3 3-3-1.35-3-3 1.35-3 3-3zM5 6h3V4H5V1H3v3H0v2h3v3h2z"/>
+                                    </svg>
+                                </div>
+                                <span class="sidebar-item">Shooter</span>
+                                <span class="ml-auto text-xs text-gray-500">24</span>
+                            </a>
+
+                            <a href="/pages/categories/cards.html" class="sidebar-link">
+                                <div class="sidebar-icon icon-cards">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M21.47 4.35l-1.34-.56v9.03l2.43-5.86c.41-1.02-.06-2.19-1.09-2.61zm-19.5 3.7L6.93 20a2.01 2.01 0 002.58 1.06l10.39-4.22c1.02-.41 1.49-1.58 1.09-2.6l-4.96-11.97a2.001 2.001 0 00-2.58-1.06L3.06 5.41a2.003 2.003 0 00-1.09 2.64z"/>
+                                    </svg>
+                                </div>
+                                <span class="sidebar-item">Cards</span>
+                                <span class="ml-auto text-xs text-gray-500">18</span>
+                            </a>
+
+                            <a href="/pages/categories/strategy.html" class="sidebar-link">
+                                <div class="sidebar-icon icon-strategy">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M11 18c0 1.1-.9 2-2 2s-2-.9-2-2 .9-2 2-2 2 .9 2 2zm-2-8c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0-6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm6 4c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/>
+                                    </svg>
+                                </div>
+                                <span class="sidebar-item">Strategy</span>
+                                <span class="ml-auto text-xs text-gray-500">15</span>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content flex-1 p-6">
+                <div class="game-container">
+                    <div class="title-section">
+                        <h1>{{game.title}}</h1>
+                        
+                        <div class="categories-section">
+                            {% for category in game.categories %}
+                            <span class="category-tag" style="
+                                background: linear-gradient(135deg, rgba(124, 58, 237, 0.8), rgba(139, 92, 246, 0.8));
+                                box-shadow: 0 2px 8px rgba(124, 58, 237, 0.2);
+                                border: 1px solid rgba(255, 255, 255, 0.1);
+                                padding: 0.5rem 1rem;
+                                border-radius: 20px;
+                                font-weight: 500;
+                            ">{{category}}</span>
+                            {% endfor %}
+                        </div>
+                        
+                        <div class="description-section">
+                            <p class="text-white text-lg">{{game.description}}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="game-wrapper">
+                        <iframe id="game-frame" src="{{game.iframeUrl}}" frameborder="0" allowfullscreen></iframe>
+                        
+                        <!-- 游戏加载覆盖层 - 放在game-wrapper内部 -->
+                        <div id="game-loading-overlay" class="absolute inset-0 bg-black/80 flex flex-col items-center justify-center z-10 rounded-lg">
+                            <div class="w-16 h-16 border-t-4 border-blue-500 border-solid rounded-full animate-spin mb-4"></div>
+                            <p class="text-xl text-white">Loading Game...</p>
+                            <p class="text-sm text-gray-400 mt-2">Please wait while the game loads</p>
+                            <div class="w-64 h-2 bg-gray-700 rounded-full mt-4 overflow-hidden">
+                                <div id="loading-progress" class="h-full bg-blue-500 rounded-full" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Game control buttons -->
+                    <div class="flex justify-between items-center mb-6">
+                        <div class="flex space-x-3">
+                            <button id="fullscreen-btn" class="bg-blue-primary hover:bg-blue-secondary text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors">
+                                <i class="fas fa-expand"></i>
+                                <span>Fullscreen</span>
+                            </button>
+                            
+                            <button id="favorite-btn" class="favorite-btn bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors">
+                                <i class="fas fa-heart"></i>
+                                <span>Add to Favorites</span>
+                            </button>
+                        </div>
+                        
+                        <button id="report-btn" class="text-gray-400 hover:text-white flex items-center space-x-1">
+                            <i class="fas fa-flag"></i>
+                            <span>Report Issue</span>
+                        </button>
+                    </div>
+
+                    <!-- Game Controls Section - New Design -->
+                    <div class="bg-blue-600/80 p-6 rounded-lg mb-6">
+                        <h2 class="text-2xl font-bold mb-4 text-white">Game Controls</h2>
+                        <ul class="text-white space-y-2 pl-4">
+                            <li class="flex items-start">
+                                <span class="mr-2">•</span>
+                                <span>Mouse Click - Click to earn points or currency</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2">•</span>
+                                <span>Number Keys or Letter Keys - Purchase upgrades or activate special abilities</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2">•</span>
+                                <span>Left/Right arrow keys - Navigate through menus (in some games)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2">•</span>
+                                <span>Spacebar - Pause game or activate primary function</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="mr-2">•</span>
+                                <span>Z, X, C - Special actions or combo moves</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Game Overview Section - New Design -->
+                    <div class="bg-blue-600/80 p-6 rounded-lg mb-6">
+                        <h2 class="text-2xl font-bold mb-4 text-white">Game Overview</h2>
+                        <p class="text-white leading-relaxed mb-4">
+                            This is a clicker/incremental game where you start small and gradually build up your resources. Click to earn points, invest in upgrades, and watch your earnings grow exponentially. The game features automatic income generation, various upgrades and achievements to unlock, and increasingly rewarding milestones to reach.
+                        </p>
+                        <p class="text-white leading-relaxed mb-6">
+                            As you progress, you'll unlock new features and mechanics that add depth to the gameplay. Strategize your investments to maximize your earnings and compete for the highest scores. Special events and bonuses appear randomly to boost your progress!
+                        </p>
+                        
+                        <!-- Game Features -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                            <div class="bg-white/10 p-4 rounded-lg">
+                                <h3 class="text-lg font-semibold mb-2 text-white">Key Features</h3>
+                                <ul class="text-white space-y-1 pl-4">
+                                    <li class="flex items-start">
+                                        <span class="mr-2">•</span>
+                                        <span>Auto-clickers and passive income generators</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="mr-2">•</span>
+                                        <span>Multiple upgrade paths and strategies</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <span class="mr-2">•</span>
+                                        <span>Achievement system with rewards</span>
+                                </li>
+                                </ul>
+                            </div>
+                            <div class="bg-white/10 p-4 rounded-lg">
+                                <h3 class="text-lg font-semibold mb-2 text-white">Game Progress</h3>
+                                <ul class="text-white space-y-1 pl-4">
+                                    <li class="flex items-start">
+                                        <span class="mr-2">•</span>
+                                        <span>Automatic saving of your progress</span>
+                                </li>
+                                    <li class="flex items-start">
+                                        <span class="mr-2">•</span>
+                                        <span>Prestige system for advanced players</span>
+                                </li>
+                                    <li class="flex items-start">
+                                        <span class="mr-2">•</span>
+                                        <span>Special weekend events with bonus rewards</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                        <!-- Game Tags / Categories -->
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm font-medium text-white">Clicker</span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm font-medium text-white">Incremental</span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm font-medium text-white">Idle</span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm font-medium text-white">Strategy</span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm font-medium text-white">Resource Management</span>
+                            <span class="bg-white/20 px-3 py-1 rounded-full text-sm font-medium text-white">Casual</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Wrapped recommendations and ratings in a common container with frosted glass background -->
+                <div class="game-container glass-container">
+                    <!-- Recommended Games -->
+                    <div class="recommended-games mb-10">
+                        <h2 class="text-2xl font-bold mb-4 text-white">You May Also Like</h2>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="related-games">
+                            <!-- Related games will be loaded dynamically -->
+                            <div class="skeleton-loader">Loading recommended games...</div>
+                        </div>
+                    </div>
+
+                    <!-- Rating Section -->
+                    <div class="rating-section bg-blue-600 p-6 rounded-lg text-center">
+                        <h2 class="text-2xl font-bold mb-4 text-white">Rate This Game</h2>
+                        <div class="rating-stars flex justify-center space-x-4 mb-4">
+                            <span class="star text-4xl cursor-pointer text-white opacity-70 hover:opacity-100" data-rating="1">★</span>
+                            <span class="star text-4xl cursor-pointer text-white opacity-70 hover:opacity-100" data-rating="2">★</span>
+                            <span class="star text-4xl cursor-pointer text-white opacity-70 hover:opacity-100" data-rating="3">★</span>
+                            <span class="star text-4xl cursor-pointer text-white opacity-70 hover:opacity-100" data-rating="4">★</span>
+                            <span class="star text-4xl cursor-pointer text-white opacity-70 hover:opacity-100" data-rating="5">★</span>
+                                </div>
+                        <div class="rating-count text-white">
+                            Average Rating: <span id="avgRating">{{game.rating || '4.5'}}</span>/5
+                            (<span id="ratingCount">{{game.ratingCount || '128'}}</span> votes)
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer bg-gray-900 text-white py-10 border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-1">
+                    <a href="/index.html" class="flex items-center mb-4">
+                        <img src="/assets/images/icons/logo.png" alt="Sonice Games" class="w-10 h-10 mr-2">
+                        <span class="text-2xl font-bold">
+                            <span class="text-white">Sonice</span><span class="text-blue-500 font-bold">.Games</span>
+                        </span>
+                    </a>
+                    <p class="text-gray-400 mb-4">Play the best online games for free. New games added daily!</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="md:col-span-1">
+                    <h3 class="text-xl font-semibold mb-4">Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/pages/categories/action.html" class="text-gray-400 hover:text-white transition-colors">Action Games</a></li>
+                        <li><a href="/pages/categories/puzzle.html" class="text-gray-400 hover:text-white transition-colors">Puzzle Games</a></li>
+                        <li><a href="/pages/categories/racing.html" class="text-gray-400 hover:text-white transition-colors">Racing Games</a></li>
+                        <li><a href="/pages/categories/sports.html" class="text-gray-400 hover:text-white transition-colors">Sports Games</a></li>
+                        <li><a href="/pages/categories/shooter.html" class="text-gray-400 hover:text-white transition-colors">Shooter Games</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-1">
+                    <h3 class="text-xl font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/pages/about.html" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="/pages/contact.html" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="/pages/privacy.html" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="/pages/terms.html" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+
+                <div class="md:col-span-1">
+                    <h3 class="text-xl font-semibold mb-4">Newsletter</h3>
+                    <p class="text-gray-400 mb-4">Subscribe to get updates on new games and features.</p>
+                    <form class="space-y-2">
+                        <input
+                            type="email"
+                            placeholder="Your email address"
+                            class="w-full px-4 py-2 rounded bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required
+                        >
+                        <button
+                            type="submit"
+                            class="w-full px-4 py-2 bg-blue-600 hover:bg-blue-700 transition-colors rounded text-white font-semibold"
+                        >
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
+                <p>&copy; 2023-2024 Sonice.Games. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Auth Modal Container -->
+    <div id="authModalContainer">
+        <!-- 登录模态框 -->
+        <div id="loginModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+            <div class="fixed inset-0 bg-black opacity-70"></div>
+            <div class="bg-dark-lighter rounded-lg shadow-xl p-6 max-w-md w-full relative z-10">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold text-white">Login</h2>
+                    <button class="close-modal text-gray-400 hover:text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <form id="loginForm">
+                    <div class="mb-4">
+                        <label class="block text-white text-sm font-medium mb-2" for="loginEmail">Email</label>
+                        <input id="loginEmail" type="email" class="w-full px-3 py-2 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-primary" placeholder="your@email.com" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-white text-sm font-medium mb-2" for="loginPassword">Password</label>
+                        <input id="loginPassword" type="password" class="w-full px-3 py-2 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-primary" placeholder="Your password" required>
+                    </div>
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center">
+                            <input id="rememberMe" type="checkbox" class="h-4 w-4 bg-gray-800 border-gray-700 rounded">
+                            <label for="rememberMe" class="ml-2 block text-sm text-gray-400">Remember me</label>
+                        </div>
+                        <button type="button" id="forgotPasswordBtn" class="text-sm text-blue-primary hover:text-blue-bright">Forgot password?</button>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-primary hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors">Sign In</button>
+                    <div class="mt-4 text-center">
+                        <p class="text-gray-400">Don't have an account? <button type="button" id="showRegisterBtn" class="text-blue-primary hover:text-blue-bright">Sign up</button></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- 注册模态框 -->
+        <div id="registerModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+            <div class="fixed inset-0 bg-black opacity-70"></div>
+            <div class="bg-dark-lighter rounded-lg shadow-xl p-6 max-w-md w-full relative z-10">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold text-white">Create Account</h2>
+                    <button class="close-modal text-gray-400 hover:text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <form id="registerForm">
+                    <div class="mb-4">
+                        <label class="block text-white text-sm font-medium mb-2" for="registerUsername">Username</label>
+                        <input id="registerUsername" type="text" class="w-full px-3 py-2 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-primary" placeholder="Choose a username" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-white text-sm font-medium mb-2" for="registerEmail">Email</label>
+                        <input id="registerEmail" type="email" class="w-full px-3 py-2 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-primary" placeholder="your@email.com" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-white text-sm font-medium mb-2" for="registerPassword">Password</label>
+                        <input id="registerPassword" type="password" class="w-full px-3 py-2 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-primary" placeholder="Create a password" required>
+                        <div class="mt-1 text-xs text-gray-400">Password must be at least 8 characters long with numbers and letters</div>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-white text-sm font-medium mb-2" for="registerConfirmPassword">Confirm Password</label>
+                        <input id="registerConfirmPassword" type="password" class="w-full px-3 py-2 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-primary" placeholder="Confirm your password" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="flex items-center">
+                            <input type="checkbox" id="termsAgree" class="h-4 w-4 bg-gray-800 border-gray-700 rounded" required>
+                            <span class="ml-2 text-sm text-gray-400">I agree to the <a href="/pages/terms.html" class="text-blue-primary hover:text-blue-bright">Terms of Service</a> and <a href="/pages/privacy.html" class="text-blue-primary hover:text-blue-bright">Privacy Policy</a></span>
+                        </label>
+                    </div>
+                    <button type="submit" class="w-full bg-blue-primary hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors">Create Account</button>
+                    <div class="mt-4 text-center">
+                        <p class="text-gray-400">Already have an account? <button type="button" id="showLoginBtn" class="text-blue-primary hover:text-blue-bright">Sign in</button></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <!-- 个人资料模态框 -->
+        <div id="profileModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+            <div class="fixed inset-0 bg-black opacity-70"></div>
+            <div class="bg-dark-lighter rounded-lg shadow-xl p-6 max-w-md w-full relative z-10">
+                <div class="flex justify-between items-center mb-6">
+                    <h2 class="text-xl font-bold text-white">My Profile</h2>
+                    <button class="close-modal text-gray-400 hover:text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <div class="text-center mb-6">
+                    <div class="relative inline-block">
+                        <img id="profileAvatar" src="/assets/images/user/default-avatar.png" alt="User Avatar" class="w-24 h-24 rounded-full border-4 border-blue-primary mx-auto">
+                        <button id="changeAvatarBtn" class="absolute bottom-0 right-0 bg-blue-600 rounded-full p-2 text-white hover:bg-blue-700">
+                            <i class="fas fa-camera"></i>
+                        </button>
+                    </div>
+                    <h3 id="profileUsername" class="text-xl font-bold text-white mt-4">Username</h3>
+                    <p id="profileEmail" class="text-gray-400">user@example.com</p>
+                </div>
+                
+                <div class="mb-6">
+                    <h4 class="text-white font-medium mb-2">Account Statistics</h4>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-gray-800 p-3 rounded-lg text-center">
+                            <p class="text-gray-400 text-sm">Favorites</p>
+                            <p class="text-white text-xl font-bold favorites-count">0</p>
+                        </div>
+                        <div class="bg-gray-800 p-3 rounded-lg text-center">
+                            <p class="text-gray-400 text-sm">Recently Played</p>
+                            <p id="recentCount" class="text-white text-xl font-bold">0</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <h4 class="text-white font-medium mb-2">Account Settings</h4>
+                    <button id="changePasswordBtn" class="w-full text-left mb-2 px-4 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-key mr-2"></i> Change Password
+                    </button>
+                </div>
+                
+                <div class="pt-4 border-t border-gray-700">
+                    <button id="closeProfileBtn" class="w-full bg-blue-primary hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Report Modal Container -->
+    <div id="reportModalContainer"></div>
+
+    <!-- Scripts -->
+    <script src="/js/load-games.js"></script>
+    <script src="/js/category-loader.js"></script>
+    <script src="/src/js/auth.js"></script>
+    <script>
+        // 用户菜单交互功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 用户菜单下拉功能
+            const userMenuButton = document.getElementById('userMenuButton');
+            const userDropdownMenu = document.getElementById('userDropdownMenu');
+            
+            if (userMenuButton && userDropdownMenu) {
+                // 点击菜单按钮显示/隐藏下拉菜单
+                userMenuButton.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    userDropdownMenu.classList.toggle('hidden');
+                });
+                
+                // 点击页面其他区域关闭菜单
+                document.addEventListener('click', function(e) {
+                    if (!userMenuButton.contains(e.target) && !userDropdownMenu.contains(e.target)) {
+                        userDropdownMenu.classList.add('hidden');
+                    }
+                });
+                
+                // 登出按钮功能
+                const logoutButton = document.getElementById('logoutButton');
+                if (logoutButton) {
+                    logoutButton.addEventListener('click', function() {
+                        // 调用现有的登出方法
+                        if (typeof auth !== 'undefined' && auth.logout) {
+                            auth.logout();
+                        } else {
+                            // 如果没有auth对象，执行基本的登出逻辑
+                            localStorage.removeItem('user');
+                            localStorage.removeItem('token');
+                            // 重定向到首页或刷新页面
+                            window.location.reload();
+                        }
+                    });
+                }
+                
+                // 登录按钮点击事件
+                const loginBtn = document.getElementById('loginBtn');
+                if (loginBtn) {
+                    loginBtn.addEventListener('click', function() {
+                        showModal('loginModal');
+                    });
+                }
+                
+                // 注册按钮点击事件
+                const registerBtn = document.getElementById('registerBtn');
+                if (registerBtn) {
+                    registerBtn.addEventListener('click', function() {
+                        showModal('registerModal');
+                    });
+                }
+                
+                // 个人资料按钮点击事件
+                const profileBtn = document.getElementById('profileBtn');
+                if (profileBtn) {
+                    profileBtn.addEventListener('click', function() {
+                        showModal('profileModal');
+                        updateProfileUI();
+                    });
+                }
+            }
+            
+            // 模态框功能
+            function showModal(modalId) {
+                // 隐藏用户菜单
+                if (userDropdownMenu) {
+                    userDropdownMenu.classList.add('hidden');
+                }
+                
+                // 显示指定的模态框
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.classList.remove('hidden');
+                }
+            }
+            
+            function hideModal(modalId) {
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    modal.classList.add('hidden');
+                }
+            }
+            
+            // 关闭模态框按钮
+            const closeButtons = document.querySelectorAll('.close-modal');
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const modal = this.closest('[id$="Modal"]');
+                    if (modal) {
+                        modal.classList.add('hidden');
+                    }
+                });
+            });
+            
+            // 点击模态框背景关闭
+            const modals = document.querySelectorAll('[id$="Modal"]');
+            modals.forEach(modal => {
+                modal.addEventListener('click', function(e) {
+                    if (e.target === this || e.target.classList.contains('fixed')) {
+                        this.classList.add('hidden');
+                    }
+                });
+            });
+            
+            // 在模态框之间切换
+            const showRegisterBtn = document.getElementById('showRegisterBtn');
+            if (showRegisterBtn) {
+                showRegisterBtn.addEventListener('click', function() {
+                    hideModal('loginModal');
+                    showModal('registerModal');
+                });
+            }
+            
+            const showLoginBtn = document.getElementById('showLoginBtn');
+            if (showLoginBtn) {
+                showLoginBtn.addEventListener('click', function() {
+                    hideModal('registerModal');
+                    showModal('loginModal');
+                });
+            }
+            
+            // 关闭个人资料模态框按钮
+            const closeProfileBtn = document.getElementById('closeProfileBtn');
+            if (closeProfileBtn) {
+                closeProfileBtn.addEventListener('click', function() {
+                    hideModal('profileModal');
+                });
+            }
+            
+            // 更新个人资料界面
+            function updateProfileUI() {
+                const profileUsername = document.getElementById('profileUsername');
+                const profileEmail = document.getElementById('profileEmail');
+                const profileAvatar = document.getElementById('profileAvatar');
+                const recentCount = document.getElementById('recentCount');
+                
+                // 获取用户信息
+                const user = JSON.parse(localStorage.getItem('user')) || null;
+                
+                if (user) {
+                    profileUsername.textContent = user.username || user.name || 'User';
+                    profileEmail.textContent = user.email || 'No email provided';
+                    
+                    if (user.avatar) {
+                        profileAvatar.src = user.avatar;
+                    }
+                    
+                    // 更新最近游戏数量
+                    const recentGames = JSON.parse(localStorage.getItem('recentGames')) || [];
+                    if (recentCount) {
+                        recentCount.textContent = recentGames.length;
+                    }
+                }
+            }
+            
+            // 登录表单提交
+            const loginForm = document.getElementById('loginForm');
+            if (loginForm) {
+                loginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const email = document.getElementById('loginEmail').value;
+                    const password = document.getElementById('loginPassword').value;
+                    const rememberMe = document.getElementById('rememberMe').checked;
+                    
+                    // 验证输入
+                    if (!email || !password) {
+                        showToast('Please enter both email and password', 'error');
+                        return;
+                    }
+                    
+                    // 这里应该调用你现有的登录API
+                    // 模拟登录成功
+                    const mockUser = {
+                        username: email.split('@')[0],
+                        email: email,
+                        avatar: '/assets/images/user/default-avatar.png'
+                    };
+                    
+                    // 保存用户信息
+                    localStorage.setItem('user', JSON.stringify(mockUser));
+                    localStorage.setItem('token', 'mock-token-' + Date.now());
+                    if (rememberMe) {
+                        localStorage.setItem('rememberMe', 'true');
+                    }
+                    
+                    // 关闭模态框并更新UI
+                    hideModal('loginModal');
+                    updateUserUI();
+                    showToast('Login successful!', 'success');
+                });
+            }
+            
+            // 注册表单提交
+            const registerForm = document.getElementById('registerForm');
+            if (registerForm) {
+                registerForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const username = document.getElementById('registerUsername').value;
+                    const email = document.getElementById('registerEmail').value;
+                    const password = document.getElementById('registerPassword').value;
+                    const confirmPassword = document.getElementById('registerConfirmPassword').value;
+                    const termsAgree = document.getElementById('termsAgree').checked;
+                    
+                    // 验证输入
+                    if (!username || !email || !password) {
+                        showToast('Please fill in all required fields', 'error');
+                        return;
+                    }
+                    
+                    if (password !== confirmPassword) {
+                        showToast('Passwords do not match', 'error');
+                        return;
+                    }
+                    
+                    if (!termsAgree) {
+                        showToast('You must agree to the Terms of Service', 'error');
+                        return;
+                    }
+                    
+                    // 这里应该调用你现有的注册API
+                    // 模拟注册成功
+                    const mockUser = {
+                        username: username,
+                        email: email,
+                        avatar: '/assets/images/user/default-avatar.png'
+                    };
+                    
+                    // 保存用户信息
+                    localStorage.setItem('user', JSON.stringify(mockUser));
+                    localStorage.setItem('token', 'mock-token-' + Date.now());
+                    
+                    // 关闭模态框并更新UI
+                    hideModal('registerModal');
+                    updateUserUI();
+                    showToast('Registration successful!', 'success');
+                });
+            }
+            
+            // 检查用户登录状态并更新UI
+            function updateUserUI() {
+                const userDisplayName = document.getElementById('userDisplayName');
+                const userAvatar = document.getElementById('userAvatar');
+                const guestMenuItems = document.getElementById('guestMenuItems');
+                const userMenuItems = document.getElementById('userMenuItems');
+                
+                // 尝试从localStorage获取用户信息
+                const user = JSON.parse(localStorage.getItem('user')) || null;
+                const token = localStorage.getItem('token');
+                
+                if (user && token) {
+                    // 用户已登录
+                    userDisplayName.textContent = user.username || user.name || user.email || 'User';
+                    if (user.avatar) {
+                        userAvatar.src = user.avatar;
+                    }
+                    
+                    // 显示已登录菜单
+                    if (guestMenuItems) guestMenuItems.classList.add('hidden');
+                    if (userMenuItems) userMenuItems.classList.remove('hidden');
+                    
+                    // 更新收藏数量显示
+                    updateFavoritesCount();
+                } else {
+                    // 用户未登录
+                    userDisplayName.textContent = 'Login';
+                    userAvatar.src = '/assets/images/user/default-avatar.png';
+                    
+                    // 显示未登录菜单
+                    if (guestMenuItems) guestMenuItems.classList.remove('hidden');
+                    if (userMenuItems) userMenuItems.classList.add('hidden');
+                }
+            }
+            
+            // 更新收藏数量
+            function updateFavoritesCount() {
+                const favCountElements = document.querySelectorAll('.favorites-count');
+                const favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+                
+                favCountElements.forEach(element => {
+                    element.textContent = favorites.length;
+                });
+            }
+            
+            // 初始更新用户UI
+            updateUserUI();
+            
+            // 监听存储变化，以更新UI
+            window.addEventListener('storage', function(e) {
+                if (e.key === 'user' || e.key === 'token' || e.key === 'favorites') {
+                    updateUserUI();
+                }
+            });
+            
+            // 搜索建议功能
+            const searchInput = document.getElementById('searchInput');
+            const searchSuggestions = document.getElementById('searchSuggestions');
+            const suggestionResults = document.getElementById('suggestionResults');
+            
+            if (searchInput && searchSuggestions && suggestionResults) {
+                // 防抖函数
+                function debounce(func, wait) {
+                    let timeout;
+                    return function() {
+                        const context = this;
+                        const args = arguments;
+                        clearTimeout(timeout);
+                        timeout = setTimeout(function() {
+                            func.apply(context, args);
+                        }, wait);
+                    };
+                }
+                
+                // 获取游戏数据并生成搜索建议
+                async function fetchSearchSuggestions(query) {
+                    if (!query || query.length < 2) {
+                        searchSuggestions.classList.add('hidden');
+                        return;
+                    }
+                    
+                    try {
+                        // 从games-enhanced.json获取游戏数据
+                        const response = await fetch('/data/games-enhanced.json');
+                        if (!response.ok) throw new Error('Failed to fetch games data');
+                        
+                        const data = await response.json();
+                        const games = data.games || [];
+                        
+                        // 根据查询筛选游戏
+                        const filteredGames = games.filter(game => 
+                            game.title.toLowerCase().includes(query.toLowerCase()) ||
+                            (game.description && game.description.toLowerCase().includes(query.toLowerCase())) ||
+                            (game.categories && game.categories.some(cat => cat.toLowerCase().includes(query.toLowerCase())))
+                        ).slice(0, 6); // 限制为前6个结果
+                        
+                        // 清空并生成新的建议项
+                        suggestionResults.innerHTML = '';
+                        
+                        if (filteredGames.length === 0) {
+                            const noResults = document.createElement('div');
+                            noResults.className = 'text-gray-400 p-2 text-center';
+                            noResults.textContent = 'No games found';
+                            suggestionResults.appendChild(noResults);
+                        } else {
+                            filteredGames.forEach(game => {
+                                const suggestionItem = document.createElement('a');
+                                suggestionItem.href = `/pages/games/${game.slug}.html`;
+                                suggestionItem.className = 'flex items-center p-2 hover:bg-gray-700 rounded transition-colors';
+                                
+                                // 游戏缩略图
+                                const thumbnail = document.createElement('img');
+                                thumbnail.src = `/assets/images/games/${game.slug}-360-240.webp`;
+                                thumbnail.alt = game.title;
+                                thumbnail.className = 'w-12 h-12 object-cover rounded';
+                                thumbnail.onerror = function() {
+                                    this.onerror = null;
+                                    this.src = '/assets/images/defaults/default-game.webp';
+                                };
+                                
+                                // 游戏信息
+                                const infoDiv = document.createElement('div');
+                                infoDiv.className = 'ml-3';
+                                
+                                const title = document.createElement('div');
+                                title.className = 'text-white font-medium';
+                                title.textContent = game.title;
+                                
+                                const category = document.createElement('div');
+                                category.className = 'text-gray-400 text-xs';
+                                category.textContent = game.categories ? game.categories.join(', ') : 'Game';
+                                
+                                infoDiv.appendChild(title);
+                                infoDiv.appendChild(category);
+                                
+                                suggestionItem.appendChild(thumbnail);
+                                suggestionItem.appendChild(infoDiv);
+                                suggestionResults.appendChild(suggestionItem);
+                            });
+                        }
+                        
+                        // 显示搜索建议
+                        searchSuggestions.classList.remove('hidden');
+                    } catch (error) {
+                        console.error('Error fetching search suggestions:', error);
+                    }
+                }
+                
+                // 使用防抖减少请求频率
+                const debouncedFetchSuggestions = debounce(fetchSearchSuggestions, 300);
+                
+                // 监听输入事件
+                searchInput.addEventListener('input', function() {
+                    const query = this.value.trim();
+                    debouncedFetchSuggestions(query);
+                });
+                
+                // 监听焦点事件
+                searchInput.addEventListener('focus', function() {
+                    const query = this.value.trim();
+                    if (query.length >= 2) {
+                        debouncedFetchSuggestions(query);
+                    }
+                });
+                
+                // 点击外部关闭搜索建议
+                document.addEventListener('click', function(e) {
+                    if (!searchInput.contains(e.target) && !searchSuggestions.contains(e.target)) {
+                        searchSuggestions.classList.add('hidden');
+                    }
+                });
+                
+                // 搜索表单提交处理
+                const searchForm = document.getElementById('searchForm');
+                if (searchForm) {
+                    searchForm.addEventListener('submit', function(e) {
+                        const query = searchInput.value.trim();
+                        if (!query) {
+                            e.preventDefault(); // 阻止空查询提交
+                        }
+                    });
+                }
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize auth system
+            if (typeof auth !== 'undefined') {
+                auth.init();
+            }
+
+            // Game page specific JS
+            const gameId = '{{game.id}}';
+            const gameSlug = '{{game.slug}}';
+            
+            // Load related games for the same category
+            const gameCategories = [{% for category in game.categories %}'{{category}}'{% if not loop.last %}, {% endif %}{% endfor %}];
+            if (gameCategories.length > 0) {
+                loadRelatedGames(gameCategories[0], 'related-games', 4);
+            } else {
+                // Fallback to general recommended games
+                loadAllGames('related-games', 4);
+            }
+
+            // Fullscreen functionality
+            const fullscreenBtn = document.getElementById('fullscreen-btn');
+            if (fullscreenBtn) {
+                fullscreenBtn.addEventListener('click', function() {
+                    const gameFrame = document.getElementById('game-frame');
+                    if (gameFrame) {
+                        if (gameFrame.requestFullscreen) {
+                            gameFrame.requestFullscreen();
+                        } else if (gameFrame.webkitRequestFullscreen) {
+                            gameFrame.webkitRequestFullscreen();
+                        } else if (gameFrame.msRequestFullscreen) {
+                            gameFrame.msRequestFullscreen();
+                        }
+                    }
+                });
+            }
+
+            // Favorites functionality
+            const favoriteBtn = document.getElementById('favorite-btn');
+            if (favoriteBtn) {
+                // Check if game is already in favorites
+                const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                const isAlreadyFavorite = favorites.some(fav => fav.id === gameId || fav.slug === gameSlug);
+                
+                if (isAlreadyFavorite) {
+                    favoriteBtn.classList.add('is-favorite');
+                    favoriteBtn.querySelector('span').textContent = 'Remove from Favorites';
+                }
+                
+                favoriteBtn.addEventListener('click', function() {
+                    // Check if user is logged in
+                    if (typeof auth !== 'undefined' && !auth.currentUser) {
+                        showToast('Please log in to add games to favorites', 'error');
+                        return;
+                    }
+                    
+                    const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+                    const gameIndex = favorites.findIndex(fav => fav.id === gameId || fav.slug === gameSlug);
+                    
+                    if (gameIndex === -1) {
+                        // Add to favorites
+                        favorites.push({
+                            id: gameId,
+                            slug: gameSlug,
+                            title: '{{game.title}}',
+                            description: '{{game.description}}',
+                            image: '/assets/images/games/{{game.slug}}-360-240.webp',
+                            addedAt: new Date().toISOString()
+                        });
+                        
+                        localStorage.setItem('favorites', JSON.stringify(favorites));
+                        favoriteBtn.classList.add('is-favorite');
+                        favoriteBtn.querySelector('span').textContent = 'Remove from Favorites';
+                        showToast('Added to favorites!', 'success');
+                        
+                        // Update favorites count in sidebar
+                        const favCountEl = document.querySelector('.favorites-count');
+                        if (favCountEl) {
+                            favCountEl.textContent = favorites.length;
+                        }
+                    } else {
+                        // Remove from favorites
+                        favorites.splice(gameIndex, 1);
+                        localStorage.setItem('favorites', JSON.stringify(favorites));
+                        favoriteBtn.classList.remove('is-favorite');
+                        favoriteBtn.querySelector('span').textContent = 'Add to Favorites';
+                        showToast('Removed from favorites', 'success');
+                        
+                        // Update favorites count in sidebar
+                        const favCountEl = document.querySelector('.favorites-count');
+                        if (favCountEl) {
+                            favCountEl.textContent = favorites.length;
+                        }
+                    }
+                });
+            }
+            
+            // Rating functionality
+            const stars = document.querySelectorAll('.star');
+            let userRating = 0;
+
+            stars.forEach(star => {
+                star.addEventListener('mouseover', () => {
+                    const rating = parseInt(star.dataset.rating);
+                    highlightStars(rating);
+                });
+
+                star.addEventListener('mouseout', () => {
+                    highlightStars(userRating);
+                });
+
+                star.addEventListener('click', () => {
+                    // Check if user is logged in
+                    if (typeof auth !== 'undefined' && !auth.currentUser) {
+                        showToast('Please log in to rate games', 'error');
+                        return;
+                    }
+                    
+                    userRating = parseInt(star.dataset.rating);
+                    highlightStars(userRating);
+                    saveRating(userRating);
+                });
+            });
+
+            function highlightStars(rating) {
+                stars.forEach(star => {
+                    const starRating = parseInt(star.dataset.rating);
+                    if (starRating <= rating) {
+                        star.classList.add('text-white');
+                        star.classList.remove('opacity-70');
+                        star.classList.add('opacity-100');
+                    } else {
+                        star.classList.add('opacity-70');
+                        star.classList.remove('opacity-100');
+                    }
+                });
+            }
+
+            function saveRating(rating) {
+                // In a real app, this would send rating to server
+                const avgRatingEl = document.getElementById('avgRating');
+                const ratingCountEl = document.getElementById('ratingCount');
+                
+                let currentCount = parseInt(ratingCountEl.textContent);
+                let currentAvg = parseFloat(avgRatingEl.textContent);
+                
+                // Calculate new average
+                const newCount = currentCount + 1;
+                const newAvg = ((currentAvg * currentCount) + rating) / newCount;
+                
+                // Update display
+                avgRatingEl.textContent = newAvg.toFixed(1);
+                ratingCountEl.textContent = newCount;
+                
+                // Save to recent games
+                saveToRecentGames();
+                
+                showToast('Thank you for rating!', 'success');
+            }
+            
+            // Report game functionality
+            const reportBtn = document.getElementById('report-btn');
+            if (reportBtn) {
+                reportBtn.addEventListener('click', function() {
+                    // Check if user is logged in
+                    if (typeof auth !== 'undefined' && !auth.currentUser) {
+                        showToast('Please log in to report issues', 'error');
+                        return;
+                    }
+                    
+                    const reportModal = document.createElement('div');
+                    reportModal.className = 'fixed inset-0 flex items-center justify-center z-50';
+                    reportModal.innerHTML = `
+                        <div class="fixed inset-0 bg-black opacity-70" id="report-overlay"></div>
+                        <div class="bg-dark-lighter rounded-lg shadow-xl p-6 max-w-md w-full relative z-10">
+                            <div class="flex justify-between items-center mb-4">
+                                <h2 class="text-xl font-bold text-white">Report Issue</h2>
+                                <button id="close-report-modal" class="text-gray-400 hover:text-white">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                            <form id="report-form">
+                                <div class="mb-4">
+                                    <label class="block text-white text-sm font-medium mb-2" for="issue-type">Issue Type</label>
+                                    <select id="issue-type" class="w-full px-3 py-2 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-primary">
+                                        <option value="broken">Game Not Loading</option>
+                                        <option value="inappropriate">Inappropriate Content</option>
+                                        <option value="performance">Performance Issues</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="block text-white text-sm font-medium mb-2" for="issue-description">Description</label>
+                                    <textarea id="issue-description" rows="4" class="w-full px-3 py-2 bg-gray-800 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-primary" placeholder="Please describe the issue in detail"></textarea>
+                                </div>
+                                <button type="submit" class="w-full bg-blue-primary hover:bg-blue-600 text-white font-medium py-2 px-4 rounded-lg transition-colors">Submit Report</button>
+                            </form>
+                        </div>
+                    `;
+                    
+                    document.getElementById('reportModalContainer').appendChild(reportModal);
+                    
+                    // Close modal handlers
+                    document.getElementById('close-report-modal').addEventListener('click', function() {
+                        reportModal.remove();
+                    });
+                    
+                    document.getElementById('report-overlay').addEventListener('click', function() {
+                        reportModal.remove();
+                    });
+                    
+                    // Submit form handler
+                    document.getElementById('report-form').addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        const issueType = document.getElementById('issue-type').value;
+                        const description = document.getElementById('issue-description').value;
+                        
+                        if (!description.trim()) {
+                            showToast('Please provide a description of the issue', 'error');
+                            return;
+                        }
+                        
+                        // In a real app, send this to server
+                        console.log('Report submitted:', {
+                            gameId,
+                            gameSlug,
+                            issueType,
+                            description,
+                            userId: auth.currentUser?.id || 'anonymous'
+                        });
+                        
+                        reportModal.remove();
+                        showToast('Thank you for your report. We will look into it.', 'success');
+                    });
+                });
+            }
+            
+            // Save to recent games
+            function saveToRecentGames() {
+                const recentGames = JSON.parse(localStorage.getItem('recentGames') || '[]');
+                
+                // Remove this game if it already exists in the list
+                const existingIndex = recentGames.findIndex(game => game.id === gameId || game.slug === gameSlug);
+                if (existingIndex !== -1) {
+                    recentGames.splice(existingIndex, 1);
+                }
+                
+                // Add to the beginning of the list
+                recentGames.unshift({
+                    id: gameId,
+                    slug: gameSlug,
+                    title: '{{game.title}}',
+                    description: '{{game.description}}',
+                    image: '/assets/images/games/{{game.slug}}-360-240.webp',
+                    playedAt: new Date().toISOString()
+                });
+                
+                // Keep only the most recent 20 games
+                if (recentGames.length > 20) {
+                    recentGames.pop();
+                }
+                
+                localStorage.setItem('recentGames', JSON.stringify(recentGames));
+            }
+            
+            // Call this on page load to record the visit
+            saveToRecentGames();
+            
+            // Initialize favorites count
+            const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+            const favCountEl = document.querySelector('.favorites-count');
+            if (favCountEl) {
+                favCountEl.textContent = favorites.length;
+            }
+        });
+        
+        // Toast notification helper
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast ${type} show`;
+            
+            setTimeout(() => {
+                toast.className = `toast ${type}`;
+            }, 3000);
+        }
+        
+        // Helper function to load related games
+        async function loadRelatedGames(category, targetElementId, limit = 4) {
+            const targetElement = document.getElementById(targetElementId);
+            if (!targetElement) return;
+            
+            try {
+                const response = await fetch('/data/games-enhanced.json');
+                if (!response.ok) throw new Error('Failed to fetch games data');
+                
+                const data = await response.json();
+                const currentGameSlug = '{{game.slug}}';
+                
+                // Find games in the same category, excluding the current game
+                let relatedGames = data.games.filter(game => 
+                    game.slug !== currentGameSlug && 
+                    game.categories && 
+                    game.categories.includes(category)
+                );
+                
+                // If not enough games, add some random ones
+                if (relatedGames.length < limit) {
+                    const randomGames = data.games
+                        .filter(game => game.slug !== currentGameSlug && !relatedGames.includes(game))
+                        .sort(() => 0.5 - Math.random())
+                        .slice(0, limit - relatedGames.length);
+                    
+                    relatedGames = [...relatedGames, ...randomGames];
+                }
+                
+                // Limit to requested number
+                relatedGames = relatedGames.slice(0, limit);
+                
+                if (relatedGames.length === 0) {
+                    targetElement.innerHTML = '<p class="text-center w-full py-4 text-gray-400">No related games found</p>';
+                    return;
+                }
+                
+                // Render the related games
+                targetElement.innerHTML = relatedGames.map(game => `
+                    <div class="bg-white/5 rounded-lg overflow-hidden shadow-lg hover:scale-105 transition-transform">
+                        <a href="/pages/games/${game.slug}.html" class="block">
+                            <img src="/assets/images/games/${game.slug}-360-240.webp" alt="${game.title}" class="w-full h-40 object-cover"
+                                 onerror="this.onerror=null; this.src='/assets/images/defaults/default-game.webp';">
+                            <div class="p-4">
+                                <h3 class="text-lg font-semibold mb-2">${game.title}</h3>
+                                <p class="text-gray-300 text-sm mb-4">${game.description.substring(0, 65)}...</p>
+                                <div class="text-center">
+                                    <a href="/pages/games/${game.slug}.html" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg w-full transition-colors inline-block">Play Now</a>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                `).join('');
+                
+            } catch (error) {
+                console.error('Error loading related games:', error);
+                targetElement.innerHTML = '<p class="text-center w-full py-4 text-gray-400">Failed to load related games</p>';
+            }
+        }
+    </script>
+</body>
+</html> 

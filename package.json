@@ -1,17 +1,40 @@
 {
   "name": "sonice-online-games",
   "version": "1.0.0",
-  "description": "Sonice Online Games Platform",
+  "description": "Platform for online games",
+  "main": "index.js",
   "scripts": {
-    "fetch-games": "node scripts/fetch-games-data.js",
-    "generate-pages": "node scripts/generate-game-pages.js",
-    "build": "npm run fetch-games && npm run generate-pages"
+    "csv-to-json": "node js/csv-to-json.js",
+    "generate-pages": "node js/generate-game-pages.js",
+    "build": "npm run csv-to-json && npm run generate-pages"
   },
+  "keywords": [
+    "games",
+    "online",
+    "html5"
+  ],
+  "author": "Sonice",
+  "license": "MIT",
   "dependencies": {
-    "axios": "^1.4.0",
-    "cheerio": "^1.0.0",
+    "browser-sync": "^3.0.4",
+    "chokidar": "^3.6.0",
     "csv-parser": "^3.2.0",
-    "fs-extra": "^11.1.1",
-    "puppeteer": "^19.7.2"
-  }
+    "csvtojson": "^2.0.10",
+    "express": "^5.1.0",
+    "nunjucks": "^3.2.4"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soniceon/sonice-online-games.git"
+  },
+  "bugs": {
+    "url": "https://github.com/soniceon/sonice-online-games/issues"
+  },
+  "homepage": "https://github.com/soniceon/sonice-online-games#readme"
 }

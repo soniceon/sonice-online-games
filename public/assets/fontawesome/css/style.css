@@ -1,0 +1,229 @@
+/* Base styles */
+:root {
+    --color-dark: #0F1012;
+    --color-dark-lighter: #1A1B1F;
+    --color-blue-primary: #0EA5E9;
+    --color-blue-secondary: #38BDF8;
+    --color-blue-bright: #7DD3FC;
+    --color-purple-primary: #7C3AED;
+    --color-gray-custom: #2A2B31;
+    --color-sidebar-blue: #152a69;
+    --color-sidebar-hover: #1d3a8f;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-dark);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-gray-custom);
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-blue-primary);
+}
+
+/* Header styles */
+.header-search {
+    transition: all 0.3s ease;
+}
+
+.header-search:focus {
+    box-shadow: 0 0 0 2px var(--color-blue-primary);
+}
+
+/* Sidebar styles */
+.sidebar-link {
+    transition: all 0.2s ease;
+}
+
+.sidebar-link:hover {
+    background-color: var(--color-sidebar-hover);
+}
+
+.sidebar-icon {
+    transition: all 0.2s ease;
+}
+
+.sidebar-link:hover .sidebar-icon {
+    transform: scale(1.1);
+}
+
+/* Game card hover effects */
+.game-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.game-card .favorite-btn {
+    transition: all 0.2s ease;
+}
+
+.game-card .favorite-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Button hover effects */
+.btn-primary {
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+}
+
+/* Modal animations */
+.modal {
+    transition: opacity 0.3s ease;
+}
+
+.modal.show {
+    opacity: 1;
+}
+
+/* Toast notifications */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background: var(--color-dark-lighter);
+    color: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 50;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all 0.3s ease;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Loading spinner */
+.spinner {
+    width: 24px;
+    height: 24px;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    border-top-color: var(--color-blue-primary);
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Dropdown menu animations */
+.dropdown-menu {
+    transform-origin: top right;
+    transition: all 0.2s ease;
+}
+
+.dropdown-menu.show {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Custom gradients */
+.gradient-blue {
+    background: linear-gradient(135deg, #2563eb 0%, #60a5fa 100%);
+    min-height: 100vh;
+}
+
+.card {
+    background: rgba(96, 165, 250, 0.10);
+    border-radius: 1rem;
+    box-shadow: 0 6px 32px 0 rgba(30, 58, 138, 0.18);
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.card:hover {
+    box-shadow: 0 12px 48px 0 rgba(30, 58, 138, 0.28);
+    transform: translateY(-6px) scale(1.04);
+}
+
+.card * {
+    color: #fff !important;
+}
+
+.card-img {
+    border-radius: 1rem 1rem 0 0;
+    object-fit: cover;
+    width: 100%;
+    height: 140px;
+    background: #222b44;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+    .sidebar {
+        width: 4rem;
+    }
+    
+    .main-content {
+        margin-left: 4rem;
+    }
+    .card {
+        border-radius: 1rem !important;
+        margin-bottom: 1.5rem;
+    }
+    .card-img {
+        height: 180px !important;
+        border-radius: 1rem 1rem 0 0 !important;
+    }
+    .footer-gradient, .gradient-blue {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+
+@media (max-width: 640px) {
+    .card {
+        border-radius: 0.75rem !important;
+        margin-bottom: 1rem;
+    }
+    .card-img {
+        height: 120px !important;
+        border-radius: 0.75rem 0.75rem 0 0 !important;
+    }
+    .footer-gradient, .gradient-blue {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+}
+
+@media (hover: none) {
+    .card:hover {
+        box-shadow: 0 4px 24px 0 rgba(30, 58, 138, 0.10);
+        transform: none;
+    }
+}
+
+.footer-gradient {
+    background: linear-gradient(135deg, #162447 0%, #233a6b 100%);
+}
+
+.footer-social {
+    color: #fff;
+    transition: color 0.2s;
+}
+
+.footer-social:hover {
+    color: #3b82f6;
+} 

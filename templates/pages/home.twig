@@ -1,0 +1,143 @@
+{% extends "base.twig" %}
+{% set categories = categories %}
+
+{% block content %}
+<!-- Featured Games -->
+<section class="mb-12">
+    <h2 class="text-3xl font-bold mb-6 text-white">Featured Games</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 xl:grid-cols-6 gap-4">
+        {% for game in featured_games %}
+        <div class="card relative overflow-hidden">
+            <a href="{{ base_url }}/game/{{ game.slug }}" class="block relative">
+                <img src="{{ game.thumbnail }}" alt="{{ game.title }}" class="card-img h-60 object-cover w-full rounded-2xl rounded-b-none">
+                <div class="absolute top-3 right-3 z-10">
+                    <button class="favorite-btn p-2 bg-black bg-opacity-50 rounded-full hover:bg-opacity-75 transition-colors shadow" data-game-id="{{ game.id }}">
+                        <i class="fas fa-heart {% if game.is_favorite %}text-red-500{% else %}text-white{% endif %}"></i>
+                    </button>
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/80 to-transparent z-0"></div>
+            </a>
+            <div class="absolute bottom-0 left-0 right-0 p-5 z-10">
+                <h3 class="text-xl font-bold mb-2 text-white">
+                    <a href="{{ base_url }}/game/{{ game.slug }}" class="hover:text-blue-400 transition-colors">{{ game.title }}</a>
+                </h3>
+                <div class="flex items-center justify-between text-base text-gray-200">
+                    <span>{{ game.category }}</span>
+                    <span>{{ game.plays }} plays</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- New Games -->
+<section class="mb-12">
+    <h2 class="text-3xl font-bold mb-6 text-white">New Games</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 xl:grid-cols-6 gap-4">
+        {% for game in new_games %}
+        <div class="card relative overflow-hidden">
+            <a href="{{ base_url }}/game/{{ game.slug }}" class="block relative">
+                <img src="{{ game.thumbnail }}" alt="{{ game.title }}" class="card-img h-60 object-cover w-full rounded-2xl rounded-b-none">
+                <div class="absolute top-3 right-3 z-10">
+                    <button class="favorite-btn p-2 bg-black bg-opacity-50 rounded-full hover:bg-opacity-75 transition-colors shadow" data-game-id="{{ game.id }}">
+                        <i class="fas fa-heart {% if game.is_favorite %}text-red-500{% else %}text-white{% endif %}"></i>
+                    </button>
+                </div>
+                <div class="absolute top-3 left-3 z-10">
+                    <span class="px-2 py-1 bg-blue-600 text-white text-xs rounded-full shadow">NEW</span>
+                </div>
+                <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/80 to-transparent z-0"></div>
+            </a>
+            <div class="absolute bottom-0 left-0 right-0 p-5 z-10">
+                <h3 class="text-xl font-bold mb-2 text-white">
+                    <a href="{{ base_url }}/game/{{ game.slug }}" class="hover:text-blue-400 transition-colors">{{ game.title }}</a>
+                </h3>
+                <div class="flex items-center justify-between text-base text-gray-200">
+                    <span>{{ game.category }}</span>
+                    <span>{{ game.plays }} plays</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- Popular Categories -->
+<section class="mb-12">
+    <h2 class="text-3xl font-bold mb-6 text-white">Popular Categories</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 xl:grid-cols-6 gap-4">
+        {% for category in popular_categories %}
+        <a href="{{ base_url }}/category/{{ category.slug }}" class="card flex flex-col items-center justify-center p-6 text-center hover:bg-sidebar-blue transition-colors rounded-2xl">
+            <div class="icon-{{ category.slug }} w-14 h-14 mx-auto mb-3 flex items-center justify-center">
+                <i class="{{ category.icon }} text-3xl"></i>
+            </div>
+            <h3 class="font-bold text-white">{{ category.name }}</h3>
+            <p class="text-base text-gray-200">{{ category.count }} games</p>
+        </a>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- 头像选择弹窗 -->
+<div id="avatar-picker-modal" class="modal-backdrop hidden">
+  <div class="modal-content max-w-lg mx-auto p-8 rounded-2xl bg-white text-center relative">
+    <button onclick="hideAvatarPickerModal()" class="absolute right-4 top-4 text-gray-400 hover:text-blue-600 text-2xl"><i class="fas fa-times"></i></button>
+    <h2 class="text-2xl font-bold mb-4 text-blue-700 flex items-center justify-center"><i class="fas fa-random mr-2"></i>选择你的新头像</h2>
+    <div id="avatar-picker-list" class="grid grid-cols-3 gap-4 mb-6"></div>
+    <button onclick="refreshAvatarPicker()" class="btn-secondary mb-2"><i class="fas fa-sync-alt mr-2"></i>再换一批</button>
+    <div class="text-gray-400 text-xs">头像由 DiceBear API 随机生成</div>
+  </div>
+</div>
+
+<script>
+function showAvatarPickerModal() {
+    document.getElementById('avatar-picker-modal').classList.remove('hidden');
+    refreshAvatarPicker();
+}
+function hideAvatarPickerModal() {
+    document.getElementById('avatar-picker-modal').classList.add('hidden');
+}
+function refreshAvatarPicker() {
+    const list = document.getElementById('avatar-picker-list');
+    list.innerHTML = '';
+    for (let i = 0; i < 9; i++) {
+        const seed = Math.random().toString(36).substring(2, 12);
+        const url = `https://api.dicebear.com/7.x/adventurer/svg?seed=${seed}`;
+        const btn = document.createElement('button');
+        btn.className = 'rounded-xl overflow-hidden border-2 border-transparent hover:border-blue-500 transition-all aspect-square bg-white';
+        btn.style.padding = '0';
+        btn.onclick = function() { selectAvatarFromPicker(url); };
+        const img = document.createElement('img');
+        img.src = url;
+        img.alt = 'avatar';
+        img.className = 'w-20 h-20 object-cover';
+        btn.appendChild(img);
+        list.appendChild(btn);
+    }
+}
+function selectAvatarFromPicker(avatar) {
+    fetch('api/change_avatar.php', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'same-origin',
+        body: JSON.stringify({avatar})
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            hideAvatarPickerModal();
+            location.reload();
+        } else {
+            alert(data.message || '换头像失败');
+        }
+    })
+    .catch(() => {
+        alert('网络错误，换头像失败');
+    });
+}
+window.showAvatarPickerModal = showAvatarPickerModal;
+window.refreshAvatarPicker = refreshAvatarPicker;
+window.hideAvatarPickerModal = hideAvatarPickerModal;
+</script>
+{% endblock %} 

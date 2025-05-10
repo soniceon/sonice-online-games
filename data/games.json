@@ -1,250 +1,105 @@
 {
+  "count": 10,
   "games": [
     {
-      "id": "idle-breakout",
-      "title": "Idle Breakout",
-      "categories": ["idle", "clicker"],
-      "description": "Break the bricks and earn money in this addictive idle game."
+      "id": "1",
+      "title": "2048",
+      "slug": "2048",
+      "category": "Puzzle",
+      "description": "Join the numbers and get to the 2048 tile! Simple and addictive puzzle game.",
+      "iframeUrl": "https://play2048.co/",
+      "imageUrl": "images/games/2048.jpg",
+      "featured": "true"
     },
     {
-      "id": "doge-miner",
-      "title": "Doge Miner",
-      "categories": ["mining", "idle"],
-      "description": "Mine dogecoins and upgrade your mining equipment."
+      "id": "2",
+      "title": "Flappy Bird",
+      "slug": "flappy-bird",
+      "category": "Arcade",
+      "description": "Guide the bird through pipes by tapping. Classic arcade game that tests your reflexes.",
+      "iframeUrl": "https://flappybird.io/",
+      "imageUrl": "images/games/flappy-bird.jpg",
+      "featured": "true"
     },
     {
-      "id": "cookie-clicker-save-the-world",
-      "title": "Cookie Clicker Save the World",
-      "categories": ["clicker", "idle"],
-      "description": "Click cookies to save the world and unlock upgrades."
+      "id": "3",
+      "title": "Tetris",
+      "slug": "tetris",
+      "category": "Puzzle",
+      "description": "Classic tetris game. Arrange falling blocks to create complete rows.",
+      "iframeUrl": "https://tetris.com/play-tetris",
+      "imageUrl": "images/games/tetris.jpg",
+      "featured": "true"
     },
     {
-      "id": "idle-miner",
-      "title": "Idle Miner",
-      "categories": ["mining", "idle"],
-      "description": "Become a mining tycoon in this idle mining simulation."
+      "id": "4",
+      "title": "Snake",
+      "slug": "snake",
+      "category": "Arcade",
+      "description": "Control a snake to eat food and grow longer without hitting walls or yourself.",
+      "iframeUrl": "https://playsnake.org/",
+      "imageUrl": "images/games/snake.jpg",
+      "featured": "false"
     },
     {
-      "id": "merge-pickaxe",
-      "title": "Merge Pickaxe",
-      "categories": ["merge", "idle"],
-      "description": "Merge pickaxes to mine more efficiently and earn more resources."
+      "id": "5",
+      "title": "Pac-Man",
+      "slug": "pac-man",
+      "category": "Arcade",
+      "description": "Navigate Pac-Man through a maze, eating dots and avoiding ghosts.",
+      "iframeUrl": "https://www.google.com/logos/2010/pacman10-i.html",
+      "imageUrl": "images/games/pacman.jpg",
+      "featured": "true"
     },
     {
-      "id": "race-clicker",
-      "title": "Race Clicker",
-      "categories": ["racing", "clicker"],
-      "description": "Click to race against opponents and upgrade your car."
+      "id": "6",
+      "title": "Sudoku",
+      "slug": "sudoku",
+      "category": "Puzzle",
+      "description": "Fill a 9×9 grid with numbers so each column, row, and section contains digits 1-9.",
+      "iframeUrl": "https://sudoku.com/",
+      "imageUrl": "images/games/sudoku.jpg",
+      "featured": "false"
     },
     {
-      "id": "drift-hunters",
-      "title": "Drift Hunters",
-      "categories": ["racing", "action"],
-      "description": "Master the art of drifting in this realistic racing game."
+      "id": "7",
+      "title": "Minesweeper",
+      "slug": "minesweeper",
+      "category": "Puzzle",
+      "description": "Clear a board containing hidden mines without detonating any of them.",
+      "iframeUrl": "https://minesweeper.online/",
+      "imageUrl": "images/games/minesweeper.jpg",
+      "featured": "false"
     },
     {
-      "id": "basketball-superstars",
-      "title": "Basketball Superstars",
-      "categories": ["sports", "action"],
-      "description": "Become a basketball star in this exciting sports game."
+      "id": "8",
+      "title": "Solitaire",
+      "slug": "solitaire",
+      "category": "Card",
+      "description": "Classic card game where you sort cards in descending order alternating colors.",
+      "iframeUrl": "https://www.solitr.com/",
+      "imageUrl": "images/games/solitaire.jpg",
+      "featured": "false"
     },
     {
-      "id": "soccer-clicker",
-      "title": "Soccer Clicker",
-      "categories": ["sports", "clicker"],
-      "description": "Click to score goals and build your soccer team."
+      "id": "9",
+      "title": "Chess",
+      "slug": "chess",
+      "category": "Strategy",
+      "description": "Classic strategy board game between two players.",
+      "iframeUrl": "https://www.chess.com/play/computer",
+      "imageUrl": "images/games/chess.jpg",
+      "featured": "true"
     },
     {
-      "id": "carnival-shooter",
-      "title": "Carnival Shooter",
-      "categories": ["shooting", "arcade"],
-      "description": "Test your shooting skills in this carnival-themed shooter game."
-    },
-    {
-      "id": "shoot-gun-clicker",
-      "title": "Shoot Gun Clicker",
-      "categories": ["shooting", "clicker"],
-      "description": "Click to shoot and upgrade your weapons."
-    },
-    {
-      "id": "colorful-city-of-cards",
-      "title": "Colorful City of Cards",
-      "categories": ["cards", "puzzle"],
-      "description": "Build a colorful city with cards in this unique card game."
-    },
-    {
-      "id": "dice-idle",
-      "title": "Dice Idle",
-      "categories": ["idle", "clicker"],
-      "description": "Roll dice to earn points and unlock upgrades."
-    },
-    {
-      "id": "mine-merge-mania",
-      "title": "Mine Merge Mania",
-      "categories": ["merge", "mining"],
-      "description": "Merge mining tools to dig deeper and find more valuable resources."
-    },
-    {
-      "id": "cosmic-miners",
-      "title": "Cosmic Miners",
-      "categories": ["mining", "idle"],
-      "description": "Mine resources in space and upgrade your cosmic mining fleet."
-    },
-    {
-      "id": "merge-mine-idle-clicker",
-      "title": "Merge Mine Idle Clicker",
-      "categories": ["merge", "mining", "idle", "clicker"],
-      "description": "Merge mines, click for resources, and build your mining empire."
-    },
-    {
-      "id": "aim-trainer-idle",
-      "title": "Aim Trainer Idle",
-      "categories": ["shooting", "idle"],
-      "description": "Improve your aiming skills and earn rewards in this idle aim trainer."
-    },
-    {
-      "id": "cube-vs-ball-clicker",
-      "title": "Cube vs Ball Clicker",
-      "categories": ["clicker", "arcade"],
-      "description": "Click to defeat balls with your cube in this simple but addictive game."
-    },
-    {
-      "id": "console-idle",
-      "title": "Console Idle",
-      "categories": ["idle", "simulation"],
-      "description": "Build and manage your own gaming console company."
-    },
-    {
-      "id": "idle-coffee-business",
-      "title": "Idle Coffee Business",
-      "categories": ["idle", "tycoon"],
-      "description": "Run a coffee shop and expand your business in this idle tycoon game."
-    },
-    {
-      "id": "miner-madness-tycoon",
-      "title": "Miner Madness Tycoon",
-      "categories": ["mining", "tycoon"],
-      "description": "Build and manage a mining operation in this tycoon simulation."
-    },
-    {
-      "id": "fruit-clicker",
-      "title": "Fruit Clicker",
-      "categories": ["clicker", "idle"],
-      "description": "Click on fruits to earn points and unlock new fruit varieties."
-    },
-    {
-      "id": "grindcraft",
-      "title": "GrindCraft",
-      "categories": ["mining", "crafting"],
-      "description": "Mine resources and craft items in this grid-based crafting game."
-    },
-    {
-      "id": "idle-monster-slayer",
-      "title": "Idle Monster Slayer",
-      "categories": ["idle", "rpg"],
-      "description": "Slay monsters while idle and upgrade your hero's equipment."
-    },
-    {
-      "id": "idle-pet-business",
-      "title": "Idle Pet Business",
-      "categories": ["idle", "tycoon"],
-      "description": "Run a pet shop and expand your pet business empire."
-    },
-    {
-      "id": "magic-chop-idle",
-      "title": "Magic Chop Idle",
-      "categories": ["idle", "clicker"],
-      "description": "Chop wood with magic and upgrade your magical chopping abilities."
-    },
-    {
-      "id": "the-cool-merge",
-      "title": "The Cool Merge",
-      "categories": ["merge", "puzzle"],
-      "description": "Merge items to create new and more valuable objects in this merging puzzle."
-    },
-    {
-      "id": "merge-pickaxe-2",
-      "title": "Merge Pickaxe 2",
-      "categories": ["merge", "mining"],
-      "description": "The sequel to Merge Pickaxe with new merging mechanics and more resources."
-    },
-    {
-      "id": "mineclicker-2",
-      "title": "MineClicker 2",
-      "categories": ["clicker", "mining"],
-      "description": "The second chapter of the MineClicker saga with new resources and upgrades."
-    },
-    {
-      "id": "incremental-epic-hero",
-      "title": "Incremental Epic Hero",
-      "categories": ["idle", "rpg"],
-      "description": "Train your hero and embark on epic adventures in this incremental RPG."
-    },
-    {
-      "id": "landlord-real-estate-tycoon",
-      "title": "Landlord Real Estate Tycoon",
-      "categories": ["tycoon", "simulation"],
-      "description": "Buy properties, collect rent, and become a real estate tycoon."
-    },
-    {
-      "id": "idle-soccer-manager",
-      "title": "Idle Soccer Manager",
-      "categories": ["idle", "sports"],
-      "description": "Manage a soccer team and win championships while idle."
-    },
-    {
-      "id": "idle-emoji-factory",
-      "title": "Idle Emoji Factory",
-      "categories": ["idle", "simulation"],
-      "description": "Produce emojis in your factory and upgrade your production line."
-    },
-    {
-      "id": "idle-gun",
-      "title": "Idle Gun",
-      "categories": ["idle", "shooting"],
-      "description": "Collect guns and upgrade them in this idle shooting game."
-    },
-    {
-      "id": "horror-bosses-clicker",
-      "title": "Horror Bosses Clicker",
-      "categories": ["clicker", "horror"],
-      "description": "Click to defeat horror-themed bosses and unlock new monsters."
-    },
-    {
-      "id": "idle-research",
-      "title": "Idle Research",
-      "categories": ["idle", "simulation"],
-      "description": "Conduct research and make scientific discoveries in this idle game."
-    },
-    {
-      "id": "slime-clicker",
-      "title": "Slime Clicker",
-      "categories": ["clicker", "idle"],
-      "description": "Click on slimes to earn resources and breed new slime types."
-    },
-    {
-      "id": "dog-clicker",
-      "title": "Dog Clicker",
-      "categories": ["clicker", "idle"],
-      "description": "Click to pet dogs and collect different dog breeds."
-    },
-    {
-      "id": "garden-idle",
-      "title": "Garden Idle",
-      "categories": ["idle", "simulation"],
-      "description": "Grow plants and expand your garden while idle."
-    },
-    {
-      "id": "tank-clicker",
-      "title": "Tank Clicker",
-      "categories": ["clicker", "action"],
-      "description": "Click to fire tanks and destroy enemy bases."
-    },
-    {
-      "id": "block-clicker",
-      "title": "Block Clicker",
-      "categories": ["clicker", "puzzle"],
-      "description": "Click to break blocks and earn points in this Minecraft-inspired clicker."
+      "id": "10",
+      "title": "Checkers",
+      "slug": "checkers",
+      "category": "Strategy",
+      "description": "Move your pieces diagonally and jump over opponent pieces to capture them.",
+      "iframeUrl": "https://www.gamesforthebrain.com/game/checkers/",
+      "imageUrl": "images/games/checkers.jpg",
+      "featured": "false"
     }
   ]
-} 
+}

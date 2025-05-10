@@ -1,0 +1,259 @@
+/* 评分系统样式 */
+.rating-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.stars {
+    display: inline-flex;
+    margin: 10px 0;
+}
+
+.star {
+    color: #ddd;
+    font-size: 30px;
+    padding: 0 5px;
+    cursor: pointer;
+    transition: color 0.2s ease;
+    user-select: none;
+}
+
+.star:hover, .star.active {
+    color: #ffcc00;
+}
+
+.star:hover ~ .star {
+    color: #ddd;
+}
+
+.rating-info {
+    font-size: 14px;
+    color: #777;
+    margin-top: 5px;
+}
+
+/* Custom Styles for Sonice Online Games */
+
+/* ===== Base Styles ===== */
+:root {
+    --scrollbar-width: 4px;
+}
+
+/* Custom Scrollbar */
+.scrollbar-thin::-webkit-scrollbar {
+    width: var(--scrollbar-width);
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+    background: #0f172a; /* dark-900 */
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+    background: #4b5563; /* gray-600 */
+    border-radius: 3px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: #6b7280; /* gray-500 */
+}
+
+/* ===== Component Styles ===== */
+
+/* Game Card */
+.game-card {
+    width: 160px;
+    min-width: 0;
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 0.75rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    background: #181a20;
+    overflow: hidden;
+    padding: 0.5rem 0.5rem 1rem 0.5rem;
+}
+
+.game-card img, .game-card-image {
+    width: 100%;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 0.5rem;
+}
+
+.game-card-title {
+    font-size: 1rem;
+    margin: 0.5rem 0 0.25rem 0;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+}
+
+.game-card-description {
+    font-size: 0.85rem;
+    color: #b0b3b8;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.game-card-meta {
+    font-size: 0.75rem;
+    color: #7c7f87;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.btn-primary {
+    font-size: 0.85rem;
+    padding: 0.25rem 0.75rem;
+}
+
+/* Category Badges */
+.category-badge {
+    transition: all 0.3s ease;
+    background-size: 200% auto;
+    background-position: left center;
+}
+
+.category-badge:hover {
+    background-position: right center;
+}
+
+/* Buttons */
+.btn-secondary {
+    @apply bg-dark-700 hover:bg-dark-600 text-gray-200 font-medium py-2 px-4 rounded-lg transition-colors;
+}
+
+.btn-outline {
+    @apply border border-gray-700 hover:border-primary-500 hover:text-primary-500 text-gray-300 font-medium py-2 px-4 rounded-lg transition-colors;
+}
+
+/* Gradients */
+.gradient-primary {
+    background: linear-gradient(90deg, #0ea5e9 0%, #8b5cf6 100%);
+}
+
+.gradient-text {
+    @apply bg-gradient-to-r from-primary-400 to-secondary-500 bg-clip-text text-transparent;
+}
+
+/* ===== Animation ===== */
+.pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* Loading Effect */
+.shimmer {
+    position: relative;
+    overflow: hidden;
+    background: #1f2937; /* dark-700 */
+}
+
+.shimmer::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0,
+        rgba(255, 255, 255, 0.05) 20%,
+        rgba(255, 255, 255, 0.1) 60%,
+        rgba(255, 255, 255, 0)
+    );
+    animation: shimmer 2s infinite;
+    content: '';
+}
+
+@keyframes shimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* ===== Utils ===== */
+.text-shadow {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.text-shadow-lg {
+    text-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* ===== Media Queries ===== */
+@media (max-width: 768px) {
+    .game-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .game-grid {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+/* ===== Toast Notifications ===== */
+.toast {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background: #111827; /* dark-800 */
+    color: white;
+    z-index: 100;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    display: flex;
+    align-items: center;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.toast.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.toast-success {
+    border-left: 4px solid #10b981; /* green-500 */
+}
+
+.toast-error {
+    border-left: 4px solid #ef4444; /* red-500 */
+}
+
+.toast-info {
+    border-left: 4px solid #3b82f6; /* blue-500 */
+}
+
+/* ===== Input Focus States ===== */
+.input-focus-effect {
+    position: relative;
+}
+
+.input-focus-effect::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #0ea5e9 0%, #8b5cf6 100%);
+    transition: width 0.3s ease;
+}
+
+.input-focus-effect:focus-within::after {
+    width: 100%;
+} 

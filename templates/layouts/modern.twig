@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title|default('Sonice.Games - Play Free Online Games') }}</title>
+    <meta name="description" content="{{ page_description|default('Play the best free online games in your browser!') }}">
+    <link rel="icon" type="image/png" href="{{ base_url }}/assets/images/icons/logo.png">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #60a5fa 100%);
+            color: #fff;
+        }
+
+        /* 顶部导航栏 */
+        .header-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            z-index: 50;
+            background: linear-gradient(to right, #0d1130, #121c44, #152a69);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+        }
+
+        /* 侧边栏 */
+        .sidebar {
+            position: fixed;
+            top: 64px;
+            left: 0;
+            bottom: 0;
+            width: 72px;
+            background: rgba(30, 41, 59, 0.85);
+            backdrop-filter: blur(16px);
+            z-index: 40;
+        }
+
+        /* 主要内容区域包装器 */
+        .page-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding-top: 64px;
+        }
+
+        /* 内容区 */
+        .content-wrapper {
+            flex: 1;
+            display: flex;
+            padding: 2rem;
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #60a5fa 100%);
+        }
+
+        main {
+            flex: 1;
+            margin-left: 72px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .sidebar { width: 0; }
+            main { margin-left: 0; }
+        }
+
+        /* 侧边栏样式 */
+        .sidebar-label, .category-label, .category-count {
+            opacity: 0;
+            transition: opacity 0.2s;
+            white-space: nowrap;
+        }
+
+        .sidebar:hover .sidebar-label, 
+        .sidebar:hover .category-label, 
+        .sidebar:hover .category-count {
+            opacity: 1;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: rgba(255,255,255,0.85);
+            transition: all 0.2s;
+            border-radius: 12px;
+            margin: 0.25rem 0.5rem;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .sidebar-link.active, 
+        .sidebar-link:hover {
+            background: rgba(59,130,246,0.18);
+            color: #fff;
+        }
+
+        .sidebar-icon {
+            min-width: 32px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+
+        /* 图标颜色 */
+        .icon-home { color: #4f86f7; }
+        .icon-favorites { color: #ff5c8d; }
+        .icon-recent { color: #3da4e3; }
+        .icon-new { color: #2dce89; }
+        .icon-action { color: #ff8c3f; }
+        .icon-puzzle { color: #a66ffe; }
+        .icon-racing { color: #e64c66; }
+        .icon-sports { color: #36d399; }
+        .icon-shooter { color: #f6c90e; }
+        .icon-cards { color: #a66ffe; }
+        .icon-strategy { color: #3ac2ff; }
+        .icon-educational { color: #2dce89; }
+
+        /* 徽章样式 */
+        .badge {
+            display: inline-block;
+            min-width: 22px;
+            padding: 0 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #fff;
+            background: #2563eb;
+            border-radius: 9999px;
+            margin-left: 8px;
+            text-align: center;
+        }
+        .badge.fav { background: #ff5c8d; }
+        .badge.new { background: #2dce89; }
+    </style>
+    {% block styles %}{% endblock %}
+</head>
+<body class="{{ body_class|default('') }}">
+    <!-- 顶部导航栏 -->
+    {% include 'partials/header.twig' %}
+
+    <!-- 页面主体包装器 -->
+    <div class="page-wrapper">
+        <!-- 内容区包装器 -->
+        <div class="content-wrapper">
+            <!-- 侧边栏 -->
+            {% include 'partials/sidebar.twig' %}
+
+            <!-- 主内容区 -->
+            <main>
+                <div class="max-w-7xl mx-auto">
+                    {% block content %}{% endblock %}
+                </div>
+            </main>
+        </div>
+
+        <!-- 页脚 -->
+        {% include 'partials/footer.twig' %}
+    </div>
+
+    <!-- 模态框 -->
+    {% include 'partials/modals.twig' %}
+
+    <!-- Toast 通知 -->
+    <div id="toast" class="fixed top-6 right-6 z-[9999] bg-green-500 text-white px-4 py-2 rounded shadow-lg hidden"></div>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html> 
+ 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title|default('Sonice.Games - Play Free Online Games') }}</title>
+    <meta name="description" content="{{ page_description|default('Play the best free online games in your browser!') }}">
+    <link rel="icon" type="image/png" href="{{ base_url }}/assets/images/icons/logo.png">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #60a5fa 100%);
+            color: #fff;
+        }
+
+        /* 顶部导航栏 */
+        .header-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            z-index: 50;
+            background: linear-gradient(to right, #0d1130, #121c44, #152a69);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+        }
+
+        /* 侧边栏 */
+        .sidebar {
+            position: fixed;
+            top: 64px;
+            left: 0;
+            bottom: 0;
+            width: 72px;
+            background: rgba(30, 41, 59, 0.85);
+            backdrop-filter: blur(16px);
+            z-index: 40;
+        }
+
+        /* 主要内容区域包装器 */
+        .page-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding-top: 64px;
+        }
+
+        /* 内容区 */
+        .content-wrapper {
+            flex: 1;
+            display: flex;
+            padding: 2rem;
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #60a5fa 100%);
+        }
+
+        main {
+            flex: 1;
+            margin-left: 72px;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .sidebar { width: 0; }
+            main { margin-left: 0; }
+        }
+
+        /* 侧边栏样式 */
+        .sidebar-label, .category-label, .category-count {
+            opacity: 0;
+            transition: opacity 0.2s;
+            white-space: nowrap;
+        }
+
+        .sidebar:hover .sidebar-label, 
+        .sidebar:hover .category-label, 
+        .sidebar:hover .category-count {
+            opacity: 1;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem 1rem;
+            color: rgba(255,255,255,0.85);
+            transition: all 0.2s;
+            border-radius: 12px;
+            margin: 0.25rem 0.5rem;
+            font-size: 1rem;
+            position: relative;
+        }
+
+        .sidebar-link.active, 
+        .sidebar-link:hover {
+            background: rgba(59,130,246,0.18);
+            color: #fff;
+        }
+
+        .sidebar-icon {
+            min-width: 32px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+        }
+
+        /* 图标颜色 */
+        .icon-home { color: #4f86f7; }
+        .icon-favorites { color: #ff5c8d; }
+        .icon-recent { color: #3da4e3; }
+        .icon-new { color: #2dce89; }
+        .icon-action { color: #ff8c3f; }
+        .icon-puzzle { color: #a66ffe; }
+        .icon-racing { color: #e64c66; }
+        .icon-sports { color: #36d399; }
+        .icon-shooter { color: #f6c90e; }
+        .icon-cards { color: #a66ffe; }
+        .icon-strategy { color: #3ac2ff; }
+        .icon-educational { color: #2dce89; }
+
+        /* 徽章样式 */
+        .badge {
+            display: inline-block;
+            min-width: 22px;
+            padding: 0 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #fff;
+            background: #2563eb;
+            border-radius: 9999px;
+            margin-left: 8px;
+            text-align: center;
+        }
+        .badge.fav { background: #ff5c8d; }
+        .badge.new { background: #2dce89; }
+    </style>
+    {% block styles %}{% endblock %}
+</head>
+<body class="{{ body_class|default('') }}">
+    <!-- 顶部导航栏 -->
+    {% include 'partials/header.twig' %}
+
+    <!-- 页面主体包装器 -->
+    <div class="page-wrapper">
+        <!-- 内容区包装器 -->
+        <div class="content-wrapper">
+            <!-- 侧边栏 -->
+            {% include 'partials/sidebar.twig' %}
+
+            <!-- 主内容区 -->
+            <main>
+                <div class="max-w-7xl mx-auto">
+                    {% block content %}{% endblock %}
+                </div>
+            </main>
+        </div>
+
+        <!-- 页脚 -->
+        {% include 'partials/footer.twig' %}
+    </div>
+
+    <!-- 模态框 -->
+    {% include 'partials/modals.twig' %}
+
+    <!-- Toast 通知 -->
+    <div id="toast" class="fixed top-6 right-6 z-[9999] bg-green-500 text-white px-4 py-2 rounded shadow-lg hidden"></div>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html> 
+ 

@@ -1,0 +1,29 @@
+{% extends "base.twig" %}
+{% block content %}
+<h2 class="text-3xl font-bold mb-6 text-white">{{ category.name }}</h2>
+<p class="mb-4 text-gray-300">{{ category.description }}</p>
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+    {% for game in games %}
+    <div class="card relative overflow-hidden">
+        <a href="/game/{{ game.slug }}" class="block relative">
+            <img src="{{ game.thumbnail }}" alt="{{ game.title }}" class="card-img h-60 object-cover w-full rounded-2xl rounded-b-none">
+            <div class="absolute top-3 right-3 z-10">
+                <button class="favorite-btn p-2 bg-black bg-opacity-50 rounded-full hover:bg-opacity-75 transition-colors shadow" data-game-id="{{ game.id }}">
+                    <i class="fas fa-heart {% if game.is_favorite %}text-red-500{% else %}text-white{% endif %}"></i>
+                </button>
+            </div>
+            <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/80 to-transparent z-0"></div>
+        </a>
+        <div class="absolute bottom-0 left-0 right-0 p-5 z-10">
+            <h3 class="text-xl font-bold mb-2 text-white">
+                <a href="/game/{{ game.slug }}" class="hover:text-blue-400 transition-colors">{{ game.title }}</a>
+            </h3>
+            <div class="flex items-center justify-between text-base text-gray-200">
+                <span>{{ game.category }}</span>
+                <span>{{ game.plays }} plays</span>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %} 

@@ -1,0 +1,64 @@
+/* Sidebar component styles */
+.sidebar {
+  background: rgb(0, 43, 135);
+  z-index: 30;
+  transition: width 0.3s ease;
+}
+
+.sidebar-item {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.sidebar-icon {
+  min-width: 24px;
+}
+
+/* Hover states for menu items */
+.sidebar a:hover {
+  background-color: rgba(56, 97, 187, 0.8);
+}
+
+/* Custom colors for icons */
+.text-purple-500 {
+  color: #7C3AED;
+}
+
+.text-red-500 {
+  color: #EF4444;
+}
+
+.text-blue-500 {
+  color: #3B82F6;
+}
+
+.text-green-500 {
+  color: #10B981;
+}
+
+.text-orange-500 {
+  color: #F59E0B;
+}
+
+.text-pink-500 {
+  color: #EC4899;
+}
+
+.text-cyan-500 {
+  color: #06B6D4;
+}
+
+.text-indigo-500 {
+  color: #6366F1;
+}
+
+.text-purple-700 {
+  color: #7E22CE;
+}
+
+/* Media query for mobile devices */
+@media (max-width: 1023px) {
+  .sidebar {
+    width: 240px;
+  }
+} 

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sonice Games - 导航栏演示</title>
+  <!-- 加载React、ReactDOM和Babel -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- 加载Tailwind CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+  <div id="root"></div>
+
+  <script type="text/babel">
+    // React导航栏组件
+    const Navbar = () => {
+      const [searchQuery, setSearchQuery] = React.useState('');
+
+      const handleSearchChange = (e) => {
+        setSearchQuery(e.target.value);
+      };
+
+      const handleSearchSubmit = (e) => {
+        e.preventDefault();
+        console.log('搜索关键词:', searchQuery);
+        // 这里可以添加实际的搜索逻辑
+      };
+
+      return (
+        <div className="bg-black h-14 flex items-center px-4 w-full relative">
+          {/* Logo和品牌 */}
+          <div className="flex items-center z-10">
+            <img 
+              src="/assets/images/logo.png" 
+              alt="Sonice Logo" 
+              className="w-8 h-8 mr-2"
+              onError={(e) => {e.target.src = 'https://via.placeholder.com/32'; e.target.onerror = null;}}
+            />
+            <div className="text-white text-lg font-bold">
+              Sonice Games
+            </div>
+          </div>
+          
+          {/* 居中搜索栏 */}
+          <div className="absolute left-1/2 transform -translate-x-1/2 w-full max-w-md">
+            <form onSubmit={handleSearchSubmit}>
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={handleSearchChange}
+                placeholder="搜索游戏..."
+                className="w-full bg-gray-800 text-white rounded-full px-4 py-2 focus:outline-none"
+              />
+            </form>
+          </div>
+          
+          {/* 右侧空白区域 */}
+          <div className="ml-auto z-10">
+            {/* 保持为空以保持设计平衡 */}
+          </div>
+        </div>
+      );
+    };
+
+    // 渲染React组件到页面
+    ReactDOM.createRoot(document.getElementById('root')).render(<Navbar />);
+  </script>
+
+  <div class="container mx-auto mt-8 p-4">
+    <h1 class="text-2xl font-bold mb-4">React导航栏演示</h1>
+    <p class="mb-4">上面显示的导航栏是使用React组件直接在HTML中渲染的。</p>
+    <p class="mb-4">这个页面使用以下技术：</p>
+    <ul class="list-disc ml-6 mb-4">
+      <li>React 18 (通过CDN加载)</li>
+      <li>Babel (用于编译JSX)</li>
+      <li>Tailwind CSS (用于样式)</li>
+    </ul>
+    <p>你可以在开发者控制台中看到搜索功能的日志输出。</p>
+  </div>
+</body>
+</html> 
