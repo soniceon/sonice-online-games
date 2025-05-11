@@ -72,15 +72,16 @@
             <!-- Search Bar -->
             <div class="flex-1 max-w-2xl mx-8">
                 <div class="relative">
-                    <input type="search" placeholder="Search games..."
-                           class="w-full px-5 py-2 bg-[#233a6b] border-none rounded-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent shadow-inner">
-                    <button class="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-500 hover:bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center transition">
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
+                    <form id="searchForm" action="/search" method="get" class="relative">
+                        <input type="search" name="q" id="searchInput" placeholder="Search games..." class="w-full px-5 py-2 bg-[#233a6b] border-none rounded-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent shadow-inner">
+                        <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-500 hover:bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center transition">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </form>
                 </div>
             </div>
-            <!-- 新用户系统入口和弹窗 -->
-            <div id="user-entry" class="flex items-center space-x-2"></div>
+            <!-- 新登录注册入口 -->
+            <button id="navLoginBtn" class="ml-4 px-4 py-2 bg-blue-600 text-white rounded">登录/注册</button>
         </div>
     </header>
     <div class="flex flex-1 min-h-0 pt-16">
@@ -101,21 +102,19 @@
                         </div>
                         <p class="mb-4 text-sm text-gray-300">Play the best online games for free. New games added daily!</p>
                         <div class="flex space-x-4 text-xl">
-                            <a href="#" class="footer-social"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#" class="footer-social"><i class="fab fa-twitter"></i></a>
-                            <a href="#" class="footer-social"><i class="fab fa-instagram"></i></a>
-                            <a href="#" class="footer-social"><i class="fab fa-discord"></i></a>
+                            <a href="https://facebook.com/sharer/sharer.php?u={{ base_url }}" target="_blank" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://twitter.com/intent/tweet?url={{ base_url }}" target="_blank" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="https://instagram.com/sonicegames" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="https://discord.gg/xxxxxx" target="_blank" title="Discord"><i class="fab fa-discord"></i></a>
                         </div>
                     </div>
                     <!-- Categories -->
                     <div class="flex-1 min-w-[180px] mb-8 lg:mb-0">
                         <h4 class="text-lg font-bold mb-3 text-white">Categories</h4>
-                        <ul class="space-y-2 text-sm text-gray-300">
-                            <li><a href="{{ base_url }}/category/action" class="hover:text-blue-400">Action Games</a></li>
-                            <li><a href="{{ base_url }}/category/puzzle" class="hover:text-blue-400">Puzzle Games</a></li>
-                            <li><a href="{{ base_url }}/category/racing" class="hover:text-blue-400">Racing Games</a></li>
-                            <li><a href="{{ base_url }}/category/sports" class="hover:text-blue-400">Sports Games</a></li>
-                            <li><a href="{{ base_url }}/category/shooter" class="hover:text-blue-400">Shooter Games</a></li>
+                        <ul class="grid grid-cols-2 md:grid-cols-3 gap-y-1 gap-x-4 text-sm text-gray-300">
+                            {% for cat in categories %}
+                            <li><a href="{{ base_url }}/category/{{ cat.slug }}" class="hover:text-blue-400">{{ cat.name }}</a></li>
+                            {% endfor %}
                         </ul>
                     </div>
                     <!-- Quick Links -->
@@ -132,9 +131,10 @@
                     <div class="flex-1 min-w-[220px]">
                         <h4 class="text-lg font-bold mb-3 text-white">Newsletter</h4>
                         <p class="mb-2 text-sm text-gray-300">Subscribe to get updates on new games and features.</p>
-                        <form class="flex flex-col space-y-2">
-                            <input type="email" placeholder="Your email address" class="px-3 py-2 rounded-full bg-[#233a6b] border-none text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400">
+                        <form id="newsletterForm" class="flex flex-col space-y-2">
+                            <input type="email" id="newsletterEmail" placeholder="Your email address" class="px-3 py-2 rounded-full bg-[#233a6b] border-none text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400">
                             <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-full transition">Subscribe</button>
+                            <div id="newsletterError" class="text-red-500 mt-2 hidden"></div>
                         </form>
                     </div>
                 </div>
@@ -144,248 +144,87 @@
             </footer>
         </div>
     </div>
-    <!-- 通用用户弹窗 -->
-    <div id="userModal" class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50 hidden pointer-events-none">
-        <div class="bg-white rounded-lg p-8 max-w-md w-full relative pointer-events-auto">
-            <button type="button" id="closeUserModal" class="absolute top-4 right-4 text-gray-400 hover:text-blue-600 text-2xl"><i class="fas fa-times"></i></button>
-            <div id="userModalContent"></div>
+    <!-- 登录弹窗（美化版） -->
+    <div id="loginModal" class="fixed inset-0 z-50 items-center justify-center bg-black bg-opacity-60 hidden">
+        <div class="bg-white rounded-xl shadow-lg p-8 w-full max-w-xs relative">
+            <button id="closeLoginModal" class="absolute top-3 right-3 text-gray-400 hover:text-blue-600 text-2xl">&times;</button>
+            <h2 class="text-2xl font-bold mb-6 text-center text-blue-700">登录</h2>
+            <div id="loginError" class="text-red-500 text-center mb-2 hidden"></div>
+            <input id="loginUsername" type="text" placeholder="用户名/邮箱" class="w-full mb-3 p-2 border rounded text-gray-900 focus:ring-2 focus:ring-blue-400" required>
+            <input id="loginPassword" type="password" placeholder="密码" class="w-full mb-4 p-2 border rounded text-gray-900 focus:ring-2 focus:ring-blue-400" required>
+            <button id="loginSubmit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded font-semibold transition">登录</button>
         </div>
     </div>
+    <style>
+    #loginModal { display: none; }
+    #loginModal.flex { display: flex; }
+    #loginModal .bg-white { animation: popIn .2s cubic-bezier(.4,2,.6,1) both; }
+    @keyframes popIn { from { transform: scale(.8); opacity:0; } to { transform: scale(1); opacity:1; } }
+    </style>
     <script>
-    let currentUser = null;
-
-    function renderUserEntry() {
-        const entry = document.getElementById('user-entry');
-        if (!entry) return;
-        if (!currentUser) {
-            entry.innerHTML = `<button id="loginBtn" class="btn-primary">登录/注册</button>`;
-            document.getElementById('loginBtn').onclick = showLoginModal;
-        } else {
-            entry.innerHTML = `
-                <div class="relative group">
-                    <img src="${currentUser.avatar || '{{ base_url }}/assets/images/icons/logo.png'}" class="w-9 h-9 rounded-full border-2 border-blue-400 cursor-pointer" id="userAvatar">
-                    <div class="absolute right-0 mt-2 w-48 bg-white rounded shadow-lg py-2 z-50 hidden group-hover:block" id="userDropdown">
-                        <div class="px-4 py-2 text-gray-800 border-b">${currentUser.username}</div>
-                        <button id="changeAvatarBtn" class="w-full text-left px-4 py-2 hover:bg-gray-100">更换头像</button>
-                        <button id="logoutBtn" class="w-full text-left px-4 py-2 hover:bg-gray-100 text-red-500">退出登录</button>
-                    </div>
-                </div>
-            `;
-            document.getElementById('logoutBtn').onclick = handleLogout;
-            document.getElementById('changeAvatarBtn').onclick = showAvatarModal;
-        }
-    }
-
-    // 登录弹窗
-    function showLoginModal() {
-        showModal(`
-            <h2 class='text-2xl font-bold mb-4 text-center text-blue-700'>登录</h2>
-            <form id='loginForm'>
-                <input type='text' name='username' placeholder='用户名/邮箱' class='w-full mb-3 p-2 border rounded text-gray-900' required>
-                <input type='password' name='password' placeholder='密码' class='w-full mb-3 p-2 border rounded text-gray-900' required>
-                <button id='loginBtnModal' type='button' class='w-full bg-blue-600 text-white py-2 rounded'>登录</button>
-                <div class='text-center mt-2'>没有账号？<a href='#' id='toRegister' class='text-blue-600 underline'>注册</a> | <a href='#' id='toForgot' class='text-blue-600 underline'>忘记密码</a></div>
-                <div id='loginError' class='text-red-500 text-center mt-2 hidden'></div>
-            </form>
-        `);
-        console.log('准备绑定loginBtnModal');
-        document.getElementById('loginBtnModal').onclick = function(e){
-            console.log('loginBtnModal clicked');
-            handleLogin(e);
-        };
-        document.getElementById('toRegister').onclick = function(e){e.preventDefault();showRegisterModal();};
-        document.getElementById('toForgot').onclick = function(e){e.preventDefault();showForgotModal();};
-    }
-    // 注册弹窗
-    function showRegisterModal() {
-        showModal(`
-            <h2 class='text-2xl font-bold mb-4 text-center text-blue-700'>注册</h2>
-            <form id='registerForm'>
-                <input type='text' name='username' placeholder='用户名' class='w-full mb-3 p-2 border rounded text-gray-900' required>
-                <input type='email' name='email' placeholder='邮箱' class='w-full mb-3 p-2 border rounded text-gray-900' required>
-                <input type='password' name='password' placeholder='密码' class='w-full mb-3 p-2 border rounded text-gray-900' required>
-                <button id='registerBtnModal' type='button' class='w-full bg-blue-600 text-white py-2 rounded'>注册</button>
-                <div class='text-center mt-2'>已有账号？<a href='#' id='toLogin' class='text-blue-600 underline'>登录</a></div>
-                <div id='registerError' class='text-red-500 text-center mt-2 hidden'></div>
-            </form>
-        `);
-        document.getElementById('registerBtnModal').onclick = handleRegister;
-        document.getElementById('toLogin').onclick = function(e){e.preventDefault();showLoginModal();};
-    }
-    // 找回密码弹窗
-    function showForgotModal() {
-        showModal(`
-            <h2 class='text-2xl font-bold mb-4 text-center text-blue-700'>找回密码</h2>
-            <form id='forgotForm'>
-                <input type='email' name='email' placeholder='注册邮箱' class='w-full mb-3 p-2 border rounded text-gray-900' required>
-                <button type='submit' class='w-full bg-blue-600 text-white py-2 rounded'>发送重置邮件</button>
-                <div class='text-center mt-2'>记得密码了？<a href='#' id='toLogin2' class='text-blue-600 underline'>登录</a></div>
-                <div id='forgotError' class='text-red-500 text-center mt-2 hidden'></div>
-            </form>
-        `);
-        document.getElementById('forgotForm').onsubmit = handleForgot;
-        document.getElementById('toLogin2').onclick = function(e){e.preventDefault();showLoginModal();};
-    }
-    // 头像选择弹窗
-    function showAvatarModal() {
-        let avatars = [];
-        for(let i=0;i<9;i++){
-            const seed = Math.random().toString(36).substring(2,10)+Date.now()+i;
-            avatars.push(`https://api.dicebear.com/6.x/pixel-art/svg?seed=${seed}`);
-        }
-        showModal(`
-            <h2 class='text-2xl font-bold mb-4 text-center text-blue-700'>选择头像</h2>
-            <div class='grid grid-cols-3 gap-4 mb-4'>
-                ${avatars.map(url=>`<img src='${url}' class='w-20 h-20 rounded-full border-2 border-blue-300 cursor-pointer hover:scale-110 transition' onclick='setAvatar("${url}")'>`).join('')}
-            </div>
-            <form id='avatarUploadForm' class='mt-4 flex flex-col items-center'>
-                <label class='mb-2 text-gray-700'>或上传自定义头像：</label>
-                <input type='file' name='avatar' accept='image/*' class='mb-2'>
-                <button type='submit' class='bg-blue-600 text-white px-4 py-1 rounded'>上传头像</button>
-                <div id='avatarUploadError' class='text-red-500 text-center mt-2 hidden'></div>
-            </form>
-        `);
-        document.getElementById('avatarUploadForm').onsubmit = handleAvatarUpload;
-    }
-    // 通用弹窗
-    function showModal(html) {
-        let modal = document.getElementById('userModal');
-        if (!modal) {
-            modal = document.createElement('div');
-            modal.id = 'userModal';
-            modal.className = 'fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50';
-            modal.innerHTML = `<div class='bg-white rounded-lg p-8 max-w-md w-full relative'><button type='button' id='closeUserModal' class='absolute top-4 right-4 text-gray-400 hover:text-blue-600 text-2xl'><i class='fas fa-times'></i></button><div id='userModalContent'></div></div>`;
-            document.body.appendChild(modal);
-            document.getElementById('closeUserModal').onclick = closeModal;
-        }
-        document.getElementById('userModalContent').innerHTML = html;
-        modal.classList.remove('hidden');
-    }
-    function closeModal() {
-        document.getElementById('userModal').classList.add('hidden');
-    }
-    // 登录处理
-    async function handleLogin(e) {
-        console.log('handleLogin called');
-        e.preventDefault();
-        const form = e.target.form || e.target;
-        const username = form.username.value.trim();
-        const password = form.password.value;
+    // 弹窗控制
+    const loginModal = document.getElementById('loginModal');
+    const showLoginModal = () => { loginModal.classList.remove('hidden'); loginModal.classList.add('flex'); };
+    const hideLoginModal = () => { loginModal.classList.add('hidden'); loginModal.classList.remove('flex'); };
+    document.getElementById('navLoginBtn').onclick = showLoginModal;
+    document.getElementById('closeLoginModal').onclick = hideLoginModal;
+    loginModal.addEventListener('click', e => { if (e.target === loginModal) hideLoginModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') hideLoginModal(); });
+    // 登录逻辑
+    document.getElementById('loginSubmit').onclick = async function() {
+        const username = document.getElementById('loginUsername').value.trim();
+        const password = document.getElementById('loginPassword').value;
         const errorDiv = document.getElementById('loginError');
         errorDiv.classList.add('hidden');
         errorDiv.innerText = '';
-        const res = await fetch('{{ base_url }}/api/login.php', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({username, password})
-        });
-        const data = await res.json();
-        if (data.success) {
-            window.location.href = '{{ base_url }}/';
-        } else {
-            errorDiv.innerText = data.message || '登录失败';
+        if (!username || !password) {
+            errorDiv.innerText = '请输入用户名和密码';
             errorDiv.classList.remove('hidden');
+            return;
         }
-    }
-    // 注册处理
-    async function handleRegister(e) {
-        e.preventDefault();
-        const form = e.target.form || e.target;
-        const username = form.username.value.trim();
-        const email = form.email.value.trim();
-        const password = form.password.value;
-        const errorDiv = document.getElementById('registerError');
-        errorDiv.classList.add('hidden');
-        errorDiv.innerText = '';
-        const res = await fetch('{{ base_url }}/api/register.php', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({username, email, password})
-        });
-        const data = await res.json();
-        if (data.success) {
-            window.location.href = '{{ base_url }}/';
-        } else {
-            errorDiv.innerText = data.message || '注册失败';
-            errorDiv.classList.remove('hidden');
-        }
-    }
-    // 找回密码处理
-    async function handleForgot(e) {
-        e.preventDefault();
-        const form = e.target;
-        const email = form.email.value.trim();
-        const errorDiv = document.getElementById('forgotError');
-        errorDiv.classList.add('hidden');
-        errorDiv.innerText = '';
-        const res = await fetch('{{ base_url }}/api/forgot.php', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({email})
-        });
-        const data = await res.json();
-        if (data.success) {
-            showModal(`<div class='text-green-600 text-center py-8'>重置链接已生成，请查收邮箱！<br><span class='break-all'>${data.reset_link || ''}</span></div>`);
-        } else {
-            errorDiv.innerText = data.message || '发送失败';
-            errorDiv.classList.remove('hidden');
-        }
-    }
-    // 头像选择
-    async function setAvatar(url) {
-        const res = await fetch('{{ base_url }}/api/set-avatar.php', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({avatar: url})
-        });
-        const data = await res.json();
-        if(data.success){ window.location.reload(); }
-    }
-    // 上传头像
-    async function handleAvatarUpload(e) {
-        e.preventDefault();
-        const form = e.target;
-        const file = form.avatar.files[0];
-        const errorDiv = document.getElementById('avatarUploadError');
-        errorDiv.classList.add('hidden');
-        errorDiv.innerText = '';
-        if(!file){ errorDiv.innerText='请选择图片'; errorDiv.classList.remove('hidden'); return; }
-        const fd = new FormData();
-        fd.append('avatar', file);
-        const res = await fetch('{{ base_url }}/api/upload-avatar.php', {method:'POST',body:fd,credentials:'include'});
-        const data = await res.json();
-        if(data.success){ window.location.reload(); }
-        else{ errorDiv.innerText = data.message || '上传失败'; errorDiv.classList.remove('hidden'); }
-    }
-    // 登出
-    async function handleLogout() {
-        await fetch('{{ base_url }}/api/logout.php', {method: 'POST'});
-        window.location.href = '{{ base_url }}/';
-    }
-    // 登录态检测
-    async function checkUser() {
-        const res = await fetch('{{ base_url }}/api/userinfo.php');
-        const data = await res.json();
-        currentUser = data.user || null;
-        renderUserEntry();
-    }
-    checkUser();
-    window.handleLogin = handleLogin;
-    window.handleRegister = handleRegister;
-    // 事件委托，彻底兜底弹窗按钮点击
-    if (typeof window._modalBtnDelegate === 'undefined') {
-        window._modalBtnDelegate = true;
-        document.body.addEventListener('click', function(e) {
-            if (e.target && e.target.id === 'loginBtnModal') {
-                console.log('loginBtnModal delegate clicked');
-                handleLogin(e);
+        // 发起登录请求
+        try {
+            const res = await fetch('/api/auth/login.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+            const data = await res.json();
+            if (data.success) {
+                errorDiv.classList.add('hidden');
+                alert('登录成功！');
+                // hideLoginModal();
+                window.location.reload();
+            } else {
+                errorDiv.innerText = data.message || '登录失败，请检查用户名和密码';
+                errorDiv.classList.remove('hidden');
             }
-            if (e.target && e.target.id === 'registerBtnModal') {
-                console.log('registerBtnModal delegate clicked');
-                handleRegister(e);
-            }
-        });
-    }
+        } catch (err) {
+            errorDiv.innerText = '网络错误，请稍后再试';
+            errorDiv.classList.remove('hidden');
+        }
+    };
+    document.getElementById('searchForm').onsubmit = function(e) {
+        e.preventDefault();
+        const q = document.getElementById('searchInput').value.trim();
+        if (q) window.location.href = '/search?q=' + encodeURIComponent(q);
+    };
+    document.getElementById('newsletterForm').onsubmit = function(e) {
+        e.preventDefault();
+        const email = document.getElementById('newsletterEmail').value.trim();
+        const errorDiv = document.getElementById('newsletterError');
+        errorDiv.classList.add('hidden');
+        errorDiv.innerText = '';
+        if (!/^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+            errorDiv.innerText = '请输入有效的邮箱地址';
+            errorDiv.classList.remove('hidden');
+            return;
+        }
+        // 这里可以用 fetch/AJAX 提交到后端
+        // fetch('/api/newsletter.php', {method:'POST', body:...})
+        // .then(...).catch(() => { errorDiv.innerText = '提交失败，请稍后再试'; errorDiv.classList.remove('hidden'); });
+        alert('订阅成功！');
+    };
     </script>
 </body>
 </html> 
