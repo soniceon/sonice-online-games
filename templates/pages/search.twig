@@ -1,0 +1,6 @@
+{% extends 'base.twig' %}
+{% block content %}
+    <h1 class="text-2xl font-bold mb-4">Search Results</h1>
+    <p class="mb-6 text-gray-300">Results for: <span class="font-semibold">{{ app.request.get('q') ?? '' }}</span></p>
+    <div class="bg-dark-lighter rounded-lg p-4 shadow text-white">（这里展示搜索结果，后端可用 q 查询游戏）</div>
+{% endblock %} 

@@ -178,14 +178,17 @@ body {
     min-width: 24px;
     width: 24px;
     height: 24px;
-    margin-right: 1rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-left: 16px;
 }
 
-.sidebar:not(:hover) .sidebar-link {
-    justify-content: center;
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: 16px;
 }
 
 .sidebar:not(:hover) .sidebar-icon {
@@ -364,16 +367,10 @@ body {
 .sidebar:hover .sidebar-link:focus {
   padding-left: 2.5rem !important; /* 增加左侧内边距 */
 }
-.sidebar:hover .sidebar-icon {
-  margin-left: 0.5rem !important; /* 图标整体右移 */
-}
 
 /* 保证收起时不受影响 */
 .sidebar .sidebar-link {
   padding-left: 0 !important;
-}
-.sidebar .sidebar-icon {
-  margin-left: 0 !important;
 }
 
 /* 侧边栏收起时所有父级都宽64px且居中 */
@@ -407,6 +404,7 @@ body {
     align-items: center !important;
     margin: 0 auto !important;
     box-sizing: border-box !important;
+    padding: 0 !important;
 }
 /* 强制侧边栏图标始终居中 */
 .sidebar ul li .sidebar-icon,
@@ -474,10 +472,6 @@ body {
 }
 #sidebar:hover ul li > a {
     justify-content: flex-start;
-}
-#sidebar ul li > a > span[style] {
-    margin-left: 12px !important; /* 图标整体右移 */
-    margin-right: 0 !important;
 }
 
 /* 兼容id和class的侧边栏滚动条隐藏 */

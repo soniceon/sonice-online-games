@@ -1,29 +1,29 @@
 {% extends "base.twig" %}
+
 {% block content %}
-<h2 class="text-3xl font-bold mb-6 text-white">{{ category.name }}</h2>
-<p class="mb-4 text-gray-300">{{ category.description }}</p>
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-    {% for game in games %}
-    <div class="card relative overflow-hidden">
-        <a href="/game/{{ game.slug }}" class="block relative">
-            <img src="{{ game.thumbnail }}" alt="{{ game.title }}" class="card-img h-60 object-cover w-full rounded-2xl rounded-b-none">
-            <div class="absolute top-3 right-3 z-10">
-                <button class="favorite-btn p-2 bg-black bg-opacity-50 rounded-full hover:bg-opacity-75 transition-colors shadow" data-game-id="{{ game.id }}">
-                    <i class="fas fa-heart {% if game.is_favorite %}text-red-500{% else %}text-white{% endif %}"></i>
-                </button>
+<div class="content-wrapper" style="margin-top: 104px;">
+  <div class="flex flex-col items-center">
+    <h1 class="text-3xl font-bold mb-6 text-white">{{ category_name }} Games</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 w-full max-w-7xl">
+      {% for game in category_games %}
+      <div class="game-card bg-blue-700/60 rounded-xl overflow-hidden shadow-lg flex flex-col">
+        <a href="{{ base_url }}/game/{{ game.slug }}" class="block">
+          <img src="{{ base_url }}/assets/images/games/{{ game.slug }}.webp" alt="{{ game.title }}" class="w-full h-40 object-cover"
+               onerror="this.onerror=null;this.src='/assets/images/defaults/game-default.webp';">
+          <div class="p-4">
+            <h3 class="text-lg font-semibold mb-1 text-white">{{ game.title }}</h3>
+            <div class="flex flex-wrap gap-1 mt-2">
+              {% for cat in game.categories %}
+              <a href="{{ base_url }}/category/{{ cat|lower|replace({' ':'-'}) }}" class="bg-blue-primary px-2 py-1 rounded-full text-xs text-white hover:bg-blue-800 transition">{{ cat }}</a>
+              {% endfor %}
             </div>
-            <div class="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-black/80 to-transparent z-0"></div>
+          </div>
         </a>
-        <div class="absolute bottom-0 left-0 right-0 p-5 z-10">
-            <h3 class="text-xl font-bold mb-2 text-white">
-                <a href="/game/{{ game.slug }}" class="hover:text-blue-400 transition-colors">{{ game.title }}</a>
-            </h3>
-            <div class="flex items-center justify-between text-base text-gray-200">
-                <span>{{ game.category }}</span>
-                <span>{{ game.plays }} plays</span>
-            </div>
-        </div>
+      </div>
+      {% else %}
+      <div class="text-white/70 col-span-full">No games found in this category.</div>
+      {% endfor %}
     </div>
-    {% endfor %}
+  </div>
 </div>
 {% endblock %} 

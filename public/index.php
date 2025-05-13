@@ -36,7 +36,7 @@ if ($isLoggedIn) {
 // Get the current page from URL
 $requestUri = $_SERVER['REQUEST_URI'];
 $scriptName = dirname($_SERVER['SCRIPT_NAME']);
-$basePath = rtrim($scriptName, '/');
+$basePath = '';
 $path = substr($requestUri, strlen($basePath));
 $path = trim($path, '/');
 
@@ -97,35 +97,84 @@ $categoryMap = [
     'strategy' => ['name' => 'Strategy', 'icon' => 'fas fa-chess'],
 ];
 
+// CSV驱动游戏数据
+function load_games_from_csv($csvFile) {
+    $games = [];
+    if (($handle = fopen($csvFile, "r")) !== FALSE) {
+        $header = fgetcsv($handle);
+        while (($row = fgetcsv($handle)) !== FALSE) {
+            if (count($row) < 3) continue;
+            $game = [
+                'title' => $row[0],
+                'iframe_url' => $row[1],
+                'categories' => array_slice($row, 2),
+            ];
+            $game['slug'] = strtolower(str_replace([' ', "'", ":"], ['-', '', ''], $game['title']));
+            $imgPath = __DIR__ . '/assets/images/games/' . $game['slug'] . '.webp';
+            // 过滤无图片或无有效iframe的游戏
+            if (!file_exists($imgPath)) continue;
+            if (empty($game['iframe_url']) || !preg_match('#^https?://#', $game['iframe_url'])) continue;
+            $games[] = $game;
+        }
+        fclose($handle);
+    }
+    return $games;
+}
+$csvFile = __DIR__ . '/../游戏iframe.CSV';
+$games = load_games_from_csv($csvFile);
+// 首页和新游都用CSV
+$data['featured_games'] = $games;
+$data['new_games'] = $games;
+
+// 分类slug到游戏的映射
+$categoryGames = [];
+foreach ($games as $game) {
+    foreach ($game['categories'] as $catName) {
+        $catSlug = strtolower(str_replace([' ', "'", ":"], ['-', '', ''], $catName));
+        if (!isset($categoryGames[$catSlug])) $categoryGames[$catSlug] = [];
+        $categoryGames[$catSlug][] = $game;
+    }
+}
+// 给每个分类加上 games 字段
+foreach ($data['categories'] as &$cat) {
+    $catSlug = $cat['slug'];
+    $cat['games'] = $categoryGames[$catSlug] ?? [];
+}
+unset($cat);
+// 首页热门分类
+$data['popular_categories'] = array_slice($data['categories'], 0, 6);
+
 // 自动分类路由匹配，优先于switch($path)
 if (preg_match('#^category/([a-z0-9-]+)$#', $path, $matches)) {
     $slug = $matches[1];
-    if (isset($categoryMap[$slug])) {
-        // 假数据，实际应查数据库
-        $games = [
-            [
-                'id' => 1,
-                'slug' => 'super-adventure',
-                'title' => 'Super Adventure',
-                'thumbnail' => $basePath . '/assets/images/games/game1.jpg',
-                'category' => $categoryMap[$slug]['name'],
-                'plays' => 15000,
-                'is_favorite' => false,
-                'is_new' => true
-            ],
-            // ... 其它游戏
-        ];
-        $category = [
-            'slug' => $slug,
-            'name' => $categoryMap[$slug]['name'],
-            'icon' => $categoryMap[$slug]['icon'],
-            'count' => count($games)
-        ];
-        $data['category'] = $category;
-        $data['games'] = $games;
-        $data['total_pages'] = 1;
-        $data['current_page'] = 1;
-        echo $twig->render('category.twig', $data);
+    foreach ($data['categories'] as $cat) {
+        if ($cat['slug'] === $slug) {
+            $data['category'] = $cat;
+            $data['category_name'] = $cat['name'];
+            $data['category_games'] = $cat['games'];
+            $data['total_pages'] = 1;
+            $data['current_page'] = 1;
+            echo $twig->render('category.twig', $data);
+            exit;
+        }
+    }
+    echo $twig->render('404.twig', $data);
+    exit;
+}
+
+// 处理 /game/{slug} 路由
+if (preg_match('#^game/([a-zA-Z0-9-_]+)$#', $path, $matches)) {
+    $slug = $matches[1];
+    $game = null;
+    foreach ($games as $g) {
+        if ($g['slug'] === $slug) {
+            $game = $g;
+            break;
+        }
+    }
+    if ($game) {
+        $data['game'] = $game;
+        echo $twig->render('game-detail.twig', $data);
         exit;
     } else {
         echo $twig->render('404.twig', $data);
@@ -133,125 +182,25 @@ if (preg_match('#^category/([a-z0-9-]+)$#', $path, $matches)) {
     }
 }
 
-// 处理 /game/{slug} 路由
-if (preg_match('#^game/([a-zA-Z0-9-_]+)$#', $path, $matches)) {
-    $slug = $matches[1];
-    // 假数据，实际应查数据库
-    $game = [
-        'title' => 'Super Adventure',
-        'thumbnail' => $basePath . '/assets/images/games/game1.jpg',
-        'category' => 'Adventure',
-        'plays' => 15000,
-        'release_date' => '2024-01-01',
-        'description' => '一款超好玩的冒险游戏！',
-        'long_description' => '<p>这里是详细介绍，可以包含HTML。</p>'
-    ];
-    $related_games = [
-        [
-            'slug' => 'space-shooter',
-            'title' => 'Space Shooter',
-            'thumbnail' => $basePath . '/assets/images/games/game2.jpg',
-            'category' => 'Shooter'
-        ],
-        [
-            'slug' => 'racing-fever',
-            'title' => 'Racing Fever',
-            'thumbnail' => $basePath . '/assets/images/games/game3.jpg',
-            'category' => 'Racing'
-        ]
-        // ...更多相关游戏
-    ];
-    $data['game'] = $game;
-    $data['related_games'] = $related_games;
-    echo $twig->render('game-detail.twig', $data);
-    exit;
-}
-
 // Add page-specific data
 switch ($path) {
     case '':
     case 'home':
         $data['page_title'] = 'Home';
-        $data['featured_games'] = [
-            [
-                'id' => 1,
-                'title' => 'Super Adventure',
-                'slug' => 'super-adventure',
-                'thumbnail' => $basePath . '/assets/images/games/game1.jpg',
-                'category' => 'Adventure',
-                'plays' => 15000,
-                'is_favorite' => false
-            ],
-            [
-                'id' => 2,
-                'title' => 'Space Shooter',
-                'slug' => 'space-shooter',
-                'thumbnail' => $basePath . '/assets/images/games/game2.jpg',
-                'category' => 'Shooter',
-                'plays' => 12000,
-                'is_favorite' => true
-            ],
-            [
-                'id' => 3,
-                'title' => 'Racing Fever',
-                'slug' => 'racing-fever',
-                'thumbnail' => $basePath . '/assets/images/games/game3.jpg',
-                'category' => 'Racing',
-                'plays' => 9000,
-                'is_favorite' => false
-            ],
-            [
-                'id' => 4,
-                'title' => 'Puzzle Master',
-                'slug' => 'puzzle-master',
-                'thumbnail' => $basePath . '/assets/images/games/game4.jpg',
-                'category' => 'Puzzle',
-                'plays' => 7500,
-                'is_favorite' => false
-            ]
-        ];
-        $data['new_games'] = [
-            [
-                'id' => 5,
-                'title' => 'Zombie Defense',
-                'slug' => 'zombie-defense',
-                'thumbnail' => $basePath . '/assets/images/games/game5.jpg',
-                'category' => 'Action',
-                'plays' => 5000,
-                'is_new' => true,
-                'is_favorite' => false
-            ],
-            [
-                'id' => 6,
-                'title' => 'Card Kingdom',
-                'slug' => 'card-kingdom',
-                'thumbnail' => $basePath . '/assets/images/games/game6.jpg',
-                'category' => 'Cards',
-                'plays' => 3000,
-                'is_new' => true,
-                'is_favorite' => false
-            ],
-            [
-                'id' => 7,
-                'title' => 'Soccer Star',
-                'slug' => 'soccer-star',
-                'thumbnail' => $basePath . '/assets/images/games/game7.jpg',
-                'category' => 'Sports',
-                'plays' => 2000,
-                'is_new' => true,
-                'is_favorite' => false
-            ],
-            [
-                'id' => 8,
-                'title' => 'Chess Master',
-                'slug' => 'chess-master',
-                'thumbnail' => $basePath . '/assets/images/games/game8.jpg',
-                'category' => 'Strategy',
-                'plays' => 1500,
-                'is_new' => true,
-                'is_favorite' => false
-            ]
-        ];
+        // 自动同步首页游戏与详情页
+        $games = [];
+        $gamesDir = __DIR__ . '/../templates/pages/games/';
+        foreach (glob($gamesDir . '*.twig') as $file) {
+            $slug = basename($file, '.twig');
+            $games[] = [
+                'slug' => $slug,
+                'title' => ucwords(str_replace('-', ' ', $slug)),
+                'category' => 'Unknown',
+                'plays' => rand(1000, 10000)
+            ];
+        }
+        $data['featured_games'] = $games;
+        $data['new_games'] = $games;
         $data['popular_categories'] = array_slice($data['categories'], 0, 6);
         echo $twig->render('home.twig', $data);
         exit;

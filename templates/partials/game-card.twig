@@ -1,6 +1,6 @@
 <!-- Game Card -->
 <div class="game-card">
-    <img src="{{ game.image }}" alt="{{ game.title }}" class="game-card-image">
+    <img src="{{ base_url }}/{{ game.image }}" alt="{{ game.title }}" class="game-card-image" loading="lazy" onerror="this.onerror=null;this.src='{{ base_url }}/assets/images/defaults/game-default.webp';">
     <div class="game-card-content">
         <h3 class="game-card-title">{{ game.title }}</h3>
         <p class="game-card-description">{{ game.description }}</p>
@@ -13,7 +13,7 @@
 </div> 
  
 <div class="game-card">
-    <img src="{{ game.image }}" alt="{{ game.title }}" class="game-card-image">
+    <img src="{{ base_url }}/{{ game.image }}" alt="{{ game.title }}" class="game-card-image" loading="lazy" onerror="this.onerror=null;this.src='{{ base_url }}/assets/images/defaults/game-default.webp';">
     <div class="game-card-content">
         <h3 class="game-card-title">{{ game.title }}</h3>
         <p class="game-card-description">{{ game.description }}</p>

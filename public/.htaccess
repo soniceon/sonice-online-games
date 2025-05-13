@@ -1,4 +1,10 @@
 RewriteEngine On
+
+# 允许静态资源直通
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^ - [L]
+
+# 其它 rewrite 规则...
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . index.php [L] 
+RewriteRule ^ index.php [QSA,L] 
