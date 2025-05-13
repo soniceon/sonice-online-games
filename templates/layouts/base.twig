@@ -92,56 +92,10 @@
                     {% block content %}{% endblock %}
                 </div>
             </main>
-            <footer class="w-full bg-dark-lighter text-gray-200 pt-12 pb-6 mt-0 border-t border-gray-800">
-                <div class="w-full px-4 flex flex-col lg:flex-row lg:justify-between gap-8">
-                    <!-- Logo & About -->
-                    <div class="flex-1 min-w-[220px] mb-8 lg:mb-0">
-                        <div class="flex items-center mb-4">
-                            <img src="{{ base_url }}/assets/images/icons/logo.png" alt="Sonice.Games" class="h-10 w-10 rounded-full mr-2">
-                            <span class="text-2xl font-bold text-white">Sonice<span class="text-blue-400">.Games</span></span>
-                        </div>
-                        <p class="mb-4 text-sm text-gray-300">Play the best online games for free. New games added daily!</p>
-                        <div class="flex space-x-4 text-xl">
-                            <a href="https://facebook.com/sharer/sharer.php?u={{ base_url }}" target="_blank" title="Share on Facebook"><i class="fab fa-facebook-f"></i></a>
-                            <a href="https://twitter.com/intent/tweet?url={{ base_url }}" target="_blank" title="Share on Twitter"><i class="fab fa-twitter"></i></a>
-                            <a href="https://instagram.com/sonicegames" target="_blank" title="Instagram"><i class="fab fa-instagram"></i></a>
-                            <a href="https://discord.gg/xxxxxx" target="_blank" title="Discord"><i class="fab fa-discord"></i></a>
-                        </div>
-                    </div>
-                    <!-- Categories -->
-                    <div class="flex-1 min-w-[180px] mb-8 lg:mb-0">
-                        <h4 class="text-lg font-bold mb-3 text-white">Categories</h4>
-                        <ul class="grid grid-cols-2 md:grid-cols-3 gap-y-1 gap-x-4 text-sm text-gray-300">
-                            {% for cat in categories %}
-                            <li><a href="{{ base_url }}/category/{{ cat.slug }}" class="hover:text-blue-400">{{ cat.name }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    <!-- Quick Links -->
-                    <div class="flex-1 min-w-[180px] mb-8 lg:mb-0">
-                        <h4 class="text-lg font-bold mb-3 text-white">Quick Links</h4>
-                        <ul class="space-y-2 text-sm text-gray-300">
-                            <li><a href="{{ base_url }}/about" class="hover:text-blue-400">About Us</a></li>
-                            <li><a href="{{ base_url }}/contact" class="hover:text-blue-400">Contact</a></li>
-                            <li><a href="{{ base_url }}/privacy" class="hover:text-blue-400">Privacy Policy</a></li>
-                            <li><a href="{{ base_url }}/terms" class="hover:text-blue-400">Terms of Service</a></li>
-                        </ul>
-                    </div>
-                    <!-- Newsletter -->
-                    <div class="flex-1 min-w-[220px]">
-                        <h4 class="text-lg font-bold mb-3 text-white">Newsletter</h4>
-                        <p class="mb-2 text-sm text-gray-300">Subscribe to get updates on new games and features.</p>
-                        <form id="newsletterForm" class="flex flex-col space-y-2">
-                            <input type="email" id="newsletterEmail" placeholder="Your email address" class="px-3 py-2 rounded-full bg-[#233a6b] border-none text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400">
-                            <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-full transition">Subscribe</button>
-                            <div id="newsletterError" class="text-red-500 mt-2 hidden"></div>
-                        </form>
-                    </div>
-                </div>
-                <div class="w-full px-4 mt-8 border-t border-blue-900 pt-4 text-center text-xs text-gray-400">
-                    © 2023-2024 Sonice.Games. All rights reserved.
-                </div>
-            </footer>
+            <script>
+                window.allGameSlugs = {{ (games is defined and games is iterable) ? games|column('slug')|json_encode|raw : '[]' }};
+            </script>
+            {% include 'footer.twig' %}
         </div>
     </div>
     <!-- 登录弹窗（美化版） -->

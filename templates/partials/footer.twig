@@ -1,46 +1,27 @@
-<!-- 页脚 -->
-<footer class="footer" style="background: #181c2f; margin-left:64px; border-top:1px solid rgba(255,255,255,0.08);">
-    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div>
-            <a href="{{ base_url }}/" class="flex items-center mb-4">
-                <img src="{{ base_url }}/assets/images/icons/logo.png" alt="{{ site_name }}" class="w-10 h-10 mr-2">
-                <span class="text-2xl font-bold"><span class="text-white">Sonice</span><span class="text-blue-400">.Games</span></span>
-            </a>
-            <p class="text-gray-300 mb-2">Play the best online games for free. New games added daily!</p>
-            <div class="flex space-x-3 mt-2">
-                <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-discord"></i></a>
-            </div>
-        </div>
-        <div>
-            <h3 class="text-lg font-semibold mb-3">Categories</h3>
-            <ul class="space-y-1">
-                <li><a href="{{ base_url }}/category/action" class="hover:text-blue-300">Action Games</a></li>
-                <li><a href="{{ base_url }}/category/puzzle" class="hover:text-blue-300">Puzzle Games</a></li>
-                <li><a href="{{ base_url }}/category/racing" class="hover:text-blue-300">Racing Games</a></li>
-                <li><a href="{{ base_url }}/category/sports" class="hover:text-blue-300">Sports Games</a></li>
-                <li><a href="{{ base_url }}/category/shooter" class="hover:text-blue-300">Shooter Games</a></li>
-            </ul>
-        </div>
-        <div>
-            <h3 class="text-lg font-semibold mb-3">Quick Links</h3>
-            <ul class="space-y-1">
-                <li><a href="{{ base_url }}/about" class="hover:text-blue-300">About Us</a></li>
-                <li><a href="{{ base_url }}/contact" class="hover:text-blue-300">Contact</a></li>
-                <li><a href="{{ base_url }}/privacy" class="hover:text-blue-300">Privacy Policy</a></li>
-                <li><a href="{{ base_url }}/terms" class="hover:text-blue-300">Terms of Service</a></li>
-            </ul>
-        </div>
-        <div>
-            <h3 class="text-lg font-semibold mb-3">Newsletter</h3>
-            <p class="text-gray-300 mb-2">Subscribe to get updates on new games and features.</p>
-            <form class="flex flex-col space-y-2">
-                <input type="email" placeholder="Your email address" class="px-3 py-2 rounded bg-white/20 text-white placeholder-gray-300 focus:outline-none focus:bg-white/30" />
-                <button type="submit" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded">Subscribe</button>
-            </form>
-        </div>
+<script>
+    window.allGameSlugs = {{ (games is defined and games is iterable) ? games|column('slug')|json_encode|raw : '[]' }};
+</script>
+<!-- 页脚按钮，仅保留按钮，无背景 -->
+<div class="w-full flex flex-col items-center justify-center my-8">
+    <div class="flex flex-row items-center justify-center gap-6">
+        <button id="randomGameBtn" class="flex items-center px-8 py-3 rounded-full border border-black text-black font-semibold text-lg bg-white shadow-lg hover:bg-gray-100 transition">
+            <i class="fa-solid fa-dice-six mr-2"></i> Random game
+        </button>
+        <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="flex items-center px-8 py-3 rounded-full bg-purple-600 hover:bg-purple-700 text-white font-semibold text-lg transition">
+            <i class="fa-solid fa-arrow-up mr-2"></i> Back to top
+        </button>
     </div>
-    <div class="text-center text-gray-400 mt-8 text-sm">&copy; 2023-2024 {{ site_name }}. All rights reserved.</div>
-</footer> 
- 
+</div>
+<script>
+// 假设所有游戏链接都在 window.allGameSlugs 数组里
+if (window.allGameSlugs && Array.isArray(window.allGameSlugs)) {
+    document.getElementById('randomGameBtn').onclick = function() {
+        if(window.allGameSlugs.length > 0) {
+            var slug = window.allGameSlugs[Math.floor(Math.random() * window.allGameSlugs.length)];
+            window.location.href = '/game/' + slug;
+        } else {
+            alert('No games found!');
+        }
+    };
+}
+</script> 

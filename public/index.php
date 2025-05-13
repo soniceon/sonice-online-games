@@ -39,6 +39,7 @@ $scriptName = dirname($_SERVER['SCRIPT_NAME']);
 $basePath = '';
 $path = substr($requestUri, strlen($basePath));
 $path = trim($path, '/');
+$path = explode('?', $path, 2)[0];
 
 // Twig 初始化后立即初始化 $data
 $data = [
@@ -188,19 +189,19 @@ switch ($path) {
     case 'home':
         $data['page_title'] = 'Home';
         // 自动同步首页游戏与详情页
-        $games = [];
-        $gamesDir = __DIR__ . '/../templates/pages/games/';
-        foreach (glob($gamesDir . '*.twig') as $file) {
-            $slug = basename($file, '.twig');
-            $games[] = [
-                'slug' => $slug,
-                'title' => ucwords(str_replace('-', ' ', $slug)),
-                'category' => 'Unknown',
-                'plays' => rand(1000, 10000)
-            ];
-        }
-        $data['featured_games'] = $games;
-        $data['new_games'] = $games;
+        // $games = [];
+        // $gamesDir = __DIR__ . '/../templates/pages/games/';
+        // foreach (glob($gamesDir . '*.twig') as $file) {
+        //     $slug = basename($file, '.twig');
+        //     $games[] = [
+        //         'slug' => $slug,
+        //         'title' => ucwords(str_replace('-', ' ', $slug)),
+        //         'category' => 'Unknown',
+        //         'plays' => rand(1000, 10000)
+        //     ];
+        // }
+        // $data['featured_games'] = $games;
+        // $data['new_games'] = $games;
         $data['popular_categories'] = array_slice($data['categories'], 0, 6);
         echo $twig->render('home.twig', $data);
         exit;
@@ -241,6 +242,11 @@ switch ($path) {
         $data['page_title'] = 'Dashboard';
         echo $twig->render('dashboard.twig', $data);
         exit;
+    case 'search':
+        $data['page_title'] = '搜索结果';
+        $data['search_query'] = $_GET['q'] ?? '';
+        echo $twig->render('search.twig', $data);
+        exit;
         
     default:
         // If no matching route found, show 404
@@ -260,6 +266,8 @@ switch ($path) {
 //         $data[$key] = [];
 //     }
 // }
+
+$data['games'] = $games;
 
 try {
     // Attempt to load and render the template
