@@ -33,15 +33,20 @@
             theme: {
                 extend: {
                     colors: {
-                        'dark': '#0F1012',
-                        'dark-lighter': '#1A1B1F',
-                        'blue-primary': '#0EA5E9',
-                        'blue-secondary': '#38BDF8',
-                        'blue-bright': '#7DD3FC',
-                        'purple-primary': '#7C3AED',
-                        'gray-custom': '#2A2B31',
-                        'sidebar-blue': '#152a69',
-                        'sidebar-hover': '#1d3a8f'
+                        'dark': '#171123',
+                        'dark-lighter': '#211A30',
+                        'blue-primary': '#5039A6',
+                        'blue-secondary': '#764AF2',
+                        'blue-bright': '#8D66FF',
+                        'purple-primary': '#9C3EE9',
+                        'pink-accent': '#FF36AB',
+                        'cyan-accent': '#00E1CA',
+                        'lime-accent': '#7DEB69',
+                        'yellow-accent': '#FFCC17',
+                        'orange-accent': '#FF7B2F',
+                        'gray-custom': '#332E44',
+                        'sidebar-bg': '#1F143D',
+                        'sidebar-hover': '#2F1F5A'
                     }
                 }
             }
@@ -49,46 +54,414 @@
     </script>
     <style>
         body {
-            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #60a5fa 100%) !important;
+            background: linear-gradient(135deg, #1F143D 0%, #30175E 50%, #5039A6 100%) !important;
             color: #ffffff;
         }
         .content-wrapper {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            background: linear-gradient(135deg, #211A30 0%, #422080 100%);
         }
+        
+        /* Logo动画效果 */
+        .logo-image {
+            transition: transform 0.5s ease;
+            transform-style: preserve-3d;
+            perspective: 500px;
+        }
+        .logo-image:hover {
+            transform: rotate(10deg) scale(1.1);
+        }
+        
+        /* 自动旋转效果 */
+        @keyframes floatAnimation {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-3px) rotate(3deg);
+            }
+            50% {
+                transform: translateY(0) rotate(0deg);
+            }
+            75% {
+                transform: translateY(3px) rotate(-3deg);
+            }
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+        }
+        
+        .auto-animate {
+            animation: floatAnimation 6s ease-in-out infinite;
+        }
+        
+        /* 3D翻转效果 */
+        .logo-container {
+            perspective: 1000px;
+            position: relative;
+        }
+        
+        .logo-flip {
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+        
+        /* 自动翻转效果 */
+        @keyframes autoFlip {
+            0%, 80% {
+                transform: rotateY(0deg);
+            }
+            90%, 100% {
+                transform: rotateY(180deg);
+            }
+        }
+        
+        .auto-flip {
+            animation: autoFlip 12s ease-in-out infinite;
+        }
+        
+        .logo-front, .logo-back {
+            backface-visibility: hidden;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-back {
+            transform: rotateY(180deg);
+            background: linear-gradient(135deg, #5039A6, #764AF2);
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        /* 网站名动画效果 */
+        .site-name {
+            position: relative;
+            display: inline-block;
+        }
+        .site-name .games-text {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        /* 自动文字动画 */
+        @keyframes textWave {
+            0% {
+                letter-spacing: 0;
+                text-shadow: 0 0 0px rgba(59, 130, 246, 0);
+            }
+            30% {
+                letter-spacing: 1px;
+                text-shadow: 0 0 8px rgba(59, 130, 246, 0.5);
+            }
+            100% {
+                letter-spacing: 0;
+                text-shadow: 0 0 0px rgba(59, 130, 246, 0);
+            }
+        }
+        
+        .wave-text {
+            animation: textWave 8s ease-in-out infinite;
+        }
+        
+        /* 文字发光效果 */
+        @keyframes glow {
+            0% {
+                text-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 20px rgba(96, 165, 250, 0.8), 0 0 30px rgba(59, 130, 246, 0.5);
+            }
+            100% {
+                text-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+            }
+        }
+        
+        .glow-text {
+            animation: glow 3s infinite;
+        }
+        
+        /* 闪烁效果 */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        .blink-effect {
+            animation: blink 3.5s infinite;
+        }
+        
+        /* 脉冲效果 */
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        /* 颜色渐变动画 */
+        @keyframes colorGradient {
+            0% { color: #3b82f6; } /* 蓝色开始 */
+            20% { color: #8D66FF; } /* 紫色 */
+            40% { color: #FF36AB; } /* 粉色 */
+            60% { color: #00E1CA; } /* 青色 */
+            80% { color: #0EA5E9; } /* 新增天蓝色 */
+            100% { color: #3b82f6; } /* 回到蓝色 */
+        }
+        
+        .gradient-text {
+            animation: colorGradient 8s linear infinite;
+        }
+        
+        /* 波浪浮动动画 */
+        @keyframes waveFloat {
+            0% {
+                transform: translateY(0px) translateX(0px) rotate(0deg);
+            }
+            25% {
+                transform: translateY(-3px) translateX(1px) rotate(1deg);
+            }
+            50% {
+                transform: translateY(0px) translateX(2px) rotate(0deg);
+            }
+            75% {
+                transform: translateY(3px) translateX(1px) rotate(-1deg);
+            }
+            100% {
+                transform: translateY(0px) translateX(0px) rotate(0deg);
+            }
+        }
+        
+        .wave-float {
+            display: inline-block;
+            animation: waveFloat 3s ease-in-out infinite;
+            transform-origin: center;
+        }
+        
+        /* 单个字母逐个动画效果 */
+        @keyframes typingEffect {
+            0%, 10% {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            30%, 100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .typing-text span {
+            display: inline-block;
+            opacity: 0;
+            animation-fill-mode: forwards;
+            animation-name: typingEffect;
+            animation-duration: 3s;
+            animation-iteration-count: infinite;
+        }
+        
+        .typing-text span:nth-child(1) { animation-delay: 0s; }
+        .typing-text span:nth-child(2) { animation-delay: 0.3s; }
+        .typing-text span:nth-child(3) { animation-delay: 0.6s; }
+        .typing-text span:nth-child(4) { animation-delay: 0.9s; }
+        .typing-text span:nth-child(5) { animation-delay: 1.2s; }
+        .typing-text span:nth-child(6) { animation-delay: 1.5s; }
+        .typing-text span:nth-child(7) { animation-delay: 1.2s; }
     </style>
 </head>
-<body class="min-h-screen flex flex-col bg-dark text-white">
+<body class="min-h-screen bg-dark text-white">
 {% if categories is not defined or categories is null %}
     {% set categories = [] %}
 {% endif %}
     <!-- Header -->
-    <header class="fixed top-0 left-0 right-0 z-30 bg-dark-lighter bg-opacity-90 backdrop-blur-sm border-b border-gray-800">
+    <header class="fixed top-0 left-0 right-0 z-30 bg-dark-lighter bg-opacity-90 backdrop-blur-sm border-b border-purple-700">
         <div class="container mx-auto px-4 h-16 flex items-center justify-between">
             <!-- Logo -->
             <a href="{{ base_url }}/" class="flex items-center space-x-2">
-                <img src="{{ base_url }}/assets/images/icons/logo.png" alt="Sonice.Games" class="h-10 w-10 rounded-full object-cover">
-                <span class="text-2xl font-bold text-white">Sonice<span class="text-blue-500">.Games</span></span>
+                <div class="logo-container h-10 w-10">
+                    <div class="logo-flip h-10 w-10">
+                        <div class="logo-front">
+                            <img src="{{ base_url }}/assets/images/icons/logo.png" alt="Sonice.Games" class="h-10 w-10 rounded-full object-cover logo-image">
+                        </div>
+                    </div>
+                </div>
+                <span class="text-2xl font-bold text-white site-name">Sonice<span class="text-blue-500 games-text gradient-text typing-text"></span></span>
             </a>
             <!-- Search Bar -->
             <div class="flex-1 max-w-2xl mx-8">
                 <div class="relative">
                     <form id="searchForm" action="/search" method="get" class="relative">
-                        <input type="search" name="q" id="searchInput" placeholder="Search games..." class="w-full px-5 py-2 bg-[#233a6b] border-none rounded-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent shadow-inner">
-                        <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-500 hover:bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center transition">
+                        <input type="search" name="q" id="searchInput" placeholder="Search games..." class="w-full px-5 py-2 bg-gray-custom border-none rounded-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-primary focus:border-transparent shadow-inner">
+                        <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 bg-pink-accent hover:bg-purple-primary text-white rounded-full w-8 h-8 flex items-center justify-center transition">
                             <i class="fas fa-arrow-right"></i>
                         </button>
                     </form>
                 </div>
             </div>
             <!-- 新登录注册入口 -->
-            <button id="navLoginBtn" class="ml-4 px-4 py-2 bg-blue-600 text-white rounded">登录/注册</button>
+            <button id="navLoginBtn" class="ml-4 px-4 py-2 bg-purple-primary hover:bg-blue-bright text-white rounded">登录/注册</button>
         </div>
     </header>
-    <div class="flex flex-1 min-h-0 pt-16">
-        {% include 'sidebar.twig' with {'categories': categories, 'base_url': base_url} %}
-        <div id="mainContent" class="flex-1 flex flex-col min-h-0 ml-14 transition-all duration-300">
-            <main class="flex-1 gradient-blue">
-                <div class="w-full px-0 py-4">
+    <div id="layoutRoot">
+        <nav id="sidebar" style="position: fixed; left: 0; top: 4rem; bottom: 0; width: 56px; transition: width 0.3s; z-index: 20; background: #1F143D; overflow: hidden; box-shadow: 0 0 20px rgba(118, 74, 242, 0.3);">
+            <!-- 侧边栏内容 -->
+            <div style="height: 100%; display: flex; flex-direction: column; overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none;">
+                <style>
+                    #sidebar div::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }
+                    
+                    /* 移除霓虹灯效果 */
+                    /* 按钮渐变背景 */
+                    .gradient-button {
+                        background: linear-gradient(45deg, #5039A6, #764AF2);
+                        transition: all 0.3s;
+                    }
+                    .gradient-button:hover {
+                        background: linear-gradient(45deg, #764AF2, #9C3EE9);
+                        transform: translateY(-2px);
+                        box-shadow: 0 5px 15px rgba(118, 74, 242, 0.4);
+                    }
+                </style>
+                <ul style="list-style: none; padding: 0; margin: 0; flex-grow: 1;">
+                    <li style="margin: 0; padding: 0;">
+                        <a href="{{ base_url }}/" class="sidebar-icon-wrapper" style="display: flex; align-items: center; padding: 0.42rem 1rem; color: white; text-decoration: none;">
+                            <span style="width: 32px; display: flex; justify-content: center;">
+                                <i class="fas fa-home" style="font-size: 1.25rem; color: #00E1CA;"></i>
+                            </span>
+                            <span style="margin-left: 1rem; white-space: nowrap; opacity: 0; transition: opacity 0.2s;" class="sidebar-text">首页</span>
+                        </a>
+                    </li>
+                    <li style="margin: 0; padding: 0;">
+                        <a href="{{ base_url }}/favorites" class="sidebar-icon-wrapper" style="display: flex; align-items: center; padding: 0.42rem 1rem; color: white; text-decoration: none;">
+                            <span style="width: 32px; display: flex; justify-content: center;">
+                                <i class="fas fa-heart" style="font-size: 1.25rem; color: #FF36AB;"></i>
+                            </span>
+                            <span style="margin-left: 1rem; white-space: nowrap; opacity: 0; transition: opacity 0.2s;" class="sidebar-text">收藏</span>
+                        </a>
+                    </li>
+                    <li style="margin: 0; padding: 0;">
+                        <a href="{{ base_url }}/recently-played" class="sidebar-icon-wrapper" style="display: flex; align-items: center; padding: 0.42rem 1rem; color: white; text-decoration: none;">
+                            <span style="width: 32px; display: flex; justify-content: center;">
+                                <i class="fas fa-history" style="font-size: 1.25rem; color: #7DEB69;"></i>
+                            </span>
+                            <span style="margin-left: 1rem; white-space: nowrap; opacity: 0; transition: opacity 0.2s;" class="sidebar-text">最近玩过</span>
+                        </a>
+                    </li>
+                    
+                    <!-- 分类标题 - 内嵌在隐藏文字里，不占用额外空间 -->
+                    {% if categories is defined and categories|length > 0 %}
+                        {% for category in categories %}
+                        <li style="margin: 0; padding: 0;">
+                            <a href="{{ base_url }}/category/{{ category.slug }}" class="sidebar-icon-wrapper" style="display: flex; align-items: center; padding: 0.42rem 1rem; color: white; text-decoration: none;">
+                                <span style="width: 32px; display: flex; justify-content: center;">
+                                    <i class="{{ category.icon|default('fas fa-gamepad') }}" style="font-size: 1.25rem; color: {{ category.color|default('#8D66FF') }};"></i>
+                                </span>
+                                <span style="margin-left: 1rem; white-space: nowrap; opacity: 0; transition: opacity 0.2s;" class="sidebar-text">{{ category.name }}</span>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    {% else %}
+                        <!-- 默认分类，以防categories为空 -->
+                        <li style="margin: 0; padding: 0;">
+                            <a href="{{ base_url }}/category/action" class="sidebar-icon-wrapper" style="display: flex; align-items: center; padding: 0.42rem 1rem; color: white; text-decoration: none;">
+                                <span style="width: 32px; display: flex; justify-content: center;">
+                                    <i class="fas fa-gamepad" style="font-size: 1.25rem; color: #8D66FF;"></i>
+                                </span>
+                                <span style="margin-left: 1rem; white-space: nowrap; opacity: 0; transition: opacity 0.2s;" class="sidebar-text">动作游戏</span>
+                            </a>
+                        </li>
+                        <li style="margin: 0; padding: 0;">
+                            <a href="{{ base_url }}/category/racing" class="sidebar-icon-wrapper" style="display: flex; align-items: center; padding: 0.42rem 1rem; color: white; text-decoration: none;">
+                                <span style="width: 32px; display: flex; justify-content: center;">
+                                    <i class="fas fa-car" style="font-size: 1.25rem; color: #FF7B2F;"></i>
+                                </span>
+                                <span style="margin-left: 1rem; white-space: nowrap; opacity: 0; transition: opacity 0.2s;" class="sidebar-text">赛车游戏</span>
+                            </a>
+                        </li>
+                        <li style="margin: 0; padding: 0;">
+                            <a href="{{ base_url }}/category/sports" class="sidebar-icon-wrapper" style="display: flex; align-items: center; padding: 0.42rem 1rem; color: white; text-decoration: none;">
+                                <span style="width: 32px; display: flex; justify-content: center;">
+                                    <i class="fas fa-futbol" style="font-size: 1.25rem; color: #7DEB69;"></i>
+                                </span>
+                                <span style="margin-left: 1rem; white-space: nowrap; opacity: 0; transition: opacity 0.2s;" class="sidebar-text">体育游戏</span>
+                            </a>
+                        </li>
+                        <li style="margin: 0; padding: 0;">
+                            <a href="{{ base_url }}/category/shooting" class="sidebar-icon-wrapper" style="display: flex; align-items: center; padding: 0.42rem 1rem; color: white; text-decoration: none;">
+                                <span style="width: 32px; display: flex; justify-content: center;">
+                                    <i class="fas fa-crosshairs" style="font-size: 1.25rem; color: #FFCC17;"></i>
+                                </span>
+                                <span style="margin-left: 1rem; white-space: nowrap; opacity: 0; transition: opacity 0.2s;" class="sidebar-text">射击游戏</span>
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+                
+                <!-- 底部信息 -->
+                <div style="padding: 0.75rem; text-align: center; margin-top: auto;">
+                    <div style="margin-bottom: 0.75rem;">
+                        <img src="{{ base_url }}/assets/images/icons/logo.png" alt="Sonice Games" style="width: 32px; height: 32px; margin: 0 auto; object-fit: contain;">
+                        <div style="margin-top: 0.25rem; font-weight: bold; color: white; opacity: 0; transition: opacity 0.2s;" class="sidebar-text">
+                            Sonice<span style="color: #3b82f6;">.Games</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Links -->
+                    <div style="margin-top: 0.75rem; opacity: 0; transition: opacity 0.2s;" class="sidebar-text">
+                        <h3 style="color: white; font-size: 0.875rem; margin-bottom: 0.375rem;">Quick Links</h3>
+                        <ul style="list-style: none; padding: 0; text-align: center;">
+                            <li style="margin-bottom: 0.2rem;"><a href="{{ base_url }}/about" style="color: #a3a3a3; text-decoration: none; font-size: 0.75rem; transition: color 0.2s;" onmouseover="this.style.color='#00E1CA'" onmouseout="this.style.color='#a3a3a3'">About Us</a></li>
+                            <li style="margin-bottom: 0.2rem;"><a href="{{ base_url }}/contact" style="color: #a3a3a3; text-decoration: none; font-size: 0.75rem; transition: color 0.2s;" onmouseover="this.style.color='#00E1CA'" onmouseout="this.style.color='#a3a3a3'">Contact</a></li>
+                            <li style="margin-bottom: 0.2rem;"><a href="{{ base_url }}/privacy" style="color: #a3a3a3; text-decoration: none; font-size: 0.75rem; transition: color 0.2s;" onmouseover="this.style.color='#00E1CA'" onmouseout="this.style.color='#a3a3a3'">Privacy Policy</a></li>
+                            <li style="margin-bottom: 0.2rem;"><a href="{{ base_url }}/terms" style="color: #a3a3a3; text-decoration: none; font-size: 0.75rem; transition: color 0.2s;" onmouseover="this.style.color='#00E1CA'" onmouseout="this.style.color='#a3a3a3'">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Newsletter -->
+                    <div style="margin-top: 0.75rem; opacity: 0; transition: opacity 0.2s;" class="sidebar-text">
+                        <h3 style="color: white; font-size: 0.875rem; margin-bottom: 0.375rem;">Newsletter</h3>
+                        <p style="color: #a3a3a3; font-size: 0.75rem; margin-bottom: 0.25rem;">Subscribe for updates</p>
+                        <form id="newsletterForm" class="flex flex-col items-center" style="margin: 0;">
+                            <input type="email" id="newsletterEmail" placeholder="Your email address" style="width: 100%; padding: 0.4rem; border-radius: 0.25rem; background: rgba(255,255,255,0.1); border: none; color: white; font-size: 0.75rem; margin-bottom: 0.25rem;">
+                            <button type="submit" class="gradient-button" style="width: 100%; padding: 0.4rem; border-radius: 0.25rem; color: white; border: none; font-size: 0.75rem; cursor: pointer;">Subscribe</button>
+                            <div id="newsletterError" class="text-red-500 text-center text-xs mt-1 hidden"></div>
+                        </form>
+                    </div>
+                    
+                    <!-- Social Links -->
+                    <div style="margin-top: 0.75rem; opacity: 0; transition: opacity 0.2s;" class="sidebar-text">
+                        <div style="display: flex; justify-content: center; gap: 0.75rem;">
+                            <a href="#" style="color: #a3a3a3; transition: color 0.2s;" onmouseover="this.style.color='#FF36AB'" onmouseout="this.style.color='#a3a3a3'"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" style="color: #a3a3a3; transition: color 0.2s;" onmouseover="this.style.color='#00E1CA'" onmouseout="this.style.color='#a3a3a3'"><i class="fab fa-twitter"></i></a>
+                            <a href="#" style="color: #a3a3a3; transition: color 0.2s;" onmouseover="this.style.color='#8D66FF'" onmouseout="this.style.color='#a3a3a3'"><i class="fab fa-discord"></i></a>
+                        </div>
+                    </div>
+                    
+                    <!-- Copyright -->
+                    <div style="font-size: 0.7rem; color: #a3a3a3; margin-top: 0.75rem; opacity: 0; transition: opacity 0.2s;" class="sidebar-text">
+                        © 2024 Sonice.Games
+                        <div style="margin-top: 0.125rem;">All rights reserved</div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <div id="mainContent" style="margin-left: 56px; padding-left: 1.5rem; padding-top: 5rem; transition: margin-left 0.3s; background: linear-gradient(135deg, #30175E 0%, #422080 100%); min-height: calc(100vh - 4rem);">
+            <main>
+                <div>
                     {% block content %}{% endblock %}
                 </div>
             </main>
@@ -98,6 +471,111 @@
             {% include 'footer.twig' %}
         </div>
     </div>
+    <script>
+    // 直接用JS控制样式，绝对优先级，无法被覆盖
+    document.addEventListener('DOMContentLoaded', function() {
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('mainContent');
+        const sidebarTexts = document.querySelectorAll('.sidebar-text');
+        
+        if (sidebar && mainContent) {
+            sidebar.addEventListener('mouseenter', () => {
+                sidebar.style.width = '224px';
+                mainContent.style.marginLeft = '224px';
+                // 显示文字
+                sidebarTexts.forEach(text => {
+                    text.style.opacity = '1';
+                });
+                console.log('鼠标进入侧边栏，宽度变为224px');
+            });
+            
+            sidebar.addEventListener('mouseleave', () => {
+                sidebar.style.width = '56px';
+                mainContent.style.marginLeft = '56px';
+                // 隐藏文字
+                sidebarTexts.forEach(text => {
+                    text.style.opacity = '0';
+                });
+                console.log('鼠标离开侧边栏，宽度变回56px');
+            });
+        }
+        
+        // Logo动画效果
+        const logoImage = document.querySelector('.logo-image');
+        const siteName = document.querySelector('.site-name');
+        const gamesText = document.querySelector('.games-text');
+        
+        // 页面加载时动画
+        if (logoImage) {
+            logoImage.style.opacity = '0';
+            logoImage.style.transform = 'translateY(-20px)';
+            setTimeout(() => {
+                logoImage.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                logoImage.style.opacity = '1';
+                logoImage.style.transform = 'translateY(0)';
+            }, 300);
+        }
+        
+        if (siteName) {
+            siteName.style.opacity = '0';
+            siteName.style.transform = 'translateY(-20px)';
+            setTimeout(() => {
+                siteName.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                siteName.style.opacity = '1';
+                siteName.style.transform = 'translateY(0)';
+            }, 500);
+        }
+        
+        // 随机添加脉冲效果
+        setInterval(() => {
+            if (Math.random() > 0.7 && logoImage) {
+                logoImage.classList.add('pulse-animation');
+                setTimeout(() => {
+                    logoImage.classList.remove('pulse-animation');
+                }, 2000);
+            }
+        }, 5000);
+        
+        // 字母跳动效果
+        if (gamesText) {
+            gamesText.addEventListener('mouseover', () => {
+                const text = gamesText.textContent;
+                let html = '';
+                for (let i = 0; i < text.length; i++) {
+                    html += `<span class="hover-letter" style="display:inline-block; transition: transform 0.2s ease ${i * 0.05}s;">${text[i]}</span>`;
+                }
+                gamesText.innerHTML = html;
+                
+                const letters = gamesText.querySelectorAll('.hover-letter');
+                letters.forEach(letter => {
+                    letter.addEventListener('mouseover', () => {
+                        letter.style.transform = 'translateY(-5px)';
+                        letter.style.color = '#60a5fa';
+                    });
+                    letter.addEventListener('mouseout', () => {
+                        letter.style.transform = 'translateY(0)';
+                        letter.style.color = '';
+                    });
+                });
+            }, {once: true});
+        }
+        
+        // 创建字母动画效果
+        if (gamesText) {
+            const text = gamesText.textContent;
+            let html = '';
+            for (let i = 0; i < text.length; i++) {
+                html += `<span class="auto-letter" style="display:inline-block; animation: letterBounce 2s infinite ${i * 0.1}s;">${text[i]}</span>`;
+            }
+            gamesText.innerHTML = html;
+        }
+        
+        // 创建逐字动画效果
+        if (gamesText) {
+            gamesText.innerHTML = '<span>.</span><span>G</span><span>a</span><span>m</span><span>e</span><span>s</span>';
+        }
+    });
+    </script>
     <!-- 登录弹窗（美化版） -->
     <div id="loginModal" class="fixed inset-0 z-50 items-center justify-center bg-black bg-opacity-60 hidden">
         <div class="bg-white rounded-xl shadow-lg p-8 w-full max-w-xs relative">
@@ -174,26 +652,62 @@
             errorDiv.classList.remove('hidden');
             return;
         }
-        // 这里可以用 fetch/AJAX 提交到后端
-        // fetch('/api/newsletter.php', {method:'POST', body:...})
-        // .then(...).catch(() => { errorDiv.innerText = '提交失败，请稍后再试'; errorDiv.classList.remove('hidden'); });
         alert('订阅成功！');
     };
-    // 侧边栏展开时推开内容区
-    const sidebar = document.getElementById('sidebar');
-    const mainContent = document.getElementById('mainContent');
-    if (sidebar && mainContent) {
-        sidebar.addEventListener('mouseenter', () => {
-            mainContent.classList.remove('ml-14');
-            mainContent.classList.add('ml-56');
-        });
-        sidebar.addEventListener('mouseleave', () => {
-            mainContent.classList.remove('ml-56');
-            mainContent.classList.add('ml-14');
-        });
-    }
     </script>
+    <!-- 删除极简推开测试区块 -->
     {% block extra_scripts %}{% endblock %}
+    <!-- 添加文字发光效果 -->
+    const addGlowEffect = () => {
+        if (gamesText) {
+            gamesText.classList.add('glow-text');
+            setTimeout(() => {
+                gamesText.classList.remove('glow-text');
+            }, 3000);
+        }
+    };
+    
+    // 随机触发闪烁和发光效果
+    setInterval(() => {
+        if (Math.random() > 0.7) {
+            addGlowEffect();
+        }
+    }, 8000);
+    
+    // 页面加载完毕后添加一次发光效果
+    setTimeout(addGlowEffect, 2000);
+    
+    // 添加字母弹跳动画样式
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes letterBounce {
+            0%, 70%, 100% { transform: translateY(0); }
+            85% { transform: translateY(-5px); }
+        }
+        .auto-letter:nth-child(odd) {
+            animation-delay: 0.3s;
+        }
+    `;
+    document.head.appendChild(style);
+    
+    // 随机触发特效
+    setInterval(() => {
+        // 随机Logo动画效果
+        if (Math.random() > 0.8) {
+            const logoImage = document.querySelector('.logo-image');
+            if (logoImage) {
+                logoImage.classList.add('pulse-animation');
+                setTimeout(() => {
+                    logoImage.classList.remove('pulse-animation');
+                }, 2000);
+            }
+        }
+        
+        // 随机文字特效
+        if (Math.random() > 0.7) {
+            addGlowEffect();
+        }
+    }, 4000);
 </body>
 </html> 
- 
+ ···············
