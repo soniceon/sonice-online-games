@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonice Games Sitemap - 独立版本</title>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            padding: 20px; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container { 
+            max-width: 900px; 
+            margin: 0 auto; 
+            background: white; 
+            padding: 40px; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        h1 { 
+            color: #333; 
+            text-align: center; 
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        .header-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            border-left: 5px solid #007bff;
+        }
+        .url-item { 
+            margin: 15px 0; 
+            padding: 20px; 
+            background: #f8f9fa; 
+            border-left: 4px solid #28a745; 
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .url-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .url-link { 
+            color: #007bff; 
+            text-decoration: none; 
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .url-link:hover { 
+            color: #0056b3;
+            text-decoration: underline; 
+        }
+        .url-meta { 
+            color: #666; 
+            font-size: 0.9em; 
+            margin-top: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .priority-badge {
+            background: #28a745;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+        }
+        .category-section {
+            margin: 30px 0;
+        }
+        .section-title {
+            color: #495057;
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌐 Sonice Games Sitemap</h1>
+        
+        <div class="header-info">
+            <h3>📋 网站地图信息</h3>
+            <p><strong>Google Search Console提交地址:</strong></p>
+            <p><code>http://localhost:8000/sitemap-standalone.html</code></p>
+            <div class="status-badge status-success">✅ 独立版本 - 无需服务器依赖</div>
+            <div class="status-badge status-info">📅 最后更新: 2024年8月6日</div>
+        </div>
+        
+        <div class="category-section">
+            <h2 class="section-title">🏠 主要页面</h2>
+            <div class="url-item">
+                <a href="http://localhost:8000/" class="url-link" target="_blank">http://localhost:8000/</a>
+                <div class="url-meta">
+                    <span>主页 - 更新频率: 每日</span>
+                    <span class="priority-badge">优先级: 1.0</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category-section">
+            <h2 class="section-title">🎮 游戏分类页面</h2>
+            
+            <div class="url-item">
+                <a href="http://localhost:8000/category/action" class="url-link" target="_blank">http://localhost:8000/category/action</a>
+                <div class="url-meta">
+                    <span>动作游戏分类 - 更新频率: 每周</span>
+                    <span class="priority-badge">优先级: 0.8</span>
+                </div>
+            </div>
+            
+            <div class="url-item">
+                <a href="http://localhost:8000/category/racing" class="url-link" target="_blank">http://localhost:8000/category/racing</a>
+                <div class="url-meta">
+                    <span>赛车游戏分类 - 更新频率: 每周</span>
+                    <span class="priority-badge">优先级: 0.8</span>
+                </div>
+            </div>
+            
+            <div class="url-item">
+                <a href="http://localhost:8000/category/sports" class="url-link" target="_blank">http://localhost:8000/category/sports</a>
+                <div class="url-meta">
+                    <span>体育游戏分类 - 更新频率: 每周</span>
+                    <span class="priority-badge">优先级: 0.8</span>
+                </div>
+            </div>
+            
+            <div class="url-item">
+                <a href="http://localhost:8000/category/shooter" class="url-link" target="_blank">http://localhost:8000/category/shooter</a>
+                <div class="url-meta">
+                    <span>射击游戏分类 - 更新频率: 每周</span>
+                    <span class="priority-badge">优先级: 0.8</span>
+                </div>
+            </div>
+            
+            <div class="url-item">
+                <a href="http://localhost:8000/category/cards" class="url-link" target="_blank">http://localhost:8000/category/cards</a>
+                <div class="url-meta">
+                    <span>卡牌游戏分类 - 更新频率: 每周</span>
+                    <span class="priority-badge">优先级: 0.8</span>
+                </div>
+            </div>
+            
+            <div class="url-item">
+                <a href="http://localhost:8000/category/adventure" class="url-link" target="_blank">http://localhost:8000/category/adventure</a>
+                <div class="url-meta">
+                    <span>冒险游戏分类 - 更新频率: 每周</span>
+                    <span class="priority-badge">优先级: 0.8</span>
+                </div>
+            </div>
+            
+            <div class="url-item">
+                <a href="http://localhost:8000/category/puzzle" class="url-link" target="_blank">http://localhost:8000/category/puzzle</a>
+                <div class="url-meta">
+                    <span>益智游戏分类 - 更新频率: 每周</span>
+                    <span class="priority-badge">优先级: 0.8</span>
+                </div>
+            </div>
+            
+            <div class="url-item">
+                <a href="http://localhost:8000/category/strategy" class="url-link" target="_blank">http://localhost:8000/category/strategy</a>
+                <div class="url-meta">
+                    <span>策略游戏分类 - 更新频率: 每周</span>
+                    <span class="priority-badge">优先级: 0.8</span>
+                </div>
+            </div>
+            
+            <div class="url-item">
+                <a href="http://localhost:8000/category/mining" class="url-link" target="_blank">http://localhost:8000/category/mining</a>
+                <div class="url-meta">
+                    <span>挖矿游戏分类 - 更新频率: 每周</span>
+                    <span class="priority-badge">优先级: 0.8</span>
+                </div>
+            </div>
+            
+            <div class="url-item">
+                <a href="http://localhost:8000/category/idle" class="url-link" target="_blank">http://localhost:8000/category/idle</a>
+                <div class="url-meta">
+                    <span>放置游戏分类 - 更新频率: 每周</span>
+                    <span class="priority-badge">优先级: 0.8</span>
+                </div>
+            </div>
+            
+            <div class="url-item">
+                <a href="http://localhost:8000/category/clicker" class="url-link" target="_blank">http://localhost:8000/category/clicker</a>
+                <div class="url-meta">
+                    <span>点击游戏分类 - 更新频率: 每周</span>
+                    <span class="priority-badge">优先级: 0.8</span>
+                </div>
+            </div>
+            
+            <div class="url-item">
+                <a href="http://localhost:8000/category/simulation" class="url-link" target="_blank">http://localhost:8000/category/simulation</a>
+                <div class="url-meta">
+                    <span>模拟游戏分类 - 更新频率: 每周</span>
+                    <span class="priority-badge">优先级: 0.8</span>
+                </div>
+            </div>
+            
+            <div class="url-item">
+                <a href="http://localhost:8000/category/tycoon" class="url-link" target="_blank">http://localhost:8000/category/tycoon</a>
+                <div class="url-meta">
+                    <span>经营游戏分类 - 更新频率: 每周</span>
+                    <span class="priority-badge">优先级: 0.8</span>
+                </div>
+            </div>
+            
+            <div class="url-item">
+                <a href="http://localhost:8000/category/arcade" class="url-link" target="_blank">http://localhost:8000/category/arcade</a>
+                <div class="url-meta">
+                    <span>街机游戏分类 - 更新频率: 每周</span>
+                    <span class="priority-badge">优先级: 0.8</span>
+                </div>
+            </div>
+            
+            <div class="url-item">
+                <a href="http://localhost:8000/category/board" class="url-link" target="_blank">http://localhost:8000/category/board</a>
+                <div class="url-meta">
+                    <span>棋盘游戏分类 - 更新频率: 每周</span>
+                    <span class="priority-badge">优先级: 0.8</span>
+                </div>
+            </div>
+            
+            <div class="url-item">
+                <a href="http://localhost:8000/category/platformer" class="url-link" target="_blank">http://localhost:8000/category/platformer</a>
+                <div class="url-meta">
+                    <span>平台游戏分类 - 更新频率: 每周</span>
+                    <span class="priority-badge">优先级: 0.8</span>
+                </div>
+            </div>
+            
+            <div class="url-item">
+                <a href="http://localhost:8000/category/multiplayer" class="url-link" target="_blank">http://localhost:8000/category/multiplayer</a>
+                <div class="url-meta">
+                    <span>多人游戏分类 - 更新频率: 每周</span>
+                    <span class="priority-badge">优先级: 0.8</span>
+                </div>
+            </div>
+            
+            <div class="url-item">
+                <a href="http://localhost:8000/category/io" class="url-link" target="_blank">http://localhost:8000/category/io</a>
+                <div class="url-meta">
+                    <span>IO游戏分类 - 更新频率: 每周</span>
+                    <span class="priority-badge">优先级: 0.8</span>
+                </div>
+            </div>
+            
+            <div class="url-item">
+                <a href="http://localhost:8000/category/music" class="url-link" target="_blank">http://localhost:8000/category/music</a>
+                <div class="url-meta">
+                    <span>音乐游戏分类 - 更新频率: 每周</span>
+                    <span class="priority-badge">优先级: 0.8</span>
+                </div>
+            </div>
+            
+            <div class="url-item">
+                <a href="http://localhost:8000/category/educational" class="url-link" target="_blank">http://localhost:8000/category/educational</a>
+                <div class="url-meta">
+                    <span>教育游戏分类 - 更新频率: 每周</span>
+                    <span class="priority-badge">优先级: 0.8</span>
+                </div>
+            </div>
+            
+            <div class="url-item">
+                <a href="http://localhost:8000/category/other" class="url-link" target="_blank">http://localhost:8000/category/other</a>
+                <div class="url-meta">
+                    <span>其他游戏分类 - 更新频率: 每周</span>
+                    <span class="priority-badge">优先级: 0.8</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="category-section">
+            <h2 class="section-title">📄 静态页面</h2>
+            
+            <div class="url-item">
+                <a href="http://localhost:8000/about" class="url-link" target="_blank">http://localhost:8000/about</a>
+                <div class="url-meta">
+                    <span>关于我们 - 更新频率: 每月</span>
+                    <span class="priority-badge">优先级: 0.6</span>
+                </div>
+            </div>
+            
+            <div class="url-item">
+                <a href="http://localhost:8000/contact" class="url-link" target="_blank">http://localhost:8000/contact</a>
+                <div class="url-meta">
+                    <span>联系我们 - 更新频率: 每月</span>
+                    <span class="priority-badge">优先级: 0.6</span>
+                </div>
+            </div>
+            
+            <div class="url-item">
+                <a href="http://localhost:8000/privacy" class="url-link" target="_blank">http://localhost:8000/privacy</a>
+                <div class="url-meta">
+                    <span>隐私政策 - 更新频率: 每月</span>
+                    <span class="priority-badge">优先级: 0.5</span>
+                </div>
+            </div>
+            
+            <div class="url-item">
+                <a href="http://localhost:8000/terms" class="url-link" target="_blank">http://localhost:8000/terms</a>
+                <div class="url-meta">
+                    <span>服务条款 - 更新频率: 每月</span>
+                    <span class="priority-badge">优先级: 0.5</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="header-info">
+            <h3>🎯 使用说明</h3>
+            <ol>
+                <li>这个页面显示了所有网站页面的列表</li>
+                <li>您可以在Google Search Console中提交此页面地址</li>
+                <li>所有链接都是本地测试地址，用于开发验证</li>
+                <li>此文件完全独立，无需任何服务器依赖</li>
+                <li>可以直接在浏览器中打开使用</li>
+            </ol>
+        </div>
+    </div>
+</body>
+</html> 
