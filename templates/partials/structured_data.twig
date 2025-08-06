@@ -1,0 +1,96 @@
+<!-- Structured Data for SEO -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Sonice Online Games",
+  "url": "https://sonice.games",
+  "description": "Play free online games at Sonice.Games - The best collection of browser games, HTML5 games, and free online games",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://sonice.games/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  },
+  "sameAs": [
+    "https://twitter.com/sonicegames",
+    "https://facebook.com/sonicegames"
+  ]
+}
+</script>
+
+{% if game is defined and game %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "VideoGame",
+  "name": "{{ game.title }}",
+  "description": "{{ game.description|default('Play ' ~ game.title ~ ' online for free at Sonice.Games') }}",
+  "url": "https://sonice.games/game/{{ game.slug }}",
+  "image": "https://sonice.games/assets/images/games/{{ game.slug }}.webp",
+  "genre": "{{ game.categories|join(', ') }}",
+  "gamePlatform": "Web Browser",
+  "applicationCategory": "Game",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD",
+    "availability": "https://schema.org/InStock"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Sonice.Games"
+  }
+}
+</script>
+{% endif %}
+
+{% if category is defined and category %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "{{ category.name }} Games",
+  "description": "Play the best {{ category.name|lower }} games online for free at Sonice.Games",
+  "url": "https://sonice.games/category/{{ category.slug }}",
+  "mainEntity": {
+    "@type": "ItemList",
+    "numberOfItems": "{{ category.games|length }}",
+    "itemListElement": [
+      {% for game in category.games %}
+      {
+        "@type": "ListItem",
+        "position": "{{ loop.index }}",
+        "item": {
+          "@type": "VideoGame",
+          "name": "{{ game.title }}",
+          "url": "https://sonice.games/game/{{ game.slug }}"
+        }
+      }{% if not loop.last %},{% endif %}
+      {% endfor %}
+    ]
+  }
+}
+</script>
+{% endif %}
+
+<!-- Organization Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Sonice.Games",
+  "url": "https://sonice.games",
+  "logo": "https://sonice.games/assets/images/icons/logo.png",
+  "description": "Free online games platform offering the best collection of browser games and HTML5 games",
+  "sameAs": [
+    "https://twitter.com/sonicegames",
+    "https://facebook.com/sonicegames"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "url": "https://sonice.games/contact"
+  }
+}
+</script> 

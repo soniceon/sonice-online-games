@@ -1,0 +1,41 @@
+<!-- Search Bar -->
+<div class="flex-1 max-w-2xl mx-8 relative">
+    <form id="searchForm" action="{{ base_url }}/search.php" method="get" class="hidden md:flex items-center flex-1 max-w-xl mx-8">
+        <div class="relative flex-1">
+            <input 
+                type="text" 
+                id="searchInput" 
+                name="q" 
+                placeholder="Search games..." 
+                class="w-full py-2 px-4 bg-gray-700/50 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500"
+                autocomplete="off"
+                value="{{ search_query|default('') }}"
+            >
+            <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2">
+                <i class="fas fa-search text-gray-400"></i>
+            </button>
+        </div>
+    </form>
+    <div id="searchSuggestions" class="absolute left-0 right-0 mt-2 bg-dark-lighter rounded-lg shadow-lg z-50 hidden"></div>
+</div> 
+ 
+<div class="flex-1 max-w-2xl mx-8 relative">
+    <form id="searchForm" action="{{ base_url }}/search.php" method="get" class="hidden md:flex items-center flex-1 max-w-xl mx-8">
+        <div class="relative flex-1">
+            <input 
+                type="text" 
+                id="searchInput" 
+                name="q" 
+                placeholder="Search games..." 
+                class="w-full py-2 px-4 bg-gray-700/50 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-500"
+                autocomplete="off"
+                value="{{ search_query|default('') }}"
+            >
+            <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2">
+                <i class="fas fa-search text-gray-400"></i>
+            </button>
+        </div>
+    </form>
+    <div id="searchSuggestions" class="absolute left-0 right-0 mt-2 bg-dark-lighter rounded-lg shadow-lg z-50 hidden"></div>
+</div> 
+ 

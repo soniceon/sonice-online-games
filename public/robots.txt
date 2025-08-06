@@ -1,0 +1,65 @@
+User-agent: *
+Allow: /
+
+# AI爬虫优化
+User-agent: GPTBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: ChatGPT-User
+Allow: /
+Crawl-delay: 1
+
+User-agent: Google-Extended
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Applebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: PerplexityBot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Amazonbot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Bytespider
+Allow: /
+Crawl-delay: 1
+
+# 搜索引擎爬虫
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 1
+
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 1
+
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 1
+
+# 限制访问的路径
+Disallow: /admin/
+Disallow: /config/
+Disallow: /cache/
+Disallow: /logs/
+Disallow: /vendor/
+Disallow: /includes/
+
+# 允许访问静态资源
+Allow: /assets/
+Allow: /css/
+Allow: /js/
+Allow: /images/
+
+# Sitemap
+Sitemap: https://sonice.games/sitemap.xml 

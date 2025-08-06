@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sonice Games - Play Free Online Games{% endblock %}</title>
+    <meta name="description" content="{% block description %}Play free online games at Sonice Games. Enjoy a wide variety of free online games including action, racing, sports, shooter and card games.{% endblock %}">
+    <link rel="icon" type="image/png" href="/src/assets/icons/logo.png">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{% block og_url %}https://sonice.online/{% endblock %}">
+    <meta property="og:title" content="{% block og_title %}Sonice Games - Play Free Online Games{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}Play free online games at Sonice Games. Enjoy a wide variety of free online games including action, racing, sports, shooter and card games.{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}/src/assets/images/og-image.jpg{% endblock %}">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{% block twitter_url %}https://sonice.online/{% endblock %}">
+    <meta property="twitter:title" content="{% block twitter_title %}Sonice Games - Play Free Online Games{% endblock %}">
+    <meta property="twitter:description" content="{% block twitter_description %}Play free online games at Sonice Games. Enjoy a wide variety of free online games including action, racing, sports, shooter and card games.{% endblock %}">
+    <meta property="twitter:image" content="{% block twitter_image %}/src/assets/images/og-image.jpg{% endblock %}">
+
+    <!-- Structured Data -->
+    {% block structured_data %}{% endblock %}
+
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'blue': {
+                            800: '#1e40af',
+                            900: '#1e3a8a'
+                        },
+                        'gray': {
+                            800: '#1f2937',
+                            900: '#111827'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            @apply bg-blue-900 text-white;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239BA3EB' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .game-container {
+            @apply bg-opacity-10 bg-white backdrop-blur-md rounded-xl border border-white border-opacity-20 p-8 mx-auto my-8 max-w-7xl;
+        }
+        
+        .toast {
+            @apply fixed top-5 right-5 px-4 py-3 rounded-lg text-white font-medium z-50 opacity-0 transform -translate-y-5 transition-all;
+        }
+        .toast.success {
+            @apply bg-green-500;
+        }
+        .toast.error {
+            @apply bg-red-500;
+        }
+        .toast.show {
+            @apply opacity-100 translate-y-0;
+        }
+    </style>
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    {% include 'components/navbar.html' %}
+
+    <div class="pt-16">
+        {% include 'components/sidebar.html' %}
+
+        <!-- Main Content -->
+        <main class="ml-64 p-6">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    {% include 'components/footer.html' %}
+
+    <script>
+        // Toast notification system
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast-notification');
+            if (!toast) return;
+            
+            toast.textContent = message;
+            toast.className = 'toast ' + type;
+            
+            // Show the toast
+            setTimeout(() => {
+                toast.classList.add('show');
+            }, 100);
+            
+            // Hide after 3 seconds
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Login button functionality
+        document.getElementById('loginButton')?.addEventListener('click', function() {
+            // Show login form
+            showToast('Login functionality will be implemented soon');
+        });
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html> 

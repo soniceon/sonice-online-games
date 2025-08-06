@@ -1,0 +1,34 @@
+<!-- Header -->
+<header class="fixed top-0 left-0 right-0 z-30 bg-gray-800 bg-opacity-90 backdrop-blur-sm border-b border-gray-700">
+    <div class="container mx-auto px-4 py-3">
+        <div class="flex items-center justify-between">
+            <!-- Logo -->
+            <a href="{{ base_url }}/" class="flex items-center space-x-2">
+                <img src="{{ base_url }}/assets/images/icons/logo.png" alt="{{ site_name }}" class="h-8" loading="lazy" onerror="this.onerror=null;this.src='/assets/images/defaults/game-default.webp';">
+                <span class="text-xl font-bold text-white">{{ site_name }}</span>
+            </a>
+            
+            <!-- Search Bar -->
+            <div class="flex-1 max-w-xl mx-4">
+                <div class="relative">
+                    <input type="search" placeholder="Search games..."
+                           class="w-full px-4 py-2 bg-gray-700 border border-gray-600 rounded-lg text-white 
+                                  placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 
+                                  focus:border-blue-500">
+                    <button class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                        </svg>
+                    </button>
+                    
+                    <!-- Search Suggestions -->
+                    <div id="searchSuggestions" class="hidden absolute left-0 right-0 mt-2 bg-gray-800 rounded-lg 
+                                                      shadow-lg border border-gray-700 overflow-hidden">
+                        <!-- Suggestions will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header> 

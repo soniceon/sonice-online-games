@@ -1,0 +1,51 @@
+import React, { useState } from 'react';
+
+// This is a complete, working React component for the Sonice Games navbar
+const Navbar = () => {
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    console.log('Searching for:', searchQuery);
+  };
+
+  return (
+    <div className="bg-black h-14 flex items-center px-4 w-full relative">
+      {/* Logo and Brand */}
+      <div className="flex items-center z-10">
+        <img 
+          src="/path-to-your-logo.png" 
+          alt="Sonice Logo" 
+          className="w-8 h-8 mr-2"
+        />
+        <div className="text-white text-lg font-bold">
+          Sonice Games
+        </div>
+      </div>
+      
+      {/* Centered Search Bar with absolute positioning */}
+      <div className="absolute left-1/2 transform -translate-x-1/2 w-full max-w-md">
+        <form onSubmit={handleSearchSubmit}>
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={handleSearchChange}
+            placeholder="Search games..."
+            className="w-full bg-gray-800 text-white rounded-full px-4 py-2 focus:outline-none"
+          />
+        </form>
+      </div>
+      
+      {/* Empty right side for balance */}
+      <div className="ml-auto z-10">
+        {/* This remains empty to match your design */}
+      </div>
+    </div>
+  );
+};
+
+export default Navbar;

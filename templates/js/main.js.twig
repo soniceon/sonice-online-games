@@ -1,0 +1,807 @@
+document.addEventListener('DOMContentLoaded', function() {
+    // 用户菜单
+    const userMenu = document.getElementById('user-menu');
+    const userMenuButton = document.getElementById('user-menu-button');
+    const userMenuDropdown = document.getElementById('user-menu-dropdown');
+    
+    if (userMenuButton && userMenuDropdown) {
+        userMenuButton.addEventListener('click', () => {
+            userMenuDropdown.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!userMenu.contains(event.target)) {
+                userMenuDropdown.classList.add('hidden');
+            }
+        });
+    }
+    
+    // 登录模态框
+    const loginModal = document.getElementById('login-modal');
+    const registerModal = document.getElementById('register-modal');
+    const activateModal = document.getElementById('activate-modal');
+    const avatarModal = document.getElementById('avatar-modal');
+    
+    function showModal(modalId) {
+        document.getElementById(modalId).classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function hideModal(modalId) {
+        document.getElementById(modalId).classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+    
+    function showLoginModal() {
+        hideModal('registerModal');
+        showModal('loginModal');
+    }
+    
+    function showRegisterModal() {
+        hideModal('loginModal');
+        showModal('registerModal');
+    }
+    
+    function showActivateModal() {
+        activateModal.classList.remove('hidden');
+    }
+    
+    function hideActivateModal() {
+        activateModal.classList.add('hidden');
+    }
+    
+    function showAvatarModal() {
+        avatarModal.classList.remove('hidden');
+    }
+    
+    function hideAvatarModal() {
+        avatarModal.classList.add('hidden');
+    }
+    
+    function switchToRegister() {
+        hideLoginModal();
+        showRegisterModal();
+    }
+    
+    function switchToLogin() {
+        hideRegisterModal();
+        showLoginModal();
+    }
+    
+    // 处理登录
+    async function handleLogin(event) {
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch('{{ base_url }}/api/auth/login', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                hideLoginModal();
+                showToast('登录成功', 'success');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            } else {
+                showToast(data.message || '登录失败，请重试', 'error');
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            showToast('登录失败，请重试', 'error');
+        }
+    }
+    
+    // 处理注册
+    async function handleRegister(event) {
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData(form);
+
+        if (formData.get('password') !== formData.get('confirmPassword')) {
+            showToast('两次输入的密码不一致', 'error');
+            return;
+        }
+
+        try {
+            const response = await fetch('{{ base_url }}/api/auth/register', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                hideRegisterModal();
+                showActivateModal();
+            } else {
+                showToast(data.message || '注册失败，请重试', 'error');
+            }
+        } catch (error) {
+            console.error('Register error:', error);
+            showToast('注册失败，请重试', 'error');
+        }
+    }
+    
+    // 重新发送激活邮件
+    async function resendActivation() {
+        try {
+            const response = await fetch('{{ base_url }}/api/resend-activation.php', {
+                method: 'POST',
+                credentials: 'include'
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                showToast('激活邮件已重新发送', 'success');
+            } else {
+                showToast(data.message || '发送失败，请重试', 'error');
+            }
+        } catch (error) {
+            console.error('Resend activation error:', error);
+            showToast('发送失败，请重试', 'error');
+        }
+    }
+    
+    // 选择头像
+    async function selectAvatar(avatar) {
+        try {
+            const response = await fetch('{{ base_url }}/api/update-avatar.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ avatar }),
+                credentials: 'include'
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                hideAvatarModal();
+                showToast('头像更新成功', 'success');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            } else {
+                showToast(data.message || '更新失败，请重试', 'error');
+            }
+        } catch (error) {
+            console.error('Update avatar error:', error);
+            showToast('更新失败，请重试', 'error');
+        }
+    }
+    
+    // 上传自定义头像
+    function uploadAvatar() {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.onchange = async (event) => {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const formData = new FormData();
+            formData.append('avatar', file);
+
+            try {
+                const response = await fetch('{{ base_url }}/api/upload-avatar.php', {
+                    method: 'POST',
+                    body: formData,
+                    credentials: 'include'
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    hideAvatarModal();
+                    showToast('头像上传成功', 'success');
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    showToast(data.message || '上传失败，请重试', 'error');
+                }
+            } catch (error) {
+                console.error('Upload avatar error:', error);
+                showToast('上传失败，请重试', 'error');
+            }
+        };
+        input.click();
+    }
+    
+    // 退出登录
+    async function logout() {
+        try {
+            const response = await fetch('{{ base_url }}/api/logout.php', {
+                method: 'POST',
+                credentials: 'include'
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                showToast('退出登录成功', 'success');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            } else {
+                showToast(data.message || '退出失败，请重试', 'error');
+            }
+        } catch (error) {
+            console.error('Logout error:', error);
+            showToast('退出失败，请重试', 'error');
+        }
+    }
+    
+    // 订阅新闻邮件
+    async function subscribe(event) {
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch('{{ base_url }}/api/newsletter/subscribe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email: formData.get('email') })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                showToast('订阅成功', 'success');
+                form.reset();
+            } else {
+                showToast(data.message || '订阅失败，请重试', 'error');
+            }
+        } catch (error) {
+            console.error('Subscribe error:', error);
+            showToast('订阅失败，请重试', 'error');
+        }
+
+        return false;
+    }
+    
+    // 显示提示消息
+    function showToast(message, type = 'info') {
+        const toast = document.createElement('div');
+        toast.className = `toast toast-${type}`;
+        toast.innerHTML = `
+            <div class="toast-content">
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                <span>${message}</span>
+            </div>
+        `;
+
+        const container = document.getElementById('toastContainer');
+        container.appendChild(toast);
+
+        setTimeout(() => {
+            toast.classList.add('fade-out');
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    }
+    
+    // 搜索建议
+    const searchInput = document.getElementById('search-input');
+    const searchSuggestions = document.getElementById('search-suggestions');
+    const suggestionList = document.getElementById('suggestion-list');
+    let searchTimeout;
+    
+    if (searchInput && searchSuggestions && suggestionList) {
+        searchInput.addEventListener('input', () => {
+            clearTimeout(searchTimeout);
+            const query = searchInput.value.trim();
+
+            if (query.length > 1) {
+                searchTimeout = setTimeout(() => {
+                    fetch(`{{ base_url }}/api/search/suggestions?q=${encodeURIComponent(query)}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.suggestions && data.suggestions.length > 0) {
+                                suggestionList.innerHTML = data.suggestions
+                                    .map(game => `
+                                        <a href="{{ base_url }}/game/${game.slug}" class="suggestion-item">
+                                            <img src="${game.thumbnail}" alt="${game.title}" class="w-10 h-10 rounded">
+                                            <div class="ml-3">
+                                                <div class="font-medium">${game.title}</div>
+                                                <div class="text-sm text-gray-400">${game.category}</div>
+                                            </div>
+                                        </a>
+                                    `).join('');
+                                searchSuggestions.classList.remove('hidden');
+                            } else {
+                                searchSuggestions.classList.add('hidden');
+                            }
+                        })
+                        .catch(() => {
+                            searchSuggestions.classList.add('hidden');
+                        });
+                }, 300);
+            } else {
+                searchSuggestions.classList.add('hidden');
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!searchInput.contains(e.target) && !searchSuggestions.contains(e.target)) {
+                searchSuggestions.classList.add('hidden');
+            }
+        });
+
+        searchInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                const query = searchInput.value.trim();
+                if (query.length > 0) {
+                    window.location.href = `{{ base_url }}/search?q=${encodeURIComponent(query)}`;
+                }
+            }
+        });
+    }
+
+    // Close modals when clicking outside
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal')) {
+            hideModal(e.target.id);
+        }
+    });
+
+    // Close modals when clicking close button
+    document.querySelectorAll('.modal-close').forEach(button => {
+        button.addEventListener('click', () => {
+            const modal = button.closest('.modal');
+            hideModal(modal.id);
+        });
+    });
+
+    // Mobile menu
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    if (mobileMenuButton) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    }
+
+    // Sidebar
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('collapsed'));
+        });
+
+        // Restore sidebar state
+        if (localStorage.getItem('sidebarCollapsed') === 'true') {
+            sidebar.classList.add('collapsed');
+        }
+    }
+
+    // Game card hover effects
+    document.querySelectorAll('.game-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.querySelector('.game-card-overlay').classList.remove('opacity-0');
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.querySelector('.game-card-overlay').classList.add('opacity-0');
+        });
+    });
+}); 
+ 
+    // 用户菜单
+    const userMenu = document.getElementById('user-menu');
+    const userMenuButton = document.getElementById('user-menu-button');
+    const userMenuDropdown = document.getElementById('user-menu-dropdown');
+    
+    if (userMenuButton && userMenuDropdown) {
+        userMenuButton.addEventListener('click', () => {
+            userMenuDropdown.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!userMenu.contains(event.target)) {
+                userMenuDropdown.classList.add('hidden');
+            }
+        });
+    }
+    
+    // 登录模态框
+    const loginModal = document.getElementById('login-modal');
+    const registerModal = document.getElementById('register-modal');
+    const activateModal = document.getElementById('activate-modal');
+    const avatarModal = document.getElementById('avatar-modal');
+    
+    function showModal(modalId) {
+        document.getElementById(modalId).classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function hideModal(modalId) {
+        document.getElementById(modalId).classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+    
+    function showLoginModal() {
+        hideModal('registerModal');
+        showModal('loginModal');
+    }
+    
+    function showRegisterModal() {
+        hideModal('loginModal');
+        showModal('registerModal');
+    }
+    
+    function showActivateModal() {
+        activateModal.classList.remove('hidden');
+    }
+    
+    function hideActivateModal() {
+        activateModal.classList.add('hidden');
+    }
+    
+    function showAvatarModal() {
+        avatarModal.classList.remove('hidden');
+    }
+    
+    function hideAvatarModal() {
+        avatarModal.classList.add('hidden');
+    }
+    
+    function switchToRegister() {
+        hideLoginModal();
+        showRegisterModal();
+    }
+    
+    function switchToLogin() {
+        hideRegisterModal();
+        showLoginModal();
+    }
+    
+    // 处理登录
+    async function handleLogin(event) {
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch('{{ base_url }}/api/auth/login', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                hideLoginModal();
+                showToast('登录成功', 'success');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            } else {
+                showToast(data.message || '登录失败，请重试', 'error');
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            showToast('登录失败，请重试', 'error');
+        }
+    }
+    
+    // 处理注册
+    async function handleRegister(event) {
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData(form);
+
+        if (formData.get('password') !== formData.get('confirmPassword')) {
+            showToast('两次输入的密码不一致', 'error');
+            return;
+        }
+
+        try {
+            const response = await fetch('{{ base_url }}/api/auth/register', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                hideRegisterModal();
+                showActivateModal();
+            } else {
+                showToast(data.message || '注册失败，请重试', 'error');
+            }
+        } catch (error) {
+            console.error('Register error:', error);
+            showToast('注册失败，请重试', 'error');
+        }
+    }
+    
+    // 重新发送激活邮件
+    async function resendActivation() {
+        try {
+            const response = await fetch('{{ base_url }}/api/resend-activation.php', {
+                method: 'POST',
+                credentials: 'include'
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                showToast('激活邮件已重新发送', 'success');
+            } else {
+                showToast(data.message || '发送失败，请重试', 'error');
+            }
+        } catch (error) {
+            console.error('Resend activation error:', error);
+            showToast('发送失败，请重试', 'error');
+        }
+    }
+    
+    // 选择头像
+    async function selectAvatar(avatar) {
+        try {
+            const response = await fetch('{{ base_url }}/api/update-avatar.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ avatar }),
+                credentials: 'include'
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                hideAvatarModal();
+                showToast('头像更新成功', 'success');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            } else {
+                showToast(data.message || '更新失败，请重试', 'error');
+            }
+        } catch (error) {
+            console.error('Update avatar error:', error);
+            showToast('更新失败，请重试', 'error');
+        }
+    }
+    
+    // 上传自定义头像
+    function uploadAvatar() {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.onchange = async (event) => {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const formData = new FormData();
+            formData.append('avatar', file);
+
+            try {
+                const response = await fetch('{{ base_url }}/api/upload-avatar.php', {
+                    method: 'POST',
+                    body: formData,
+                    credentials: 'include'
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    hideAvatarModal();
+                    showToast('头像上传成功', 'success');
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1000);
+                } else {
+                    showToast(data.message || '上传失败，请重试', 'error');
+                }
+            } catch (error) {
+                console.error('Upload avatar error:', error);
+                showToast('上传失败，请重试', 'error');
+            }
+        };
+        input.click();
+    }
+    
+    // 退出登录
+    async function logout() {
+        try {
+            const response = await fetch('{{ base_url }}/api/logout.php', {
+                method: 'POST',
+                credentials: 'include'
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                showToast('退出登录成功', 'success');
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            } else {
+                showToast(data.message || '退出失败，请重试', 'error');
+            }
+        } catch (error) {
+            console.error('Logout error:', error);
+            showToast('退出失败，请重试', 'error');
+        }
+    }
+    
+    // 订阅新闻邮件
+    async function subscribe(event) {
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch('{{ base_url }}/api/newsletter/subscribe', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email: formData.get('email') })
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                showToast('订阅成功', 'success');
+                form.reset();
+            } else {
+                showToast(data.message || '订阅失败，请重试', 'error');
+            }
+        } catch (error) {
+            console.error('Subscribe error:', error);
+            showToast('订阅失败，请重试', 'error');
+        }
+
+        return false;
+    }
+    
+    // 显示提示消息
+    function showToast(message, type = 'info') {
+        const toast = document.createElement('div');
+        toast.className = `toast toast-${type}`;
+        toast.innerHTML = `
+            <div class="toast-content">
+                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                <span>${message}</span>
+            </div>
+        `;
+
+        const container = document.getElementById('toastContainer');
+        container.appendChild(toast);
+
+        setTimeout(() => {
+            toast.classList.add('fade-out');
+            setTimeout(() => toast.remove(), 300);
+        }, 3000);
+    }
+    
+    // 搜索建议
+    const searchInput = document.getElementById('search-input');
+    const searchSuggestions = document.getElementById('search-suggestions');
+    const suggestionList = document.getElementById('suggestion-list');
+    let searchTimeout;
+    
+    if (searchInput && searchSuggestions && suggestionList) {
+        searchInput.addEventListener('input', () => {
+            clearTimeout(searchTimeout);
+            const query = searchInput.value.trim();
+
+            if (query.length > 1) {
+                searchTimeout = setTimeout(() => {
+                    fetch(`{{ base_url }}/api/search/suggestions?q=${encodeURIComponent(query)}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.suggestions && data.suggestions.length > 0) {
+                                suggestionList.innerHTML = data.suggestions
+                                    .map(game => `
+                                        <a href="{{ base_url }}/game/${game.slug}" class="suggestion-item">
+                                            <img src="${game.thumbnail}" alt="${game.title}" class="w-10 h-10 rounded">
+                                            <div class="ml-3">
+                                                <div class="font-medium">${game.title}</div>
+                                                <div class="text-sm text-gray-400">${game.category}</div>
+                                            </div>
+                                        </a>
+                                    `).join('');
+                                searchSuggestions.classList.remove('hidden');
+                            } else {
+                                searchSuggestions.classList.add('hidden');
+                            }
+                        })
+                        .catch(() => {
+                            searchSuggestions.classList.add('hidden');
+                        });
+                }, 300);
+            } else {
+                searchSuggestions.classList.add('hidden');
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!searchInput.contains(e.target) && !searchSuggestions.contains(e.target)) {
+                searchSuggestions.classList.add('hidden');
+            }
+        });
+
+        searchInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                const query = searchInput.value.trim();
+                if (query.length > 0) {
+                    window.location.href = `{{ base_url }}/search?q=${encodeURIComponent(query)}`;
+                }
+            }
+        });
+    }
+
+    // Close modals when clicking outside
+    document.addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal')) {
+            hideModal(e.target.id);
+        }
+    });
+
+    // Close modals when clicking close button
+    document.querySelectorAll('.modal-close').forEach(button => {
+        button.addEventListener('click', () => {
+            const modal = button.closest('.modal');
+            hideModal(modal.id);
+        });
+    });
+
+    // Mobile menu
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    if (mobileMenuButton) {
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    }
+
+    // Sidebar
+    const sidebar = document.getElementById('sidebar');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+
+    if (sidebarToggle) {
+        sidebarToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+            localStorage.setItem('sidebarCollapsed', sidebar.classList.contains('collapsed'));
+        });
+
+        // Restore sidebar state
+        if (localStorage.getItem('sidebarCollapsed') === 'true') {
+            sidebar.classList.add('collapsed');
+        }
+    }
+
+    // Game card hover effects
+    document.querySelectorAll('.game-card').forEach(card => {
+        card.addEventListener('mouseenter', () => {
+            card.querySelector('.game-card-overlay').classList.remove('opacity-0');
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.querySelector('.game-card-overlay').classList.add('opacity-0');
+        });
+    });
+}); 
+ 

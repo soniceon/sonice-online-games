@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心 - Sonice在线游戏</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/profile.css">
+</head>
+<body>
+    <!-- 页面头部 -->
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="logo">
+                    <img src="../images/logo.png" alt="Sonice在线游戏">
+                </a>
+                
+                <nav class="nav-links">
+                    <a href="index.html">首页</a>
+                    <a href="games.html">游戏</a>
+                    <a href="ranking.html">排行榜</a>
+                    <a href="community.html">社区</a>
+                    <a href="about.html">关于我们</a>
+                </nav>
+                
+                <div class="header-actions">
+                    <!-- 未登录状态显示 -->
+                    <div class="guest-actions">
+                        <a href="login.html" class="btn btn-outline">登录</a>
+                        <a href="register.html" class="btn btn-primary">注册</a>
+                    </div>
+                    
+                    <!-- 登录状态显示 -->
+                    <div class="user-menu">
+                        <a href="profile.html" class="user-avatar">
+                            <img id="nav-user-avatar" src="../images/avatars/default.jpg" alt="用户头像">
+                        </a>
+                        <span class="user-menu-name" id="nav-username">用户名</span>
+                        <div class="dropdown-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要内容区域 -->
+    <main class="main-content">
+        <div class="container">
+            <!-- 未登录提示 -->
+            <div class="not-logged-in" id="not-logged-in">
+                <h2>您尚未登录</h2>
+                <p>登录后可以查看您的个人资料、游戏收藏、游戏历史记录等信息，还可以参与社区讨论、获取积分奖励。</p>
+                <div class="btn-group">
+                    <a href="login.html" class="btn btn-primary">
+                        <i class="fas fa-sign-in-alt"></i> 登录
+                    </a>
+                    <a href="register.html" class="btn btn-outline">
+                        <i class="fas fa-user-plus"></i> 注册
+                    </a>
+                </div>
+            </div>
+
+            <!-- 个人资料内容 -->
+            <div class="profile-content" id="profile-content">
+                <!-- 个人资料头部 -->
+                <section class="profile-header">
+                    <div class="profile-cover"></div>
+                    <div class="profile-avatar">
+                        <img id="user-avatar" src="../images/avatars/default.jpg" alt="用户头像">
+                    </div>
+                    <div class="profile-info">
+                        <h1 class="profile-name" id="user-nickname">用户昵称</h1>
+                        <div class="profile-username" id="user-username">@username</div>
+                        <div class="profile-meta">
+                            <span id="user-join-date"><i class="fas fa-calendar-alt"></i> 加入时间: 2023年10月1日</span>
+                            <span id="user-last-login"><i class="fas fa-clock"></i> 最近登录: 2023年10月15日</span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 用户统计数据 -->
+                <section class="stats-bar">
+                    <div class="stat-item">
+                        <div class="stat-value" id="user-games-played">0</div>
+                        <div class="stat-label">游戏次数</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="user-favorites">0</div>
+                        <div class="stat-label">收藏游戏</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="user-high-scores">0</div>
+                        <div class="stat-label">最高分数</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="user-achievements">0</div>
+                        <div class="stat-label">获得成就</div>
+                    </div>
+                </section>
+
+                <!-- 选项卡内容 -->
+                <section class="profile-tabs">
+                    <div class="tab-navigation">
+                        <button class="tab-button active" data-tab="profile-tab">
+                            <i class="fas fa-user"></i> 个人资料
+                        </button>
+                        <button class="tab-button" data-tab="favorites-tab">
+                            <i class="fas fa-heart"></i> 我的收藏
+                        </button>
+                        <button class="tab-button" data-tab="history-tab">
+                            <i class="fas fa-history"></i> 游戏记录
+                        </button>
+                        <button class="tab-button" data-tab="security-tab">
+                            <i class="fas fa-shield-alt"></i> 安全设置
+                        </button>
+                    </div>
+
+                    <div class="tab-content">
+                        <!-- 个人资料选项卡 -->
+                        <div class="tab-pane active" id="profile-tab">
+                            <!-- 个人资料查看模式 -->
+                            <div class="profile-view-mode" id="profile-view-mode">
+                                <div class="profile-section">
+                                    <h3 class="profile-section-title">基本信息</h3>
+                                    <div class="profile-item">
+                                        <div class="profile-item-label">昵称</div>
+                                        <div class="profile-item-value" id="view-nickname">用户昵称</div>
+                                    </div>
+                                    <div class="profile-item">
+                                        <div class="profile-item-label">用户名</div>
+                                        <div class="profile-item-value" id="view-username">username</div>
+                                    </div>
+                                    <div class="profile-item">
+                                        <div class="profile-item-label">邮箱</div>
+                                        <div class="profile-item-value" id="view-email">user@example.com</div>
+                                    </div>
+                                </div>
+
+                                <div class="profile-section">
+                                    <h3 class="profile-section-title">个人简介</h3>
+                                    <div class="profile-item">
+                                        <div class="profile-item-value" id="view-bio">这位用户很懒，还没有填写个人简介...</div>
+                                    </div>
+                                </div>
+
+                                <div class="profile-section">
+                                    <h3 class="profile-section-title">喜爱的游戏类型</h3>
+                                    <div class="profile-item">
+                                        <div class="profile-item-value" id="view-favorite-types">益智, 策略, 动作</div>
+                                    </div>
+                                </div>
+
+                                <div class="profile-actions">
+                                    <button id="edit-profile-btn" class="btn btn-primary">
+                                        <i class="fas fa-edit"></i> 编辑资料
+                                    </button>
+                                    <button id="change-avatar-btn" class="btn btn-outline">
+                                        <i class="fas fa-camera"></i> 更换头像
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- 个人资料编辑模式 -->
+                            <div class="profile-edit-form" id="profile-edit-form">
+                                <form id="profile-form">
+                                    <div class="form-group">
+                                        <label for="edit-nickname" class="form-label">昵称</label>
+                                        <input type="text" id="edit-nickname" class="form-control" placeholder="请输入昵称">
+                                        <div class="form-error" id="nickname-error"></div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="edit-email" class="form-label">邮箱</label>
+                                        <input type="email" id="edit-email" class="form-control" placeholder="请输入邮箱">
+                                        <div class="form-error" id="email-error"></div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="edit-bio" class="form-label">个人简介</label>
+                                        <textarea id="edit-bio" class="form-control" placeholder="请输入个人简介"></textarea>
+                                        <div class="form-error" id="bio-error"></div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="edit-favorite-types" class="form-label">喜爱的游戏类型</label>
+                                        <input type="text" id="edit-favorite-types" class="form-control" placeholder="例如：益智, 策略, 动作">
+                                        <div class="form-error" id="favorite-types-error"></div>
+                                    </div>
+                                    
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-save"></i> 保存更改
+                                        </button>
+                                        <button type="button" id="cancel-edit-btn" class="btn btn-secondary">
+                                            <i class="fas fa-times"></i> 取消
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <!-- 我的收藏选项卡 -->
+                        <div class="tab-pane" id="favorites-tab">
+                            <!-- 空状态 -->
+                            <div class="empty-state" id="empty-favorites">
+                                <div class="empty-state-icon">
+                                    <i class="far fa-heart"></i>
+                                </div>
+                                <div class="empty-state-text">
+                                    您还没有收藏任何游戏
+                                </div>
+                                <a href="games.html" class="btn btn-primary">
+                                    <i class="fas fa-gamepad"></i> 浏览游戏
+                                </a>
+                            </div>
+
+                            <!-- 收藏游戏列表 -->
+                            <div class="game-grid" id="favorites-list"></div>
+                        </div>
+
+                        <!-- 游戏记录选项卡 -->
+                        <div class="tab-pane" id="history-tab">
+                            <!-- 空状态 -->
+                            <div class="empty-state" id="empty-history">
+                                <div class="empty-state-icon">
+                                    <i class="far fa-clock"></i>
+                                </div>
+                                <div class="empty-state-text">
+                                    您还没有任何游戏记录
+                                </div>
+                                <a href="games.html" class="btn btn-primary">
+                                    <i class="fas fa-gamepad"></i> 开始游戏
+                                </a>
+                            </div>
+
+                            <!-- 游戏记录列表 -->
+                            <div class="history-list" id="history-list"></div>
+                        </div>
+
+                        <!-- 安全设置选项卡 -->
+                        <div class="tab-pane" id="security-tab">
+                            <div class="security-section">
+                                <h3 class="security-section-title">修改密码</h3>
+                                <p class="security-section-description">
+                                    为了保障您的账号安全，建议定期更换密码，并避免使用与其他网站相同的密码。
+                                </p>
+                                
+                                <form id="password-form">
+                                    <div class="form-group">
+                                        <label for="current-password" class="form-label">当前密码</label>
+                                        <input type="password" id="current-password" class="form-control" placeholder="请输入当前密码">
+                                        <div class="form-error" id="current-password-error"></div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="new-password" class="form-label">新密码</label>
+                                        <input type="password" id="new-password" class="form-control" placeholder="请输入新密码">
+                                        <div class="form-error" id="new-password-error"></div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="confirm-password" class="form-label">确认新密码</label>
+                                        <input type="password" id="confirm-password" class="form-control" placeholder="请再次输入新密码">
+                                        <div class="form-error" id="confirm-password-error"></div>
+                                    </div>
+                                    
+                                    <div class="form-actions">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-key"></i> 修改密码
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="security-section">
+                                <h3 class="security-section-title">账号安全</h3>
+                                <div class="danger-zone">
+                                    <h4 class="danger-zone-title">危险操作</h4>
+                                    <p class="danger-zone-description">
+                                        注销账号将会删除您的所有数据，包括游戏记录、收藏、个人资料等。此操作不可逆，请谨慎操作。
+                                    </p>
+                                    <button id="delete-account-btn" class="btn btn-danger-outline">
+                                        <i class="fas fa-trash-alt"></i> 注销账号
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </main>
+
+    <!-- 底部信息 -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="../images/logo.png" alt="Sonice在线游戏">
+                    <p>快乐游戏，精彩生活</p>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="footer-links-group">
+                        <h4>关于我们</h4>
+                        <ul>
+                            <li><a href="about.html">公司简介</a></li>
+                            <li><a href="about.html#team">团队介绍</a></li>
+                            <li><a href="about.html#contact">联系我们</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-links-group">
+                        <h4>帮助中心</h4>
+                        <ul>
+                            <li><a href="help.html">常见问题</a></li>
+                            <li><a href="help.html#guide">新手指南</a></li>
+                            <li><a href="help.html#feedback">问题反馈</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-links-group">
+                        <h4>法律信息</h4>
+                        <ul>
+                            <li><a href="legal.html#terms">服务条款</a></li>
+                            <li><a href="legal.html#privacy">隐私政策</a></li>
+                            <li><a href="legal.html#copyright">版权声明</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 Sonice在线游戏. 保留所有权利.</p>
+                <div class="social-links">
+                    <a href="#" target="_blank"><i class="fab fa-weibo"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-weixin"></i></a>
+                    <a href="#" target="_blank"><i class="fab fa-qq"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 模态框 -->
+    <!-- 头像选择模态框 -->
+    <div class="modal" id="avatar-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">选择头像</h3>
+                <button class="modal-close" id="close-avatar-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="avatar-grid" id="avatar-grid">
+                    <!-- 头像将通过JavaScript动态加载 -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-avatar-select">取消</button>
+                <button class="btn btn-primary" id="confirm-avatar-select">确认</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 确认注销账号模态框 -->
+    <div class="modal" id="confirm-delete-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">确认注销账号</h3>
+                <button class="modal-close" id="close-confirm-delete-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>您确定要注销账号吗？此操作将会删除您的所有数据，包括游戏记录、收藏、个人资料等，且不可恢复。</p>
+                <div class="form-group">
+                    <label for="delete-confirm-password" class="form-label">请输入您的密码以确认操作</label>
+                    <input type="password" id="delete-confirm-password" class="form-control" placeholder="请输入密码">
+                    <div class="form-error" id="delete-confirm-password-error"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="cancel-delete-account">取消</button>
+                <button class="btn btn-danger" id="confirm-delete-account">确认注销</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 提示消息容器 -->
+    <div class="toast-container" id="toast-container">
+        <!-- 提示消息将通过JavaScript动态添加 -->
+    </div>
+
+    <script src="../js/profile.js"></script>
+</body>
+</html> 

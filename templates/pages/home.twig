@@ -1,0 +1,130 @@
+{% extends "base.twig" %}
+{% set categories = categories %}
+
+{% block content %}
+<div class="pl-8">
+
+{# 分类横滑卡片 #}
+{% for category in categories %}
+  {% if category.games|length > 0 %}
+    <div class="category-block mb-4 group" id="cat-block-{{ category.slug }}">
+      <div class="flex items-center mb-2">
+        <h2 class="text-xl font-bold text-white mr-2 flex items-center">
+          <span class="inline-block align-middle mr-2">
+            <svg width="22" height="22" fill="white" viewBox="0 0 24 24"><path d="M7 15v2a1 1 0 0 1-2 0v-2H3a1 1 0 0 1 0-2h2v-2a1 1 0 0 1 2 0v2h2a1 1 0 0 1 0 2H7zm10.293-7.707a1 1 0 0 0-1.414 0l-2.586 2.586a1 1 0 0 0 1.414 1.414l2.586-2.586a1 1 0 0 0 0-1.414zm-8.586 0a1 1 0 0 0 0 1.414l2.586 2.586a1 1 0 0 0 1.414-1.414L10.121 7.293a1 1 0 0 0-1.414 0z"/></svg>
+          </span>
+          {{ category.name }} Games
+        </h2>
+        <a href="{{ base_url }}/category/{{ category.slug }}" class="ml-2 text-blue-300 hover:text-blue-400 text-base font-medium px-2 py-0.5 rounded transition bg-blue-900/40">更多游戏</a>
+      </div>
+      <div class="relative px-2 flex items-center">
+        <button class="carousel-arrow carousel-arrow-left absolute left-0 top-1/2" aria-label="Left arrow" onclick="scrollCategoryPage('{{ category.slug }}', -1)"></button>
+        <div class="game-grid grid grid-cols-7 gap-2 w-full" id="cat-grid-{{ category.slug }}"></div>
+        <button class="carousel-arrow carousel-arrow-right absolute right-0 top-1/2" aria-label="Right arrow" onclick="scrollCategoryPage('{{ category.slug }}', 1)"></button>
+      </div>
+    </div>
+  {% endif %}
+{% endfor %}
+
+<style>
+.game-card-home { aspect-ratio: 16/9; height: auto; min-height: 100px; background: transparent; border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; align-items: stretch; justify-content: flex-start; }
+.game-card-home img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px 8px 0 0; background: #222; }
+.category-block { margin-bottom: 0.75rem; }
+.game-grid { margin-bottom: 0.25rem; }
+.carousel-arrow {
+  width: 48px;
+  height: 100%;
+  min-height: 40px;
+  border-radius: 8px;
+  background: rgba(30, 64, 175, 0.25);
+  border: none;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s, opacity 0.2s;
+  z-index: 20;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 2px 8px 0 rgba(0,0,0,0.10);
+  position: absolute;
+  transform: translateY(-50%);
+}
+.carousel-arrow[disabled], .carousel-arrow.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+.carousel-arrow:hover {
+  background: rgba(30, 64, 175, 0.45);
+  transform: translateY(-50%) scale(1.08);
+}
+.carousel-arrow-left::before {
+  content: '\2039';
+  font-size: 2rem;
+  display: block;
+  line-height: 1;
+}
+.carousel-arrow-right::before {
+  content: '\203A';
+  font-size: 2rem;
+  display: block;
+  line-height: 1;
+}
+.category-block:hover .carousel-arrow {
+  display: flex !important;
+}
+@media (max-width: 900px) {
+  .carousel-arrow { width: 36px; min-height: 32px; }
+}
+</style>
+<script>
+window.categoryGames = {};
+{% for category in categories %}
+  window.categoryGames['{{ category.slug }}'] = [
+    {% for game in category.games %}
+      { slug: "{{ game.slug }}", title: "{{ game.title|e('js') }}" },
+    {% endfor %}
+  ];
+{% endfor %}
+window.categoryPages = {};
+function renderCategoryPage(slug) {
+  const games = window.categoryGames[slug] || [];
+  const page = window.categoryPages[slug] || 0;
+  const grid = document.getElementById('cat-grid-' + slug);
+  const leftBtn = document.querySelector('#cat-block-' + slug + ' .carousel-arrow-left');
+  const rightBtn = document.querySelector('#cat-block-' + slug + ' .carousel-arrow-right');
+  if (!grid) return;
+  grid.innerHTML = '';
+  const start = page * 7;
+  const end = start + 7;
+  const pageGames = games.slice(start, end);
+  pageGames.forEach(game => {
+    const card = document.createElement('div');
+    card.className = 'game-card-home';
+    card.innerHTML = `<a href="${window.baseUrl || ''}/game/${game.slug}"><img src="${window.baseUrl || ''}/assets/images/games/${game.slug}.webp" alt="${game.title}"></a>`;
+    grid.appendChild(card);
+  });
+  // 箭头显示/隐藏
+  if (leftBtn) leftBtn.disabled = !(page > 0);
+  if (rightBtn) rightBtn.disabled = !(end < games.length);
+}
+function scrollCategoryPage(slug, dir) {
+  const games = window.categoryGames[slug] || [];
+  const maxPage = Math.floor((games.length - 1) / 7);
+  window.categoryPages[slug] = (window.categoryPages[slug] || 0) + dir;
+  if (window.categoryPages[slug] < 0) window.categoryPages[slug] = 0;
+  if (window.categoryPages[slug] > maxPage) window.categoryPages[slug] = maxPage;
+  renderCategoryPage(slug);
+}
+window.baseUrl = '{{ base_url }}';
+document.addEventListener('DOMContentLoaded', function() {
+  Object.keys(window.categoryGames).forEach(slug => {
+    window.categoryPages[slug] = 0;
+    renderCategoryPage(slug);
+  });
+});
+</script>
+</div>
+{% endblock %} 

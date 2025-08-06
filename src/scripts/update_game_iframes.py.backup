@@ -1,0 +1,181 @@
+import os
+import glob
+import re
+import csv
+import codecs
+
+def read_iframe_urls(csv_path):
+    """从CSV文件读取游戏iframe URLs"""
+    iframe_urls = {}
+    
+    # 使用codecs防止BOM问题
+    with codecs.open(csv_path, 'r', encoding='utf-8-sig') as f:
+        reader = csv.reader(f)
+        next(reader)  # 跳过表头
+        for row in reader:
+            if len(row) >= 2:
+                game_title = row[0].strip()
+                iframe_url = row[1].strip()
+                # 将游戏标题转换为小写并删除空格，用作键
+                key = re.sub(r'[^a-z0-9]', '', game_title.lower())
+                iframe_urls[key] = iframe_url
+                # 同时用标题的各种变体作为备用键
+                slug_key = game_title.lower().replace(' ', '-')
+                iframe_urls[slug_key] = iframe_url
+    
+    return iframe_urls
+
+def extract_game_info(file_path):
+    """从游戏页面提取游戏信息"""
+    with open(file_path, 'r', encoding='utf-8') as f:
+        content = f.read()
+    
+    # 提取游戏名称
+    title_match = re.search(r'<title>(.*?)(?:\s*-|\s*\|)', content)
+    title = title_match.group(1).strip() if title_match else "Game"
+    
+    # 提取游戏描述
+    desc_match = re.search(r'<meta name="description" content="([^"]*)"', content)
+    description = desc_match.group(1) if desc_match else f"Play {title} online for free."
+    
+    # 提取游戏分类
+    category_match = re.search(r'"genre":\s*"([^"]*)"', content)
+    category = category_match.group(1).split(',')[0].strip() if category_match else "Action"
+    categories = [cat.strip() for cat in category.split(',')] if ',' in category else [category]
+    
+    # 获取slug（从文件名）
+    slug = os.path.splitext(os.path.basename(file_path))[0]
+    
+    # 尝试提取控制说明
+    controls_match = re.search(r'<div class="game-controls">\s*<h2>Game Controls</h2>\s*<p>(.*?)</p>', content, re.DOTALL)
+    controls = controls_match.group(1).strip() if controls_match else "Use mouse to play."
+    
+    return {
+        'title': title,
+        'description': description,
+        'categories': categories,
+        'slug': slug,
+        'controls': controls
+    }
+
+def get_iframe_url(game_info, iframe_urls):
+    """根据游戏信息获取iframe URL"""
+    title = game_info['title']
+    slug = game_info['slug']
+    
+    # 将游戏标题转换为键格式
+    title_key = re.sub(r'[^a-z0-9]', '', title.lower())
+    slug_key = slug.lower()
+    
+    # 尝试直接匹配标题
+    if title_key in iframe_urls:
+        return iframe_urls[title_key]
+    
+    # 尝试匹配slug
+    if slug_key in iframe_urls:
+        return iframe_urls[slug_key]
+    
+    # 尝试部分匹配
+    for k, url in iframe_urls.items():
+        if k in title_key or title_key in k or k in slug_key or slug_key in k:
+            return url
+    
+    # 未找到匹配项，返回默认URL
+    return f"https://sonice.online/games/{slug}/"
+
+def update_game_page(file_path, template_path, iframe_urls):
+    """使用模板和CSV数据更新游戏页面"""
+    try:
+        # 读取模板文件
+        with open(template_path, 'r', encoding='utf-8') as f:
+            template = f.read()
+        
+        # 获取游戏信息
+        game_info = extract_game_info(file_path)
+        
+        # 获取iframe URL
+        game_info['iframe_url'] = get_iframe_url(game_info, iframe_urls)
+        
+        print(f"处理: {file_path}")
+        print(f"  标题: {game_info['title']}")
+        print(f"  iframe URL: {game_info['iframe_url']}")
+        
+        # 创建新内容，替换所有模板变量
+        new_content = template
+        
+        # 基本属性替换
+        new_content = new_content.replace('{{game.title}}', game_info['title'])
+        new_content = new_content.replace('{{game.description}}', game_info['description'])
+        new_content = new_content.replace('{{game.slug}}', game_info['slug'])
+        new_content = new_content.replace('{{game.controls}}', game_info['controls'])
+        new_content = new_content.replace('{{game.iframeUrl}}', game_info['iframe_url'])
+        new_content = new_content.replace('{{game.image}}', f"/src/assets/images/games/{game_info['slug']}.jpg")
+        
+        # 分类替换
+        categories_section = ""
+        category_template = ""
+        
+        # 提取分类模板
+        category_pattern = r'{% for category in game\.categories %}(.*?){% if not loop\.last %}.*?{% endif %}(.*?){% endfor %}'
+        category_match = re.search(category_pattern, new_content, re.DOTALL)
+        
+        if category_match:
+            category_template = category_match.group(1) + category_match.group(2)
+            
+            # 为每个分类生成HTML
+            for category in game_info['categories']:
+                categories_section += category_template.replace('{{category}}', category)
+            
+            # 替换所有分类循环
+            new_content = re.sub(category_pattern, categories_section, new_content, flags=re.DOTALL)
+        
+        # 设置默认评分值
+        new_content = new_content.replace('{{game.rating|default(4.5)}}', '4.5')
+        new_content = new_content.replace('{{game.ratingCount|default(128)}}', '128')
+        
+        # 保存更新后的内容
+        with open(file_path, 'w', encoding='utf-8') as f:
+            f.write(new_content)
+        
+        return True
+    except Exception as e:
+        print(f"更新 {file_path} 时出错: {str(e)}")
+        return False
+
+def main():
+    # 模板和CSV文件路径
+    template_path = 'src/templates/game-template.html'
+    csv_path = '游戏iframe.CSV'
+    
+    # 确认文件存在
+    if not os.path.exists(template_path):
+        print(f"错误: 模板文件 {template_path} 不存在!")
+        return
+    
+    if not os.path.exists(csv_path):
+        print(f"错误: CSV文件 {csv_path} 不存在!")
+        return
+    
+    # 读取iframe URLs
+    iframe_urls = read_iframe_urls(csv_path)
+    print(f"从CSV文件加载了 {len(iframe_urls)} 个游戏iframe URL")
+    
+    # 获取所有游戏HTML文件
+    game_pages = glob.glob('pages/games/*.html')
+    
+    success_count = 0
+    error_count = 0
+    
+    # 更新每个游戏页面
+    for page in game_pages:
+        if update_game_page(page, template_path, iframe_urls):
+            success_count += 1
+        else:
+            error_count += 1
+    
+    print("\n更新完成!")
+    print(f"成功更新: {success_count} 页面")
+    print(f"更新失败: {error_count} 页面")
+
+if __name__ == "__main__":
+    main() 

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{page_title|default('Welcome')}} - Sonice Online Games</title>
+    <meta name="description" content="{{page_description|default('Play free online games at Sonice.Games')}}">
+    <meta name="keywords" content="online games, free games, browser games, HTML5 games, {{page_keywords|default('action games, racing games, puzzle games, strategy games')}}">
+    <meta name="author" content="Sonice.Games">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="en">
+    <meta name="revisit-after" content="7 days">
+    <meta name="distribution" content="global">
+    <meta name="rating" content="general">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://sonice.games{{page_url|default('/')}}">
+    
+    <!-- Sitemap -->
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="https://sonice.games/sitemap.xml">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ base_url }}/assets/images/icons/logo.png">
+    <link rel="apple-touch-icon" href="{{ base_url }}/assets/images/icons/logo.png">
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="//cdn.tailwindcss.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://sonice.online{{page_url}}">
+    <meta property="og:title" content="{{page_title|default('Welcome')}} - Sonice Online Games">
+    <meta property="og:description" content="{{page_description|default('Play free online games at Sonice.Games')}}">
+    <meta property="og:image" content="https://sonice.online/assets/images/icons/logo.png">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://sonice.online{{page_url}}">
+    <meta property="twitter:title" content="{{page_title|default('Welcome')}} - Sonice Online Games">
+    <meta property="twitter:description" content="{{page_description|default('Play free online games at Sonice.Games')}}">
+    <meta property="twitter:image" content="https://sonice.online/assets/images/icons/logo.png">
+
+    <link rel="stylesheet" href="{{ base_url }}/assets/css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome icon library -->
+    <link rel="stylesheet" href="{{ base_url }}/assets/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="{{ base_url }}/assets/css/auth.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+    
+    <!-- Structured Data for SEO -->
+    {% include 'partials/structured_data.twig' %}
+    
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C6DQJE930Z"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-C6DQJE930Z', {
+            'page_title': '{{page_title|default("Welcome")}}',
+            'page_location': 'https://sonice.games{{page_url|default("/")}}',
+            'custom_map': {
+                'dimension1': 'user_type',
+                'dimension2': 'game_category'
+            }
+        });
+        
+        // 自定义事件跟踪
+        function trackGamePlay(gameTitle, gameCategory) {
+            gtag('event', 'game_play', {
+                'event_category': 'Games',
+                'event_label': gameTitle,
+                'custom_map': {
+                    'dimension2': gameCategory
+                }
+            });
+        }
+        
+        function trackGameSearch(searchTerm) {
+            gtag('event', 'search', {
+                'search_term': searchTerm,
+                'event_category': 'Search'
+            });
+        }
+        
+        function trackCategoryView(categoryName) {
+            gtag('event', 'category_view', {
+                'event_category': 'Navigation',
+                'event_label': categoryName
+            });
+        }
+    </script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark': '#0F1012',
+                        'dark-lighter': '#1A1B1F',
+                        'blue-primary': '#0EA5E9',
+                        'blue-secondary': '#38BDF8',
+                        'blue-bright': '#7DD3FC',
+                        'purple-primary': '#7C3AED',
+                        'gray-custom': '#2A2B31',
+                        'sidebar-blue': '#152a69',
+                        'sidebar-hover': '#1d3a8f'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #60a5fa 100%) !important;
+            color: #ffffff;
+        }
+        .content-wrapper {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-dark text-white">
+{% if categories is not defined or categories is null %}
+    {% set categories = [] %}
+{% endif %}
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-30 bg-dark-lighter bg-opacity-90 backdrop-blur-sm border-b border-gray-800">
+        <div class="container mx-auto px-4 h-16 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="{{ base_url }}/" class="flex items-center space-x-2">
+                <img src="{{ base_url }}/assets/images/icons/logo.png" alt="Sonice.Games" class="h-10 w-10 rounded-full object-cover">
+                <span class="text-2xl font-bold text-white">Sonice<span class="text-blue-500">.Games</span></span>
+            </a>
+            <!-- Search Bar -->
+            <div class="flex-1 max-w-2xl mx-8">
+                <div class="relative">
+                    <form id="searchForm" action="/search" method="get" class="relative">
+                        <input type="search" name="q" id="searchInput" placeholder="Search games..." class="w-full px-5 py-2 bg-[#233a6b] border-none rounded-full text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent shadow-inner">
+                        <button type="submit" class="absolute right-2 top-1/2 -translate-y-1/2 bg-blue-500 hover:bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center transition">
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <!-- 新登录注册入口 -->
+            <button id="navLoginBtn" class="ml-4 px-4 py-2 bg-blue-600 text-white rounded">登录/注册</button>
+        </div>
+    </header>
+    <div class="flex flex-1 min-h-0 pt-16">
+        {% include 'sidebar.twig' with {'categories': categories, 'base_url': base_url} %}
+        <div id="mainContent" class="flex-1 flex flex-col min-h-0 ml-14 transition-all duration-300">
+            <main class="flex-1 gradient-blue">
+                <div class="w-full px-0 py-4">
+                    {% block content %}{% endblock %}
+                </div>
+            </main>
+            <script>
+                window.allGameSlugs = {{ (games is defined and games is iterable) ? games|column('slug')|json_encode|raw : '[]' }};
+            </script>
+            {% include 'footer.twig' %}
+        </div>
+    </div>
+    <!-- 登录弹窗（美化版） -->
+    <div id="loginModal" class="fixed inset-0 z-50 items-center justify-center bg-black bg-opacity-60 hidden">
+        <div class="bg-white rounded-xl shadow-lg p-8 w-full max-w-xs relative">
+            <button id="closeLoginModal" class="absolute top-3 right-3 text-gray-400 hover:text-blue-600 text-2xl">&times;</button>
+            <h2 class="text-2xl font-bold mb-6 text-center text-blue-700">登录</h2>
+            <div id="loginError" class="text-red-500 text-center mb-2 hidden"></div>
+            <input id="loginUsername" type="text" placeholder="用户名/邮箱" class="w-full mb-3 p-2 border rounded text-gray-900 focus:ring-2 focus:ring-blue-400" required>
+            <input id="loginPassword" type="password" placeholder="密码" class="w-full mb-4 p-2 border rounded text-gray-900 focus:ring-2 focus:ring-blue-400" required>
+            <button id="loginSubmit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded font-semibold transition">登录</button>
+        </div>
+    </div>
+    <style>
+    #loginModal { display: none; }
+    #loginModal.flex { display: flex; }
+    #loginModal .bg-white { animation: popIn .2s cubic-bezier(.4,2,.6,1) both; }
+    @keyframes popIn { from { transform: scale(.8); opacity:0; } to { transform: scale(1); opacity:1; } }
+    </style>
+    <script>
+    // 弹窗控制
+    const loginModal = document.getElementById('loginModal');
+    const showLoginModal = () => { loginModal.classList.remove('hidden'); loginModal.classList.add('flex'); };
+    const hideLoginModal = () => { loginModal.classList.add('hidden'); loginModal.classList.remove('flex'); };
+    document.getElementById('navLoginBtn').onclick = showLoginModal;
+    document.getElementById('closeLoginModal').onclick = hideLoginModal;
+    loginModal.addEventListener('click', e => { if (e.target === loginModal) hideLoginModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') hideLoginModal(); });
+    // 登录逻辑
+    document.getElementById('loginSubmit').onclick = async function() {
+        const username = document.getElementById('loginUsername').value.trim();
+        const password = document.getElementById('loginPassword').value;
+        const errorDiv = document.getElementById('loginError');
+        errorDiv.classList.add('hidden');
+        errorDiv.innerText = '';
+        if (!username || !password) {
+            errorDiv.innerText = '请输入用户名和密码';
+            errorDiv.classList.remove('hidden');
+            return;
+        }
+        // 发起登录请求
+        try {
+            const res = await fetch('/api/auth/login.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
+            const data = await res.json();
+            if (data.success) {
+                errorDiv.classList.add('hidden');
+                alert('登录成功！');
+                // hideLoginModal();
+                window.location.reload();
+            } else {
+                errorDiv.innerText = data.message || '登录失败，请检查用户名和密码';
+                errorDiv.classList.remove('hidden');
+            }
+        } catch (err) {
+            errorDiv.innerText = '网络错误，请稍后再试';
+            errorDiv.classList.remove('hidden');
+        }
+    };
+    document.getElementById('searchForm').onsubmit = function(e) {
+        e.preventDefault();
+        const q = document.getElementById('searchInput').value.trim();
+        if (q) window.location.href = '/search?q=' + encodeURIComponent(q);
+    };
+    document.getElementById('newsletterForm').onsubmit = function(e) {
+        e.preventDefault();
+        const email = document.getElementById('newsletterEmail').value.trim();
+        const errorDiv = document.getElementById('newsletterError');
+        errorDiv.classList.add('hidden');
+        errorDiv.innerText = '';
+        if (!/^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+            errorDiv.innerText = '请输入有效的邮箱地址';
+            errorDiv.classList.remove('hidden');
+            return;
+        }
+        // 这里可以用 fetch/AJAX 提交到后端
+        // fetch('/api/newsletter.php', {method:'POST', body:...})
+        // .then(...).catch(() => { errorDiv.innerText = '提交失败，请稍后再试'; errorDiv.classList.remove('hidden'); });
+        alert('订阅成功！');
+    };
+    // 侧边栏展开时推开内容区
+    const sidebar = document.getElementById('sidebar');
+    const mainContent = document.getElementById('mainContent');
+    if (sidebar && mainContent) {
+        sidebar.addEventListener('mouseenter', () => {
+            mainContent.classList.remove('ml-14');
+            mainContent.classList.add('ml-56');
+        });
+        sidebar.addEventListener('mouseleave', () => {
+            mainContent.classList.remove('ml-56');
+            mainContent.classList.add('ml-14');
+        });
+    }
+    </script>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html> 
+ 

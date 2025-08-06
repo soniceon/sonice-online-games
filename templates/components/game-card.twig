@@ -1,0 +1,34 @@
+{% macro render(game) %}
+<div class="game-card bg-dark-lighter rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow">
+    <a href="{{ base_url }}/game/{{ game.slug }}" class="block relative">
+        <img src="{{ game.thumbnail }}" alt="{{ game.title }}" class="w-full h-48 object-cover">
+        <div class="absolute top-2 right-2">
+            <button class="favorite-btn p-2 bg-black bg-opacity-50 rounded-full hover:bg-opacity-75 transition-colors" data-game-id="{{ game.id }}">
+                <i class="fas fa-heart {% if game.is_favorite %}text-red-500{% else %}text-white{% endif %}"></i>
+            </button>
+        </div>
+        {% if game.is_new %}
+        <div class="absolute top-2 left-2">
+            <span class="px-2 py-1 bg-blue-600 text-white text-xs rounded-full">NEW</span>
+        </div>
+        {% endif %}
+        {% if game.last_played_at is defined %}
+        <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black to-transparent">
+            <div class="text-sm text-gray-300">
+                <i class="fas fa-clock mr-1"></i> 
+                Last played: {{ game.last_played_at|date("M d, Y H:i") }}
+            </div>
+        </div>
+        {% endif %}
+    </a>
+    <div class="p-4">
+        <h3 class="text-lg font-semibold mb-2">
+            <a href="{{ base_url }}/game/{{ game.slug }}" class="hover:text-blue-400 transition-colors">{{ game.title }}</a>
+        </h3>
+        <div class="flex items-center justify-between text-sm text-gray-400">
+            <span>{{ game.category }}</span>
+            <span>{{ game.plays }} plays</span>
+        </div>
+    </div>
+</div>
+{% endmacro %} 

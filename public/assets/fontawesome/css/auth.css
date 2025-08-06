@@ -1,0 +1,141 @@
+/* Auth modal styles */
+.auth-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 50;
+}
+
+.auth-modal.show {
+    display: flex;
+}
+
+.auth-modal-content {
+    background: var(--color-dark-lighter);
+    border-radius: 1rem;
+    padding: 2rem;
+    width: 100%;
+    max-width: 28rem;
+    position: relative;
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.auth-modal.show .auth-modal-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.auth-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.5rem;
+    color: #9CA3AF;
+    transition: color 0.2s ease;
+}
+
+.auth-modal-close:hover {
+    color: white;
+}
+
+.auth-form-group {
+    margin-bottom: 1.5rem;
+}
+
+.auth-form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #9CA3AF;
+    font-size: 0.875rem;
+}
+
+.auth-form-group input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: var(--color-dark);
+    border: 1px solid #374151;
+    border-radius: 0.5rem;
+    color: white;
+    transition: border-color 0.2s ease;
+}
+
+.auth-form-group input:focus {
+    outline: none;
+    border-color: var(--color-blue-primary);
+}
+
+.auth-form-group input::placeholder {
+    color: #6B7280;
+}
+
+.auth-checkbox {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.auth-checkbox input[type="checkbox"] {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid #374151;
+    background: var(--color-dark);
+}
+
+.auth-checkbox label {
+    color: #9CA3AF;
+    font-size: 0.875rem;
+}
+
+.auth-submit {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: var(--color-blue-primary);
+    color: white;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+}
+
+.auth-submit:hover {
+    background: var(--color-blue-secondary);
+}
+
+.auth-links {
+    margin-top: 1.5rem;
+    text-align: center;
+    font-size: 0.875rem;
+}
+
+.auth-links a {
+    color: var(--color-blue-primary);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.auth-links a:hover {
+    color: var(--color-blue-secondary);
+}
+
+.auth-error {
+    background: #DC2626;
+    color: white;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    display: none;
+}
+
+.auth-error.show {
+    display: block;
+} 

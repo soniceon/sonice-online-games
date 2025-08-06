@@ -1,0 +1,210 @@
+<!-- Login Modal -->
+<div id="loginModal" class="modal hidden">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="text-xl font-bold">登录</h3>
+            <button type="button" class="modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="loginForm" onsubmit="return handleLogin(event)">
+                <div class="space-y-4">
+                    <div>
+                        <label for="loginEmail" class="block text-sm font-medium mb-1">邮箱</label>
+                        <input 
+                            type="email" 
+                            id="loginEmail" 
+                            name="email" 
+                            class="input-field" 
+                            required
+                        >
+                    </div>
+                    <div>
+                        <label for="loginPassword" class="block text-sm font-medium mb-1">密码</label>
+                        <input 
+                            type="password" 
+                            id="loginPassword" 
+                            name="password" 
+                            class="input-field" 
+                            required
+                        >
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <label class="flex items-center">
+                            <input type="checkbox" class="form-checkbox">
+                            <span class="ml-2 text-sm">记住我</span>
+                        </label>
+                        <a href="#" class="text-sm text-blue-500 hover:text-blue-600">忘记密码？</a>
+                    </div>
+                    <button type="submit" class="btn-primary w-full">
+                        登录
+                    </button>
+                </div>
+            </form>
+            <div class="mt-4 text-center">
+                <p class="text-sm">
+                    还没有账号？
+                    <button type="button" class="text-blue-500 hover:text-blue-600" onclick="showRegisterModal()">
+                        立即注册
+                    </button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Register Modal -->
+<div id="registerModal" class="modal hidden">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="text-xl font-bold">注册</h3>
+            <button type="button" class="modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="registerForm" onsubmit="return handleRegister(event)">
+                <div class="space-y-4">
+                    <div>
+                        <label for="registerUsername" class="block text-sm font-medium mb-1">用户名</label>
+                        <input 
+                            type="text" 
+                            id="registerUsername" 
+                            name="username" 
+                            class="input-field" 
+                            required
+                        >
+                    </div>
+                    <div>
+                        <label for="registerEmail" class="block text-sm font-medium mb-1">邮箱</label>
+                        <input 
+                            type="email" 
+                            id="registerEmail" 
+                            name="email" 
+                            class="input-field" 
+                            required
+                        >
+                    </div>
+                    <div>
+                        <label for="registerPassword" class="block text-sm font-medium mb-1">密码</label>
+                        <input 
+                            type="password" 
+                            id="registerPassword" 
+                            name="password" 
+                            class="input-field" 
+                            required
+                        >
+                    </div>
+                    <div>
+                        <label for="registerConfirmPassword" class="block text-sm font-medium mb-1">确认密码</label>
+                        <input 
+                            type="password" 
+                            id="registerConfirmPassword" 
+                            name="confirmPassword" 
+                            class="input-field" 
+                            required
+                        >
+                    </div>
+                    <div class="flex items-center">
+                        <input type="checkbox" id="agreeTerms" class="form-checkbox" required>
+                        <label for="agreeTerms" class="ml-2 text-sm">
+                            我同意
+                            <a href="{{ base_url }}/terms" class="text-blue-500 hover:text-blue-600">服务条款</a>
+                            和
+                            <a href="{{ base_url }}/privacy" class="text-blue-500 hover:text-blue-600">隐私政策</a>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn-primary w-full">
+                        注册
+                    </button>
+                </div>
+            </form>
+            <div class="mt-4 text-center">
+                <p class="text-sm">
+                    已有账号？
+                    <button type="button" class="text-blue-500 hover:text-blue-600" onclick="showLoginModal()">
+                        立即登录
+                    </button>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Toast Notifications -->
+<div id="toastContainer" class="fixed bottom-4 right-4 z-50"></div>
+
+<!-- Toast 通知 -->
+<div id="toast" class="fixed top-6 right-6 z-[9999] bg-green-500 text-white px-4 py-2 rounded shadow-lg hidden"></div>
+
+<!-- 激活通知模态框 -->
+<div id="activate-modal" class="modal-backdrop hidden">
+    <div class="modal-content">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold">激活账号</h2>
+            <button onclick="hideActivateModal()" class="text-gray-400 hover:text-white">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="text-center space-y-4">
+            <div class="w-16 h-16 mx-auto bg-green-500 rounded-full flex items-center justify-center">
+                <i class="fas fa-envelope-open text-2xl"></i>
+            </div>
+            
+            <p class="text-gray-400">
+                我们已经向您的邮箱发送了一封激活邮件，请查收并点击邮件中的激活链接来完成账号激活。
+            </p>
+            
+            <div class="text-sm text-gray-400">
+                没有收到邮件？
+                <button type="button" onclick="resendActivation()" class="text-blue-500 hover:text-blue-400">
+                    重新发送
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 选择头像模态框 -->
+<div id="avatar-modal" class="modal-backdrop hidden">
+    <div class="modal-content">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-xl font-bold">选择头像</h2>
+            <button onclick="hideAvatarModal()" class="text-gray-400 hover:text-white">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="grid grid-cols-4 gap-4 mb-6">
+            {% for i in 1..12 %}
+            <button 
+                onclick="selectAvatar('avatar{{ i }}.png')" 
+                class="aspect-square rounded-xl overflow-hidden hover:ring-2 hover:ring-blue-500 transition-all"
+            >
+                <img src="{{ base_url }}/assets/images/avatars/avatar{{ i }}.png" alt="Avatar {{ i }}" class="w-full h-full object-cover">
+            </button>
+            {% endfor %}
+        </div>
+        
+        <div class="text-center">
+            <button onclick="uploadAvatar()" class="btn-secondary">
+                <i class="fas fa-upload mr-2"></i>
+                上传自定义头像
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- 头像选择弹窗 -->
+<div id="avatar-picker-modal" class="modal-backdrop hidden">
+  <div class="modal-content max-w-lg mx-auto p-8 rounded-2xl bg-white text-center relative">
+    <button onclick="hideAvatarPickerModal()" class="absolute right-4 top-4 text-gray-400 hover:text-blue-600 text-2xl"><i class="fas fa-times"></i></button>
+    <h2 class="text-2xl font-bold mb-4 text-blue-700 flex items-center justify-center"><i class="fas fa-random mr-2"></i>选择你的新头像</h2>
+    <div id="avatar-picker-list" class="grid grid-cols-3 gap-4 mb-6"></div>
+    <button onclick="refreshAvatarPicker()" class="btn-secondary mb-2"><i class="fas fa-sync-alt mr-2"></i>再换一批</button>
+    <div class="text-gray-400 text-xs">头像由 DiceBear API 随机生成</div>
+  </div>
+</div> 
+ 

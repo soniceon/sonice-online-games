@@ -1,0 +1,27 @@
+<script>
+    window.allGameSlugs = {{ (games is defined and games is iterable) ? games|column('slug')|json_encode|raw : '[]' }};
+</script>
+<!-- 页脚按钮，仅保留按钮，无背景 -->
+<div class="w-full flex flex-col items-center justify-center my-8">
+    <div class="flex flex-row items-center justify-center gap-6">
+        <button id="randomGameBtn" class="flex items-center px-8 py-3 rounded-full border border-black text-black font-semibold text-lg bg-white shadow-lg hover:bg-gray-100 transition">
+            <i class="fa-solid fa-dice-six mr-2"></i> Random game
+        </button>
+        <button onclick="window.scrollTo({top:0,behavior:'smooth'})" class="flex items-center px-8 py-3 rounded-full bg-purple-600 hover:bg-purple-700 text-white font-semibold text-lg transition">
+            <i class="fa-solid fa-arrow-up mr-2"></i> Back to top
+        </button>
+    </div>
+</div>
+<script>
+// 假设所有游戏链接都在 window.allGameSlugs 数组里
+if (window.allGameSlugs && Array.isArray(window.allGameSlugs)) {
+    document.getElementById('randomGameBtn').onclick = function() {
+        if(window.allGameSlugs.length > 0) {
+            var slug = window.allGameSlugs[Math.floor(Math.random() * window.allGameSlugs.length)];
+            window.location.href = '/game/' + slug;
+        } else {
+            alert('No games found!');
+        }
+    };
+}
+</script> 
