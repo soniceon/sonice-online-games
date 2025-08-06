@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper - Sonice Online Games</title>
+    <meta name="description" content="Play Minesweeper online for free at Sonice.Games">
+    <meta name="keywords" content="Minesweeper, online games, free games, browser games">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-C6DQJE930Z"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-C6DQJE930Z');
+    </script>
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #60a5fa 100%);
+            color: white;
+        }
+        .game-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .game-header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .game-title {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        .game-category {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        .game-frame {
+            width: 100%;
+            height: 600px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .game-info {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+        .back-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #3b82f6;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .back-button:hover {
+            background: #2563eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <a href="/" class="back-button">← Back to Games</a>
+        
+        <div class="game-header">
+            <h1 class="game-title">Minesweeper</h1>
+            <div class="game-category">Puzzle</div>
+        </div>
+        
+        <iframe 
+            src="https://minesweeper.online/" 
+            class="game-frame"
+            allowfullscreen>
+        </iframe>
+        
+        <div class="game-info">
+            <h3>About Minesweeper</h3>
+            <p>Clear a board containing hidden mines without detonating any of them.</p>
+        </div>
+    </div>
+    
+    <script>
+        // Track game play event
+        gtag('event', 'game_play', {
+            'event_category': 'Games',
+            'event_label': 'Minesweeper',
+            'custom_map': {
+                'dimension2': 'Puzzle'
+            }
+        });
+    </script>
+</body>
+</html> 

@@ -1,0 +1,105 @@
+{
+  "count": 10,
+  "games": [
+    {
+      "id": "1",
+      "title": "2048",
+      "slug": "2048",
+      "category": "Puzzle",
+      "description": "Join the numbers and get to the 2048 tile! Simple and addictive puzzle game.",
+      "iframeUrl": "https://play2048.co/",
+      "imageUrl": "images/games/2048.jpg",
+      "featured": "true"
+    },
+    {
+      "id": "2",
+      "title": "Flappy Bird",
+      "slug": "flappy-bird",
+      "category": "Arcade",
+      "description": "Guide the bird through pipes by tapping. Classic arcade game that tests your reflexes.",
+      "iframeUrl": "https://flappybird.io/",
+      "imageUrl": "images/games/flappy-bird.jpg",
+      "featured": "true"
+    },
+    {
+      "id": "3",
+      "title": "Tetris",
+      "slug": "tetris",
+      "category": "Puzzle",
+      "description": "Classic tetris game. Arrange falling blocks to create complete rows.",
+      "iframeUrl": "https://tetris.com/play-tetris",
+      "imageUrl": "images/games/tetris.jpg",
+      "featured": "true"
+    },
+    {
+      "id": "4",
+      "title": "Snake",
+      "slug": "snake",
+      "category": "Arcade",
+      "description": "Control a snake to eat food and grow longer without hitting walls or yourself.",
+      "iframeUrl": "https://playsnake.org/",
+      "imageUrl": "images/games/snake.jpg",
+      "featured": "false"
+    },
+    {
+      "id": "5",
+      "title": "Pac-Man",
+      "slug": "pac-man",
+      "category": "Arcade",
+      "description": "Navigate Pac-Man through a maze, eating dots and avoiding ghosts.",
+      "iframeUrl": "https://www.google.com/logos/2010/pacman10-i.html",
+      "imageUrl": "images/games/pacman.jpg",
+      "featured": "true"
+    },
+    {
+      "id": "6",
+      "title": "Sudoku",
+      "slug": "sudoku",
+      "category": "Puzzle",
+      "description": "Fill a 9×9 grid with numbers so each column, row, and section contains digits 1-9.",
+      "iframeUrl": "https://sudoku.com/",
+      "imageUrl": "images/games/sudoku.jpg",
+      "featured": "false"
+    },
+    {
+      "id": "7",
+      "title": "Minesweeper",
+      "slug": "minesweeper",
+      "category": "Puzzle",
+      "description": "Clear a board containing hidden mines without detonating any of them.",
+      "iframeUrl": "https://minesweeper.online/",
+      "imageUrl": "images/games/minesweeper.jpg",
+      "featured": "false"
+    },
+    {
+      "id": "8",
+      "title": "Solitaire",
+      "slug": "solitaire",
+      "category": "Card",
+      "description": "Classic card game where you sort cards in descending order alternating colors.",
+      "iframeUrl": "https://www.solitr.com/",
+      "imageUrl": "images/games/solitaire.jpg",
+      "featured": "false"
+    },
+    {
+      "id": "9",
+      "title": "Chess",
+      "slug": "chess",
+      "category": "Strategy",
+      "description": "Classic strategy board game between two players.",
+      "iframeUrl": "https://www.chess.com/play/computer",
+      "imageUrl": "images/games/chess.jpg",
+      "featured": "true"
+    },
+    {
+      "id": "10",
+      "title": "Checkers",
+      "slug": "checkers",
+      "category": "Strategy",
+      "description": "Move your pieces diagonally and jump over opponent pieces to capture them.",
+      "iframeUrl": "https://www.gamesforthebrain.com/game/checkers/",
+      "imageUrl": "images/games/checkers.jpg",
+      "featured": "false"
+    }
+  ]
+}

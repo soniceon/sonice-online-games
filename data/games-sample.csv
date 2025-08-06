@@ -1,0 +1,11 @@
+id,title,slug,category,description,iframeUrl,imageUrl,featured
+1,2048,2048,Puzzle,"Join the numbers and get to the 2048 tile! Simple and addictive puzzle game.","https://play2048.co/","images/games/2048.jpg",true
+2,Flappy Bird,flappy-bird,Arcade,"Guide the bird through pipes by tapping. Classic arcade game that tests your reflexes.","https://flappybird.io/","images/games/flappy-bird.jpg",true
+3,Tetris,tetris,Puzzle,"Classic tetris game. Arrange falling blocks to create complete rows.","https://tetris.com/play-tetris","images/games/tetris.jpg",true
+4,Snake,snake,Arcade,"Control a snake to eat food and grow longer without hitting walls or yourself.","https://playsnake.org/","images/games/snake.jpg",false
+5,Pac-Man,pac-man,Arcade,"Navigate Pac-Man through a maze, eating dots and avoiding ghosts.","https://www.google.com/logos/2010/pacman10-i.html","images/games/pacman.jpg",true
+6,Sudoku,sudoku,Puzzle,"Fill a 9×9 grid with numbers so each column, row, and section contains digits 1-9.","https://sudoku.com/","images/games/sudoku.jpg",false
+7,Minesweeper,minesweeper,Puzzle,"Clear a board containing hidden mines without detonating any of them.","https://minesweeper.online/","images/games/minesweeper.jpg",false
+8,Solitaire,solitaire,Card,"Classic card game where you sort cards in descending order alternating colors.","https://www.solitr.com/","images/games/solitaire.jpg",false
+9,Chess,chess,Strategy,"Classic strategy board game between two players.","https://www.chess.com/play/computer","images/games/chess.jpg",true
+10,Checkers,checkers,Strategy,"Move your pieces diagonally and jump over opponent pieces to capture them.","https://www.gamesforthebrain.com/game/checkers/","images/games/checkers.jpg",false 

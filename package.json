@@ -1,0 +1,40 @@
+{
+  "name": "sonice-online-games",
+  "version": "1.0.0",
+  "description": "Platform for online games",
+  "main": "index.js",
+  "scripts": {
+    "csv-to-json": "node js/csv-to-json.js",
+    "generate-pages": "node js/generate-game-pages.js",
+    "build": "npm run csv-to-json && npm run generate-pages"
+  },
+  "keywords": [
+    "games",
+    "online",
+    "html5"
+  ],
+  "author": "Sonice",
+  "license": "MIT",
+  "dependencies": {
+    "browser-sync": "^3.0.4",
+    "chokidar": "^3.6.0",
+    "csv-parser": "^3.2.0",
+    "csvtojson": "^2.0.10",
+    "express": "^5.1.0",
+    "nunjucks": "^3.2.4"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/soniceon/sonice-online-games.git"
+  },
+  "bugs": {
+    "url": "https://github.com/soniceon/sonice-online-games/issues"
+  },
+  "homepage": "https://github.com/soniceon/sonice-online-games#readme"
+}

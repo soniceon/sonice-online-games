@@ -1,0 +1,100 @@
+{
+  "categories": [
+    {
+      "name": "Action",
+      "slug": "action",
+      "description": "Experience heart-pounding action games with fast-paced gameplay and intense challenges. From shooters to fighting games, these titles will test your reflexes and skills.",
+      "icon": "fa-bolt",
+      "color": "blue",
+      "featured": true
+    },
+    {
+      "name": "Adventure",
+      "slug": "adventure",
+      "description": "Embark on epic journeys in immersive worlds full of exploration and discovery. Adventure games offer rich storytelling and challenging puzzles.",
+      "icon": "fa-mountain",
+      "color": "green",
+      "featured": true
+    },
+    {
+      "name": "Puzzle",
+      "slug": "puzzle",
+      "description": "Challenge your mind with our collection of brain-teasing puzzle games. From classic matching games to complex logic challenges, these games will keep you thinking.",
+      "icon": "fa-puzzle-piece",
+      "color": "purple",
+      "featured": true
+    },
+    {
+      "name": "Strategy",
+      "slug": "strategy",
+      "description": "Plan, think, and outsmart your opponents in our strategy games. Build empires, command armies, and make critical decisions to achieve victory.",
+      "icon": "fa-chess",
+      "color": "red",
+      "featured": true
+    },
+    {
+      "name": "Racing",
+      "slug": "racing",
+      "description": "Feel the speed and excitement of racing games. Compete against opponents, beat the clock, and customize your vehicles for the ultimate racing experience.",
+      "icon": "fa-car-side",
+      "color": "yellow",
+      "featured": false
+    },
+    {
+      "name": "Sports",
+      "slug": "sports",
+      "description": "Compete in virtual sports from football to basketball, tennis, and more. Show off your skills and become the champion in our sports game collection.",
+      "icon": "fa-basketball",
+      "color": "orange",
+      "featured": false
+    },
+    {
+      "name": "Shooting",
+      "slug": "shooting",
+      "description": "Test your aim and reflexes in our shooting games. Target practice, zombie shooters, and arcade classics await in this action-packed category.",
+      "icon": "fa-crosshairs",
+      "color": "gray",
+      "featured": false
+    },
+    {
+      "name": "Arcade",
+      "slug": "arcade",
+      "description": "Relive the golden age of gaming with our classic arcade games. Simple yet addictive gameplay that's perfect for quick play sessions.",
+      "icon": "fa-gamepad",
+      "color": "pink",
+      "featured": false
+    },
+    {
+      "name": "Multiplayer",
+      "slug": "multiplayer",
+      "description": "Play with friends or challenge players from around the world in our multiplayer games. Cooperative or competitive, the choice is yours.",
+      "icon": "fa-users",
+      "color": "indigo",
+      "featured": true
+    },
+    {
+      "name": "Idle",
+      "slug": "idle",
+      "description": "Watch your empire grow while you're away. Idle games offer satisfying progression systems that continue even when you're not actively playing.",
+      "icon": "fa-hourglass-half",
+      "color": "teal",
+      "featured": false
+    },
+    {
+      "name": "Card",
+      "slug": "card",
+      "description": "From solitaire to complex trading card games, our card game collection offers something for every type of player. Build decks, strategize, and play your cards right!",
+      "icon": "fa-cards",
+      "color": "amber",
+      "featured": false
+    },
+    {
+      "name": "Educational",
+      "slug": "educational",
+      "description": "Learn while having fun with our educational games. Perfect for kids and adults alike who want to challenge their knowledge across various subjects.",
+      "icon": "fa-graduation-cap",
+      "color": "emerald",
+      "featured": false
+    }
+  ]
+} 
