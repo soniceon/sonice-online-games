@@ -6,7 +6,7 @@
   "scripts": {
     "csv-to-json": "node js/csv-to-json.js",
     "generate-pages": "node js/generate-game-pages.js",
-    "build": "npm run csv-to-json && npm run generate-pages"
+    "build": "npm run csv-to-json && npm run generate-pages && node build.js"
   },
   "keywords": [
     "games",

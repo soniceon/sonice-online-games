@@ -1,0 +1,16 @@
+[build]
+command = ""
+publish = "public"
+
+[site]
+bucket = "public"
+
+[[headers]]
+for = "*.xml"
+[headers.values]
+Content-Type = "application/xml; charset=utf-8"
+
+[[headers]]
+for = "/sitemap.xml"
+[headers.values]
+Content-Type = "application/xml; charset=utf-8" 
