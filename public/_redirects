@@ -1,0 +1,7 @@
+# 重定向规则
+/sitemap.xml /sitemap.xml 200
+/sitemap /sitemap-static.html 200
+
+# 确保XML文件正确服务
+/*.xml
+  Content-Type: application/xml; charset=utf-8 
