@@ -2,162 +2,162 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <!-- 主页 -->
     <url>
-        <loc>http://localhost:8000/</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://sonice.online/</loc>
+        <lastmod>2024-08-06</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     
     <!-- 分类页面 -->
     <url>
-        <loc>http://localhost:8000/category/action</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://sonice.online/category/action</loc>
+        <lastmod>2024-08-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>http://localhost:8000/category/racing</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://sonice.online/category/racing</loc>
+        <lastmod>2024-08-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>http://localhost:8000/category/sports</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://sonice.online/category/sports</loc>
+        <lastmod>2024-08-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>http://localhost:8000/category/shooter</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://sonice.online/category/shooter</loc>
+        <lastmod>2024-08-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>http://localhost:8000/category/cards</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://sonice.online/category/cards</loc>
+        <lastmod>2024-08-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>http://localhost:8000/category/adventure</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://sonice.online/category/adventure</loc>
+        <lastmod>2024-08-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>http://localhost:8000/category/puzzle</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://sonice.online/category/puzzle</loc>
+        <lastmod>2024-08-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>http://localhost:8000/category/strategy</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://sonice.online/category/strategy</loc>
+        <lastmod>2024-08-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>http://localhost:8000/category/mining</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://sonice.online/category/mining</loc>
+        <lastmod>2024-08-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>http://localhost:8000/category/idle</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://sonice.online/category/idle</loc>
+        <lastmod>2024-08-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>http://localhost:8000/category/clicker</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://sonice.online/category/clicker</loc>
+        <lastmod>2024-08-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>http://localhost:8000/category/simulation</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://sonice.online/category/simulation</loc>
+        <lastmod>2024-08-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>http://localhost:8000/category/tycoon</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://sonice.online/category/tycoon</loc>
+        <lastmod>2024-08-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>http://localhost:8000/category/arcade</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://sonice.online/category/arcade</loc>
+        <lastmod>2024-08-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>http://localhost:8000/category/board</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://sonice.online/category/board</loc>
+        <lastmod>2024-08-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>http://localhost:8000/category/platformer</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://sonice.online/category/platformer</loc>
+        <lastmod>2024-08-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>http://localhost:8000/category/multiplayer</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://sonice.online/category/multiplayer</loc>
+        <lastmod>2024-08-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>http://localhost:8000/category/io</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://sonice.online/category/io</loc>
+        <lastmod>2024-08-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>http://localhost:8000/category/music</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://sonice.online/category/music</loc>
+        <lastmod>2024-08-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>http://localhost:8000/category/educational</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://sonice.online/category/educational</loc>
+        <lastmod>2024-08-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>http://localhost:8000/category/other</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://sonice.online/category/other</loc>
+        <lastmod>2024-08-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <!-- 静态页面 -->
     <url>
-        <loc>http://localhost:8000/about</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://sonice.online/about</loc>
+        <lastmod>2024-08-06</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>http://localhost:8000/contact</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://sonice.online/contact</loc>
+        <lastmod>2024-08-06</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
-        <loc>http://localhost:8000/privacy</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://sonice.online/privacy</loc>
+        <lastmod>2024-08-06</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
-        <loc>http://localhost:8000/terms</loc>
-        <lastmod>2024-01-15</lastmod>
+        <loc>https://sonice.online/terms</loc>
+        <lastmod>2024-08-06</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
