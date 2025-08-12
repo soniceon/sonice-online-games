@@ -46,6 +46,42 @@
         .links a:hover {
             background: #0056CC;
         }
+        
+        .admin-links {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e9ecef;
+        }
+        
+        .admin-links h3 {
+            color: #495057;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .admin-link {
+            display: inline-block;
+            padding: 12px 20px;
+            background: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
+            transition: background 0.3s;
+        }
+        
+        .admin-link:hover {
+            background: #218838;
+        }
     </style>
 </head>
 <body>
@@ -61,6 +97,17 @@
             <a href="sitemap-simple.xml">Simple Sitemap</a>
             <a href="sitemap-static.html">HTML Sitemap</a>
             <a href="test-deployment.html">Test Page</a>
+        </div>
+        
+        <div class="admin-links">
+            <h3>🔧 系统管理工具</h3>
+            <div class="admin-grid">
+                <a href="public/system_check.php" class="admin-link">系统健康检查</a>
+                <a href="public/status_report.php" class="admin-link">状态报告</a>
+                <a href="public/generate_missing_images.php" class="admin-link">生成缺失图片</a>
+                <a href="public/clear_cache.php" class="admin-link">清理缓存</a>
+                <a href="install.php" class="admin-link">安装/配置</a>
+            </div>
         </div>
         
         <p>如果上面的链接能正常工作，说明Cloudflare Pages配置正确。</p>

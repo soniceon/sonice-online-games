@@ -127,7 +127,7 @@ $csvFile = __DIR__ . '/游戏iframe.CSV';
 if (file_exists($csvFile)) {
     $games = [];
     if (($handle = fopen($csvFile, "r")) !== FALSE) {
-        $header = fgetcsv($handle);
+        $header = fgetcsv($handle, 0, ',', '"', '\\');
         while (($row = fgetcsv($handle, 0, ',', '"', '\\')) !== FALSE) {
             if (count($row) >= 3) {
                 $games[] = $row[0];

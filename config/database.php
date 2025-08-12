@@ -1,35 +1,64 @@
 <?php
-try {
-    $host = '127.0.0.1';
-    $port = 3306;
-    $dbname = 'sonice_online_games';
-    $username = 'root';
-    $password = '';
-    $charset = 'utf8mb4';
-
-    $dsn = "mysql:host=$host;port=$port;dbname=$dbname;charset=$charset";
-    $options = [
+// 数据库配置
+$dbConfig = [
+    'host' => '127.0.0.1',
+    'port' => 3306,
+    'dbname' => 'sonice_online_games',
+    'username' => 'root',
+    'password' => '',
+    'charset' => 'utf8mb4',
+    'options' => [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES => false,
-        PDO::ATTR_PERSISTENT => false,
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4"
-    ];
+    ]
+];
 
-    $pdo = new PDO($dsn, $username, $password, $options);
+// 连接重试函数
+function connectDatabase($config, $maxRetries = 3) {
+    $retries = 0;
+    $lastError = null;
     
-    // 测试连接
-    $pdo->query('SELECT 1');
+    while ($retries < $maxRetries) {
+        try {
+            $dsn = "mysql:host={$config['host']};port={$config['port']};dbname={$config['dbname']};charset={$config['charset']}";
+            $pdo = new PDO($dsn, $config['username'], $config['password'], $config['options']);
+            
+            // 测试连接
+            $pdo->query('SELECT 1');
+            return $pdo;
+            
+        } catch (PDOException $e) {
+            $lastError = $e;
+            $retries++;
+            
+            if ($retries < $maxRetries) {
+                // 等待一段时间后重试
+                usleep(500000); // 0.5秒
+                continue;
+            }
+        }
+    }
     
-} catch (PDOException $e) {
-    // 记录错误但不显示敏感信息
-    error_log('Database connection failed: ' . $e->getMessage());
-    
-    // 创建数据库和表（如果不存在）
+    // 所有重试都失败了
+    error_log("Database connection failed after {$maxRetries} attempts: " . $lastError->getMessage());
+    return null;
+}
+
+// 尝试连接数据库
+$pdo = connectDatabase($dbConfig);
+
+// 如果连接失败，尝试创建数据库和表
+if (!$pdo) {
     try {
-        $pdo = new PDO("mysql:host=$host;port=$port;charset=$charset", $username, $password, $options);
-        $pdo->exec("CREATE DATABASE IF NOT EXISTS `$dbname` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
-        $pdo->exec("USE `$dbname`");
+        // 尝试不指定数据库名连接
+        $dsn = "mysql:host={$dbConfig['host']};port={$dbConfig['port']};charset={$dbConfig['charset']}";
+        $pdo = new PDO($dsn, $dbConfig['username'], $dbConfig['password'], $dbConfig['options']);
+        
+        // 创建数据库
+        $pdo->exec("CREATE DATABASE IF NOT EXISTS `{$dbConfig['dbname']}` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
+        $pdo->exec("USE `{$dbConfig['dbname']}`");
         
         // 创建用户表
         $pdo->exec("
@@ -73,9 +102,51 @@ try {
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
         ");
         
-    } catch (PDOException $e2) {
-        error_log('Failed to create database: ' . $e2->getMessage());
+        // 创建游戏统计表
+        $pdo->exec("
+            CREATE TABLE IF NOT EXISTS `game_stats` (
+                `id` int(11) NOT NULL AUTO_INCREMENT,
+                `game_slug` varchar(255) NOT NULL,
+                `plays` int(11) DEFAULT 0,
+                `likes` int(11) DEFAULT 0,
+                `last_played` timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+                PRIMARY KEY (`id`),
+                UNIQUE KEY `game_slug` (`game_slug`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+        ");
+        
+        error_log("Database and tables created successfully");
+        
+    } catch (PDOException $e) {
+        error_log('Failed to create database: ' . $e->getMessage());
         // 如果数据库连接失败，创建一个模拟的PDO对象
         $pdo = null;
+    }
+}
+
+// 数据库连接状态检查函数
+function isDatabaseConnected() {
+    global $pdo;
+    if (!$pdo) return false;
+    
+    try {
+        $pdo->query('SELECT 1');
+        return true;
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
+// 安全的数据库查询函数
+function safeQuery($pdo, $sql, $params = []) {
+    if (!$pdo) return false;
+    
+    try {
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
+        return $stmt;
+    } catch (PDOException $e) {
+        error_log('Database query failed: ' . $e->getMessage());
+        return false;
     }
 } 

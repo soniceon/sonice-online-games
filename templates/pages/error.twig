@@ -2,37 +2,58 @@
 
 {% block content %}
 <div class="min-h-screen flex items-center justify-center bg-gray-900">
-    <div class="max-w-md w-full bg-gray-800 rounded-lg shadow-lg p-8 text-center">
+    <div class="max-w-md w-full bg-white rounded-lg shadow-lg p-8 text-center">
         <div class="mb-6">
-            <svg class="mx-auto h-16 w-16 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
-            </svg>
+            <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-red-100">
+                <svg class="h-8 w-8 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z" />
+                </svg>
+            </div>
         </div>
         
-        <h1 class="text-2xl font-bold text-white mb-4">Oops! Something went wrong</h1>
+        <h1 class="text-2xl font-bold text-gray-900 mb-4">出错了！</h1>
         
         {% if error_message %}
-            <p class="text-gray-300 mb-6">{{ error_message }}</p>
+            <p class="text-gray-600 mb-6">{{ error_message }}</p>
         {% else %}
-            <p class="text-gray-300 mb-6">We encountered an unexpected error. Please try again later.</p>
+            <p class="text-gray-600 mb-6">抱歉，页面加载时发生了错误。请稍后再试。</p>
         {% endif %}
         
         <div class="space-y-3">
-            <a href="{{ base_url }}/" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition duration-200">
-                Go to Homepage
+            <a href="{{ base_url }}/" class="block w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-200">
+                返回首页
             </a>
             
-            <button onclick="history.back()" class="block w-full bg-gray-600 hover:bg-gray-700 text-white font-medium py-3 px-4 rounded-lg transition duration-200">
-                Go Back
+            <a href="{{ base_url }}/public/system_check.php" class="block w-full bg-gray-600 text-white py-3 px-4 rounded-lg hover:bg-gray-700 transition duration-200">
+                系统检查
+            </a>
+            
+            <button onclick="history.back()" class="block w-full bg-green-600 text-white py-3 px-4 rounded-lg hover:bg-green-700 transition duration-200">
+                返回上一页
             </button>
         </div>
         
-        {% if debug %}
-            <div class="mt-6 p-4 bg-gray-700 rounded-lg text-left">
-                <h3 class="text-sm font-semibold text-gray-300 mb-2">Debug Information:</h3>
-                <pre class="text-xs text-gray-400 overflow-auto">{{ debug }}</pre>
-            </div>
-        {% endif %}
+        <div class="mt-6 text-sm text-gray-500">
+            <p>如果问题持续存在，请联系管理员</p>
+            <p class="mt-2">
+                <a href="{{ base_url }}/contact" class="text-blue-600 hover:underline">联系我们</a>
+            </p>
+        </div>
     </div>
 </div>
+
+<script>
+// 自动错误报告
+window.addEventListener('error', function(e) {
+    console.error('JavaScript Error:', e.error);
+    // 可以在这里添加错误上报逻辑
+});
+
+// 页面加载错误处理
+window.addEventListener('load', function() {
+    if (document.querySelector('.error-content')) {
+        console.log('Error page loaded successfully');
+    }
+});
+</script>
 {% endblock %} 

@@ -25,18 +25,23 @@ $currentUser = null;
 
 if ($isLoggedIn && $pdo) {
     try {
-        $stmt = $pdo->prepare("SELECT id, username, email, avatar FROM users WHERE id = ?");
-        $stmt->execute([$_SESSION['user_id']]);
-        $currentUser = $stmt->fetch();
-        
-        // 如果用户不存在，清除session
-        if (!$currentUser) {
+        $stmt = safeQuery($pdo, "SELECT id, username, email, avatar FROM users WHERE id = ?", [$_SESSION['user_id']]);
+        if ($stmt) {
+            $currentUser = $stmt->fetch();
+            
+            // 如果用户不存在，清除session
+            if (!$currentUser) {
+                session_destroy();
+                $isLoggedIn = false;
+            }
+        } else {
+            // 查询失败，清除session
             session_destroy();
             $isLoggedIn = false;
         }
-    } catch (PDOException $e) {
+    } catch (Exception $e) {
         error_log('Error fetching user data: ' . $e->getMessage());
-        // 数据库错误时，清除session
+        // 任何错误时，清除session
         session_destroy();
         $isLoggedIn = false;
     }
@@ -116,8 +121,8 @@ function load_games_from_csv($csvFile) {
     }
     
     if (($handle = fopen($csvFile, "r")) !== FALSE) {
-        $header = fgetcsv($handle);
-        while (($row = fgetcsv($handle, 0, ',', '"', '\\')) !== FALSE) {
+        $header = fgetcsv($handle, 0, ',', '"', '\\');
+        while (($row = fgetcsv($handle, 0, ',', '"', '"', '\\')) !== FALSE) {
             if (count($row) < 3) continue;
             $game = [
                 'title' => $row[0],
