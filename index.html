@@ -3,114 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sonice Online Games - 测试页面</title>
+    <title>🎮 Sonice Online Games - 游戏平台</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #f5f5f7;
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #60a5fa 100%);
+            color: #ffffff;
+            font-family: Arial, sans-serif;
         }
         .container {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
             text-align: center;
         }
-        h1 {
-            color: #007AFF;
+        .logo {
+            font-size: 3rem;
+            font-weight: bold;
             margin-bottom: 20px;
         }
-        .status {
-            background: #34C759;
+        .subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        .button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
             color: white;
+            padding: 15px 30px;
+            margin: 10px;
+            border-radius: 25px;
+            text-decoration: none;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s;
+        }
+        .button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+        .status {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+        .warning {
+            background: rgba(255, 193, 7, 0.2);
+            border: 1px solid rgba(255, 193, 7, 0.5);
             padding: 15px;
             border-radius: 8px;
             margin: 20px 0;
-            font-weight: bold;
-        }
-        .links {
-            margin: 20px 0;
-        }
-        .links a {
-            display: inline-block;
-            margin: 10px;
-            padding: 10px 20px;
-            background: #007AFF;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-        }
-        .links a:hover {
-            background: #0056CC;
-        }
-        
-        .admin-links {
-            margin: 30px 0;
-            padding: 20px;
-            background: #f8f9fa;
-            border-radius: 8px;
-            border: 1px solid #e9ecef;
-        }
-        
-        .admin-links h3 {
-            color: #495057;
-            margin-bottom: 15px;
-            text-align: center;
-        }
-        
-        .admin-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: 15px;
-        }
-        
-        .admin-link {
-            display: inline-block;
-            padding: 12px 20px;
-            background: #28a745;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            text-align: center;
-            transition: background 0.3s;
-        }
-        
-        .admin-link:hover {
-            background: #218838;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🎮 Sonice Online Games</h1>
+        <div class="logo">🎮 Sonice.Games</div>
+        <div class="subtitle">免费在线游戏平台</div>
+        
+        <div class="warning">
+            <h3>⚠️ 重要提示</h3>
+            <p>原始Twig模板系统存在问题，请使用以下PHP版本：</p>
+        </div>
         
         <div class="status">
-            ✅ 网站部署成功！
+            <h3>🚀 系统状态</h3>
+            <p>PHP服务器运行中 - 端口 8000</p>
+            <p>游戏数据: 221个游戏已加载</p>
+            <p>图片资源: 100% 覆盖</p>
         </div>
         
-        <div class="links">
-            <a href="sitemap.xml">XML Sitemap</a>
-            <a href="sitemap-simple.xml">Simple Sitemap</a>
-            <a href="sitemap-static.html">HTML Sitemap</a>
-            <a href="test-deployment.html">Test Page</a>
-        </div>
-        
-        <div class="admin-links">
-            <h3>🔧 系统管理工具</h3>
-            <div class="admin-grid">
-                <a href="public/system_check.php" class="admin-link">系统健康检查</a>
-                <a href="public/status_report.php" class="admin-link">状态报告</a>
-                <a href="public/generate_missing_images.php" class="admin-link">生成缺失图片</a>
-                <a href="public/clear_cache.php" class="admin-link">清理缓存</a>
-                <a href="install.php" class="admin-link">安装/配置</a>
-            </div>
-        </div>
-        
-        <p>如果上面的链接能正常工作，说明Cloudflare Pages配置正确。</p>
+        <a href="public/game-home.php" class="button">🏠 进入游戏首页 (推荐)</a>
+        <a href="public/test-game.php" class="button">📋 浏览游戏列表</a>
+        <a href="public/test-links.html" class="button">🔗 测试游戏跳转</a>
+        <a href="public/system_check.php" class="button">🔧 系统检查</a>
     </div>
+    
+    <script>
+        // 自动重定向到PHP版本
+        setTimeout(function() {
+            if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+                window.location.href = 'public/game-home.php';
+            }
+        }, 3000);
+    </script>
 </body>
 </html> 

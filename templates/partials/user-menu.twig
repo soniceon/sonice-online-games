@@ -18,22 +18,22 @@
             </div>
             <div class="py-1">
                 <a href="{{ base_url }}/profile" class="block px-4 py-2 text-sm hover:bg-gray-800 text-gray-100">
-                    <i class="fas fa-user w-5"></i> 个人资料
+                    <i class="fas fa-user w-5"></i> Profile
                 </a>
                 <a href="{{ base_url }}/recently-played" class="block px-4 py-2 text-sm hover:bg-gray-800 text-gray-100">
-                    <i class="fas fa-history w-5"></i> 玩过的游戏
+                    <i class="fas fa-history w-5"></i> Recently Played
                 </a>
                 <a href="{{ base_url }}/favorites" class="block px-4 py-2 text-sm hover:bg-gray-800 text-gray-100">
-                    <i class="fas fa-heart w-5"></i> 收藏的游戏
+                    <i class="fas fa-heart w-5"></i> Favorites
                 </a>
                 <button type="button" onclick="showAvatarPickerModal()" class="w-full text-left px-4 py-2 text-blue-400 font-bold text-base hover:bg-gray-800">
-                    <i class="fas fa-random w-5"></i> 换头像
+                    <i class="fas fa-random w-5"></i> Change Avatar
                 </button>
                 <button type="button" onclick="showAvatarUploadModal()" class="w-full text-left px-4 py-2 text-green-400 font-bold text-base hover:bg-gray-800">
-                    <i class="fas fa-upload w-5"></i> 上传头像
+                    <i class="fas fa-upload w-5"></i> Upload Avatar
                 </button>
                 <button onclick="logout()" class="w-full text-left px-4 py-2 text-red-400 font-bold text-base hover:bg-gray-800">
-                    <i class="fas fa-sign-out-alt w-5"></i> 退出登录
+                    <i class="fas fa-sign-out-alt w-5"></i> Logout
                 </button>
             </div>
         </div>
@@ -42,7 +42,7 @@
     <div class="flex items-center space-x-2">
         <img src="https://api.dicebear.com/7.x/adventurer/svg?seed={{ random()|replace({'.':'','0x':''}) }}" alt="Avatar" class="w-8 h-8 rounded-full">
         <button class="btn-primary flex items-center space-x-2" id="loginBtn">
-            <span>登录</span>
+            <span>Login</span>
         </button>
     </div>
 {% endif %} 

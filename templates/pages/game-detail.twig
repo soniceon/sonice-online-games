@@ -1,4 +1,4 @@
-{% extends "base.twig" %}
+{% extends "layouts/base.twig" %}
 
 {% block content %}
 <div class="content-wrapper max-w-screen-2xl mx-auto w-full" style="margin-top: 104px;">
@@ -36,7 +36,7 @@
             <span>Report Issue</span>
           </button>
         </div>
-        <!-- Controls 区块 -->
+        <!-- Controls section -->
         <div class="bg-blue-600/80 p-6 rounded-lg mb-6">
           <h2 class="text-2xl font-bold mb-4 text-white">Game Controls</h2>
           <ul class="text-white space-y-2 pl-4">
@@ -47,7 +47,7 @@
             <li class="flex items-start"><span class="mr-2">•</span><span>Z, X, C - Special actions or combo moves</span></li>
           </ul>
         </div>
-        <!-- Overview 区块 -->
+        <!-- Overview section -->
         <div class="bg-blue-600/80 p-6 rounded-lg mb-6">
           <h2 class="text-2xl font-bold mb-4 text-white">Game Overview</h2>
           <p class="text-white leading-relaxed mb-4">This is a clicker/incremental game where you start small and gradually build up your resources. Click to earn points, invest in upgrades, and watch your earnings grow exponentially. The game features automatic income generation, various upgrades and achievements to unlock, and increasingly rewarding milestones to reach.</p>
@@ -79,7 +79,7 @@
             <span class="bg-white/20 px-3 py-1 rounded-full text-sm font-medium text-white">Casual</span>
           </div>
         </div>
-        <!-- 推荐区块 -->
+        <!-- Recommendations section -->
         <div class="game-container glass-container mt-12">
           <div class="recommended-games mb-10">
             <h2 class="text-2xl font-bold mb-4 text-white">You May Also Like</h2>
@@ -100,7 +100,7 @@
             </div>
           </div>
         </div>
-        <!-- 评分栏 -->
+        <!-- Rating section -->
         <div class="rating-section bg-blue-600 p-6 rounded-lg text-center mt-8">
           <h2 class="text-2xl font-bold mb-4 text-white">Rate This Game</h2>
           <div class="rating-stars flex justify-center space-x-4 mb-4">
@@ -119,6 +119,126 @@
     </main>
   </div>
 </div>
+
+<!-- Comments Section -->
+<div class="game-container glass-container mt-12">
+  <div class="comments-section">
+    <h2 class="text-2xl font-bold mb-6 text-white">Comments</h2>
+    
+    <!-- Comment Form -->
+    <div class="bg-blue-600/80 p-6 rounded-lg mb-8">
+      <h3 class="text-xl font-bold mb-4 text-white flex items-center">
+        <i class="fas fa-comment-dots mr-2"></i>
+        Leave a Comment
+      </h3>
+      
+      <form id="commentForm" class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="commentName" class="block text-sm font-medium text-white mb-2">Name</label>
+            <input 
+              type="text" 
+              id="commentName" 
+              name="name" 
+              required 
+              class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+              placeholder="Enter your name"
+            >
+          </div>
+          <div>
+            <label for="commentEmail" class="block text-sm font-medium text-white mb-2">Email</label>
+            <input 
+              type="email" 
+              id="commentEmail" 
+              name="email" 
+              required 
+              class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+              placeholder="Enter your email"
+            >
+          </div>
+        </div>
+        
+        <div>
+          <label for="commentContent" class="block text-sm font-medium text-white mb-2">Content</label>
+          <textarea 
+            id="commentContent" 
+            name="content" 
+            rows="4" 
+            required 
+            class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent resize-none"
+            placeholder="Share your thoughts about this game..."
+          ></textarea>
+        </div>
+        
+        <div class="flex items-center">
+          <input 
+            type="checkbox" 
+            id="commentTerms" 
+            name="terms" 
+            required 
+            class="w-4 h-4 text-blue-600 bg-white/10 border-white/20 rounded focus:ring-blue-400 focus:ring-2"
+          >
+          <label for="commentTerms" class="ml-2 text-sm text-white">
+            I'd read and agree to the <a href="/terms" class="text-blue-300 hover:underline">terms and conditions</a>.
+          </label>
+        </div>
+        
+        <button 
+          type="submit" 
+          class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 transform hover:scale-105"
+        >
+          Comment
+        </button>
+      </form>
+    </div>
+    
+    <!-- Comments List -->
+    <div id="commentsList" class="space-y-4">
+      <!-- Sample comment for demonstration -->
+      <div class="bg-blue-600/40 p-4 rounded-lg border border-blue-500/30">
+        <div class="flex items-start justify-between mb-2">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+              <span class="text-white font-bold text-sm">JD</span>
+            </div>
+            <div>
+              <h4 class="text-white font-semibold">John Doe</h4>
+              <p class="text-blue-200 text-sm">2 hours ago</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2">
+            <button class="text-blue-300 hover:text-white transition" title="Like">
+              <i class="fas fa-thumbs-up"></i>
+            </button>
+            <button class="text-blue-300 hover:text-white transition" title="Reply">
+              <i class="fas fa-reply"></i>
+            </button>
+          </div>
+        </div>
+        <p class="text-white/90 leading-relaxed">
+          This game is absolutely amazing! The graphics are stunning and the gameplay is so addictive. 
+          I've been playing for hours and can't get enough. Highly recommend to everyone!
+        </p>
+      </div>
+      
+      <div class="bg-blue-600/40 p-4 rounded-lg border border-blue-500/30">
+        <div class="flex items-center space-x-3 mb-2">
+          <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+            <span class="text-white font-bold text-sm">SG</span>
+          </div>
+          <div>
+            <h4 class="text-white font-semibold">Sarah Green</h4>
+            <p class="text-blue-200 text-sm">1 day ago</p>
+          </div>
+        </div>
+        <p class="text-white/90 leading-relaxed">
+          Great idle game! Love the progression system and the different upgrades available. 
+          The art style is really cute too.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
 
 {% block extra_scripts %}
@@ -135,7 +255,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(hideOverlay, 10000);
   }
 
-  // ===== 全屏功能 =====
+  // ===== Fullscreen functionality =====
   const fullscreenBtn = document.getElementById('fullscreen-btn');
   const gameFrame = document.getElementById('game-frame');
   if (fullscreenBtn && gameFrame) {
@@ -149,12 +269,12 @@ document.addEventListener('DOMContentLoaded', function() {
       } else if (gameFrame.msRequestFullscreen) {
         gameFrame.msRequestFullscreen();
       } else {
-        alert('当前浏览器不支持全屏API');
+        alert('Current browser does not support fullscreen API');
       }
     };
   }
 
-  // ===== 收藏功能 =====
+  // ===== Favorites functionality =====
   const favoriteBtn = document.getElementById('favorite-btn');
   if (favoriteBtn) {
     const gameId = '{{ game.id|e('js') }}';
@@ -177,17 +297,17 @@ document.addEventListener('DOMContentLoaded', function() {
       if (idx === -1) {
         favorites.push({id: gameId, slug: gameSlug, title: document.title, addedAt: new Date().toISOString()});
         localStorage.setItem('favorites', JSON.stringify(favorites));
-        showToast('已加入收藏', 'success');
+        showToast('Added to favorites', 'success');
       } else {
         favorites.splice(idx, 1);
         localStorage.setItem('favorites', JSON.stringify(favorites));
-        showToast('已移除收藏', 'success');
+        showToast('Removed from favorites', 'success');
       }
       updateFavoriteBtn();
     };
   }
 
-  // ===== 举报功能 =====
+  // ===== Report functionality =====
   const reportBtn = document.getElementById('report-btn');
   if (reportBtn) {
     reportBtn.onclick = function() {
@@ -205,18 +325,18 @@ document.addEventListener('DOMContentLoaded', function() {
       modal.innerHTML = `
         <div style="background:#222;padding:2rem;border-radius:12px;max-width:90vw;width:350px;box-shadow:0 8px 32px #000a;position:relative;">
           <button id="closeReportModal" style="position:absolute;top:8px;right:12px;font-size:1.2rem;background:none;border:none;color:#fff;">×</button>
-          <h2 style="color:#fff;font-size:1.2rem;margin-bottom:1rem;">举报问题</h2>
+          <h2 style="color:#fff;font-size:1.2rem;margin-bottom:1rem;">Report Issue</h2>
           <form id="reportForm">
-            <label style="color:#fff;">类型：</label>
+            <label style="color:#fff;">Type:</label>
             <select id="reportType" style="width:100%;margin-bottom:1rem;">
-              <option value="broken">无法加载</option>
-              <option value="inappropriate">不良内容</option>
-              <option value="performance">性能问题</option>
-              <option value="other">其它</option>
+              <option value="broken">Cannot Load</option>
+<option value="inappropriate">Inappropriate Content</option>
+<option value="performance">Performance Issue</option>
+<option value="other">Other</option>
             </select>
-            <label style="color:#fff;">描述：</label>
+            <label style="color:#fff;">Description:</label>
             <textarea id="reportDesc" style="width:100%;height:60px;margin-bottom:1rem;"></textarea>
-            <button type="submit" style="width:100%;background:#0EA5E9;color:#fff;padding:0.5rem 0;border:none;border-radius:6px;">提交</button>
+            <button type="submit" style="width:100%;background:#0EA5E9;color:#fff;padding:0.5rem 0;border:none;border-radius:6px;">Submit</button>
           </form>
         </div>
       `;
@@ -228,16 +348,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const type = document.getElementById('reportType').value;
         const desc = document.getElementById('reportDesc').value.trim();
         if (!desc) {
-          showToast('请填写问题描述', 'error');
+          showToast('Please fill in the issue description', 'error');
           return;
         }
-        showToast('举报已提交，感谢反馈！', 'success');
+        showToast('Report submitted, thank you for your feedback!', 'success');
         modal.remove();
       };
     };
   }
 
-  // ===== 评分功能 =====
+  // ===== Rating functionality =====
   const stars = document.querySelectorAll('.star');
   let userRating = 0;
   stars.forEach(star => {
@@ -276,10 +396,76 @@ document.addEventListener('DOMContentLoaded', function() {
     const newAvg = ((currentAvg * currentCount) + rating) / newCount;
     avgRatingEl.textContent = newAvg.toFixed(1);
     ratingCountEl.textContent = newCount;
-    showToast('感谢您的评分！', 'success');
+    showToast('Thank you for your rating!', 'success');
   }
 
-  // ===== Toast 通用提示 =====
+  // ===== Comment functionality =====
+  const commentForm = document.getElementById('commentForm');
+  if (commentForm) {
+    commentForm.onsubmit = function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('commentName').value.trim();
+      const email = document.getElementById('commentEmail').value.trim();
+      const content = document.getElementById('commentContent').value.trim();
+      const terms = document.getElementById('commentTerms').checked;
+      
+      if (!name || !email || !content || !terms) {
+        showToast('Please fill in all fields and agree to terms', 'error');
+        return;
+      }
+      
+      if (!/^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+        showToast('Please enter a valid email address', 'error');
+        return;
+      }
+      
+      // Add new comment to the list
+      addComment(name, content);
+      
+      // Reset form
+      commentForm.reset();
+      
+      showToast('Comment submitted successfully!', 'success');
+    };
+  }
+  
+  function addComment(name, content) {
+    const commentsList = document.getElementById('commentsList');
+    const initials = name.split(' ').map(n => n[0]).join('').toUpperCase();
+    const colors = ['bg-blue-500', 'bg-green-500', 'bg-purple-500', 'bg-pink-500', 'bg-yellow-500'];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    
+    const commentHTML = `
+      <div class="bg-blue-600/40 p-4 rounded-lg border border-blue-500/30 animate-fade-in">
+        <div class="flex items-start justify-between mb-2">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 ${randomColor} rounded-full flex items-center justify-center">
+              <span class="text-white font-bold text-sm">${initials}</span>
+            </div>
+            <div>
+              <h4 class="text-white font-semibold">${name}</h4>
+              <p class="text-blue-200 text-sm">Just now</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2">
+            <button class="text-blue-300 hover:text-white transition" title="Like">
+              <i class="fas fa-thumbs-up"></i>
+            </button>
+            <button class="text-blue-300 hover:text-white transition" title="Reply">
+              <i class="fas fa-reply"></i>
+            </button>
+          </div>
+        </div>
+        <p class="text-white/90 leading-relaxed">${content}</p>
+      </div>
+    `;
+    
+    // Insert new comment at the top
+    commentsList.insertAdjacentHTML('afterbegin', commentHTML);
+  }
+
+  // ===== Toast general notifications =====
   function showToast(msg, type) {
     let toast = document.getElementById('toast');
     if (!toast) {
@@ -308,4 +494,55 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 </script>
+
+<style>
+/* Comment animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+/* Comment form styling */
+#commentForm input:focus,
+#commentForm textarea:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+#commentForm button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+}
+
+/* Comment list styling */
+.comments-section .bg-blue-600\/40 {
+  transition: all 0.2s ease;
+}
+
+.comments-section .bg-blue-600\/40:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* Responsive design for comments */
+@media (max-width: 768px) {
+  .comments-section .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .comments-section .bg-blue-600\/80 {
+    padding: 1rem;
+  }
+}
+</style>
 {% endblock %} 

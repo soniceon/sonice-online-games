@@ -1,10 +1,10 @@
-{% extends "base.twig" %}
+{% extends "layouts/base.twig" %}
 {% set categories = categories %}
 
 {% block content %}
 <div class="pl-8">
 
-{# 分类横滑卡片 #}
+{# Category horizontal scroll cards #}
 {% for category in categories %}
   {% if category.games|length > 0 %}
     <div class="category-block mb-4 group" id="cat-block-{{ category.slug }}">
@@ -15,7 +15,7 @@
           </span>
           {{ category.name }} Games
         </h2>
-        <a href="{{ base_url }}/category/{{ category.slug }}" class="ml-2 text-blue-300 hover:text-blue-400 text-base font-medium px-2 py-0.5 rounded transition bg-blue-900/40">更多游戏</a>
+        <a href="{{ base_url }}/category/{{ category.slug }}" class="ml-2 text-blue-300 hover:text-blue-400 text-base font-medium px-2 py-0.5 rounded transition bg-blue-900/40">More Games</a>
       </div>
       <div class="relative px-2 flex items-center">
         <button class="carousel-arrow carousel-arrow-left absolute left-0 top-1/2" aria-label="Left arrow" onclick="scrollCategoryPage('{{ category.slug }}', -1)"></button>
@@ -106,7 +106,7 @@ function renderCategoryPage(slug) {
     card.innerHTML = `<a href="${window.baseUrl || ''}/game/${game.slug}"><img src="${window.baseUrl || ''}/assets/images/games/${game.slug}.webp" alt="${game.title}"></a>`;
     grid.appendChild(card);
   });
-  // 箭头显示/隐藏
+  // Arrow show/hide
   if (leftBtn) leftBtn.disabled = !(page > 0);
   if (rightBtn) rightBtn.disabled = !(end < games.length);
 }

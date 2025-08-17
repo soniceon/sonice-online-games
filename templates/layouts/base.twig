@@ -54,7 +54,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
     
     <!-- Structured Data for SEO -->
-    {% include 'partials/structured_data.twig' %}
+    <!-- Temporarily commented out to avoid Twig errors -->
+    {# {% include 'partials/structured_data.twig' %} #}
     
     <!-- Google Analytics 4 -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-C6DQJE930Z"></script>
@@ -71,7 +72,7 @@
             }
         });
         
-        // 自定义事件跟踪
+        // Custom event tracking
         function trackGamePlay(gameTitle, gameCategory) {
             gtag('event', 'game_play', {
                 'event_category': 'Games',
@@ -149,12 +150,12 @@
                     </form>
                 </div>
             </div>
-            <!-- 新登录注册入口 -->
-            <button id="navLoginBtn" class="ml-4 px-4 py-2 bg-blue-600 text-white rounded">登录/注册</button>
+            <!-- New login/register entry -->
+            <button id="navLoginBtn" class="ml-4 px-4 py-2 bg-blue-600 text-white rounded">Login/Register</button>
         </div>
     </header>
     <div class="flex flex-1 min-h-0 pt-16">
-        {% include 'sidebar.twig' with {'categories': categories, 'base_url': base_url} %}
+        {% include 'partials/sidebar.twig' with {'categories': categories, 'base_url': base_url} %}
         <div id="mainContent" class="flex-1 flex flex-col min-h-0 ml-14 transition-all duration-300">
             <main class="flex-1 gradient-blue">
                 <div class="w-full px-0 py-4">
@@ -164,18 +165,18 @@
             <script>
                 window.allGameSlugs = {{ (games is defined and games is iterable) ? games|column('slug')|json_encode|raw : '[]' }};
             </script>
-            {% include 'footer.twig' %}
+            {% include 'partials/footer.twig' %}
         </div>
     </div>
-    <!-- 登录弹窗（美化版） -->
+    <!-- Login modal (beautified version) -->
     <div id="loginModal" class="fixed inset-0 z-50 items-center justify-center bg-black bg-opacity-60 hidden">
         <div class="bg-white rounded-xl shadow-lg p-8 w-full max-w-xs relative">
             <button id="closeLoginModal" class="absolute top-3 right-3 text-gray-400 hover:text-blue-600 text-2xl">&times;</button>
-            <h2 class="text-2xl font-bold mb-6 text-center text-blue-700">登录</h2>
+            <h2 class="text-2xl font-bold mb-6 text-center text-blue-700">Login</h2>
             <div id="loginError" class="text-red-500 text-center mb-2 hidden"></div>
-            <input id="loginUsername" type="text" placeholder="用户名/邮箱" class="w-full mb-3 p-2 border rounded text-gray-900 focus:ring-2 focus:ring-blue-400" required>
-            <input id="loginPassword" type="password" placeholder="密码" class="w-full mb-4 p-2 border rounded text-gray-900 focus:ring-2 focus:ring-blue-400" required>
-            <button id="loginSubmit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded font-semibold transition">登录</button>
+            <input id="loginUsername" type="text" placeholder="Username/Email" class="w-full mb-3 p-2 border rounded text-gray-900 focus:ring-2 focus:ring-blue-400" required>
+            <input id="loginPassword" type="password" placeholder="Password" class="w-full mb-4 p-2 border rounded text-gray-900 focus:ring-2 focus:ring-blue-400" required>
+            <button id="loginSubmit" class="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded font-semibold transition">Login</button>
         </div>
     </div>
     <style>
@@ -185,7 +186,7 @@
     @keyframes popIn { from { transform: scale(.8); opacity:0; } to { transform: scale(1); opacity:1; } }
     </style>
     <script>
-    // 弹窗控制
+    // Modal control
     const loginModal = document.getElementById('loginModal');
     const showLoginModal = () => { loginModal.classList.remove('hidden'); loginModal.classList.add('flex'); };
     const hideLoginModal = () => { loginModal.classList.add('hidden'); loginModal.classList.remove('flex'); };
@@ -193,7 +194,7 @@
     document.getElementById('closeLoginModal').onclick = hideLoginModal;
     loginModal.addEventListener('click', e => { if (e.target === loginModal) hideLoginModal(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') hideLoginModal(); });
-    // 登录逻辑
+    // Login logic
     document.getElementById('loginSubmit').onclick = async function() {
         const username = document.getElementById('loginUsername').value.trim();
         const password = document.getElementById('loginPassword').value;
@@ -201,11 +202,11 @@
         errorDiv.classList.add('hidden');
         errorDiv.innerText = '';
         if (!username || !password) {
-            errorDiv.innerText = '请输入用户名和密码';
+            errorDiv.innerText = 'Please enter username and password';
             errorDiv.classList.remove('hidden');
             return;
         }
-        // 发起登录请求
+        // Send login request
         try {
             const res = await fetch('/api/auth/login.php', {
                 method: 'POST',
@@ -215,15 +216,15 @@
             const data = await res.json();
             if (data.success) {
                 errorDiv.classList.add('hidden');
-                alert('登录成功！');
+                alert('Login successful!');
                 // hideLoginModal();
                 window.location.reload();
             } else {
-                errorDiv.innerText = data.message || '登录失败，请检查用户名和密码';
+                errorDiv.innerText = data.message || 'Login failed, please check username and password';
                 errorDiv.classList.remove('hidden');
             }
         } catch (err) {
-            errorDiv.innerText = '网络错误，请稍后再试';
+            errorDiv.innerText = 'Network error, please try again later';
             errorDiv.classList.remove('hidden');
         }
     };
@@ -239,7 +240,7 @@
         errorDiv.classList.add('hidden');
         errorDiv.innerText = '';
         if (!/^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,}$/.test(email)) {
-            errorDiv.innerText = '请输入有效的邮箱地址';
+            errorDiv.innerText = 'Please enter a valid email address';
             errorDiv.classList.remove('hidden');
             return;
         }

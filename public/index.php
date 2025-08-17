@@ -11,9 +11,7 @@ session_start();
 
 // Initialize Twig
 $loader = new FilesystemLoader([
-    __DIR__ . '/../templates/pages',
-    __DIR__ . '/../templates/layouts',
-    __DIR__ . '/../templates/partials'
+    __DIR__ . '/../templates'
 ]);
 $twig = new Environment($loader, [
     'cache' => false,
@@ -48,8 +46,8 @@ if ($isLoggedIn && $pdo) {
 }
 
 // Get the current page from URL
-$requestUri = $_SERVER['REQUEST_URI'];
-$scriptName = dirname($_SERVER['SCRIPT_NAME']);
+$requestUri = $_SERVER['REQUEST_URI'] ?? '/';
+$scriptName = dirname($_SERVER['SCRIPT_NAME'] ?? '');
 $basePath = '';
 $path = substr($requestUri, strlen($basePath));
 $path = trim($path, '/');
@@ -98,6 +96,88 @@ foreach ($data['categories'] as &$cat) {
         $cat['icon'] = str_replace('fas ', 'fa-solid ', $cat['icon']);
     }
 }
+
+// 加载游戏数据
+function load_games_from_csv() {
+    $csvFile = __DIR__ . '/../游戏iframe.CSV';
+    if (!file_exists($csvFile)) {
+        return [];
+    }
+    
+    $games = [];
+    if (($handle = fopen($csvFile, 'r')) !== FALSE) {
+        // 跳过标题行
+        fgetcsv($handle, 0, ',', '"', '\\');
+        
+        while (($data = fgetcsv($handle, 0, ',', '"', '\\')) !== FALSE) {
+            if (count($data) >= 3) {
+                // 从标题生成slug
+                $slug = strtolower(str_replace([' ', "'", ":", "!", "&", "-"], ['-', '', '', '', 'and', '-'], $data[0]));
+                $slug = preg_replace('/[^a-z0-9-]/', '', $slug);
+                
+                $games[] = [
+                    'slug' => $slug,
+                    'title' => $data[0],
+                    'categories' => explode(',', $data[2]),
+                    'iframe_url' => $data[1]
+                ];
+            }
+        }
+        fclose($handle);
+    }
+    return $games;
+}
+
+$games = load_games_from_csv();
+
+// Organize games by category, and add icon and color for sidebar
+$categories = [];
+$categoryConfig = [
+    'idle' => ['icon' => 'fa-solid fa-hourglass', 'color' => '#06d6a0'],
+    'tycoon' => ['icon' => 'fa-solid fa-building', 'color' => '#4361ee'],
+    'farm' => ['icon' => 'fa-solid fa-seedling', 'color' => '#06d6a0'],
+    'clicker' => ['icon' => 'fa-solid fa-mouse-pointer', 'color' => '#f72585'],
+    'mining' => ['icon' => 'fa-solid fa-gem', 'color' => '#ffd700'],
+    'card' => ['icon' => 'fa-solid fa-chess', 'color' => '#a259fa'],
+    'monster' => ['icon' => 'fa-solid fa-dragon', 'color' => '#ff6b6b'],
+    'merge' => ['icon' => 'fa-solid fa-object-group', 'color' => '#4ecdc4'],
+    'simulator' => ['icon' => 'fa-solid fa-cogs', 'color' => '#a259fa'],
+    'defense' => ['icon' => 'fa-solid fa-shield-alt', 'color' => '#ffd166'],
+    'adventure' => ['icon' => 'fa-solid fa-map', 'color' => '#ffb703'],
+    'block' => ['icon' => 'fa-solid fa-cube', 'color' => '#7209b7'],
+    'factory' => ['icon' => 'fa-solid fa-industry', 'color' => '#4361ee'],
+    'fishing' => ['icon' => 'fa-solid fa-fish', 'color' => '#06d6a0'],
+    'runner' => ['icon' => 'fa-solid fa-running', 'color' => '#ff7f50'],
+    'shooter' => ['icon' => 'fa-solid fa-crosshairs', 'color' => '#ffd166'],
+    'fish' => ['icon' => 'fa-solid fa-fish', 'color' => '#06d6a0'],
+    'treasure' => ['icon' => 'fa-solid fa-gem', 'color' => '#ffd700'],
+    'racing' => ['icon' => 'fa-solid fa-car', 'color' => '#ff7f50'],
+    'dance' => ['icon' => 'fa-solid fa-music', 'color' => '#a259fa'],
+    'crafting' => ['icon' => 'fa-solid fa-hammer', 'color' => '#7209b7']
+];
+
+foreach ($games as $game) {
+    $category = $game['categories'][0] ?? 'Other';
+    if (!isset($categories[$category])) {
+        $config = $categoryConfig[strtolower(str_replace(' ', '-', $category))] ??
+                  ['icon' => 'fa-solid fa-gamepad', 'color' => '#888888'];
+
+        $categories[$category] = [
+            'name' => $category,
+            'slug' => strtolower(str_replace(' ', '-', $category)),
+            'icon' => $config['icon'],
+            'color' => $config['color'],
+            'games' => []
+        ];
+    }
+    $categories[$category]['games'][] = $game;
+}
+
+// 更新 $data 数组
+$data['games'] = $games;
+$data['categories'] = array_values($categories);
+
+
 unset($cat);
 
 // 分类slug到名称和icon的映射
@@ -113,44 +193,6 @@ $categoryMap = [
 ];
 
 // CSV驱动游戏数据
-function load_games_from_csv($csvFile) {
-    $games = [];
-    if (!file_exists($csvFile)) {
-        error_log("CSV file not found: " . $csvFile);
-        return $games;
-    }
-    
-    if (($handle = fopen($csvFile, "r")) !== FALSE) {
-        $header = fgetcsv($handle, 0, ',', '"', '\\');
-        while (($row = fgetcsv($handle, 0, ',', '"', '"', '\\')) !== FALSE) {
-            if (count($row) < 3) continue;
-            $game = [
-                'title' => $row[0],
-                'iframe_url' => $row[1],
-                'categories' => array_slice($row, 2),
-            ];
-            $game['slug'] = strtolower(str_replace([' ', "'", ":", "(", ")", "-"], ['-', '', '', '', '', '-'], $game['title']));
-            
-            // 检查多种图片格式
-            $imgPath = __DIR__ . '/assets/images/games/' . $game['slug'] . '.webp';
-            $imgPathPng = __DIR__ . '/assets/images/games/' . $game['slug'] . '.png';
-            $imgPathJpg = __DIR__ . '/assets/images/games/' . $game['slug'] . '.jpg';
-            
-            // 过滤无图片或无有效iframe的游戏
-            if (!file_exists($imgPath) && !file_exists($imgPathPng) && !file_exists($imgPathJpg)) {
-                continue; // 跳过没有图片的游戏
-            }
-            
-            if (empty($game['iframe_url']) || !preg_match('#^https?://#', $game['iframe_url'])) {
-                continue; // 跳过无效iframe的游戏
-            }
-            
-            $games[] = $game;
-        }
-        fclose($handle);
-    }
-    return $games;
-}
 $csvFile = __DIR__ . '/../游戏iframe.CSV';
 $games = load_games_from_csv($csvFile);
 // 首页和新游都用CSV
@@ -185,11 +227,11 @@ if (preg_match('#^category/([a-z0-9-]+)$#', $path, $matches)) {
             $data['category_games'] = $cat['games'];
             $data['total_pages'] = 1;
             $data['current_page'] = 1;
-            echo $twig->render('category.twig', $data);
+            echo $twig->render('pages/category.twig', $data);
             exit;
         }
     }
-    echo $twig->render('404.twig', $data);
+    echo $twig->render('pages/404.twig', $data);
     exit;
 }
 
@@ -205,10 +247,10 @@ if (preg_match('#^game/([a-zA-Z0-9-_]+)$#', $path, $matches)) {
     }
     if ($game) {
         $data['game'] = $game;
-        echo $twig->render('game-detail.twig', $data);
+        echo $twig->render('pages/game-detail.twig', $data);
         exit;
     } else {
-        echo $twig->render('404.twig', $data);
+        echo $twig->render('pages/404.twig', $data);
         exit;
     }
 }
@@ -233,23 +275,23 @@ switch ($path) {
         // $data['featured_games'] = $games;
         // $data['new_games'] = $games;
         $data['popular_categories'] = array_slice($data['categories'], 0, 6);
-        echo $twig->render('home.twig', $data);
+        echo $twig->render('pages/home.twig', $data);
         exit;
     case 'about':
         $data['page_title'] = 'About Us';
-        echo $twig->render('about.twig', $data);
+        echo $twig->render('pages/about.twig', $data);
         exit;
     case 'contact':
         $data['page_title'] = 'Contact';
-        echo $twig->render('contact.twig', $data);
+        echo $twig->render('pages/contact.twig', $data);
         exit;
     case 'privacy':
         $data['page_title'] = 'Privacy Policy';
-        echo $twig->render('privacy.twig', $data);
+        echo $twig->render('pages/privacy.twig', $data);
         exit;
     case 'terms':
         $data['page_title'] = 'Terms of Service';
-        echo $twig->render('terms.twig', $data);
+        echo $twig->render('pages/terms.twig', $data);
         exit;
     case '404':
         $data['page_title'] = '404 Not Found';
@@ -257,25 +299,44 @@ switch ($path) {
         break;
         
     case 'profile':
-        $data['page_title'] = '个人资料';
-        echo $twig->render('profile.twig', $data);
+        $data['page_title'] = 'Profile';
+        echo $twig->render('pages/profile.twig', $data);
         exit;
     case 'recently-played':
-        $data['page_title'] = '玩过的游戏';
-        echo $twig->render('recently-played.twig', $data);
+        $data['page_title'] = 'Recently Played Games';
+        // 添加模拟的最近游玩数据
+        $data['recent_games'] = array_slice($games, 0, 12); // 取前12个游戏作为示例
+        // 为每个游戏添加必要的字段
+        foreach ($data['recent_games'] as &$game) {
+            $game['thumbnail'] = $basePath . '/assets/images/games/' . $game['slug'] . '.webp';
+            $game['category'] = $game['categories'][0] ?? 'Unknown';
+            $game['plays'] = rand(100, 5000);
+            $game['is_favorite'] = rand(0, 1);
+            $game['id'] = uniqid();
+        }
+        echo $twig->render('pages/recently-played.twig', $data);
         exit;
     case 'favorites':
-        $data['page_title'] = '收藏的游戏';
-        echo $twig->render('favorites.twig', $data);
+        $data['page_title'] = 'My Favorites';
+        // 添加模拟的收藏数据
+        $data['favorites'] = array_slice($games, 0, 8); // 取前8个游戏作为示例
+        // 为每个游戏添加必要的字段
+        foreach ($data['favorites'] as &$game) {
+            $game['thumbnail'] = $basePath . '/assets/images/games/' . $game['slug'] . '.webp';
+            $game['category'] = $game['categories'][0] ?? 'Unknown';
+            $game['plays'] = rand(100, 5000);
+            $game['id'] = uniqid();
+        }
+        echo $twig->render('pages/favorites.twig', $data);
         exit;
     case 'dashboard':
         $data['page_title'] = 'Dashboard';
-        echo $twig->render('dashboard.twig', $data);
+        echo $twig->render('pages/dashboard.twig', $data);
         exit;
     case 'search':
-        $data['page_title'] = '搜索结果';
-        $data['search_query'] = $_GET['q'] ?? '';
-        echo $twig->render('search.twig', $data);
+        $data['page_title'] = 'Search Results';
+        $data['search_query'] = 'Search Results';
+        echo $twig->render('pages/search.twig', $data);
         exit;
         
     default:

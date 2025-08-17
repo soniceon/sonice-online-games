@@ -1,4 +1,4 @@
-{% extends "base.twig" %}
+{% extends "layouts/base.twig" %}
 
 {% block content %}
 <div class="min-h-screen flex items-center justify-center bg-gray-900">
@@ -11,45 +11,45 @@
             </div>
         </div>
         
-        <h1 class="text-2xl font-bold text-gray-900 mb-4">出错了！</h1>
+        <h1 class="text-2xl font-bold text-gray-900 mb-4">Oops! Something went wrong!</h1>
         
         {% if error_message %}
             <p class="text-gray-600 mb-6">{{ error_message }}</p>
         {% else %}
-            <p class="text-gray-600 mb-6">抱歉，页面加载时发生了错误。请稍后再试。</p>
+            <p class="text-gray-600 mb-6">Sorry, an error occurred while loading the page. Please try again later.</p>
         {% endif %}
         
         <div class="space-y-3">
             <a href="{{ base_url }}/" class="block w-full bg-blue-600 text-white py-3 px-4 rounded-lg hover:bg-blue-700 transition duration-200">
-                返回首页
+                Back to Home
             </a>
             
             <a href="{{ base_url }}/public/system_check.php" class="block w-full bg-gray-600 text-white py-3 px-4 rounded-lg hover:bg-gray-700 transition duration-200">
-                系统检查
+                System Check
             </a>
             
             <button onclick="history.back()" class="block w-full bg-green-600 text-white py-3 px-4 rounded-lg hover:bg-green-700 transition duration-200">
-                返回上一页
+                Go Back
             </button>
         </div>
         
         <div class="mt-6 text-sm text-gray-500">
-            <p>如果问题持续存在，请联系管理员</p>
+            <p>If the problem persists, please contact the administrator</p>
             <p class="mt-2">
-                <a href="{{ base_url }}/contact" class="text-blue-600 hover:underline">联系我们</a>
+                <a href="{{ base_url }}/contact" class="text-blue-600 hover:underline">Contact Us</a>
             </p>
         </div>
     </div>
 </div>
 
 <script>
-// 自动错误报告
+// Automatic error reporting
 window.addEventListener('error', function(e) {
     console.error('JavaScript Error:', e.error);
-    // 可以在这里添加错误上报逻辑
+    // Error reporting logic can be added here
 });
 
-// 页面加载错误处理
+// Page load error handling
 window.addEventListener('load', function() {
     if (document.querySelector('.error-content')) {
         console.log('Error page loaded successfully');
