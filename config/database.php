@@ -13,7 +13,7 @@ $dbConfig = [
         PDO::ATTR_EMULATE_PREPARES => false,
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4"
     ]
-];
+    ];
 
 // 连接重试函数
 function connectDatabase($config, $maxRetries = 3) {
@@ -24,12 +24,12 @@ function connectDatabase($config, $maxRetries = 3) {
         try {
             $dsn = "mysql:host={$config['host']};port={$config['port']};dbname={$config['dbname']};charset={$config['charset']}";
             $pdo = new PDO($dsn, $config['username'], $config['password'], $config['options']);
-            
-            // 测试连接
-            $pdo->query('SELECT 1');
+    
+    // 测试连接
+    $pdo->query('SELECT 1');
             return $pdo;
-            
-        } catch (PDOException $e) {
+    
+} catch (PDOException $e) {
             $lastError = $e;
             $retries++;
             
