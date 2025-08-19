@@ -1,0 +1,548 @@
+{% extends "layouts/base.twig" %}
+
+{% block content %}
+<div class="content-wrapper max-w-screen-2xl mx-auto w-full" style="margin-top: 104px;">
+  <div class="flex justify-center">
+    <main class="main-content flex-1 p-6">
+      <div class="game-container">
+        <div class="title-section flex flex-col items-center justify-center mb-8">
+          <div class="inline-block px-8 py-2 rounded-xl font-bold text-3xl md:text-4xl text-white bg-blue-400/90 shadow-lg mb-3" style="box-shadow: 0 4px 16px rgba(14,165,233,0.15);">{{ game.title }}</div>
+          <div class="flex flex-wrap justify-center gap-2 mb-3">
+            {% for category in game.categories %}
+              <a href="{{ base_url }}/category/{{ category|lower|replace({' ':'-'}) }}" class="inline-block px-4 py-1 rounded-full text-white text-base font-semibold bg-purple-500/90 shadow hover:bg-purple-700 transition" style="box-shadow: 0 2px 8px rgba(124,58,237,0.15);">{{ category }}</a>
+            {% endfor %}
+          </div>
+          {% if game.subtitle %}
+            <div class="text-center text-blue-100 text-lg mb-1">{{ game.subtitle }}</div>
+          {% endif %}
+          <div class="text-center text-blue-200 text-base">{{ game.description }}</div>
+        </div>
+        <div class="game-wrapper" style="background: rgba(0,0,0,0.5); border-radius: 12px; overflow: hidden; position: relative; width: 100%; padding-bottom: 56.25%; margin: 2rem 0;">
+          <iframe id="game-frame" src="{{ game.iframe_url }}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 12px;" allowfullscreen></iframe>
+        </div>
+        <div class="flex justify-between items-center mb-6">
+          <div class="flex space-x-3">
+            <button id="fullscreen-btn" class="bg-blue-primary hover:bg-blue-secondary text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors">
+              <i class="fas fa-expand"></i>
+              <span>Fullscreen</span>
+            </button>
+            <button id="favorite-btn" class="favorite-btn bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded-lg flex items-center space-x-2 transition-colors">
+              <i class="fas fa-heart"></i>
+              <span>Add to Favorites</span>
+            </button>
+          </div>
+          <button id="report-btn" class="text-gray-400 hover:text-white flex items-center space-x-1">
+            <i class="fas fa-flag"></i>
+            <span>Report Issue</span>
+          </button>
+        </div>
+        <!-- Controls section -->
+        <div class="bg-blue-600/80 p-6 rounded-lg mb-6">
+          <h2 class="text-2xl font-bold mb-4 text-white">Game Controls</h2>
+          <ul class="text-white space-y-2 pl-4">
+            <li class="flex items-start"><span class="mr-2">•</span><span>Mouse Click - Click to earn points or currency</span></li>
+            <li class="flex items-start"><span class="mr-2">•</span><span>Number Keys or Letter Keys - Purchase upgrades or activate special abilities</span></li>
+            <li class="flex items-start"><span class="mr-2">•</span><span>Left/Right arrow keys - Navigate through menus (in some games)</span></li>
+            <li class="flex items-start"><span class="mr-2">•</span><span>Spacebar - Pause game or activate primary function</span></li>
+            <li class="flex items-start"><span class="mr-2">•</span><span>Z, X, C - Special actions or combo moves</span></li>
+          </ul>
+        </div>
+        <!-- Overview section -->
+        <div class="bg-blue-600/80 p-6 rounded-lg mb-6">
+          <h2 class="text-2xl font-bold mb-4 text-white">Game Overview</h2>
+          <p class="text-white leading-relaxed mb-4">This is a clicker/incremental game where you start small and gradually build up your resources. Click to earn points, invest in upgrades, and watch your earnings grow exponentially. The game features automatic income generation, various upgrades and achievements to unlock, and increasingly rewarding milestones to reach.</p>
+          <p class="text-white leading-relaxed mb-6">As you progress, you'll unlock new features and mechanics that add depth to the gameplay. Strategize your investments to maximize your earnings and compete for the highest scores. Special events and bonuses appear randomly to boost your progress!</p>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div class="bg-white/10 p-4 rounded-lg">
+              <h3 class="text-lg font-semibold mb-2 text-white">Key Features</h3>
+              <ul class="text-white space-y-1 pl-4">
+                <li class="flex items-start"><span class="mr-2">•</span><span>Auto-clickers and passive income generators</span></li>
+                <li class="flex items-start"><span class="mr-2">•</span><span>Multiple upgrade paths and strategies</span></li>
+                <li class="flex items-start"><span class="mr-2">•</span><span>Achievement system with rewards</span></li>
+              </ul>
+            </div>
+            <div class="bg-white/10 p-4 rounded-lg">
+              <h3 class="text-lg font-semibold mb-2 text-white">Game Progress</h3>
+              <ul class="text-white space-y-1 pl-4">
+                <li class="flex items-start"><span class="mr-2">•</span><span>Automatic saving of your progress</span></li>
+                <li class="flex items-start"><span class="mr-2">•</span><span>Prestige system for advanced players</span></li>
+                <li class="flex items-start"><span class="mr-2">•</span><span>Special weekend events with bonus rewards</span></li>
+              </ul>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span class="bg-white/20 px-3 py-1 rounded-full text-sm font-medium text-white">Clicker</span>
+            <span class="bg-white/20 px-3 py-1 rounded-full text-sm font-medium text-white">Incremental</span>
+            <span class="bg-white/20 px-3 py-1 rounded-full text-sm font-medium text-white">Idle</span>
+            <span class="bg-white/20 px-3 py-1 rounded-full text-sm font-medium text-white">Strategy</span>
+            <span class="bg-white/20 px-3 py-1 rounded-full text-sm font-medium text-white">Resource Management</span>
+            <span class="bg-white/20 px-3 py-1 rounded-full text-sm font-medium text-white">Casual</span>
+          </div>
+        </div>
+        <!-- Recommendations section -->
+        <div class="game-container glass-container mt-12">
+          <div class="recommended-games mb-10">
+            <h2 class="text-2xl font-bold mb-4 text-white">You May Also Like</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+              {% for related in related_games %}
+              <div class="game-card bg-blue-700/60 rounded-xl overflow-hidden shadow-lg flex flex-col">
+                <a href="{{ base_url }}/game/{{ related.slug }}" class="block">
+                  <img src="{{ base_url }}/{{ related.image_url }}"
+                       alt="{{ related.title }}"
+                       class="w-full h-auto rounded-xl"
+                       loading="lazy"
+                       onerror="this.onerror=null;this.src='{{ base_url }}/assets/images/defaults/game-default.webp';">
+                </a>
+              </div>
+              {% else %}
+              <div class="text-white/70">No related games found.</div>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <!-- Rating section -->
+        <div class="rating-section bg-blue-600 p-6 rounded-lg text-center mt-8">
+          <h2 class="text-2xl font-bold mb-4 text-white">Rate This Game</h2>
+          <div class="rating-stars flex justify-center space-x-4 mb-4">
+            <span class="star text-4xl cursor-pointer text-white opacity-70 hover:opacity-100" data-rating="1">★</span>
+            <span class="star text-4xl cursor-pointer text-white opacity-70 hover:opacity-100" data-rating="2">★</span>
+            <span class="star text-4xl cursor-pointer text-white opacity-70 hover:opacity-100" data-rating="3">★</span>
+            <span class="star text-4xl cursor-pointer text-white opacity-70 hover:opacity-100" data-rating="4">★</span>
+            <span class="star text-4xl cursor-pointer text-white opacity-70 hover:opacity-100" data-rating="5">★</span>
+          </div>
+          <div class="rating-count text-white">
+            Average Rating: <span id="avgRating">{{ game.rating|default('4.5') }}</span>/5
+            (<span id="ratingCount">{{ game.ratingCount|default('128') }}</span> votes)
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- Comments Section -->
+<div class="game-container glass-container mt-12">
+  <div class="comments-section">
+    <h2 class="text-2xl font-bold mb-6 text-white">Comments</h2>
+    
+    <!-- Comment Form -->
+    <div class="bg-blue-600/80 p-6 rounded-lg mb-8">
+      <h3 class="text-xl font-bold mb-4 text-white flex items-center">
+        <i class="fas fa-comment-dots mr-2"></i>
+        Leave a Comment
+      </h3>
+      
+      <form id="commentForm" class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label for="commentName" class="block text-sm font-medium text-white mb-2">Name</label>
+            <input 
+              type="text" 
+              id="commentName" 
+              name="name" 
+              required 
+              class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+              placeholder="Enter your name"
+            >
+          </div>
+          <div>
+            <label for="commentEmail" class="block text-sm font-medium text-white mb-2">Email</label>
+            <input 
+              type="email" 
+              id="commentEmail" 
+              name="email" 
+              required 
+              class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent"
+              placeholder="Enter your email"
+            >
+          </div>
+        </div>
+        
+        <div>
+          <label for="commentContent" class="block text-sm font-medium text-white mb-2">Content</label>
+          <textarea 
+            id="commentContent" 
+            name="content" 
+            rows="4" 
+            required 
+            class="w-full px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent resize-none"
+            placeholder="Share your thoughts about this game..."
+          ></textarea>
+        </div>
+        
+        <div class="flex items-center">
+          <input 
+            type="checkbox" 
+            id="commentTerms" 
+            name="terms" 
+            required 
+            class="w-4 h-4 text-blue-600 bg-white/10 border-white/20 rounded focus:ring-blue-400 focus:ring-2"
+          >
+          <label for="commentTerms" class="ml-2 text-sm text-white">
+            I'd read and agree to the <a href="/terms" class="text-blue-300 hover:underline">terms and conditions</a>.
+          </label>
+        </div>
+        
+        <button 
+          type="submit" 
+          class="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-200 transform hover:scale-105"
+        >
+          Comment
+        </button>
+      </form>
+    </div>
+    
+    <!-- Comments List -->
+    <div id="commentsList" class="space-y-4">
+      <!-- Sample comment for demonstration -->
+      <div class="bg-blue-600/40 p-4 rounded-lg border border-blue-500/30">
+        <div class="flex items-start justify-between mb-2">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center">
+              <span class="text-white font-bold text-sm">JD</span>
+            </div>
+            <div>
+              <h4 class="text-white font-semibold">John Doe</h4>
+              <p class="text-blue-200 text-sm">2 hours ago</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2">
+            <button class="text-blue-300 hover:text-white transition" title="Like">
+              <i class="fas fa-thumbs-up"></i>
+            </button>
+            <button class="text-blue-300 hover:text-white transition" title="Reply">
+              <i class="fas fa-reply"></i>
+            </button>
+          </div>
+        </div>
+        <p class="text-white/90 leading-relaxed">
+          This game is absolutely amazing! The graphics are stunning and the gameplay is so addictive. 
+          I've been playing for hours and can't get enough. Highly recommend to everyone!
+        </p>
+      </div>
+      
+      <div class="bg-blue-600/40 p-4 rounded-lg border border-blue-500/30">
+        <div class="flex items-center space-x-3 mb-2">
+          <div class="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center">
+            <span class="text-white font-bold text-sm">SG</span>
+          </div>
+          <div>
+            <h4 class="text-white font-semibold">Sarah Green</h4>
+            <p class="text-blue-200 text-sm">1 day ago</p>
+          </div>
+        </div>
+        <p class="text-white/90 leading-relaxed">
+          Great idle game! Love the progression system and the different upgrades available. 
+          The art style is really cute too.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // loading overlay
+  var iframe = document.getElementById('game-frame');
+  var overlay = document.getElementById('game-loading-overlay');
+  if (iframe && overlay) {
+    var hideOverlay = function() {
+      overlay.style.display = 'none';
+    };
+    iframe.onload = hideOverlay;
+    setTimeout(hideOverlay, 10000);
+  }
+
+  // ===== Fullscreen functionality =====
+  const fullscreenBtn = document.getElementById('fullscreen-btn');
+  const gameFrame = document.getElementById('game-frame');
+  if (fullscreenBtn && gameFrame) {
+    fullscreenBtn.onclick = function() {
+      if (gameFrame.requestFullscreen) {
+        gameFrame.requestFullscreen();
+      } else if (gameFrame.webkitRequestFullscreen) {
+        gameFrame.webkitRequestFullscreen();
+      } else if (gameFrame.mozRequestFullScreen) {
+        gameFrame.mozRequestFullScreen();
+      } else if (gameFrame.msRequestFullscreen) {
+        gameFrame.msRequestFullscreen();
+      } else {
+        alert('Current browser does not support fullscreen API');
+      }
+    };
+  }
+
+  // ===== Favorites functionality =====
+  const favoriteBtn = document.getElementById('favorite-btn');
+  if (favoriteBtn) {
+    const gameId = '{{ game.id|e('js') }}';
+    const gameSlug = '{{ game.slug|e('js') }}';
+    function updateFavoriteBtn() {
+      const favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+      const isFav = favorites.some(fav => fav.id === gameId || fav.slug === gameSlug);
+      if (isFav) {
+        favoriteBtn.classList.add('is-favorite');
+        favoriteBtn.querySelector('span').textContent = 'Remove from Favorites';
+      } else {
+        favoriteBtn.classList.remove('is-favorite');
+        favoriteBtn.querySelector('span').textContent = 'Add to Favorites';
+      }
+    }
+    updateFavoriteBtn();
+    favoriteBtn.onclick = function() {
+      let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+      const idx = favorites.findIndex(fav => fav.id === gameId || fav.slug === gameSlug);
+      if (idx === -1) {
+        favorites.push({id: gameId, slug: gameSlug, title: document.title, addedAt: new Date().toISOString()});
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        showToast('Added to favorites', 'success');
+      } else {
+        favorites.splice(idx, 1);
+        localStorage.setItem('favorites', JSON.stringify(favorites));
+        showToast('Removed from favorites', 'success');
+      }
+      updateFavoriteBtn();
+    };
+  }
+
+  // ===== Report functionality =====
+  const reportBtn = document.getElementById('report-btn');
+  if (reportBtn) {
+    reportBtn.onclick = function() {
+      let modal = document.createElement('div');
+      modal.style.position = 'fixed';
+      modal.style.left = '0';
+      modal.style.top = '0';
+      modal.style.width = '100vw';
+      modal.style.height = '100vh';
+      modal.style.background = 'rgba(0,0,0,0.6)';
+      modal.style.display = 'flex';
+      modal.style.alignItems = 'center';
+      modal.style.justifyContent = 'center';
+      modal.style.zIndex = '9999';
+      modal.innerHTML = `
+        <div style="background:#222;padding:2rem;border-radius:12px;max-width:90vw;width:350px;box-shadow:0 8px 32px #000a;position:relative;">
+          <button id="closeReportModal" style="position:absolute;top:8px;right:12px;font-size:1.2rem;background:none;border:none;color:#fff;">×</button>
+          <h2 style="color:#fff;font-size:1.2rem;margin-bottom:1rem;">Report Issue</h2>
+          <form id="reportForm">
+            <label style="color:#fff;">Type:</label>
+            <select id="reportType" style="width:100%;margin-bottom:1rem;">
+              <option value="broken">Cannot Load</option>
+<option value="inappropriate">Inappropriate Content</option>
+<option value="performance">Performance Issue</option>
+<option value="other">Other</option>
+            </select>
+            <label style="color:#fff;">Description:</label>
+            <textarea id="reportDesc" style="width:100%;height:60px;margin-bottom:1rem;"></textarea>
+            <button type="submit" style="width:100%;background:#0EA5E9;color:#fff;padding:0.5rem 0;border:none;border-radius:6px;">Submit</button>
+          </form>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      document.getElementById('closeReportModal').onclick = () => modal.remove();
+      modal.onclick = e => { if (e.target === modal) modal.remove(); };
+      document.getElementById('reportForm').onsubmit = function(e) {
+        e.preventDefault();
+        const type = document.getElementById('reportType').value;
+        const desc = document.getElementById('reportDesc').value.trim();
+        if (!desc) {
+          showToast('Please fill in the issue description', 'error');
+          return;
+        }
+        showToast('Report submitted, thank you for your feedback!', 'success');
+        modal.remove();
+      };
+    };
+  }
+
+  // ===== Rating functionality =====
+  const stars = document.querySelectorAll('.star');
+  let userRating = 0;
+  stars.forEach(star => {
+    star.addEventListener('mouseover', () => {
+      const rating = parseInt(star.dataset.rating);
+      highlightStars(rating);
+    });
+    star.addEventListener('mouseout', () => {
+      highlightStars(userRating);
+    });
+    star.addEventListener('click', () => {
+      userRating = parseInt(star.dataset.rating);
+      highlightStars(userRating);
+      saveRating(userRating);
+    });
+  });
+  function highlightStars(rating) {
+    stars.forEach(star => {
+      const starRating = parseInt(star.dataset.rating);
+      if (starRating <= rating) {
+        star.classList.add('text-white');
+        star.classList.remove('opacity-70');
+        star.classList.add('opacity-100');
+      } else {
+        star.classList.add('opacity-70');
+        star.classList.remove('opacity-100');
+      }
+    });
+  }
+  function saveRating(rating) {
+    const avgRatingEl = document.getElementById('avgRating');
+    const ratingCountEl = document.getElementById('ratingCount');
+    let currentCount = parseInt(ratingCountEl.textContent);
+    let currentAvg = parseFloat(avgRatingEl.textContent);
+    const newCount = currentCount + 1;
+    const newAvg = ((currentAvg * currentCount) + rating) / newCount;
+    avgRatingEl.textContent = newAvg.toFixed(1);
+    ratingCountEl.textContent = newCount;
+    showToast('Thank you for your rating!', 'success');
+  }
+
+  // ===== Comment functionality =====
+  const commentForm = document.getElementById('commentForm');
+  if (commentForm) {
+    commentForm.onsubmit = function(e) {
+      e.preventDefault();
+      
+      const name = document.getElementById('commentName').value.trim();
+      const email = document.getElementById('commentEmail').value.trim();
+      const content = document.getElementById('commentContent').value.trim();
+      const terms = document.getElementById('commentTerms').checked;
+      
+      if (!name || !email || !content || !terms) {
+        showToast('Please fill in all fields and agree to terms', 'error');
+        return;
+      }
+      
+      if (!/^[\w.-]+@[\w.-]+\.[a-zA-Z]{2,}$/.test(email)) {
+        showToast('Please enter a valid email address', 'error');
+        return;
+      }
+      
+      // Add new comment to the list
+      addComment(name, content);
+      
+      // Reset form
+      commentForm.reset();
+      
+      showToast('Comment submitted successfully!', 'success');
+    };
+  }
+  
+  function addComment(name, content) {
+    const commentsList = document.getElementById('commentsList');
+    const initials = name.split(' ').map(n => n[0]).join('').toUpperCase();
+    const colors = ['bg-blue-500', 'bg-green-500', 'bg-purple-500', 'bg-pink-500', 'bg-yellow-500'];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    
+    const commentHTML = `
+      <div class="bg-blue-600/40 p-4 rounded-lg border border-blue-500/30 animate-fade-in">
+        <div class="flex items-start justify-between mb-2">
+          <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 ${randomColor} rounded-full flex items-center justify-center">
+              <span class="text-white font-bold text-sm">${initials}</span>
+            </div>
+            <div>
+              <h4 class="text-white font-semibold">${name}</h4>
+              <p class="text-blue-200 text-sm">Just now</p>
+            </div>
+          </div>
+          <div class="flex items-center space-x-2">
+            <button class="text-blue-300 hover:text-white transition" title="Like">
+              <i class="fas fa-thumbs-up"></i>
+            </button>
+            <button class="text-blue-300 hover:text-white transition" title="Reply">
+              <i class="fas fa-reply"></i>
+            </button>
+          </div>
+        </div>
+        <p class="text-white/90 leading-relaxed">${content}</p>
+      </div>
+    `;
+    
+    // Insert new comment at the top
+    commentsList.insertAdjacentHTML('afterbegin', commentHTML);
+  }
+
+  // ===== Toast general notifications =====
+  function showToast(msg, type) {
+    let toast = document.getElementById('toast');
+    if (!toast) {
+      toast = document.createElement('div');
+      toast.id = 'toast';
+      toast.style.position = 'fixed';
+      toast.style.top = '30px';
+      toast.style.right = '30px';
+      toast.style.zIndex = '99999';
+      toast.style.padding = '12px 20px';
+      toast.style.borderRadius = '8px';
+      toast.style.color = '#fff';
+      toast.style.fontWeight = 'bold';
+      toast.style.fontSize = '1rem';
+      toast.style.boxShadow = '0 2px 8px #0004';
+      document.body.appendChild(toast);
+    }
+    toast.style.background = type === 'error' ? '#EF4444' : '#0EA5E9';
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    toast.style.display = 'block';
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      setTimeout(() => { toast.style.display = 'none'; }, 400);
+    }, 2000);
+  }
+});
+</script>
+
+<style>
+/* Comment animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+
+/* Comment form styling */
+#commentForm input:focus,
+#commentForm textarea:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(59, 130, 246, 0.5);
+}
+
+#commentForm button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 38, 38, 0.4);
+}
+
+/* Comment list styling */
+.comments-section .bg-blue-600\/40 {
+  transition: all 0.2s ease;
+}
+
+.comments-section .bg-blue-600\/40:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+/* Responsive design for comments */
+@media (max-width: 768px) {
+  .comments-section .grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .comments-section .bg-blue-600\/80 {
+    padding: 1rem;
+  }
+}
+</style>
+{% endblock %} 
