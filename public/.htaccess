@@ -1,13 +1,27 @@
-# 重定向根路径到PHP版本
+# SEO友好的重写规则
 RewriteEngine On
 
-# 如果访问根路径，重定向到PHP版本
-RewriteCond %{REQUEST_URI} ^/$
-RewriteRule ^$ /original-home.php [L,R=302]
+# 移除www前缀（可选）
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ https://%1/$1 [R=301,L]
 
-# 如果访问index.php，重定向到PHP版本
-RewriteCond %{REQUEST_URI} ^/index\.php$
-RewriteRule ^index\.php$ /original-home.php [L,R=302]
+# 强制HTTPS（可选）
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# 移除尾部斜杠
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} (.+)/$
+RewriteRule ^ %1 [R=301,L]
+
+# 处理分类页面
+RewriteRule ^category/([^/]+)/?$ index.php?category=$1 [QSA,L]
+
+# 处理游戏页面
+RewriteRule ^game/([^/]+)/?$ index.php?game=$1 [QSA,L]
+
+# 处理静态页面
+RewriteRule ^(about|contact|privacy|terms)/?$ index.php?page=$1 [QSA,L]
 
 # 确保PHP文件可以正常访问
 <Files "*.php">
@@ -15,4 +29,29 @@ RewriteRule ^index\.php$ /original-home.php [L,R=302]
 </Files>
 
 # 设置默认首页
-DirectoryIndex original-home.php index.php index.html
+DirectoryIndex index.php
+
+# 添加缓存控制
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css "access plus 1 year"
+    ExpiresByType application/javascript "access plus 1 year"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/jpg "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType text/html "access plus 2 hours"
+</IfModule>
+
+# 启用Gzip压缩
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+</IfModule>

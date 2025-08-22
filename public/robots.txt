@@ -61,5 +61,6 @@ Allow: /css/
 Allow: /js/
 Allow: /images/
 
-# Sitemap
-Sitemap: https://sonice.games/sitemap.xml 
+# Sitemaps - 静态和动态
+Sitemap: https://sonice.online/sitemap.xml
+Sitemap: https://sonice.online/sitemap-generator.php 
