@@ -2,7 +2,7 @@ name = "sonice-onlinegames11"
 compatibility_date = "2025-01-08"
 
 [build]
-command = ""
+command = "php -S localhost:8000 -t public"
 publish = "public"
 
 [[headers]]
