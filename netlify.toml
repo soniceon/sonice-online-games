@@ -9,6 +9,3 @@
   from = "/*"
   to = "/public/index.php"
   status = 200
-
-[functions]
-  directory = "api"
