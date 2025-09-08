@@ -1,29 +1,5 @@
-# Cloudflare Pages 重定向规则
-# 将所有请求重定向到 index.html，让前端路由处理
-
-# 静态资源直接访问
-/assets/* /assets/:splat 200
-/css/* /css/:splat 200
-/js/* /js/:splat 200
-/images/* /images/:splat 200
-
-# API 路由
-/api/* /api/:splat 200
-
-# 游戏页面
-/game/* /index.html 200
-
-# 分类页面
-/category/* /index.html 200
-
-# 其他页面
-/about /index.html 200
-/contact /index.html 200
-/privacy /index.html 200
-/terms /index.html 200
-
-# 根路径
+# 根路径重定向到 index.html
 / /index.html 200
 
-# 404 处理
-/* /index.html 404
+# 所有其他路径也重定向到 index.html
+/* /index.html 200
