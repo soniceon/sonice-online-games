@@ -1,104 +1,61 @@
-# Sonice Online Games
+# 🎮 Sonice Online Games
 
-A modern online gaming platform built with PHP, Twig, and MySQL.
+一个现代化的在线游戏平台，提供免费的游戏体验。
 
-## Features
+## 🚀 快速开始
 
-- Modern and responsive design
-- Game categories and filtering
-- User authentication system
-- Favorite games functionality
-- Recently played games tracking
-- Search functionality
-- Mobile-friendly interface
-
-## Requirements
-
-- PHP 7.4 or higher
-- MySQL 5.7 or higher
-- Composer
-- Web server (Apache/Nginx)
-
-## Installation
-
-1. Clone the repository:
+### 开发环境
 ```bash
-git clone https://github.com/yourusername/sonice-online-games.git
-cd sonice-online-games
+# 安装依赖
+npm install
+
+# 启动开发服务器
+npm run dev
 ```
 
-2. Install dependencies:
-```bash
-composer install
-```
+### 访问地址
+- 主页: http://localhost:8000/
+- 测试页: http://localhost:8000/test.html
 
-3. Create the database:
-```bash
-mysql -u root -p < database/schema.sql
-```
-
-4. Configure your web server:
-
-For Apache, create a `.htaccess` file in the `public` directory:
-```apache
-RewriteEngine On
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^ index.php [QSA,L]
-```
-
-For Nginx, add this to your server configuration:
-```nginx
-location / {
-    try_files $uri $uri/ /index.php?$query_string;
-}
-```
-
-5. Update the database configuration in `config/database.php` with your credentials.
-
-6. Make sure the `cache` directory is writable:
-```bash
-chmod 777 cache
-```
-
-## Directory Structure
+## 📁 项目结构
 
 ```
-.
-├── config/             # Configuration files
-├── database/          # Database schema and migrations
-├── public/            # Public directory (web root)
-│   ├── assets/       # Static assets (CSS, JS, images)
-│   └── index.php     # Front controller
-├── src/              # Application source code
-├── templates/        # Twig templates
-│   ├── components/  # Reusable components
-│   ├── layouts/     # Layout templates
-│   ├── pages/       # Page templates
-│   └── partials/    # Partial templates
-├── cache/           # Twig template cache
-├── vendor/          # Composer dependencies
-├── composer.json    # Composer configuration
-└── README.md        # This file
+sonice-online-games/
+├── public/                 # 主要应用程序
+│   ├── index.php          # 主入口文件
+│   ├── assets/            # 静态资源
+│   ├── api/               # API 接口
+│   └── templates/         # Twig 模板
+├── config/                # 配置文件
+├── templates/             # Twig 模板文件
+├── vendor/                # Composer 依赖
+└── 游戏iframe.CSV         # 游戏数据
 ```
 
-## Development
+## 🛠️ 技术栈
 
-To start the development server:
+- **后端**: PHP 8.4+
+- **模板引擎**: Twig
+- **前端**: HTML5, CSS3, JavaScript
+- **数据库**: MySQL (可选)
+- **部署**: Cloudflare Pages
 
-```bash
-cd public
-php -S localhost:8080
-```
+## 📝 功能特性
 
-## Contributing
+- 🎮 游戏分类浏览
+- 🔍 游戏搜索
+- 👤 用户系统
+- ❤️ 收藏功能
+- 📱 响应式设计
+- 🚀 快速加载
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+## 🔧 开发说明
 
-## License
+项目支持离线模式，即使没有数据库也能正常运行。
 
-This project is licensed under the MIT License - see the LICENSE file for details. 
+## 📞 支持
+
+如有问题，请检查：
+- PHP 版本 (需要 7.4+)
+- 文件权限
+- 服务器配置

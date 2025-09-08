@@ -4,6 +4,9 @@
   "description": "Platform for online games",
   "main": "index.js",
   "scripts": {
+    "dev": "php dev-server.php",
+    "start": "php dev-server.php",
+    "serve": "http-server -p 3000 -o",
     "csv-to-json": "node js/csv-to-json.js",
     "generate-pages": "node js/generate-game-pages.js",
     "build": "npm run csv-to-json && npm run generate-pages && node build.js"

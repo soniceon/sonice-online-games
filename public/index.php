@@ -2,7 +2,18 @@
 // echo 'INDEX_PHP_LOADED';
 // exit;
 require_once __DIR__ . '/../vendor/autoload.php';
-require_once __DIR__ . '/../config/database.php';
+
+// 尝试连接数据库，如果失败则使用离线模式
+$pdo = null;
+try {
+    require_once __DIR__ . '/../config/database.php';
+    if (!$pdo) {
+        throw new Exception('Database connection failed');
+    }
+} catch (Exception $e) {
+    // 使用离线模式
+    require_once __DIR__ . '/../config/database-offline.php';
+}
 
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
@@ -10,9 +21,7 @@ use Twig\Loader\FilesystemLoader;
 session_start();
 
 // Initialize Twig
-$loader = new FilesystemLoader([
-    __DIR__ . '/../templates'
-]);
+$loader = new FilesystemLoader(__DIR__ . '/templates');
 $twig = new Environment($loader, [
     'cache' => false,
 ]);
@@ -362,14 +371,16 @@ $data['games'] = $games;
 
 try {
     // Attempt to load and render the template
-    echo $twig->render("{$path}.twig", $data);
+    echo $twig->render("pages/{$path}.twig", $data);
 } catch (Exception $e) {
     error_log('Template error: ' . $e->getMessage());
     $data['error_message'] = 'An error occurred while loading the page.';
     try {
-        echo $twig->render('error.twig', $data);
+        echo $twig->render('pages/error.twig', $data);
     } catch (Exception $e2) {
         // 彻底兜底，直接输出纯文本
         echo "<h1>严重错误</h1><p>无法加载错误模板: " . htmlspecialchars($e2->getMessage()) . "</p>";
+        echo "<p>模板路径: " . __DIR__ . '/templates/pages' . "</p>";
+        echo "<p>当前路径: {$path}</p>";
     }
 } 

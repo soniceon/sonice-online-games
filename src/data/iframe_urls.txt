@@ -1,2 +1,0 @@
-# Game iframe URLs
-# Format: game_name|iframe_url 
