@@ -1,52 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>测试页面 - Sonice Games</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            text-align: center;
-            padding: 50px;
-            margin: 0;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        h1 {
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-        p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-        }
-        .success {
-            background: rgba(255,255,255,0.2);
-            padding: 20px;
-            border-radius: 10px;
-            margin: 20px 0;
-        }
-    </style>
+    <title>测试页面</title>
 </head>
 <body>
-    <div class="container">
-        <h1>🎉 测试成功！</h1>
-        <p>Cloudflare Pages 部署正常工作！</p>
-        <div class="success">
-            <h2>✅ 部署状态</h2>
-            <p>网站已成功部署到 Cloudflare Pages</p>
-            <p>时间：<span id="time"></span></p>
-        </div>
-        <p><a href="/" style="color: white; text-decoration: underline;">返回首页</a></p>
-    </div>
-    
-    <script>
-        document.getElementById('time').textContent = new Date().toLocaleString('zh-CN');
-    </script>
+    <h1>🎉 Cloudflare Pages 测试成功！</h1>
+    <p>如果你看到这个页面，说明 Cloudflare Pages 部署正常！</p>
+    <p>时间：<script>document.write(new Date().toLocaleString());</script></p>
+    <p><a href="/">返回首页</a></p>
 </body>
 </html>
