@@ -1,10 +1,12 @@
+name = "sonice-onlinegames11"
+compatibility_date = "2025-01-08"
+
 [build]
 command = ""
 publish = "public"
 
 [site]
 bucket = "public"
-entry-point = "public"
 
 [[headers]]
 for = "*.xml"
