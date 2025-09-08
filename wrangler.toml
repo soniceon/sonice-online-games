@@ -4,6 +4,7 @@ publish = "public"
 
 [site]
 bucket = "public"
+entry-point = "public"
 
 [[headers]]
 for = "*.xml"
