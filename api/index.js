@@ -1,5 +1,5 @@
 // Vercel Edge Function - 使用 JavaScript 而不是 PHP
-export default function handler(req, res) {
+export default function handler(request) {
   const games = [
     { title: 'Falling Fruits', category: 'Idle', slug: 'falling-fruits' },
     { title: 'Chipuzik\'s Evolution', category: 'Idle', slug: 'chipuziks-evolution' },
