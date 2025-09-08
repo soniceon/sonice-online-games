@@ -3,150 +3,693 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sonice Online Games - 免费在线游戏</title>
+    <title>Sonice.Games - 免费在线游戏平台</title>
     <meta name="description" content="在 Sonice.Games 玩免费在线游戏，包括动作、赛车、体育、射击、卡片、冒险、益智等各类游戏。">
     <link rel="icon" type="image/png" href="/assets/images/icons/logo.png">
     <link rel="stylesheet" href="/assets/fontawesome/css/all.min.css">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-            min-height: 100vh; 
-            color: #333; 
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            color: #333;
         }
-        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
-        .header { text-align: center; margin-bottom: 40px; color: white; }
-        .logo { font-size: 3rem; font-weight: bold; margin-bottom: 10px; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-        .subtitle { font-size: 1.2rem; opacity: 0.9; }
-        .game-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
-            gap: 20px; 
-            margin-bottom: 40px; 
+        
+        .container {
+            display: flex;
+            min-height: 100vh;
         }
-        .game-card { 
-            background: white; 
-            border-radius: 15px; 
-            padding: 20px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
-            transition: transform 0.3s ease; 
-            text-decoration: none; 
-            color: inherit; 
+        
+        /* 侧边栏 */
+        .sidebar {
+            width: 80px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
         }
-        .game-card:hover { transform: translateY(-5px); }
-        .game-title { font-size: 1.3rem; font-weight: bold; margin-bottom: 10px; color: #333; }
-        .game-category { 
-            display: inline-block; 
-            background: #667eea; 
-            color: white; 
-            padding: 5px 12px; 
-            border-radius: 20px; 
-            font-size: 0.9rem; 
+        
+        .sidebar-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
-        .categories { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-            gap: 15px; 
-            margin-bottom: 40px; 
+        
+        .sidebar-icon:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
         }
-        .category-card { 
-            background: white; 
-            border-radius: 10px; 
-            padding: 20px; 
-            text-align: center; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1); 
-            transition: transform 0.3s ease; 
-            text-decoration: none; 
-            color: inherit; 
+        
+        /* 主内容区 */
+        .main-content {
+            flex: 1;
+            padding: 20px;
         }
-        .category-card:hover { transform: translateY(-3px); }
-        .category-icon { font-size: 2rem; margin-bottom: 10px; }
-        .category-name { font-weight: bold; margin-bottom: 5px; }
-        .footer { text-align: center; color: white; margin-top: 40px; padding: 20px; }
+        
+        /* 头部 */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 15px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .logo-text {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .search-bar {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 30px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 16px;
+            outline: none;
+        }
+        
+        .search-input::placeholder {
+            color: #999;
+        }
+        
+        .auth-button {
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .auth-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* 游戏分类 */
+        .categories {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 30px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            border-radius: 2px;
+        }
+        
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .category-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .category-icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+        
+        .category-name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        /* 游戏网格 */
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .game-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+        
+        .game-thumbnail {
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            position: relative;
+        }
+        
+        .game-thumbnail.coming-soon {
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            color: #666;
+        }
+        
+        .game-thumbnail.coming-soon::after {
+            content: 'Coming Soon';
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        
+        .game-info {
+            padding: 15px;
+        }
+        
+        .game-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .game-category {
+            display: inline-block;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 60px;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .search-bar {
+                margin: 0;
+                max-width: 100%;
+            }
+            
+            .category-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            
+            .games-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <header class="header">
-            <h1 class="logo">🎮 Sonice Games</h1>
-            <p class="subtitle">免费在线游戏平台</p>
-        </header>
-        
-        <div class="categories">
-            <div class="category-card">
-                <div class="category-icon">⏳</div>
-                <div class="category-name">Idle 游戏</div>
+        <!-- 侧边栏 -->
+        <div class="sidebar">
+            <div class="sidebar-icon" title="首页">
+                <i class="fas fa-home"></i>
             </div>
-            <div class="category-card">
-                <div class="category-icon">🏢</div>
-                <div class="category-name">Tycoon 游戏</div>
+            <div class="sidebar-icon" title="收藏">
+                <i class="fas fa-heart"></i>
             </div>
-            <div class="category-card">
-                <div class="category-icon">🌱</div>
-                <div class="category-name">Farm 游戏</div>
+            <div class="sidebar-icon" title="历史">
+                <i class="fas fa-history"></i>
             </div>
-            <div class="category-card">
-                <div class="category-icon">🖱️</div>
-                <div class="category-name">Clicker 游戏</div>
+            <div class="sidebar-icon" title="最近">
+                <i class="fas fa-clock"></i>
             </div>
-            <div class="category-card">
-                <div class="category-icon">💎</div>
-                <div class="category-name">Mining 游戏</div>
+            <div class="sidebar-icon" title="分类">
+                <i class="fas fa-th"></i>
             </div>
-            <div class="category-card">
-                <div class="category-icon">🎯</div>
-                <div class="category-name">Action 游戏</div>
+            <div class="sidebar-icon" title="农场">
+                <i class="fas fa-leaf"></i>
+            </div>
+            <div class="sidebar-icon" title="点击">
+                <i class="fas fa-mouse-pointer"></i>
+            </div>
+            <div class="sidebar-icon" title="挖矿">
+                <i class="fas fa-gem"></i>
+            </div>
+            <div class="sidebar-icon" title="策略">
+                <i class="fas fa-chess"></i>
+            </div>
+            <div class="sidebar-icon" title="动作">
+                <i class="fas fa-rocket"></i>
+            </div>
+            <div class="sidebar-icon" title="图片">
+                <i class="fas fa-image"></i>
+            </div>
+            <div class="sidebar-icon" title="设置">
+                <i class="fas fa-cog"></i>
+            </div>
+            <div class="sidebar-icon" title="安全">
+                <i class="fas fa-shield-alt"></i>
+            </div>
+            <div class="sidebar-icon" title="地图">
+                <i class="fas fa-map"></i>
+            </div>
+            <div class="sidebar-icon" title="更多">
+                <i class="fas fa-cube"></i>
             </div>
         </div>
         
-        <div class="game-grid">
-            <a href="/game/falling-fruits" class="game-card">
-                <h3 class="game-title">Falling Fruits</h3>
-                <div class="game-category">Idle</div>
-            </a>
-            <a href="/game/chipuziks-evolution" class="game-card">
-                <h3 class="game-title">Chipuzik's Evolution</h3>
-                <div class="game-category">Idle</div>
-            </a>
-            <a href="/game/painters-voyage-idle" class="game-card">
-                <h3 class="game-title">Painter's Voyage Idle</h3>
-                <div class="game-category">Idle</div>
-            </a>
-            <a href="/game/magic-chop-idle" class="game-card">
-                <h3 class="game-title">Magic Chop Idle</h3>
-                <div class="game-category">Idle</div>
-            </a>
-            <a href="/game/my-sugar-factory-2" class="game-card">
-                <h3 class="game-title">My Sugar Factory 2</h3>
-                <div class="game-category">Tycoon</div>
-            </a>
-            <a href="/game/slime-farm-remake" class="game-card">
-                <h3 class="game-title">Slime Farm Remake</h3>
-                <div class="game-category">Farm</div>
-            </a>
-            <a href="/game/cupcake-clicker" class="game-card">
-                <h3 class="game-title">Cupcake Clicker</h3>
-                <div class="game-category">Clicker</div>
-            </a>
-            <a href="/game/haste-miner" class="game-card">
-                <h3 class="game-title">Haste-Miner</h3>
-                <div class="game-category">Mining</div>
-            </a>
-            <a href="/game/planet-miner-frvr" class="game-card">
-                <h3 class="game-title">Planet Miner FRVR</h3>
-                <div class="game-category">Mining</div>
-            </a>
-            <a href="/game/doggo-clicker" class="game-card">
-                <h3 class="game-title">Doggo Clicker</h3>
-                <div class="game-category">Clicker</div>
-            </a>
+        <!-- 主内容区 -->
+        <div class="main-content">
+            <!-- 头部 -->
+            <div class="header">
+                <div class="logo">
+                    <div class="logo-icon">S</div>
+                    <div class="logo-text">Sonice.Games</div>
+                </div>
+                <div class="search-bar">
+                    <input type="text" class="search-input" placeholder="Search games...">
+                </div>
+                <button class="auth-button">
+                    <i class="fas fa-arrow-right"></i> Login/Register
+                </button>
+            </div>
+            
+            <!-- 游戏分类 -->
+            <div class="categories">
+                <h2 class="section-title">Idle Games</h2>
+                <div class="category-grid">
+                    <a href="#" class="category-card">
+                        <div class="category-icon">⏳</div>
+                        <div class="category-name">Idle 游戏</div>
+                    </a>
+                    <a href="#" class="category-card">
+                        <div class="category-icon">🏢</div>
+                        <div class="category-name">Tycoon 游戏</div>
+                    </a>
+                    <a href="#" class="category-card">
+                        <div class="category-icon">🌱</div>
+                        <div class="category-name">Farm 游戏</div>
+                    </a>
+                    <a href="#" class="category-card">
+                        <div class="category-icon">🖱️</div>
+                        <div class="category-name">Clicker 游戏</div>
+                    </a>
+                    <a href="#" class="category-card">
+                        <div class="category-icon">💎</div>
+                        <div class="category-name">Mining 游戏</div>
+                    </a>
+                    <a href="#" class="category-card">
+                        <div class="category-icon">🎯</div>
+                        <div class="category-name">Action 游戏</div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Idle Games -->
+            <div class="categories">
+                <h2 class="section-title">Idle Games <a href="#" style="color: #4ecdc4; text-decoration: none; font-size: 16px; margin-left: 10px;">More Games →</a></h2>
+                <div class="games-grid">
+                    <a href="/game/falling-fruits" class="game-card">
+                        <div class="game-thumbnail">🍎</div>
+                        <div class="game-info">
+                            <div class="game-title">Falling Fruits</div>
+                            <div class="game-category">Idle</div>
+                        </div>
+                    </a>
+                    <a href="#" class="game-card">
+                        <div class="game-thumbnail coming-soon">🤖</div>
+                        <div class="game-info">
+                            <div class="game-title">Chipuzik's Evolution</div>
+                            <div class="game-category">Idle</div>
+                        </div>
+                    </a>
+                    <a href="#" class="game-card">
+                        <div class="game-thumbnail coming-soon">🎨</div>
+                        <div class="game-info">
+                            <div class="game-title">Painter's Voyage Idl</div>
+                            <div class="game-category">Idle</div>
+                        </div>
+                    </a>
+                    <a href="/game/magic-chop" class="game-card">
+                        <div class="game-thumbnail">🌳</div>
+                        <div class="game-info">
+                            <div class="game-title">MAGIC CHOP</div>
+                            <div class="game-category">Idle</div>
+                        </div>
+                    </a>
+                    <a href="#" class="game-card">
+                        <div class="game-thumbnail coming-soon">⚔️</div>
+                        <div class="game-info">
+                            <div class="game-title">Incremental Epic Her</div>
+                            <div class="game-category">Idle</div>
+                        </div>
+                    </a>
+                    <a href="/game/idle-minor" class="game-card">
+                        <div class="game-thumbnail">🐱</div>
+                        <div class="game-info">
+                            <div class="game-title">Idle Minor</div>
+                            <div class="game-category">Idle</div>
+                        </div>
+                    </a>
+                    <a href="/game/idle-pinball" class="game-card">
+                        <div class="game-thumbnail">🎱</div>
+                        <div class="game-info">
+                            <div class="game-title">Idle Pinball Breakou</div>
+                            <div class="game-category">Idle</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Tycoon Games -->
+            <div class="categories">
+                <h2 class="section-title">Tycoon Games <a href="#" style="color: #4ecdc4; text-decoration: none; font-size: 16px; margin-left: 10px;">More Games →</a></h2>
+                <div class="games-grid">
+                    <a href="/game/my-sugar-factory-2" class="game-card">
+                        <div class="game-thumbnail">🏭</div>
+                        <div class="game-info">
+                            <div class="game-title">MY SUGAR FACTORY 2</div>
+                            <div class="game-category">Tycoon</div>
+                        </div>
+                    </a>
+                    <a href="/game/my-sugar-factory" class="game-card">
+                        <div class="game-thumbnail">🏭</div>
+                        <div class="game-info">
+                            <div class="game-title">My Sugar Factory</div>
+                            <div class="game-category">Tycoon</div>
+                        </div>
+                    </a>
+                    <a href="/game/lunar-atoms-tycoon" class="game-card">
+                        <div class="game-thumbnail">🌙</div>
+                        <div class="game-info">
+                            <div class="game-title">LUNAR ATOMS TYCOON</div>
+                            <div class="game-category">Tycoon</div>
+                        </div>
+                    </a>
+                    <a href="#" class="game-card">
+                        <div class="game-thumbnail coming-soon">🚚</div>
+                        <div class="game-info">
+                            <div class="game-title">Logistics Inc</div>
+                            <div class="game-category">Tycoon</div>
+                        </div>
+                    </a>
+                    <a href="#" class="game-card">
+                        <div class="game-thumbnail coming-soon">💼</div>
+                        <div class="game-info">
+                            <div class="game-title">Military Capitalist</div>
+                            <div class="game-category">Tycoon</div>
+                        </div>
+                    </a>
+                    <a href="/game/juice-production-tycoon" class="game-card">
+                        <div class="game-thumbnail">🥤</div>
+                        <div class="game-info">
+                            <div class="game-title">JUICE PRODUCTION TYCOON ReMake</div>
+                            <div class="game-category">Tycoon</div>
+                        </div>
+                    </a>
+                    <a href="/game/my-flour-factory" class="game-card">
+                        <div class="game-thumbnail">🌾</div>
+                        <div class="game-info">
+                            <div class="game-title">MY FLOUR FACTORY</div>
+                            <div class="game-category">Tycoon</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Farm Games -->
+            <div class="categories">
+                <h2 class="section-title">Farm Games <a href="#" style="color: #4ecdc4; text-decoration: none; font-size: 16px; margin-left: 10px;">More Games →</a></h2>
+                <div class="games-grid">
+                    <a href="/game/slime-farm-remake" class="game-card">
+                        <div class="game-thumbnail">🟢</div>
+                        <div class="game-info">
+                            <div class="game-title">SLIME FARM REMAKE</div>
+                            <div class="game-category">Farm</div>
+                        </div>
+                    </a>
+                    <a href="/game/cyber-farm" class="game-card">
+                        <div class="game-thumbnail">🤖</div>
+                        <div class="game-info">
+                            <div class="game-title">Cyber Farm</div>
+                            <div class="game-category">Farm</div>
+                        </div>
+                    </a>
+                    <a href="/game/slime-farm-gold-rush" class="game-card">
+                        <div class="game-thumbnail">🟡</div>
+                        <div class="game-info">
+                            <div class="game-title">SLIME FARM GOLD RUSH</div>
+                            <div class="game-category">Farm</div>
+                        </div>
+                    </a>
+                    <a href="/game/slime-farm" class="game-card">
+                        <div class="game-thumbnail">🟣</div>
+                        <div class="game-info">
+                            <div class="game-title">SLIME FARM</div>
+                            <div class="game-category">Farm</div>
+                        </div>
+                    </a>
+                    <a href="/game/my-chicken-farm" class="game-card">
+                        <div class="game-thumbnail">🐔</div>
+                        <div class="game-info">
+                            <div class="game-title">MY CHICKEN FARM</div>
+                            <div class="game-category">Farm</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Clicker Games -->
+            <div class="categories">
+                <h2 class="section-title">Clicker Games <a href="#" style="color: #4ecdc4; text-decoration: none; font-size: 16px; margin-left: 10px;">More Games →</a></h2>
+                <div class="games-grid">
+                    <a href="/game/cupcake-clicker" class="game-card">
+                        <div class="game-thumbnail">🧁</div>
+                        <div class="game-info">
+                            <div class="game-title">CUPCAKE CLICKER</div>
+                            <div class="game-category">Clicker</div>
+                        </div>
+                    </a>
+                    <a href="/game/dog-clicker" class="game-card">
+                        <div class="game-thumbnail">🐕</div>
+                        <div class="game-info">
+                            <div class="game-title">Dog Clicker</div>
+                            <div class="game-category">Clicker</div>
+                        </div>
+                    </a>
+                    <a href="#" class="game-card">
+                        <div class="game-thumbnail coming-soon">⚔️</div>
+                        <div class="game-info">
+                            <div class="game-title">Clicker Knights vs D</div>
+                            <div class="game-category">Clicker</div>
+                        </div>
+                    </a>
+                    <a href="#" class="game-card">
+                        <div class="game-thumbnail coming-soon">⚛️</div>
+                        <div class="game-info">
+                            <div class="game-title">Particle Clicker</div>
+                            <div class="game-category">Clicker</div>
+                        </div>
+                    </a>
+                    <a href="#" class="game-card">
+                        <div class="game-thumbnail coming-soon">🏠</div>
+                        <div class="game-info">
+                            <div class="game-title">Room Clicker</div>
+                            <div class="game-category">Clicker</div>
+                        </div>
+                    </a>
+                    <a href="/game/llama-clicker" class="game-card">
+                        <div class="game-thumbnail">🦙</div>
+                        <div class="game-info">
+                            <div class="game-title">LHAMA CLICKER</div>
+                            <div class="game-category">Clicker</div>
+                        </div>
+                    </a>
+                    <a href="/game/grid-clicker" class="game-card">
+                        <div class="game-thumbnail">🔲</div>
+                        <div class="game-info">
+                            <div class="game-title">Grid Clicker</div>
+                            <div class="game-category">Clicker</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Mining Games -->
+            <div class="categories">
+                <h2 class="section-title">Mining Games <a href="#" style="color: #4ecdc4; text-decoration: none; font-size: 16px; margin-left: 10px;">More Games →</a></h2>
+                <div class="games-grid">
+                    <a href="/game/haste-miner" class="game-card">
+                        <div class="game-thumbnail">⛏️</div>
+                        <div class="game-info">
+                            <div class="game-title">Haste Miner</div>
+                            <div class="game-category">Mining</div>
+                        </div>
+                    </a>
+                    <a href="#" class="game-card">
+                        <div class="game-thumbnail coming-soon">🪐</div>
+                        <div class="game-info">
+                            <div class="game-title">Planet Miner FRVR</div>
+                            <div class="game-category">Mining</div>
+                        </div>
+                    </a>
+                    <a href="/game/mining-notebook-colony-2" class="game-card">
+                        <div class="game-thumbnail">📓</div>
+                        <div class="game-info">
+                            <div class="game-title">MINING IN NOTEBOOK COLONY 2</div>
+                            <div class="game-category">Mining</div>
+                        </div>
+                    </a>
+                    <a href="/game/mining-notebook" class="game-card">
+                        <div class="game-thumbnail">📔</div>
+                        <div class="game-info">
+                            <div class="game-title">MINING IN NOTEBOOK</div>
+                            <div class="game-category">Mining</div>
+                        </div>
+                    </a>
+                    <a href="/game/mine-to-the-last" class="game-card">
+                        <div class="game-thumbnail">💎</div>
+                        <div class="game-info">
+                            <div class="game-title">MINE TO THE LAST</div>
+                            <div class="game-category">Mining</div>
+                        </div>
+                    </a>
+                    <a href="#" class="game-card">
+                        <div class="game-thumbnail coming-soon">🐕</div>
+                        <div class="game-info">
+                            <div class="game-title">Doge Miner</div>
+                            <div class="game-category">Mining</div>
+                        </div>
+                    </a>
+                    <a href="/game/haste-miner-3" class="game-card">
+                        <div class="game-thumbnail">⛏️</div>
+                        <div class="game-info">
+                            <div class="game-title">Haste Miner 3</div>
+                            <div class="game-category">Mining</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
         </div>
-        
-        <footer class="footer">
-            <p>&copy; 2025 Sonice Online Games. 保留所有权利。</p>
-            <p>联系我们：<a href="mailto:contact@sonice.online" style="color: white;">contact@sonice.online</a></p>
-        </footer>
     </div>
+    
+    <script>
+        // 简单的搜索功能
+        document.querySelector('.search-input').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const gameCards = document.querySelectorAll('.game-card');
+            
+            gameCards.forEach(card => {
+                const title = card.querySelector('.game-title').textContent.toLowerCase();
+                if (title.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = searchTerm ? 'none' : 'block';
+                }
+            });
+        });
+        
+        // 侧边栏图标点击效果
+        document.querySelectorAll('.sidebar-icon').forEach(icon => {
+            icon.addEventListener('click', function() {
+                // 移除所有活跃状态
+                document.querySelectorAll('.sidebar-icon').forEach(i => i.classList.remove('active'));
+                // 添加活跃状态
+                this.classList.add('active');
+            });
+        });
+        
+        // 添加活跃状态样式
+        const style = document.createElement('style');
+        style.textContent = `
+            .sidebar-icon.active {
+                background: rgba(255, 255, 255, 0.4) !important;
+                transform: scale(1.1);
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
 </body>
 </html>
