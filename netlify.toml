@@ -1,0 +1,11 @@
+[build]
+  command = ""
+  publish = "public"
+
+[build.environment]
+  PHP_VERSION = "8.2"
+
+[[redirects]]
+  from = "/*"
+  to = "/public/index.php"
+  status = 200

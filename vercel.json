@@ -1,0 +1,13 @@
+{
+  "functions": {
+    "public/index.php": {
+      "runtime": "php@8.2"
+    }
+  },
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/public/index.php"
+    }
+  ]
+}
