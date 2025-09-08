@@ -1,13 +1,10 @@
 {
-  "functions": {
-    "public/index.php": {
-      "runtime": "php@8.2"
-    }
-  },
+  "buildCommand": "npm run build",
+  "outputDirectory": "public",
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/public/index.php"
+      "dest": "/index.html"
     }
   ]
 }
